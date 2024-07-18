@@ -22,7 +22,7 @@ export const meta: MetaFunction = () => {
 export default function Index() {
   return (
     <div className="flex items-center h-screen">
-      <Card className="w-full max-w-sm mx-auto">
+      <Card className="w-full max-w-xs md:max-w-sm mx-auto">
         <CardHeader>
           <CardTitle className="text-2xl">Login</CardTitle>
           <CardDescription>
@@ -40,7 +40,7 @@ export default function Index() {
           </div>
         </CardContent>
         <CardFooter>
-          <Button className="w-full">Sign in</Button>
+          <Button className="w-full" size="lg">Sign in</Button>
         </CardFooter>
       </Card>
     </div>
