@@ -7,8 +7,6 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 
-import AppShell from "./components/app-shell";
-
 import "./globals.css";
 
 export const links: LinksFunction = () => [
@@ -55,8 +53,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   return (
-    <AppShell>
-      <Outlet />
-    </AppShell>
+    <Outlet />
   );
 }

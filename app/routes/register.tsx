@@ -31,15 +31,23 @@ export default function Index() {
         </div>
         <Card className="w-[90%] max-w-sm md:min-w-96 mx-auto">
           <CardHeader>
-            <CardTitle className="text-xl">Log in ke akun kamu</CardTitle>
+            <CardTitle className="text-xl">Buat akun baru</CardTitle>
             <CardDescription>
               Nikmati kemudahan mencatat keuangan Anda
             </CardDescription>
           </CardHeader>
           <CardContent className="grid gap-3">
             <div className="grid gap-2">
+              <Label htmlFor="name">Nama Lengkap</Label>
+              <Input id="name" type="text" required />
+            </div>
+            <div className="grid gap-2">
               <Label htmlFor="email">Email</Label>
               <Input id="email" type="email" required />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="username">Nama Pengguna</Label>
+              <Input id="username" type="text" required />
             </div>
             <div className="grid gap-2">
               <Label htmlFor="password">Kata Sandi</Label>
@@ -47,14 +55,14 @@ export default function Index() {
             </div>
           </CardContent>
           <CardFooter>
-            <Button className="w-full" size="lg">Masuk</Button>
+            <Button className="w-full" size="lg">Daftar Sekarang</Button>
           </CardFooter>
         </Card>
         <div>
           <p className="text-sm">
-            <span className="text-muted-foreground">Belum memiliki akun?{" "}</span>
-            <Link to="/register">
-              <span className="text-primary-foreground font-bold">Daftar</span>
+            <span className="text-muted-foreground">Sudah memiliki akun?{" "}</span>
+            <Link to="/">
+              <span className="text-primary-foreground font-bold">Masuk di sini</span>
             </Link>
           </p>
         </div>

@@ -19,7 +19,7 @@ const config = {
     },
     extend: {
       boxShadow: {
-        "3xl": "rgba(0, 200, 6, 0.05) 0px 7px 32px 0px"
+        "3xl": "rgba(0, 200, 6, 0.10) 0px 7px 32px 0px"
       },
       colors: {
         border: "hsl(var(--border))",
