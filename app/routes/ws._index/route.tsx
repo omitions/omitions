@@ -13,12 +13,10 @@ export default function Index() {
   return (
     <div className="h-full">
       <div className="flex">
-        <div className="border-border fixed left-[var(--sidebar-width)] z-50 hidden h-ful w-full max-w-[var(--sidebar-width-xl)] border-r md:block">
-          <Sidebar />
-        </div>
+        <Sidebar />
         <div className="relative h-full w-full md:ml-auto md:w-[calc(100%_-_var(--sidebar-width-xl))]">
           <div className="relative h-full w-full min-h-screen">
-            <div className="mx-auto mt-[var(--header-height)] max-w-screen-2xl md:mt-0 p-2">
+            <div className="max-w-screen-2xl p-2 mx-auto m-4">
               <Page />
             </div>
           </div>
@@ -30,8 +28,22 @@ export default function Index() {
 
 function Page() {
   return (
-    <div>
-      index
+    <div className="grid grid-cols-4 gap-4">
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+    </div>
+  )
+}
+
+function Card() {
+  return (
+    <div className="border w-full rounded-lg p-4 cursor-pointer">
+      <h4>Title</h4>
+      <p>Descript</p>
     </div>
   )
 }

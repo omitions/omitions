@@ -5,22 +5,24 @@ import { cn } from '~/lib/utils';
 
 export default function HomeSidebar() {
   return (
-    <div className="px-4 py-6 my-1 flex flex-col gap-8 min-h-screen">
-      <div>
-        <h2 className="text-xl ml-2 font-bold">Pengaturan</h2>
-      </div>
-      <div className="flex flex-col gap-4">
-        <div className="flex flex-col gap-1">
-          <NavItem
-            title="Akun"
-            href="/settings"
-            iconName="UserRoundCog"
-          />
-          <NavItem
-            title="Billing"
-            href="/settings/billing"
-            iconName="ReceiptText"
-          />
+    <div className="fixed left-[var(--sidebar-width)] z-50 hidden h-ful w-full max-w-[var(--sidebar-width-xl)] md:block">
+      <div className="px-4 py-6 my-1 flex flex-col gap-8 min-h-screen">
+        <div className="flex items-center">
+          <h2 className="text-xl ml-2 font-bold">Pengaturan</h2>
+        </div>
+        <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-1">
+            <NavItem
+              title="Akun"
+              href="/settings"
+              iconName="UserRoundCog"
+            />
+            <NavItem
+              title="Billing"
+              href="/settings/billing"
+              iconName="ReceiptText"
+            />
+          </div>
         </div>
       </div>
     </div>

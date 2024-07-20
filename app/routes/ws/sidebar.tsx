@@ -5,31 +5,33 @@ import { cn } from '~/lib/utils';
 
 export default function HomeSidebar() {
   return (
-    <div className="px-4 py-6 my-1 flex flex-col gap-8 min-h-screen">
-      <div>
-        <h2 className="text-xl ml-2 font-bold">Beranda</h2>
-      </div>
-      <div className="flex flex-col gap-4">
-        <Button size="sm" variant="outline" className="w-fit h-11 gap-2">
-          <Plus size={16} strokeWidth={3} />
-          <span>Buat Workspace</span>
-        </Button>
-        <div className="flex flex-col gap-1">
-          <NavItem
-            title="Workspace"
-            href="/ws"
-            iconName="FileText"
-          />
-          <NavItem
-            title="Koleksi"
-            href="/ws/collections"
-            iconName="FolderOpen"
-          />
-          <NavItem
-            title="Pengingat"
-            href="/ws/collectionss"
-            iconName="AlarmClock"
-          />
+    <div className="fixed left-[var(--sidebar-width)] z-50 hidden h-ful w-full max-w-[var(--sidebar-width-xl)] md:block">
+      <div className="px-4 py-6 my-1 flex flex-col gap-8 min-h-screen">
+        <div className="flex items-center">
+          <h2 className="text-xl ml-2 font-bold">Beranda</h2>
+        </div>
+        <div className="flex flex-col gap-4">
+          <Button size="sm" variant="outline" className="w-fit h-11 rounded-xl gap-2">
+            <Plus size={16} strokeWidth={3} />
+            <span>Buat workspace</span>
+          </Button>
+          <div className="flex flex-col gap-1">
+            <NavItem
+              title="Workspace"
+              href="/ws"
+              iconName="FileText"
+            />
+            <NavItem
+              title="Koleksi"
+              href="/ws/collections"
+              iconName="FolderOpen"
+            />
+            <NavItem
+              title="Pengingat"
+              href="/ws/collectionss"
+              iconName="AlarmClock"
+            />
+          </div>
         </div>
       </div>
     </div>
