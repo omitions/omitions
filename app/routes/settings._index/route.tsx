@@ -1,5 +1,6 @@
 import { MetaFunction } from "@remix-run/node";
-import Sidebar from "../ws/sidebar";
+
+import Sidebar from "../settings/sidebar";
 
 export const meta: MetaFunction = () => {
   return [
@@ -30,7 +31,7 @@ export default function Index() {
 function Page() {
   return (
     <div>
-      Collections
+      index
     </div>
   )
 }

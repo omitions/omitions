@@ -22,7 +22,7 @@ export const meta: MetaFunction = () => {
 
 export default function Index() {
   return (
-    <div className="flex items-center h-screen use-matter">
+    <div className="flex items-center h-screen use-matter bg-background">
       <div className="w-full flex flex-col items-center gap-6 md:gap-8">
         <div>
           <h2 className="text-4xl font-bold text-primary">

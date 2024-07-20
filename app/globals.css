@@ -20,7 +20,7 @@
     --accent-foreground: 142 78% 47%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 6%;
-    --border: 214.3 31.8% 91.4%;
+    --border: 0 0% 94%;
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
     --radius: 0.55rem;
@@ -29,8 +29,8 @@
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
-    --sidebar-width: 325px;
-    --sidebar-width-xl: 280px;
+    --sidebar-width: 54px;
+    --sidebar-width-xl: 245px;
   }
 
   .dark {
@@ -78,7 +78,7 @@
     text-rendering: optimizelegibility;
     -webkit-tap-highlight-color: transparent;
 
-    @apply bg-background text-foreground;
+    @apply text-foreground;
   }
 
   @font-face {
