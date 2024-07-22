@@ -40,7 +40,10 @@ function Page() {
 
 function CardComp() {
   return (
-    <Link to="/ws/:id" className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 rounded-xl">
+    <Link
+      to="/ws/:id"
+      className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 rounded-xl"
+    >
       <div className="border w-full rounded-xl p-6 flex flex-col gap-1 cursor-pointer border-input bg-background">
         <h4 className="text-base font-semibold">Keuangan Bulanan</h4>
         <p className="text-sm font-medium text-muted-foreground">Unlock premium features and help us build the future of the Read.cv.</p>
