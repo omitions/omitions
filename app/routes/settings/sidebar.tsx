@@ -5,7 +5,7 @@ import { cn } from '~/lib/utils';
 
 export default function HomeSidebar() {
   return (
-    <div className="fixed left-[var(--sidebar-width)] z-50 hidden h-ful w-full max-w-[var(--sidebar-width-xl)] md:block">
+    <div className="fixed left-[var(--sidebar-width)] z-50 hidden h-ful w-full max-w-[var(--sidebar-width-xl)] md:block border-r border-border">
       <div className="px-4 py-6 my-1 flex flex-col gap-8 min-h-screen">
         <div className="flex items-center">
           <h2 className="text-xl ml-2 font-bold">Pengaturan</h2>
