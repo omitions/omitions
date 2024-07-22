@@ -30,14 +30,14 @@ export default function Index() {
 function Page() {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
-      <Card />
+      <CardComp />
     </div>
   )
 }
 
-function Card() {
+function CardComp() {
   return (
-    <Link to="/ws/:id">
+    <Link to="/ws/:id" className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 rounded-xl">
       <div className="border w-full rounded-xl p-4 flex flex-col gap-1.5 cursor-pointer bg-background">
         <h4 className="text-lg font-semibold">Keuangan Bulanan</h4>
         <p className="text-sm font-medium text-muted-foreground">Unlock premium features and help us build the future of the Read.cv.</p>

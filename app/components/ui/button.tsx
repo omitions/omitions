@@ -18,7 +18,7 @@ const buttonVariants = cva(
 
         outline: "border border-input bg-background shadow-sm hover:border-primary hover:ring-2 hover:ring-primary/30",
         default: "bg-primary text-primary-foreground shadow hover:bg-primary/90 hover:ring-2 hover:ring-ring",
-        ghost: 'hover:bg-secondary focus-visible:bg-secondary',
+        ghost: 'hover:bg-secondary focus-visible:bg-primary/20',
       },
       size: {
         default: "h-10 px-4 py-3 rounded-lg",
