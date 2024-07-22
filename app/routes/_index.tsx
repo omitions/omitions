@@ -1,5 +1,5 @@
-import type { MetaFunction } from "@remix-run/node";
-import { Link } from "@remix-run/react";
+import type { ActionFunctionArgs, MetaFunction } from "@remix-run/node";
+import { Form, Link, redirect } from "@remix-run/react";
 
 import { Button } from "~/components/ui/button";
 import {
@@ -20,6 +20,36 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+export async function action({ request }: ActionFunctionArgs) {
+  const formData = await request.formData();
+  const email = formData.get("email");
+  const password = formData.get("password");
+
+  let resp = null
+
+  try {
+    const fetched = await fetch("https://api.mybucks.today/users/login", {
+      method: "POST",
+      body: JSON.stringify({
+        email,
+        password
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    resp = await fetched.json();
+  } catch (error) {
+    console.log('error', error);
+    return {};
+  }
+
+  console.log('response', await resp);
+  return redirect("/ws")
+}
+
+
 export default function Index() {
   return (
     <div className="flex items-center h-screen use-matter bg-background">
@@ -36,23 +66,23 @@ export default function Index() {
               Nikmati kemudahan mencatat keuangan Anda
             </CardDescription>
           </CardHeader>
-          <CardContent className="grid gap-3">
-            <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
-              <Input id="email" type="email" required />
-            </div>
-            <div className="grid gap-2">
-              <Label htmlFor="password">Kata Sandi</Label>
-              <Input id="password" type="password" required />
-            </div>
-          </CardContent>
-          <CardFooter>
-            <Button asChild className="w-full" size="lg">
-              <Link to="/ws">
+          <Form action="." method="post">
+            <CardContent className="grid gap-3">
+              <div className="grid gap-2">
+                <Label htmlFor="email">Email</Label>
+                <Input id="email" type="email" name="email" required />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="password">Kata Sandi</Label>
+                <Input id="password" type="password" name="password" required />
+              </div>
+            </CardContent>
+            <CardFooter>
+              <Button className="w-full" size="lg">
                 Masuk
-              </Link>
-            </Button>
-          </CardFooter>
+              </Button>
+            </CardFooter>
+          </Form>
         </Card>
         <div>
           <p className="text-sm">

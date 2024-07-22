@@ -1,6 +1,8 @@
 import { LinkProps, useLocation } from '@remix-run/react';
 import { icons, Plus } from 'lucide-react';
 import { Button, ButtonLink } from '~/components/ui/button';
+import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '~/components/ui/dialog';
+import { Input } from '~/components/ui/input';
 import { cn } from '~/lib/utils';
 
 export default function HomeSidebar() {
@@ -10,11 +12,8 @@ export default function HomeSidebar() {
         <div className="flex items-center">
           <h2 className="text-xl ml-2 font-bold">Beranda</h2>
         </div>
-        <div className="flex flex-col gap-4">
-          <Button size="sm" variant="outline" className="w-fit h-11 rounded-xl gap-2">
-            <Plus size={16} strokeWidth={3} />
-            <span>Buat workspace</span>
-          </Button>
+        <div className="flex flex-col gap-6">
+          <CreateWorkspace />
           <div className="flex flex-col gap-1">
             <NavItem
               title="Workspace"
@@ -66,16 +65,50 @@ function NavItem({
       variant="ghost"
       size="sm"
       className={cn(
-        'w-full justify-start gap-2 hover:bg-primary/20 rounded-full px-4',
+        'w-full justify-start gap-3 text-sm hover:bg-primary/20 rounded-full px-4',
         isMatch && "bg-primary/20",
       )}
     >
 
       <Icon
-        size={16}
-        strokeWidth={isMatch ? 3 : 2}
+        size={18}
+        strokeWidth={isMatch ? 2.5 : 2}
       />
       <span>{title}</span>
     </ButtonLink>
+  )
+}
+
+function CreateWorkspace() {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button size="sm" variant="outline" className="w-fit h-14 rounded-xl text-sm gap-2">
+          <Plus size={18} strokeWidth={3} />
+          <span>Buat workspace</span>
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle>Workspace Baru</DialogTitle>
+        </DialogHeader>
+        <div className="flex flex-col space-y-3">
+          <Input type="text" name="title" required placeholder="Judul" />
+          <Input type="text" name="description" required placeholder="Deskripsi" />
+        </div>
+        <DialogFooter className="">
+          <DialogClose asChild>
+            <Button type="button" variant="outline" size="sm">
+              Tutup
+            </Button>
+          </DialogClose>
+          <DialogClose asChild>
+            <Button type="button" size="sm">
+              Buat Sekarang
+            </Button>
+          </DialogClose>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   )
 }

@@ -10,7 +10,7 @@ export default function HomeSidebar() {
         <div className="flex items-center">
           <h2 className="text-xl ml-2 font-bold">Pengaturan</h2>
         </div>
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-1">
             <NavItem
               title="Akun"
@@ -57,14 +57,14 @@ function NavItem({
       variant="ghost"
       size="sm"
       className={cn(
-        'w-full justify-start gap-2 hover:bg-primary/20 rounded-full px-4',
+        'w-full justify-start gap-3 text-sm hover:bg-primary/20 rounded-full px-4',
         isMatch && "bg-primary/20",
       )}
     >
 
       <Icon
-        size={16}
-        strokeWidth={isMatch ? 3 : 2}
+        size={18}
+        strokeWidth={isMatch ? 2.5 : 2}
       />
       <span>{title}</span>
     </ButtonLink>

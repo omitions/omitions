@@ -6,7 +6,7 @@ import { cn } from "~/lib/utils"
 import { AnchorOrLink } from "~/utils/misc"
 
 const buttonVariants = cva(
-  "relative inline-flex items-center justify-center whitespace-nowrap font-bold tracking-tight ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-50",
+  "relative inline-flex items-center justify-center whitespace-nowrap font-bold tracking-tight ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-30",
   {
     variants: {
       variant: {
@@ -21,8 +21,8 @@ const buttonVariants = cva(
         ghost: 'hover:bg-secondary focus-visible:bg-secondary',
       },
       size: {
-        default: "h-9 px-4 py-2",
-        sm: "h-8 rounded-lg px-3 text-xs",
+        default: "h-10 px-4 py-3 rounded-lg",
+        sm: "h-8 rounded-lg px-4 text-xs",
         lg: "h-12 rounded-xl px-8",
         icon: "h-8 w-8 rounded-full",
       },

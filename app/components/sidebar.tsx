@@ -10,7 +10,7 @@ export default function Sidebar() {
   return (
     <div className="p-2 gap-1 flex flex-col justify-between h-full">
       <div></div>
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col items-center gap-1">
         <NavItem
           href="/ws"
           iconName="House"
@@ -66,13 +66,13 @@ function NavItem({
       prefetch={prefetch}
       variant="ghost"
       className={cn(
-        'w-full justify-center hover:bg-primary/20 rounded-full p-2',
+        'justify-center hover:bg-primary/20 h-10 w-10 rounded-full p-2',
         isMatch && "bg-primary/20",
       )}
     >
       <Icon
-        size={16}
-        strokeWidth={isMatch ? 3 : 2}
+        size={18}
+        strokeWidth={isMatch ? 2.5 : 2}
       />
     </Comp>
   )

@@ -1,5 +1,5 @@
-import type { MetaFunction } from "@remix-run/node";
-import { Link } from "@remix-run/react";
+import type { ActionFunctionArgs, MetaFunction } from "@remix-run/node";
+import { Form, Link } from "@remix-run/react";
 
 import { Button } from "~/components/ui/button";
 import {
@@ -20,7 +20,30 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export default function Index() {
+export async function action({ request }: ActionFunctionArgs) {
+  const formData = await request.formData();
+
+  const fullName = formData.get("fullName");
+  const email = formData.get("email");
+  const password = formData.get("password");
+
+  const resp = await fetch("https://api.mybucks.today/users/register", {
+    method: "POST",
+    body: JSON.stringify({
+      email,
+      fullname: fullName,
+      password
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  console.log('resp >>', await resp?.json());
+  return {};
+}
+
+export default function Register() {
   return (
     <div className="flex items-center h-screen use-matter bg-background">
       <div className="w-full flex flex-col items-center gap-6 md:gap-8">
@@ -36,27 +59,25 @@ export default function Index() {
               Nikmati kemudahan mencatat keuangan Anda
             </CardDescription>
           </CardHeader>
-          <CardContent className="grid gap-3">
-            <div className="grid gap-2">
-              <Label htmlFor="name">Nama Lengkap</Label>
-              <Input id="name" type="text" required />
-            </div>
-            <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
-              <Input id="email" type="email" required />
-            </div>
-            <div className="grid gap-2">
-              <Label htmlFor="username">Nama Pengguna</Label>
-              <Input id="username" type="text" required />
-            </div>
-            <div className="grid gap-2">
-              <Label htmlFor="password">Kata Sandi</Label>
-              <Input id="password" type="password" required />
-            </div>
-          </CardContent>
-          <CardFooter>
-            <Button className="w-full" size="lg">Daftar Sekarang</Button>
-          </CardFooter>
+          <Form action="/register" method="post">
+            <CardContent className="grid gap-3">
+              <div className="grid gap-2">
+                <Label htmlFor="name">Nama Lengkap</Label>
+                <Input id="name" type="text" name="fullName" required />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="email">Email</Label>
+                <Input id="email" type="email" name="email" required />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="password">Kata Sandi</Label>
+                <Input id="password" type="password" name="password" required />
+              </div>
+            </CardContent>
+            <CardFooter>
+              <Button className="w-full" size="lg">Daftar Sekarang</Button>
+            </CardFooter>
+          </Form>
         </Card>
         <div>
           <p className="text-sm">
