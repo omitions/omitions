@@ -9,7 +9,7 @@ export default function Shell() {
           <Sidebar />
         </div>
         <div className="relative h-full w-full md:ml-auto md:w-[calc(100%_-_var(--sidebar-width))]">
-          <div className="relative h-full w-full min-h-screen">
+          <div className="relative h-full w-full">
             <div className="mx-auto mt-[var(--header-height)] max-w-screen-2xl md:mt-0">
               <Outlet />
             </div>

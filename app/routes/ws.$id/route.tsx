@@ -1,7 +1,5 @@
 import { MetaFunction } from "@remix-run/node";
-
 import Sidebar from "../ws/sidebar";
-import { Link } from "@remix-run/react";
 
 export const meta: MetaFunction = () => {
   return [
@@ -17,7 +15,7 @@ export default function Index() {
         <Sidebar />
         <div className="relative h-full w-full md:ml-auto md:w-[calc(100%_-_var(--sidebar-width-xl))]">
           <div className="relative h-full w-full">
-            <div className="max-w-screen-2xl p-2 mx-auto m-4">
+            <div className="mx-auto mt-[var(--header-height)] max-w-screen-2xl md:mt-0 p-2">
               <Page />
             </div>
           </div>
@@ -29,19 +27,10 @@ export default function Index() {
 
 function Page() {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      <Card />
-    </div>
-  )
-}
-
-function Card() {
-  return (
-    <Link to="/ws/:id">
-      <div className="border w-full rounded-xl p-6 flex flex-col gap-1.5 cursor-pointer bg-background">
-        <h4 className="text-lg font-semibold">Keuangan Bulanan</h4>
-        <p className="text-sm font-medium text-muted-foreground">Unlock premium features and help us build the future of the Read.cv.</p>
+    <div className="border flex justify-center">
+      <div>
+        idd detail
       </div>
-    </Link>
+    </div>
   )
 }
