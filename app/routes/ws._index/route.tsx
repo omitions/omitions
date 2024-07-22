@@ -29,7 +29,7 @@ export default function Index() {
 
 function Page() {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
       <Card />
     </div>
   )
@@ -38,7 +38,7 @@ function Page() {
 function Card() {
   return (
     <Link to="/ws/:id">
-      <div className="border w-full rounded-xl p-6 flex flex-col gap-1.5 cursor-pointer bg-background">
+      <div className="border w-full rounded-xl p-4 flex flex-col gap-1.5 cursor-pointer bg-background">
         <h4 className="text-lg font-semibold">Keuangan Bulanan</h4>
         <p className="text-sm font-medium text-muted-foreground">Unlock premium features and help us build the future of the Read.cv.</p>
       </div>

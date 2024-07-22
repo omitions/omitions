@@ -1,5 +1,5 @@
-import type { ActionFunctionArgs, MetaFunction } from "@remix-run/node";
-import { Form, Link, redirect } from "@remix-run/react";
+import type { ActionFunctionArgs, LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
+import { Form, json, Link, useLoaderData } from "@remix-run/react";
 
 import { Button } from "~/components/ui/button";
 import {
@@ -12,45 +12,34 @@ import {
 } from "~/components/ui/card";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
+import { auth, sessionStorage } from "~/utils/auth.server";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
+    { title: "Log in | mybucks" },
     { name: "description", content: "Welcome to Remix!" },
   ];
 };
 
-export async function action({ request }: ActionFunctionArgs) {
-  const formData = await request.formData();
-  const email = formData.get("email");
-  const password = formData.get("password");
+export const action = async ({ request }: ActionFunctionArgs) => {
+  await auth.authenticate("form", request, {
+    successRedirect: "/ws",
+    failureRedirect: "/",
+  });
+};
 
-  let resp = null
+type LoaderError = { message: string } | null;
+export const loader = async ({ request }: LoaderFunctionArgs) => {
+  await auth.isAuthenticated(request, { successRedirect: "/ws" });
+  const session = await sessionStorage.getSession(
+    request.headers.get("Cookie"),
+  );
+  const error = session.get(auth.sessionErrorKey) as LoaderError;
+  return json({ error });
+};
 
-  try {
-    const fetched = await fetch("https://api.mybucks.today/users/login", {
-      method: "POST",
-      body: JSON.stringify({
-        email,
-        password
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    resp = await fetched.json();
-  } catch (error) {
-    console.log('error', error);
-    return {};
-  }
-
-  console.log('response', await resp);
-  return redirect("/ws")
-}
-
-
-export default function Index() {
+export default function Login() {
+  const { error } = useLoaderData<typeof loader>();
   return (
     <div className="flex items-center h-screen use-matter bg-background">
       <div className="w-full flex flex-col items-center gap-6 md:gap-8">
@@ -59,7 +48,7 @@ export default function Index() {
             mybucks
           </h2>
         </div>
-        <Card className="w-[90%] max-w-sm md:min-w-96 mx-auto">
+        <Card className="w-[90%] max-w-sm md:min-w-sm mx-auto">
           <CardHeader>
             <CardTitle className="text-xl">Log in ke akun kamu</CardTitle>
             <CardDescription>
@@ -67,14 +56,25 @@ export default function Index() {
             </CardDescription>
           </CardHeader>
           <Form action="." method="post">
-            <CardContent className="grid gap-3">
+            <CardContent className="grid gap-4">
               <div className="grid gap-2">
                 <Label htmlFor="email">Email</Label>
-                <Input id="email" type="email" name="email" required />
+                <Input
+                  id="email"
+                  type="email"
+                  name="email"
+                  isError={!!error}
+                />
               </div>
               <div className="grid gap-2">
                 <Label htmlFor="password">Kata Sandi</Label>
-                <Input id="password" type="password" name="password" required />
+                <Input
+                  id="password"
+                  type="password"
+                  isError={!!error}
+                  name="password"
+                />
+                {error ? <div className="text-sm text-red-500">{error.message}</div> : null}
               </div>
             </CardContent>
             <CardFooter>

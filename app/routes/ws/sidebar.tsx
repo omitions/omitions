@@ -92,7 +92,7 @@ function CreateWorkspace() {
         <DialogHeader>
           <DialogTitle>Workspace Baru</DialogTitle>
         </DialogHeader>
-        <div className="flex flex-col space-y-3">
+        <div className="flex flex-col gap-4">
           <Input type="text" name="title" required placeholder="Judul" />
           <Input type="text" name="description" required placeholder="Deskripsi" />
         </div>
