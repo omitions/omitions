@@ -1,19 +1,35 @@
-import { json, LoaderFunctionArgs } from "@remix-run/node";
+import { ActionFunctionArgs, json, LoaderFunctionArgs } from "@remix-run/node";
 import { Outlet } from "@remix-run/react";
+
 import Sidebar from "~/components/sidebar";
-import { auth, sessionStorage } from "~/utils/auth.server";
+
+import { auth } from "~/utils/auth.server";
+import { createWorkspaces } from "~/utils/workspaces.server";
+
+export enum FormType {
+  CREATE_WORKSPACES = 'CREATE_WORKSPACES',
+}
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const email = await auth.isAuthenticated(request, {
     failureRedirect: "/",
   });
-
-  const session = await sessionStorage.getSession(
-    request.headers.get("Cookie"),
-  );
-
-  console.log('session: ', session.get("user"));
   return json({ email });
+};
+
+export const action = async ({ request }: ActionFunctionArgs) => {
+  const formData = await request.formData();
+  const formPayload = Object.fromEntries(formData);
+
+  const _action = formPayload['_action'] as keyof typeof FormType;
+
+  switch (_action) {
+    case FormType.CREATE_WORKSPACES:
+      await createWorkspaces(formData, request)
+      return "success"
+    default:
+      return {}
+  }
 };
 
 export default function Shell() {

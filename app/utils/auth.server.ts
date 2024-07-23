@@ -27,21 +27,21 @@ auth.use(
 
     let resp = null;
     const fetched = await fetch("https://api.mybucks.today/users/login", {
-        method: "POST",
-        body: JSON.stringify({
-          email,
-          password
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      resp = await fetched.json();
+      method: "POST",
+      body: JSON.stringify({
+        email,
+        password
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    resp = await fetched.json();
 
-      if (
-        resp.message === "Wrong password" ||
-        resp.message === "User not found"
-      ) throw new AuthorizationError("Invalid credentials");
-      return { ...resp.data }
+    if (
+      resp.message === "Wrong password" ||
+      resp.message === "User not found"
+    ) throw new AuthorizationError("Invalid credentials");
+    return { ...resp.data }
   }),
 );

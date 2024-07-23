@@ -1,10 +1,27 @@
-import { Link, LinkProps, useLocation } from '@remix-run/react';
+import {
+  Form,
+  Link,
+  LinkProps,
+  useLocation
+} from '@remix-run/react';
 import { icons, Plus } from 'lucide-react';
+
 import { Button, ButtonLink } from '~/components/ui/button';
-import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '~/components/ui/dialog';
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger
+} from '~/components/ui/dialog';
 import { Input } from '~/components/ui/input';
 import { Progress } from '~/components/ui/progress';
+
 import { cn } from '~/lib/utils';
+
+import { FormType } from './route';
 
 export default function HomeSidebar() {
   return (
@@ -49,7 +66,7 @@ function SidebarFooter() {
     >
       <div className="border w-full rounded-xl px-4 py-6 flex flex-col gap-3 cursor-pointer border-input bg-background">
         <div className="flex items-center justify-between">
-          <h4 className="text-xs font-bold">4/10</h4>
+          <h4 className="text-xs font-bold">4/10 Workspace</h4>
           <p className="text-xs font-medium text-muted-foreground">Gratis</p>
         </div>
         <Progress value={33} />
@@ -90,7 +107,6 @@ function NavItem({
         isMatch && "bg-primary/20",
       )}
     >
-
       <Icon
         size={18}
         strokeWidth={isMatch ? 2.5 : 2}
@@ -113,22 +129,46 @@ function CreateWorkspace() {
         <DialogHeader>
           <DialogTitle>Workspace Baru</DialogTitle>
         </DialogHeader>
-        <div className="flex flex-col gap-4">
-          <Input type="text" name="title" required placeholder="Judul" />
-          <Input type="text" name="description" required placeholder="Deskripsi" />
-        </div>
-        <DialogFooter className="">
-          <DialogClose asChild>
-            <Button type="button" variant="outline" size="sm">
-              Tutup
-            </Button>
-          </DialogClose>
-          <DialogClose asChild>
-            <Button type="button" size="sm">
-              Buat Sekarang
-            </Button>
-          </DialogClose>
-        </DialogFooter>
+        <Form action="/ws" method="post" className="flex flex-col gap-6">
+          <div className="flex flex-col gap-4">
+            <Input
+              type="text"
+              name="title"
+              required
+              placeholder="Judul"
+            />
+            <Input
+              type="text"
+              name="description"
+              required
+              placeholder="Deskripsi"
+            />
+          </div>
+          <DialogFooter>
+            <DialogClose asChild>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+              >
+                Tutup
+              </Button>
+            </DialogClose>
+            <DialogClose asChild>
+              <Button
+                type="submit"
+                size="sm"
+              >
+                Buat Sekarang
+              </Button>
+            </DialogClose>
+          </DialogFooter>
+          <input
+            type="hidden"
+            name="_action"
+            value={FormType.CREATE_WORKSPACES}
+          />
+        </Form>
       </DialogContent>
     </Dialog>
   )
