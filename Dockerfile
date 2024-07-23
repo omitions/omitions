@@ -4,8 +4,10 @@ COPY . .
 RUN apk update && \
     apk upgrade
 
-
 RUN npm install
+
+ENV SECRET=${SECRET} 
+
 RUN npm run build
 
 FROM node:20-alpine

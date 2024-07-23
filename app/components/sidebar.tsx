@@ -9,7 +9,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/t
 
 export default function Sidebar() {
   return (
-    <div className="p-2 gap-1 flex flex-col justify-between h-full">
+    <div className="px-2 py-4 gap-1 flex flex-col justify-between h-full">
       <div></div>
       <div className="flex flex-col items-center gap-1">
         <NavItem
