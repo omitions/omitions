@@ -44,6 +44,6 @@ export async function getWorkspaces(request: Request): Promise<TWorkspaces[]> {
     },
   });
   resp = await fetched.json();
-  console.log('response: ', resp);
+  // console.log('response: ', resp);
   return resp
 }

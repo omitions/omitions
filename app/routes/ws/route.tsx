@@ -6,7 +6,7 @@ import Sidebar from "~/components/sidebar";
 import { auth } from "~/utils/auth.server";
 import { createWorkspaces } from "~/utils/workspaces.server";
 
-export enum FormType {
+export enum ActionType {
   CREATE_WORKSPACES = 'CREATE_WORKSPACES',
 }
 
@@ -21,10 +21,10 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
   const formPayload = Object.fromEntries(formData);
 
-  const _action = formPayload['_action'] as keyof typeof FormType;
+  const _action = formPayload['_action'] as keyof typeof ActionType;
 
   switch (_action) {
-    case FormType.CREATE_WORKSPACES:
+    case ActionType.CREATE_WORKSPACES:
       await createWorkspaces(formData, request)
       return "success"
     default:

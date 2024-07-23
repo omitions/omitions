@@ -11,10 +11,10 @@ export default function Sidebar() {
   return (
     <div className="px-2 py-4 gap-1 flex flex-col justify-between h-full">
       <div></div>
-      <div className="flex flex-col items-center gap-1">
+      <div className="flex flex-col items-center gap-2">
         <NavItem
           href="/dash"
-          iconName="BarChartHorizontal"
+          iconName="LineChart"
           title="Statistik"
         />
         <NavItem
@@ -57,12 +57,11 @@ function NavItem({
   title: string
   disabled?: boolean
 }) {
-  const location = useLocation()
-
-  const isMatch = location.pathname.split("/")[1].includes(href?.split("/")[1])
+  const location = useLocation();
+  const isMatch = location.pathname.split("/")[1].includes(href?.split("/")[1]);
 
   // eslint-disable-next-line import/namespace
-  const Icon = icons[iconName]
+  const Icon = icons[iconName];
 
   const Comp = href ? ButtonLink : Button
   return (
@@ -85,7 +84,11 @@ function NavItem({
             />
           </Comp>
         </TooltipTrigger>
-        <TooltipContent align="center" side="right">
+        <TooltipContent
+          align="center"
+          side="right"
+          sideOffset={8}
+        >
           <p className={cn(isMatch ? "font-bold" : "font-medium")}>{title}</p>
         </TooltipContent>
       </Tooltip>

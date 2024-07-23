@@ -1,31 +1,21 @@
 import {
-  Form,
   Link,
   LinkProps,
   useLocation
 } from '@remix-run/react';
-import { icons, Plus } from 'lucide-react';
+import { icons } from 'lucide-react';
 
-import { Button, ButtonLink } from '~/components/ui/button';
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger
-} from '~/components/ui/dialog';
-import { Input } from '~/components/ui/input';
+import CreateWorkspace from '~/components/create-workspace';
 import { Progress } from '~/components/ui/progress';
+import { ButtonLink } from '~/components/ui/button';
 
 import { cn } from '~/lib/utils';
 
-import { FormType } from './route';
+import { ActionType } from './route';
 
-export default function HomeSidebar() {
+export default function WorkspaceSidebar() {
   return (
-    <div className="fixed left-[var(--sidebar-width)] hidden h-ful w-full max-w-[var(--sidebar-width-xl)] md:block border-r border-border">
+    <div className="fixed left-[var(--sidebar-width)] hidden h-ful w-full max-w-[var(--sidebar-width-xl)] md:block border-r border-input">
       <div className="px-4 py-6 my-1 flex flex-col justify-between min-h-screen">
         <div className='flex flex-col gap-8'>
           <div className="flex items-center">
@@ -37,10 +27,10 @@ export default function HomeSidebar() {
             </Link>
           </div>
           <div className="flex flex-col gap-6">
-            <CreateWorkspace />
-            <div className="flex flex-col gap-1">
+            <CreateWorkspace actionType={ActionType.CREATE_WORKSPACES} />
+            <div className="flex flex-col gap-2">
               <NavItem
-                title="Workspace"
+                title="Workspaces"
                 href="/ws"
                 iconName="FileText"
               />
@@ -117,63 +107,5 @@ function NavItem({
       />
       <span>{title}</span>
     </ButtonLink>
-  )
-}
-
-function CreateWorkspace() {
-  return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button size="sm" variant="outline" className="w-fit h-14 rounded-xl text-sm gap-2">
-          <Plus size={18} strokeWidth={3} />
-          <span>Buat workspace</span>
-        </Button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-md">
-        <DialogHeader>
-          <DialogTitle>Workspace Baru</DialogTitle>
-        </DialogHeader>
-        <Form action="/ws" method="post" className="flex flex-col gap-6">
-          <div className="flex flex-col gap-4">
-            <Input
-              type="text"
-              name="title"
-              required
-              placeholder="Judul"
-            />
-            <Input
-              type="text"
-              name="description"
-              required
-              placeholder="Deskripsi"
-            />
-          </div>
-          <DialogFooter>
-            <DialogClose asChild>
-              <Button
-                type="button"
-                variant="outline"
-                size="sm"
-              >
-                Tutup
-              </Button>
-            </DialogClose>
-            <DialogClose asChild>
-              <Button
-                type="submit"
-                size="sm"
-              >
-                Buat Sekarang
-              </Button>
-            </DialogClose>
-          </DialogFooter>
-          <input
-            type="hidden"
-            name="_action"
-            value={FormType.CREATE_WORKSPACES}
-          />
-        </Form>
-      </DialogContent>
-    </Dialog>
   )
 }

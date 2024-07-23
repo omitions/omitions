@@ -1,5 +1,17 @@
 import { json, LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
-import { Link, useLoaderData } from "@remix-run/react";
+import { useLoaderData } from "@remix-run/react";
+
+import { Ellipsis } from "lucide-react";
+
+
+import { Button, ButtonLink } from "~/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger
+} from "~/components/ui/dropdown-menu";
 
 import { getWorkspaces, type TWorkspaces } from "~/utils/workspaces.server";
 
@@ -7,7 +19,7 @@ import Sidebar from "../ws/sidebar";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "Workspace | mybucks.today" }
+    { title: "Workspaces | mybucks.today" }
   ];
 };
 
@@ -54,15 +66,40 @@ function CardComp({
   name,
   description
 }: TWorkspaces) {
+
   return (
-    <Link
-      to={`/ws/${_id}`}
-      className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 rounded-xl"
-    >
-      <div className="border w-full rounded-xl p-6 flex flex-col gap-1 cursor-pointer border-input bg-background">
-        <h4 className="text-base font-semibold">{name}</h4>
-        <p className="text-sm font-medium text-muted-foreground">{description}</p>
+    <div className="relative">
+      <div className="bottom-2 z-50 right-4 peer absolute">
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button size="icon" variant="ghost">
+              <Ellipsis size={18} />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent
+            sideOffset={0}
+            align="center"
+          >
+            <DropdownMenuItem>Ubah</DropdownMenuItem>
+            <DropdownMenuItem>Buka</DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>Hapus</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
-    </Link>
+      <ButtonLink
+        to={`/ws/${_id}`}
+        variant="outline"
+        className="
+          w-full min-h-32 justify-start px-6 py-8 rounded-2xl bg-transparent
+          peer-hover:border-primary peer-hover:ring-2 peer-hover:ring-primary/30
+        "
+      >
+        <div>
+          <h4 className="text-base font-semibold">{name}</h4>
+          <p className="text-sm font-medium text-muted-foreground">{description}</p>
+        </div>
+      </ButtonLink>
+    </div>
   )
 }

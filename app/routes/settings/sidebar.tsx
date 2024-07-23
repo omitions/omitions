@@ -5,9 +5,9 @@ import { ButtonLink } from '~/components/ui/button';
 
 import { cn } from '~/lib/utils';
 
-export default function HomeSidebar() {
+export default function WorkspaceSidebar() {
   return (
-    <div className="fixed left-[var(--sidebar-width)] hidden h-ful w-full max-w-[var(--sidebar-width-xl)] md:block border-r border-border">
+    <div className="fixed left-[var(--sidebar-width)] hidden h-ful w-full max-w-[var(--sidebar-width-xl)] md:block border-r border-input">
       <div className="px-4 py-6 my-1 flex flex-col gap-8 min-h-screen">
         <div className="flex items-center">
           <Link
@@ -18,7 +18,7 @@ export default function HomeSidebar() {
           </Link>
         </div>
         <div className="flex flex-col gap-6">
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-2">
             <NavItem
               title="Akun"
               href="/settings"
