@@ -1,5 +1,6 @@
 import { Form } from "@remix-run/react";
-import { Plus } from "lucide-react";
+
+import React from "react";
 
 import { Button } from "./ui/button";
 import {
@@ -12,55 +13,62 @@ import {
   DialogTrigger
 } from "./ui/dialog";
 import { Input } from "./ui/input";
-import { Textarea } from "./ui/textarea";
 
-export default function CreateWorkspace({ actionType }: { actionType: string }) {
+export default function RemoveWorkspace({
+  actionType,
+  children,
+  workspaceName,
+  workspaceId
+}: {
+  actionType: string,
+  children: React.ReactNode,
+  workspaceName: string,
+  workspaceId: string
+}) {
+  const [confirmationText, setConfirmationText] = React.useState("");
+
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button size="sm" variant="outline" className="w-fit md:h-14 rounded-xl text-sm gap-2">
-          <Plus size={18} strokeWidth={3} />
-          <span>Buat workspaces</span>
-        </Button>
+        {children}
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Workspace Baru</DialogTitle>
+          <DialogTitle>Hapus Workspace</DialogTitle>
         </DialogHeader>
         <Form
           action="/ws"
           method="post"
           className="flex flex-col gap-6"
         >
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-2">
+            <p className="text-sm text-muted-foreground font-semibold text-red-500">Ketikan nama workspace untuk konfirmasi.</p>
             <Input
               type="text"
-              name="name"
+              name="title"
               required
-              placeholder="Nama"
-            />
-            <Textarea
-              name="description"
-              required
-              placeholder="Deskripsi"
+              isError
+              onChange={(v) => setConfirmationText(v.target.value)}
             />
           </div>
           <DialogFooter>
             <DialogClose asChild>
               <Button
                 type="button"
-                variant="outline"
+                variant="ghost"
                 size="sm"
               >
-                Tutup
+                Batalkan
               </Button>
             </DialogClose>
             <DialogClose asChild>
               <Button
                 type="submit"
                 size="sm"
+                variant="destructive"
+                disabled={confirmationText !== workspaceName}
               >
-                Buat Sekarang
+                Konfirmasi
               </Button>
             </DialogClose>
           </DialogFooter>
@@ -68,6 +76,11 @@ export default function CreateWorkspace({ actionType }: { actionType: string }) 
             type="hidden"
             name="_action"
             value={actionType}
+          />
+          <input
+            type="hidden"
+            name="_id"
+            value={workspaceId}
           />
         </Form>
       </DialogContent>

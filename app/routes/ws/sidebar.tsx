@@ -13,7 +13,7 @@ import { cn } from '~/lib/utils';
 
 import { ActionType } from './route';
 
-export default function WorkspaceSidebar() {
+export default function WorkspaceSidebar({ workspaceCount }: { workspaceCount: number }) {
   return (
     <div className="fixed left-[var(--sidebar-width)] hidden h-ful w-full max-w-[var(--sidebar-width-xl)] md:block border-r border-input">
       <div className="px-4 py-6 my-1 flex flex-col justify-between min-h-screen">
@@ -47,13 +47,13 @@ export default function WorkspaceSidebar() {
             </div>
           </div>
         </div>
-        <SidebarFooter />
+        <SidebarFooter count={workspaceCount} />
       </div>
     </div>
   )
 }
 
-function SidebarFooter() {
+function SidebarFooter({ count }: { count: number }) {
   return (
     <Link
       to="/ws/:id"
@@ -61,7 +61,7 @@ function SidebarFooter() {
     >
       <div className="border w-full rounded-xl px-4 py-6 flex flex-col gap-3 cursor-pointer border-input bg-background">
         <div className="flex items-center justify-between">
-          <h4 className="text-xs font-bold">4/10 Workspace</h4>
+          <h4 className="text-xs font-bold">{count || 0}/10 Workspace</h4>
           <p className="text-xs font-medium text-muted-foreground">Gratis</p>
         </div>
         <Progress value={33} />

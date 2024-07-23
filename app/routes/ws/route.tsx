@@ -4,10 +4,16 @@ import { Outlet } from "@remix-run/react";
 import Sidebar from "~/components/sidebar";
 
 import { auth } from "~/utils/auth.server";
-import { createWorkspaces } from "~/utils/workspaces.server";
+import {
+  createWorkspace,
+  updateWorkspace,
+  removeWorkspace,
+} from "~/utils/workspaces.server";
 
 export enum ActionType {
   CREATE_WORKSPACES = 'CREATE_WORKSPACES',
+  REMOVE_WORKSPACES = 'REMOVE_WORKSPACES',
+  UPDATE_WORKSPACES = 'UPDATE_WORKSPACES',
 }
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
@@ -25,8 +31,11 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 
   switch (_action) {
     case ActionType.CREATE_WORKSPACES:
-      await createWorkspaces(formData, request)
-      return "success"
+      return await createWorkspace(formData, request)
+    case ActionType.UPDATE_WORKSPACES:
+      return await updateWorkspace(formData, request)
+    case ActionType.REMOVE_WORKSPACES:
+      return await removeWorkspace(formData, request)
     default:
       return {}
   }

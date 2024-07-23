@@ -1,5 +1,17 @@
+import { json, LoaderFunctionArgs } from "@remix-run/node";
 import { Outlet } from "@remix-run/react";
+
 import Sidebar from "~/components/sidebar";
+
+import { auth } from "~/utils/auth.server";
+
+export const loader = async ({ request }: LoaderFunctionArgs) => {
+  const email = await auth.isAuthenticated(request, {
+    failureRedirect: "/",
+  });
+  return json({ email });
+};
+
 
 export default function Shell() {
   return (

@@ -1,5 +1,4 @@
 import { Form } from "@remix-run/react";
-import { Plus } from "lucide-react";
 
 import { Button } from "./ui/button";
 import {
@@ -14,18 +13,27 @@ import {
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 
-export default function CreateWorkspace({ actionType }: { actionType: string }) {
+export default function UpdateWorkspace({
+  actionType,
+  children,
+  workspaceName,
+  workspaceDescription,
+  workspaceId
+}: {
+  actionType: string,
+  children: React.ReactNode,
+  workspaceName: string,
+  workspaceDescription: string,
+  workspaceId: string
+}) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button size="sm" variant="outline" className="w-fit md:h-14 rounded-xl text-sm gap-2">
-          <Plus size={18} strokeWidth={3} />
-          <span>Buat workspaces</span>
-        </Button>
+        {children}
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Workspace Baru</DialogTitle>
+          <DialogTitle>Ubah <b>{workspaceName}</b> Workspace</DialogTitle>
         </DialogHeader>
         <Form
           action="/ws"
@@ -37,11 +45,13 @@ export default function CreateWorkspace({ actionType }: { actionType: string }) 
               type="text"
               name="name"
               required
+              defaultValue={workspaceName}
               placeholder="Nama"
             />
             <Textarea
               name="description"
               required
+              defaultValue={workspaceDescription}
               placeholder="Deskripsi"
             />
           </div>
@@ -52,7 +62,7 @@ export default function CreateWorkspace({ actionType }: { actionType: string }) 
                 variant="outline"
                 size="sm"
               >
-                Tutup
+                Batalkan
               </Button>
             </DialogClose>
             <DialogClose asChild>
@@ -60,7 +70,7 @@ export default function CreateWorkspace({ actionType }: { actionType: string }) 
                 type="submit"
                 size="sm"
               >
-                Buat Sekarang
+                Ubah Sekarang
               </Button>
             </DialogClose>
           </DialogFooter>
@@ -68,6 +78,11 @@ export default function CreateWorkspace({ actionType }: { actionType: string }) 
             type="hidden"
             name="_action"
             value={actionType}
+          />
+          <input
+            type="hidden"
+            name="_id"
+            value={workspaceId}
           />
         </Form>
       </DialogContent>
