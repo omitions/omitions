@@ -4,6 +4,7 @@ COPY . .
 RUN apk update && \
     apk upgrade
 
+
 RUN npm install
 RUN npm run build
 
