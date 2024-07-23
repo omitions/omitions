@@ -25,11 +25,16 @@ import { FormType } from './route';
 
 export default function HomeSidebar() {
   return (
-    <div className="fixed left-[var(--sidebar-width)] z-50 hidden h-ful w-full max-w-[var(--sidebar-width-xl)] md:block border-r border-border">
+    <div className="fixed left-[var(--sidebar-width)] hidden h-ful w-full max-w-[var(--sidebar-width-xl)] md:block border-r border-border">
       <div className="px-4 py-6 my-1 flex flex-col justify-between min-h-screen">
         <div className='flex flex-col gap-8'>
           <div className="flex items-center">
-            <h2 className="text-xl ml-2 font-bold">Beranda</h2>
+            <Link
+              to="/ws"
+              className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 rounded-sm"
+            >
+              <h2 className="text-xl mx-2 font-bold">Beranda</h2>
+            </Link>
           </div>
           <div className="flex flex-col gap-6">
             <CreateWorkspace />
@@ -88,12 +93,11 @@ function NavItem({
   title: string
   disabled?: boolean
 }) {
-  const location = useLocation()
-
-  const isMatch = location.pathname === href
+  const location = useLocation();
+  const isMatch = location.pathname === href;
 
   // eslint-disable-next-line import/namespace
-  const Icon = icons[iconName]
+  const Icon = icons[iconName];
 
   return (
     <ButtonLink

@@ -1,12 +1,20 @@
 import { MetaFunction } from "@remix-run/node";
+
+import { useParams } from "@remix-run/react";
+
 import Sidebar from "../ws/sidebar";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
+    { title: " | mybucks.today" },
     { name: "description", content: "Welcome to Remix!" },
   ];
 };
+
+// export const loader = async ({ request }: LoaderFunctionArgs) => {
+//   const workspaces = await getWorkspaces(request)
+//   return json({ workspaces });
+// };
 
 export default function Index() {
   return (
@@ -26,10 +34,11 @@ export default function Index() {
 }
 
 function Page() {
+  const params = useParams();
   return (
     <div className="border flex justify-center">
       <div>
-        idd detail
+        idd detail {params.id}
       </div>
     </div>
   )

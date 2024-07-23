@@ -7,14 +7,13 @@ import Sidebar from "../ws/sidebar";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
+    { title: "Workspace | mybucks.today" }
   ];
 };
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
-  const list = await getWorkspaces(request)
-  return json({ list });
+  const workspaces = await getWorkspaces(request)
+  return json({ workspaces });
 };
 
 export default function Index() {
@@ -35,12 +34,12 @@ export default function Index() {
 }
 
 function Page() {
-  const { list } = useLoaderData<typeof loader>();
+  const { workspaces } = useLoaderData<typeof loader>();
 
-  if (!list.length) return <p>{JSON.stringify(list, null, 2)}</p>
+  if (!workspaces.length) return <p>Belum ada data</p>
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
-      {list.map((item) => (
+      {workspaces.map((item) => (
         <CardComp
           key={item._id}
           {...item}
@@ -50,10 +49,14 @@ function Page() {
   )
 }
 
-function CardComp({ name, description }: TWorkspaces) {
+function CardComp({
+  _id,
+  name,
+  description
+}: TWorkspaces) {
   return (
     <Link
-      to="/ws/:id"
+      to={`/ws/${_id}`}
       className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 rounded-xl"
     >
       <div className="border w-full rounded-xl p-6 flex flex-col gap-1 cursor-pointer border-input bg-background">
