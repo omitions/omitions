@@ -35,14 +35,15 @@ function Page() {
   const navigate = useNavigate();
 
   return (
-    <div className="border border-red-500">
+    <div className="">
       <div className="flex justify-between items-center">
         <Button
           variant="ghost"
           size="icon"
+          className="-left-1"
           onClick={() => navigate(-1)}
         >
-          <ArrowLeft size={18} strokeWidth={2} />
+          <ArrowLeft size={20} strokeWidth={2} />
         </Button>
         <div>
           idd detail {params.id}

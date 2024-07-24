@@ -14,12 +14,12 @@ export default function Sidebar() {
       <div className="flex flex-col items-center gap-2">
         <NavItem
           href="/dash"
-          iconName="LineChart"
-          title="Statistik"
+          iconName="Telescope"
+          title="Analisa"
         />
         <NavItem
           href="/ws"
-          iconName="House"
+          iconName="ScrollText"
           title="Beranda"
         />
         <NavItem

@@ -8,6 +8,7 @@ import {
 } from "@remix-run/react";
 
 import "./globals.css";
+import Navbar from "./components/navbar";
 
 export const links: LinksFunction = () => [
   {
@@ -58,6 +59,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   return (
-    <Outlet />
+    <main>
+      <Outlet />
+      <div className="block md:hidden fixed bottom-0">
+        <Navbar />
+      </div>
+    </main>
   );
 }

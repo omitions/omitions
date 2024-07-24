@@ -54,7 +54,7 @@ function Page() {
 
   if (!workspaces.length) return <p>Belum ada data</p>
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-4 gap-1 md:gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-4 gap-5 md:gap-6">
       {workspaces.map((item) => (
         <CardComp
           key={item._id}
@@ -80,7 +80,7 @@ function CardComp({
           description={description}
         />
       </div>
-      <div className="block md:hidden z-50 top-1 right-0 absolute">
+      <div className="block md:hidden z-50 top-1 right-0 absolute rotate-90">
         <MoreMenu
           _id={_id}
           name={name}
@@ -93,7 +93,7 @@ function CardComp({
       >
         <div
           className="
-            w-full min-h-14 md:min-h-40 justify-start rounded-2xl md:bg-background
+            w-full h-full md:min-h-40 justify-start rounded-2xl md:bg-background
             px-0 md:px-6 md:py-6
             ring-offset-background
             md:focus-visible:outline-none md:focus-visible:ring-2 md:focus-visible:ring-ring md:focus-visible:ring-offset-0
@@ -102,7 +102,7 @@ function CardComp({
             md:peer-hover:border-primary md:peer-hover:ring-2 md:peer-hover:ring-primary/30
           "
         >
-          <div className="w-11/12 md:w-full flex flex-col flex-wrap gap-0.5 md:gap-1">
+          <div className="w-10/12 md:w-full flex flex-col flex-wrap gap-0.5 md:gap-1">
             <h4 className="text-sm font-semibold">
               {name.length > 30
                 ? `${name.substring(0, 30)}..`
