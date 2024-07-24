@@ -60,7 +60,6 @@ export default function UpdateWorkspace({
               <Button
                 type="button"
                 variant="outline"
-                size="sm"
               >
                 Batalkan
               </Button>
@@ -68,7 +67,6 @@ export default function UpdateWorkspace({
             <DialogClose asChild>
               <Button
                 type="submit"
-                size="sm"
               >
                 Ubah Sekarang
               </Button>

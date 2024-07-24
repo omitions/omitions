@@ -4,9 +4,10 @@ import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "~/lib/utils"
 import { AnchorOrLink } from "~/utils/misc"
+import Loading from "../loading"
 
 const buttonVariants = cva(
-  "relative inline-flex items-center justify-center whitespace-nowrap font-bold tracking-tight ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-30",
+  "relative inline-flex items-center justify-center whitespace-nowrap font-semibold tracking-tight ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-80",
   {
     variants: {
       variant: {
@@ -20,7 +21,7 @@ const buttonVariants = cva(
         ghost: 'hover:bg-secondary focus-visible:bg-primary/20',
       },
       size: {
-        default: "h-10 px-4 py-3 rounded-lg",
+        default: "h-10 px-5 py-3 rounded-xl text-sm",
         sm: "h-10 md:h-8 rounded-lg px-4 text-xs",
         lg: "h-12 rounded-2xl px-8",
         icon: "h-8 w-8 rounded-full",
@@ -36,18 +37,21 @@ const buttonVariants = cva(
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
   VariantProps<typeof buttonVariants> {
-  asChild?: boolean
+  asChild?: boolean,
+  loading?: boolean
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
+  ({ className, variant, size, loading = false, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}
-      />
+      >
+        {loading ? <Loading /> : props.children}
+      </Comp>
     )
   }
 )

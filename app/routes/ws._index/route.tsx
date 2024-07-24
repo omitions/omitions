@@ -1,7 +1,7 @@
 import { json, LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 
-import { Ellipsis } from "lucide-react";
+import { ArrowUpRight, Ellipsis, PenLine, Trash } from "lucide-react";
 
 import RemoveWorkspace from "~/components/remove-workspace";
 import { Button, ButtonLink } from "~/components/ui/button";
@@ -12,12 +12,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from "~/components/ui/dropdown-menu";
+import UpdateWorkspace from "~/components/update-workspace";
 
 import { getWorkspaces, type TWorkspaces } from "~/utils/workspaces.server";
 
 import { ActionType } from "../ws/route";
 import Sidebar from "../ws/sidebar";
-import UpdateWorkspace from "~/components/update-workspace";
 
 export const meta: MetaFunction = () => {
   return [
@@ -39,7 +39,7 @@ export default function Index() {
         <Sidebar workspaceCount={workspaces?.length} />
         <div className="relative h-full w-full md:ml-auto md:w-[calc(100%_-_var(--sidebar-width-xl))]">
           <div className="relative h-full w-full">
-            <div className="max-w-screen-2xl p-2 mx-auto m-4">
+            <div className="max-w-screen-2xl md:p-2 mx-auto m-4">
               <Page />
             </div>
           </div>
@@ -73,7 +73,7 @@ function CardComp({
 
   return (
     <div className="relative">
-      <div className="bottom-3 md:bottom-4 z-50 right-6 peer absolute">
+      <div className="bottom-2 md:bottom-4 z-50 right-3 md:right-6 peer absolute">
         <MoreMenu
           _id={_id}
           name={name}
@@ -84,7 +84,7 @@ function CardComp({
         to={"/ws/" + _id}
         variant="outline"
         className="
-          w-full min-h-32 justify-start px-6 pt-8 pb-16 rounded-2xl bg-transparent
+          w-full min-h-32 justify-start px-6 pt-4 pb-11 md:pt-8 md:pb-16 rounded-2xl bg-transparent
           peer-hover:border-primary peer-hover:ring-2 peer-hover:ring-primary/30
         "
       >
@@ -94,7 +94,7 @@ function CardComp({
               ? `${name.substring(0, 30)}..`
               : name}
           </h4>
-          <p className="text-sm font-medium text-muted-foreground text-wrap">
+          <p className="text-xs md:text-sm font-medium text-muted-foreground text-wrap">
             {description.length > 60
               ? `${description.substring(0, 60)}..`
               : description}
@@ -109,7 +109,10 @@ function MoreMenu({ _id, name, description }: Pick<TWorkspaces, "_id" | "name" |
   return (
     <DropdownMenu modal>
       <DropdownMenuTrigger asChild>
-        <Button size="icon" variant="ghost">
+        <Button
+          size="icon"
+          variant="ghost"
+        >
           <Ellipsis size={18} />
         </Button>
       </DropdownMenuTrigger>
@@ -117,7 +120,7 @@ function MoreMenu({ _id, name, description }: Pick<TWorkspaces, "_id" | "name" |
         sideOffset={0}
         alignOffset={-34}
         align="end"
-        className="w-36"
+        className="w-40"
       >
         <DropdownMenuItem asChild>
           <UpdateWorkspace
@@ -129,14 +132,16 @@ function MoreMenu({ _id, name, description }: Pick<TWorkspaces, "_id" | "name" |
             <Button
               size="sm"
               variant="ghost"
-              className="w-full justify-start text-sm px-2 font-medium rounded-sm"
+              className="w-full justify-start text-xs md:text-sm px-2 gap-3 font-medium md:font-semibold rounded-sm"
             >
+              <PenLine size={16} strokeWidth={2} />
               Ubah
             </Button>
           </UpdateWorkspace>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link to={"/ws/" + _id}>
+          <Link to={"/ws/" + _id} className="flex gap-3">
+            <ArrowUpRight size={16} strokeWidth={2} />
             Buka
           </Link>
         </DropdownMenuItem>
@@ -151,11 +156,12 @@ function MoreMenu({ _id, name, description }: Pick<TWorkspaces, "_id" | "name" |
               size="sm"
               variant="ghost"
               className="
-                w-full h-8 justify-start text-sm px-2 font-medium rounded-sm text-red-500
+                w-full h-8 justify-start text-xs md:text-sm px-2 gap-3 font-medium md:font-semibold rounded-sm text-red-500
                 hover:bg-red-100 hover:ring-2 hover:ring-red-500 
                 focus-visible:ring-red-500 focus-visible:bg-red-100
               "
             >
+              <Trash size={16} strokeWidth={2} />
               Hapus
             </Button>
           </RemoveWorkspace>

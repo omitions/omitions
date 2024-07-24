@@ -41,8 +41,8 @@ export default function RemoveWorkspace({
           method="post"
           className="flex flex-col gap-6"
         >
-          <div className="flex flex-col gap-2">
-            <p className="text-sm text-muted-foreground font-semibold text-red-500">Ketikan nama workspace untuk konfirmasi.</p>
+          <div className="flex flex-col gap-3">
+            <p className="text-sm text-muted-foreground font-semibold text-red-500">Ketikan nama workspace <b>{workspaceName}</b> untuk menkonfirmasi.</p>
             <Input
               type="text"
               name="title"
@@ -56,7 +56,6 @@ export default function RemoveWorkspace({
               <Button
                 type="button"
                 variant="ghost"
-                size="sm"
               >
                 Batalkan
               </Button>
@@ -64,7 +63,6 @@ export default function RemoveWorkspace({
             <DialogClose asChild>
               <Button
                 type="submit"
-                size="sm"
                 variant="destructive"
                 disabled={confirmationText !== workspaceName}
               >

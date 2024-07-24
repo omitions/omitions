@@ -18,8 +18,8 @@ export default function CreateWorkspace({ actionType }: { actionType: string }) 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button size="sm" variant="outline" className="w-fit md:h-14 rounded-xl text-sm gap-2">
-          <Plus size={18} strokeWidth={3} />
+        <Button variant="outline" className="w-fit md:h-20 rounded-xl text-sm gap-2">
+          <Plus size={18} strokeWidth={2} />
           <span>Buat workspaces</span>
         </Button>
       </DialogTrigger>
@@ -50,7 +50,6 @@ export default function CreateWorkspace({ actionType }: { actionType: string }) 
               <Button
                 type="button"
                 variant="outline"
-                size="sm"
               >
                 Tutup
               </Button>
@@ -58,7 +57,6 @@ export default function CreateWorkspace({ actionType }: { actionType: string }) 
             <DialogClose asChild>
               <Button
                 type="submit"
-                size="sm"
               >
                 Buat Sekarang
               </Button>

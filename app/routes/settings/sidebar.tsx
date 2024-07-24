@@ -18,7 +18,7 @@ export default function WorkspaceSidebar() {
           </Link>
         </div>
         <div className="flex flex-col gap-6">
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-1">
             <NavItem
               title="Akun"
               href="/settings"
@@ -64,8 +64,8 @@ function NavItem({
       variant="ghost"
       size="sm"
       className={cn(
-        'w-full justify-start gap-3 text-sm hover:bg-primary/20 rounded-full px-4',
-        isMatch && "bg-primary/20",
+        'w-full justify-start gap-3 text-sm hover:bg-primary/20 rounded-full py-5 px-4',
+        isMatch && "bg-primary/20 font-bold",
       )}
     >
 

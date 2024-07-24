@@ -1,5 +1,14 @@
-import type { ActionFunctionArgs, LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
-import { Form, json, Link, useLoaderData } from "@remix-run/react";
+import type {
+  ActionFunctionArgs,
+  LoaderFunctionArgs,
+  MetaFunction
+} from "@remix-run/node";
+import {
+  json,
+  Link,
+  useFetcher,
+  useLoaderData,
+} from "@remix-run/react";
 
 import { Button } from "~/components/ui/button";
 import {
@@ -40,6 +49,10 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 
 export default function Login() {
   const { error } = useLoaderData<typeof loader>();
+
+  const fetcher = useFetcher();
+  const loading = fetcher.state == "submitting" || fetcher.state === "loading";
+
   return (
     <div className="flex items-center h-screen use-matter bg-background">
       <div className="w-full flex flex-col items-center gap-6 md:gap-8">
@@ -55,7 +68,7 @@ export default function Login() {
               Nikmati kemudahan mencatat keuangan Anda
             </CardDescription>
           </CardHeader>
-          <Form action="." method="post">
+          <fetcher.Form action="." method="post">
             <CardContent className="grid gap-4">
               <div className="grid gap-2">
                 <Label htmlFor="email">Email</Label>
@@ -78,11 +91,16 @@ export default function Login() {
               </div>
             </CardContent>
             <CardFooter>
-              <Button className="w-full" size="lg">
+              <Button
+                className="w-full"
+                size="lg"
+                disabled={loading}
+                loading={loading}
+              >
                 Masuk
               </Button>
             </CardFooter>
-          </Form>
+          </fetcher.Form>
         </Card>
         <div>
           <p className="text-sm">
