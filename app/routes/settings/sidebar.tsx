@@ -65,12 +65,12 @@ function NavItem({
       size="sm"
       className={cn(
         'w-full justify-start gap-3 text-sm hover:bg-primary/20 rounded-full py-5 px-4',
-        isMatch && "bg-primary/20 font-bold",
+        isMatch && "bg-primary/20 font-semibold",
       )}
     >
 
       <Icon
-        size={18}
+        size={16}
         strokeWidth={isMatch ? 2.5 : 2}
       />
       <span>{title}</span>

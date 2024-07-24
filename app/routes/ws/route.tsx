@@ -1,5 +1,6 @@
 import { ActionFunctionArgs, json, LoaderFunctionArgs } from "@remix-run/node";
 import { Outlet } from "@remix-run/react";
+import Navbar from "~/components/navbar";
 
 import Sidebar from "~/components/sidebar";
 
@@ -47,6 +48,9 @@ export default function Shell() {
       <div className="flex">
         <div className="border-border bg-background fixed z-50 hidden h-full w-full max-w-[var(--sidebar-width)] border-r md:block">
           <Sidebar />
+        </div>
+        <div className="block md:hidden fixed bottom-0">
+          <Navbar />
         </div>
         <div className="relative h-full w-full md:ml-auto md:w-[calc(100%_-_var(--sidebar-width))]">
           <div className="relative h-full w-full">

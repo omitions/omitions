@@ -31,6 +31,10 @@ export const links: LinksFunction = () => [
     type: 'font/woff2',
     crossOrigin: 'anonymous',
   },
+  {
+    rel: "stylesheet",
+    href: "https://unpkg.com/@material-tailwind/html@latest/styles/material-tailwind.css",
+  }
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -46,6 +50,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         {children}
         <ScrollRestoration />
         <Scripts />
+        <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/ripple.js"></script>
       </body>
     </html>
   );

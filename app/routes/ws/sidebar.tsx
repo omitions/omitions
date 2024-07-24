@@ -61,7 +61,7 @@ function SidebarFooter({ count }: { count: number }) {
     >
       <div className="border w-full rounded-xl px-4 py-6 flex flex-col gap-3 cursor-pointer border-input bg-background">
         <div className="flex items-center justify-between">
-          <h4 className="text-xs font-bold">{count || 0}/10 Workspace</h4>
+          <h4 className="text-xs font-semibold">{count || 0}/10 Workspace</h4>
           <p className="text-xs font-medium text-muted-foreground">Gratis</p>
         </div>
         <Progress value={33} />
@@ -98,11 +98,11 @@ function NavItem({
       size="sm"
       className={cn(
         'w-full justify-start gap-3 text-sm hover:bg-primary/20 rounded-full py-5 px-4',
-        isMatch && "bg-primary/20 font-bold",
+        isMatch && "bg-primary/20 font-semibold",
       )}
     >
       <Icon
-        size={18}
+        size={16}
         strokeWidth={isMatch ? 2.5 : 2}
       />
       <span>{title}</span>

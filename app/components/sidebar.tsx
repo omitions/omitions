@@ -74,12 +74,12 @@ function NavItem({
             prefetch={prefetch}
             variant="ghost"
             className={cn(
-              'justify-center hover:bg-primary/20 h-10 w-10 rounded-full p-2',
+              'justify-center hover:bg-primary/20 h-9 w-9 rounded-full p-2',
               isMatch && "bg-primary/20",
             )}
           >
             <Icon
-              size={20}
+              size={18}
               strokeWidth={isMatch ? 2.5 : 2}
             />
           </Comp>
@@ -87,9 +87,9 @@ function NavItem({
         <TooltipContent
           align="center"
           side="right"
-          sideOffset={8}
+          sideOffset={3}
         >
-          <p className={cn(isMatch ? "font-bold" : "font-medium")}>{title}</p>
+          <p className={cn(isMatch ? "font-semibold" : "font-medium")}>{title}</p>
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>

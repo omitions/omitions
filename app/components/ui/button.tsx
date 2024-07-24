@@ -7,7 +7,7 @@ import { AnchorOrLink } from "~/utils/misc"
 import Loading from "../loading"
 
 const buttonVariants = cva(
-  "relative inline-flex items-center justify-center whitespace-nowrap font-semibold tracking-tight ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-80",
+  "relative inline-flex items-center justify-center whitespace-nowrap font-medium tracking-tight ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-80",
   {
     variants: {
       variant: {
