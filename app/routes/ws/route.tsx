@@ -45,7 +45,7 @@ export default function Shell() {
   return (
     <div className="h-full">
       <div className="flex">
-        <div className="border-border bg-background fixed z-50 hidden h-full w-full max-w-[var(--sidebar-width)] border-r md:block">
+        <div className="border-border bg-background fixed z-50 h-full w-full max-w-[var(--sidebar-width)] border-r hidden md:block">
           <Sidebar />
         </div>
         <div className="relative h-full w-full md:ml-auto md:w-[calc(100%_-_var(--sidebar-width))]">

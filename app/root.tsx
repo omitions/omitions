@@ -7,11 +7,11 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 
+import "./globals.css";
+
 import Navbar from "./components/navbar";
 
-import { auth, sessionStorage } from "./utils/auth.server";
-
-import "./globals.css";
+import { sessionStorage } from "./utils/auth.server";
 
 export const links: LinksFunction = () => [
   {
@@ -34,18 +34,11 @@ export const links: LinksFunction = () => [
     href: '/fonts/Matter-SemiBold.woff2',
     type: 'font/woff2',
     crossOrigin: 'anonymous',
-  },
-  {
-    rel: "stylesheet",
-    href: "https://unpkg.com/@material-tailwind/html@latest/styles/material-tailwind.css",
   }
 ];
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
-  await auth.isAuthenticated(request);
-  const session = await sessionStorage.getSession(
-    request.headers.get("Cookie"),
-  );
+  const session = await sessionStorage.getSession(request.headers.get("Cookie"));
   const isAuth = !!session.get("user")
   return json({ isAuth });
 };

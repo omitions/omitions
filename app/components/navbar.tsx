@@ -9,7 +9,7 @@ import { icons } from "lucide-react";
 import { cn } from "~/lib/utils";
 import { type loader as rootLoader } from "~/root";
 
-const routeMatcher = ["ws", "settings"]
+const routeMatcher = ["ws", "settings", "search", "dash"];
 
 export default function Navbar() {
   const rootData = useRouteLoaderData<typeof rootLoader>("root");
@@ -17,14 +17,19 @@ export default function Navbar() {
   const location = useLocation();
   const isMatch = routeMatcher.includes(location.pathname.split("/")[1]);
 
-  if (!rootData?.isAuth || !isMatch) return <></>
+  if (!rootData?.isAuth || !isMatch) return <div className="block md:hidden"></div>
   return (
-    <div className="border-t border-border/50 shadow-2xl h-20 w-screen">
+    <div className="block md:hidden border-t border-border/50 shadow-2xl h-20 w-screen">
       <div className="flex gap-1 h-full w-full bg-white">
         <Navigation
           href="/ws"
           iconName="ScrollText"
           title="Beranda"
+        />
+        <Navigation
+          href="/dash"
+          iconName="Telescope"
+          title="Analisa"
         />
         <Navigation
           href="/search"
@@ -33,8 +38,8 @@ export default function Navbar() {
         />
         <Navigation
           href="/settings"
-          iconName="Telescope"
-          title="Analisa"
+          iconName="Settings"
+          title="Pengaturan"
         />
       </div>
     </div>
@@ -65,17 +70,17 @@ function Navigation({
         className="
           middle center
           flex flex-col gap-1 justify-center items-center
-          w-full h-32
+          w-full h-28
           absolute
-          -top-7
+          -top-5
           rounded-full
           transition-all
         "
         data-ripple-dark="true"
       >
         <Icon
-          size={19}
-          strokeWidth={2.5}
+          size={18}
+          strokeWidth={1.5}
           color={isMatch ? "#1ad55f" : "currentColor"}
         />
         <span className={cn("text-[10px]", isMatch && "text-[#1ad55f]")}>{title}</span>
