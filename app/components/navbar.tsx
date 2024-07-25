@@ -1,8 +1,23 @@
-import { Link, useLocation } from "@remix-run/react";
+import {
+  Link,
+  useLocation,
+  useRouteLoaderData
+} from "@remix-run/react";
+
 import { icons } from "lucide-react";
+
 import { cn } from "~/lib/utils";
+import { type loader as rootLoader } from "~/root";
+
+const routeMatcher = ["ws", "settings"]
 
 export default function Navbar() {
+  const rootData = useRouteLoaderData<typeof rootLoader>("root");
+
+  const location = useLocation();
+  const isMatch = routeMatcher.includes(location.pathname.split("/")[1]);
+
+  if (!rootData?.isAuth || !isMatch) return <></>
   return (
     <div className="border-t border-border/50 shadow-2xl h-20 w-screen">
       <div className="flex gap-1 h-full w-full bg-white">
