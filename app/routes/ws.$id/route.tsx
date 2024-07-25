@@ -17,7 +17,10 @@ export default function Index() {
   return (
     <div className="h-full">
       <div className="flex">
-        <Sidebar workspaceCount={0} />
+        <Sidebar
+          workspaceCount={0}
+          withoutMobile
+        />
         <div className="relative h-full w-full md:ml-auto md:w-[calc(100%_-_var(--sidebar-width-xl))]">
           <div className="relative h-full w-full">
             <div className="max-w-screen-2xl md:p-2 mx-auto m-4">

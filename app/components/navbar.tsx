@@ -19,7 +19,7 @@ export default function Navbar() {
 
   if (!rootData?.isAuth || !isMatch) return <div className="block md:hidden"></div>
   return (
-    <div className="block md:hidden border-t border-border/50 shadow-2xl h-20 w-screen">
+    <div className="block md:hidden border-t border-border/50 shadow-2xl h-16 w-screen">
       <div className="flex gap-1 h-full w-full bg-white">
         <Navigation
           href="/ws"
@@ -30,11 +30,6 @@ export default function Navbar() {
           href="/dash"
           iconName="Telescope"
           title="Analisa"
-        />
-        <Navigation
-          href="/search"
-          iconName="Search"
-          title="Cari"
         />
         <Navigation
           href="/settings"
@@ -64,26 +59,26 @@ function Navigation({
   return (
     <Link
       to={href}
-      className="w-full h-full relative overflow-hidden"
+      className="w-full h-full flex justify-center relative overflow-hidden"
     >
       <button
         className="
           middle center
           flex flex-col gap-1 justify-center items-center
-          w-full h-28
+          w-full h-32
+          -top-8
           absolute
-          -top-5
           rounded-full
           transition-all
         "
         data-ripple-dark="true"
       >
         <Icon
-          size={18}
+          size={22}
           strokeWidth={1.5}
           color={isMatch ? "#1ad55f" : "currentColor"}
         />
-        <span className={cn("text-[10px]", isMatch && "text-[#1ad55f]")}>{title}</span>
+        <span className={cn("text-[11px]", isMatch && "text-[#1ad55f]")}>{title}</span>
       </button>
     </Link>
   )

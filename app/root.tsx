@@ -47,6 +47,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
+        <link
+          rel="stylesheet"
+          href="https://unpkg.com/@material-tailwind/html@latest/styles/material-tailwind.css"
+        />
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />

@@ -1,7 +1,7 @@
 import { ActionFunctionArgs, json, LoaderFunctionArgs } from "@remix-run/node";
 import { Outlet } from "@remix-run/react";
 
-import Sidebar from "~/components/sidebar";
+import RootSidebar from "~/components/sidebar";
 
 import { auth } from "~/utils/auth.server";
 import {
@@ -17,10 +17,8 @@ export enum ActionType {
 }
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
-  const email = await auth.isAuthenticated(request, {
-    failureRedirect: "/",
-  });
-  return json({ email });
+  await auth.isAuthenticated(request, { failureRedirect: "/" });
+  return json({});
 };
 
 export const action = async ({ request }: ActionFunctionArgs) => {
@@ -46,7 +44,7 @@ export default function Shell() {
     <div className="h-full">
       <div className="flex">
         <div className="border-border bg-background fixed z-50 h-full w-full max-w-[var(--sidebar-width)] border-r hidden md:block">
-          <Sidebar />
+          <RootSidebar />
         </div>
         <div className="relative h-full w-full md:ml-auto md:w-[calc(100%_-_var(--sidebar-width))]">
           <div className="relative h-full w-full">

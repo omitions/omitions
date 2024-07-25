@@ -10,7 +10,7 @@ export const meta: MetaFunction = () => {
 
 export default function Index() {
   return (
-    <div className="h-full">
+    <div className="h-full mt-14 md:mt-0">
       <div className="flex">
         <Sidebar workspaceCount={0} />
         <div className="relative h-full w-full md:ml-auto md:w-[calc(100%_-_var(--sidebar-width-xl))]">

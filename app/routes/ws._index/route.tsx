@@ -34,7 +34,7 @@ export default function Index() {
   const { workspaces } = useLoaderData<typeof loader>();
 
   return (
-    <div className="h-full">
+    <div className="h-full mt-14 md:mt-0">
       <div className="flex">
         <Sidebar workspaceCount={workspaces?.length} />
         <div className="relative h-full w-full md:ml-auto md:w-[calc(100%_-_var(--sidebar-width-xl))]">
@@ -55,6 +55,9 @@ function Page() {
   if (!workspaces.length) return <p>Belum ada data</p>
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-4 gap-5 md:gap-6">
+      <div className="block md:hidden">
+        <h4 className="text-[11px] text-muted-foreground">SEMUA WORKSPACE ANDA</h4>
+      </div>
       {workspaces.map((item) => (
         <CardComp
           key={item._id}
@@ -103,14 +106,14 @@ function CardComp({
           "
         >
           <div className="w-10/12 md:w-full flex flex-col flex-wrap gap-0.5 md:gap-1">
-            <h4 className="text-sm font-semibold">
+            <h4 className="text-sm font-medium md:font-semibold">
               {name.length > 30
                 ? `${name.substring(0, 30)}..`
                 : name}
             </h4>
-            <p className="text-xs md:text-sm font-normaltext-muted-foreground text-wrap">
-              {description.length > 60
-                ? `${description.substring(0, 60)}..`
+            <p className="text-xs md:text-sm font-normaltext-muted-foreground leading-relaxed text-wrap">
+              {description.length > 90
+                ? `${description.substring(0, 90)}..`
                 : description}
             </p>
           </div>

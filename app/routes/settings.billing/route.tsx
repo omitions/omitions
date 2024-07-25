@@ -1,6 +1,6 @@
 import { MetaFunction } from "@remix-run/node";
 
-import Sidebar from "../settings/sidebar";
+import SettingsSidebar from "../settings/sidebar";
 
 export const meta: MetaFunction = () => {
   return [
@@ -11,11 +11,9 @@ export const meta: MetaFunction = () => {
 
 export default function Index() {
   return (
-    <div className="h-full">
+    <div className="h-full mt-14 md:mt-0">
       <div className="flex">
-        <div className="border-border fixed left-[var(--sidebar-width)] z-50 hidden h-ful w-full max-w-[var(--sidebar-width-xl)] border-r md:block">
-          <Sidebar />
-        </div>
+        <SettingsSidebar />
         <div className="relative h-full w-full md:ml-auto md:w-[calc(100%_-_var(--sidebar-width-xl))]">
           <div className="relative h-full w-full">
             <div className="mx-auto mt-[var(--header-height)] max-w-screen-2xl md:mt-0 p-2">
