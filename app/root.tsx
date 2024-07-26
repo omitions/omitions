@@ -7,11 +7,11 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 
-import "./globals.css";
-
 import Navbar from "./components/navbar";
 
 import { sessionStorage } from "./utils/auth.server";
+
+import "./globals.css";
 
 export const links: LinksFunction = () => [
   {

@@ -82,7 +82,7 @@ function Mobile() {
               </SheetClose>
             </div>
             <CreateWorkspace actionType={ActionType.CREATE_WORKSPACES} />
-            <div className="flex flex-col gap-1">
+            <div className="flex flex-col">
               <SheetClose>
                 <NavItem
                   title="Workspaces"
@@ -118,7 +118,7 @@ function Mobile() {
 function Desktop({ workspaceCount }: { workspaceCount: number }) {
   return (
     <div className="fixed left-[var(--sidebar-width)] hidden h-ful w-full max-w-[var(--sidebar-width-xl)] md:block border-r border-input">
-      <div className="px-4 py-6 my-1 flex flex-col justify-between min-h-screen">
+      <div className="px-2 py-6 my-1 flex flex-col justify-between min-h-screen">
         <div className='flex flex-col gap-8'>
           <div className="flex items-center">
             <Link
@@ -130,7 +130,7 @@ function Desktop({ workspaceCount }: { workspaceCount: number }) {
           </div>
           <div className="flex flex-col gap-6">
             <CreateWorkspace actionType={ActionType.CREATE_WORKSPACES} />
-            <div className="flex flex-col gap-1">
+            <div className="flex flex-col">
               <NavItem
                 title="Workspaces"
                 href="/ws"
@@ -159,7 +159,7 @@ function SidebarFooter({ count }: { count: number }) {
   return (
     <Link
       to="/ws/:id"
-      className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 rounded-xl"
+      className="focus-visible:outline-none focus-visible:ring-2 mx-2 focus-visible:ring-ring focus-visible:ring-offset-0 rounded-xl"
     >
       <div className="border w-full rounded-xl px-4 py-6 flex flex-col gap-3 cursor-pointer border-input bg-background">
         <div className="flex items-center justify-between">
@@ -202,8 +202,8 @@ function NavItem({
       variant="ghost"
       size="sm"
       className={cn(
-        'w-full justify-start gap-3 text-sm hover:bg-primary/20 rounded-full py-5 px-4',
-        isMatch && "bg-primary/20 font-semibold",
+        'w-full justify-start gap-3 text-sm rounded-full py-3 px-4',
+        isMatch && "bg-primary/20 hover:bg-primary/20 font-semibold",
       )}
     >
       <div className='flex items-center gap-3'>

@@ -18,7 +18,7 @@ export default function CreateWorkspace({ actionType }: { actionType: string }) 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline" className="w-fit h-14 rounded-xl text-sm gap-2">
+        <Button variant="outline" className="w-fit px-3.5 h-16 rounded-xl text-sm gap-2">
           <Plus size={18} strokeWidth={2} />
           <span>Buat workspaces</span>
         </Button>

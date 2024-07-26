@@ -71,7 +71,7 @@ function Mobile() {
                 </button>
               </SheetClose>
             </div>
-            <div className="flex flex-col gap-1">
+            <div className="flex flex-col">
               <SheetClose>
                 <NavItem
                   title="Akun"
@@ -99,7 +99,7 @@ function Mobile() {
 function Desktop() {
   return (
     <div className="fixed left-[var(--sidebar-width)] hidden h-ful w-full max-w-[var(--sidebar-width-xl)] md:block border-r border-input">
-      <div className="px-4 py-6 my-1 flex flex-col gap-8 min-h-screen">
+      <div className="px-2 py-6 my-1 flex flex-col gap-8 min-h-screen">
         <div className="flex items-center">
           <Link
             to="/ws/settings"
@@ -109,7 +109,7 @@ function Desktop() {
           </Link>
         </div>
         <div className="flex flex-col gap-6">
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col">
             <NavItem
               title="Akun"
               href="/settings"
@@ -157,8 +157,8 @@ function NavItem({
       variant="ghost"
       size="sm"
       className={cn(
-        'w-full justify-start gap-3 text-sm hover:bg-primary/20 rounded-full py-5 px-4',
-        isMatch && "bg-primary/20 font-semibold",
+        'w-full justify-start gap-3 text-sm rounded-full py-3 px-4',
+        isMatch && "bg-primary/20 hover:bg-primary/20 font-semibold",
       )}
     >
       <div className='flex items-center gap-3'>
