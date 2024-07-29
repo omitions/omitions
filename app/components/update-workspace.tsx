@@ -31,7 +31,7 @@ export default function UpdateWorkspace({
       <DialogTrigger asChild>
         {children}
       </DialogTrigger>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-sm">
         <DialogHeader>
           <DialogTitle>Ubah <b>{workspaceName}</b> Workspace</DialogTitle>
         </DialogHeader>

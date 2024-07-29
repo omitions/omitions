@@ -18,12 +18,12 @@ export default function CreateWorkspace({ actionType }: { actionType: string }) 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline" className="w-fit px-3.5 h-16 rounded-xl text-sm gap-2">
+        <Button variant="outline" className="w-fit px-3.5 h-16 rounded-xl text-sm font-semibold gap-2">
           <Plus size={18} strokeWidth={2} />
-          <span>Buat workspaces</span>
+          <span>Buat workspace</span>
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-sm">
         <DialogHeader>
           <DialogTitle>Workspace Baru</DialogTitle>
         </DialogHeader>

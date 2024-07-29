@@ -54,7 +54,7 @@ export default function Login() {
   const loading = fetcher.state == "submitting" || fetcher.state === "loading";
 
   return (
-    <div className="flex items-center h-screen use-matter bg-background">
+    <div className="flex items-center h-screen bg-background">
       <div className="w-full flex flex-col items-center gap-6 md:gap-8">
         <div>
           <h2 className="text-4xl font-bold text-primary">

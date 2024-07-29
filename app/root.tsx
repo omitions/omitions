@@ -13,29 +13,7 @@ import { sessionStorage } from "./utils/auth.server";
 
 import "./globals.css";
 
-export const links: LinksFunction = () => [
-  {
-    rel: 'preload',
-    as: 'font',
-    href: '/fonts/Matter-Medium.woff2',
-    type: 'font/woff2',
-    crossOrigin: 'anonymous',
-  },
-  {
-    rel: 'preload',
-    as: 'font',
-    href: '/fonts/Matter-Regular.woff2',
-    type: 'font/woff2',
-    crossOrigin: 'anonymous',
-  },
-  {
-    rel: 'preload',
-    as: 'font',
-    href: '/fonts/Matter-SemiBold.woff2',
-    type: 'font/woff2',
-    crossOrigin: 'anonymous',
-  }
-];
+export const links: LinksFunction = () => [];
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const session = await sessionStorage.getSession(request.headers.get("Cookie"));

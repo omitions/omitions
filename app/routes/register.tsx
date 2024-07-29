@@ -54,7 +54,7 @@ export default function Register() {
 
   if (actionData?.success) return <RedirectPage />
   return (
-    <div className="flex items-center h-screen use-matter bg-background">
+    <div className="flex items-center h-screen bg-background">
       <div className="w-full flex flex-col items-center gap-6 md:gap-8">
         <div>
           <h2 className="text-4xl font-bold text-primary">
@@ -104,7 +104,7 @@ export default function Register() {
 
 function RedirectPage() {
   return (
-    <div className="flex items-center h-screen use-matter bg-background">
+    <div className="flex items-center h-screen bg-background">
       <div className="w-full flex flex-col items-center gap-6 md:gap-8">
         <div className="flex flex-col items-center justify-center">
           <img src="/assets/success.png" className="w-[600px]" alt="" />

@@ -4,6 +4,7 @@ import { useNavigate } from "@remix-run/react";
 import { ChevronLeft } from "lucide-react";
 
 import { Button } from "~/components/ui/button";
+import BigCalendar from "~/components/big-calendar";
 
 import Sidebar from "../ws/sidebar";
 
@@ -64,7 +65,7 @@ function Content() {
   // params.id
   return (
     <div>
-      content
+      <BigCalendar />
     </div>
   )
 }
