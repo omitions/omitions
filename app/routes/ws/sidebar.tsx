@@ -125,7 +125,7 @@ function Desktop({ workspaceCount }: { workspaceCount: number }) {
               to="/ws"
               className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 rounded-sm"
             >
-              <h2 className="text-xl mx-2 font-bold">Beranda</h2>
+              <h2 className="text-xl mx-2 font-semibold">Beranda</h2>
             </Link>
           </div>
           <div className="flex flex-col gap-6">

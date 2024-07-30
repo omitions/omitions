@@ -8,7 +8,7 @@ import Loading from "../loading"
 import { useNavigate } from "@remix-run/react"
 
 const buttonVariants = cva(
-  "relative inline-flex items-center justify-center whitespace-nowrap font-medium tracking-tight ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-80",
+  "relative inline-flex items-center justify-center whitespace-nowrap font-semibold tracking-tight ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-80",
   {
     variants: {
       variant: {
@@ -22,7 +22,7 @@ const buttonVariants = cva(
         ghost: 'hover:bg-background focus-visible:bg-primary/20',
       },
       size: {
-        default: "h-10 px-5 py-3 rounded-xl text-sm",
+        default: "h-12 px-6 py-3 rounded-xl text-sm",
         sm: "h-10 md:h-8 rounded-lg px-4 text-xs",
         lg: "h-12 rounded-2xl px-8",
         icon: "h-9 w-9 md:h-8 md:w-8 rounded-full",

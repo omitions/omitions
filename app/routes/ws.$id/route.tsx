@@ -1,7 +1,7 @@
 import { MetaFunction } from "@remix-run/node";
 import { useNavigate } from "@remix-run/react";
 
-import { ChevronLeft } from "lucide-react";
+import { ArrowLeft, ChevronLeft } from "lucide-react";
 
 import { Button } from "~/components/ui/button";
 import BigCalendar from "~/components/big-calendar";
@@ -17,7 +17,7 @@ export const meta: MetaFunction = () => {
 
 export default function Index() {
   return (
-    <div className="h-full fixed left-0 top-0 md:top-auto md:left-auto md:relative w-screen md:w-full">
+    <div className="h-full fixed left-0 top-0 md:top-auto md:left-auto md:relative w-screen md:w-full overflow-hidden">
       <div className="flex">
         <Sidebar
           workspaceCount={0}
@@ -25,7 +25,7 @@ export default function Index() {
         />
         <div className="relative h-full w-full md:ml-auto md:w-[calc(100%_-_var(--sidebar-width-xl))]">
           <div className="relative h-full w-full">
-            <div className="max-w-screen-2xl md:p-2 mx-auto">
+            <div className="max-w-screen-2xl mx-auto">
               <Page />
             </div>
           </div>
@@ -38,33 +38,62 @@ export default function Index() {
 function Page() {
   const navigate = useNavigate();
 
+  const BackButton = () => (
+    <Button
+      variant="ghost"
+      size="icon"
+      className=""
+      onClick={() => navigate(-1)}
+    >
+      <ChevronLeft
+        size={24}
+        strokeWidth={2}
+      />
+    </Button>
+  )
+
   return (
-    <div>
-      <div className='flex md:hidden h-14 w-full justify-start px-4 md:px-0 items-center bg-white z-50'>
-        <Button
-          variant="ghost"
-          size="icon"
-          className=""
-          onClick={() => navigate(-1)}
-        >
-          <ChevronLeft
-            size={24}
-            strokeWidth={2}
-          />
-        </Button>
-      </div>
-      <div>
+    <div className="flex min-h-screen gap-4">
+      <div className="flex-1">
+        <div className='flex md:hidden h-14 w-full justify-start px-4 md:px-0 items-center bg-white z-50'>
+          <BackButton />
+        </div>
         <Content />
       </div>
+      {/* <div className="border-l bg-background">
+        heisssss
+      </div> */}
     </div>
   )
 }
 
 function Content() {
+  const navigate = useNavigate();
   // const params = useParams();
   // params.id
+
+  const BackButton = () => (
+    <Button
+      variant="ghost"
+      size="icon"
+      className=""
+      onClick={() => navigate(-1)}
+    >
+      <ArrowLeft
+        size={20}
+        strokeWidth={2}
+      />
+    </Button>
+  )
+
   return (
-    <div className="md:mt-4">
+    <div className="flex flex-col gap-4">
+      <div className="hidden md:flex items-center gap-4 py-4">
+        <BackButton />
+        <div>
+          <h4 className="text-lg font-bold">Investasi Saham</h4>
+        </div>
+      </div>
       <BigCalendar />
     </div>
   )
