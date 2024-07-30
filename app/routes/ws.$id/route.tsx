@@ -40,7 +40,7 @@ function Page() {
 
   return (
     <div>
-      <div className='flex h-14 w-full justify-start px-4 md:px-0 items-center bg-white z-50'>
+      <div className='flex md:hidden h-14 w-full justify-start px-4 md:px-0 items-center bg-white z-50'>
         <Button
           variant="ghost"
           size="icon"
@@ -53,7 +53,7 @@ function Page() {
           />
         </Button>
       </div>
-      <div className="border border-red-500">
+      <div>
         <Content />
       </div>
     </div>
@@ -64,7 +64,7 @@ function Content() {
   // const params = useParams();
   // params.id
   return (
-    <div>
+    <div className="md:mt-4">
       <BigCalendar />
     </div>
   )

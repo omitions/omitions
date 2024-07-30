@@ -96,7 +96,7 @@ function CardComp({
       >
         <div
           className="
-            w-full h-full md:min-h-40 justify-start rounded-2xl md:bg-background
+            w-full h-full md:min-h-40 justify-start rounded-2xl
             px-0 md:px-6 md:py-6
             ring-offset-background
             md:focus-visible:outline-none md:focus-visible:ring-2 md:focus-visible:ring-ring md:focus-visible:ring-offset-0

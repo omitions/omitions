@@ -11,6 +11,7 @@ import Navbar from "./components/navbar";
 
 import { sessionStorage } from "./utils/auth.server";
 
+import "react-day-picker/style.css";
 import "./globals.css";
 
 export const links: LinksFunction = () => [];
