@@ -73,17 +73,16 @@ function CardComp({
   name,
   description
 }: TWorkspaces) {
-
   return (
     <div className="relative">
-      <div className="hidden md:block bottom-3 z-50 left-6 peer absolute">
+      <div className="hidden md:block bottom-3 left-6 peer absolute">
         <MoreMenu
           _id={_id}
           name={name}
           description={description}
         />
       </div>
-      <div className="block md:hidden z-50 top-1 right-0 absolute rotate-90">
+      <div className="block md:hidden top-1 right-0 absolute rotate-90">
         <MoreMenu
           _id={_id}
           name={name}
