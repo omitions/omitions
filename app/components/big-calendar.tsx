@@ -113,7 +113,7 @@ function Header({ month, setMonth }: { month: Date, setMonth: React.Dispatch<Rea
   const prevMonth = subMonths(month, 1);
 
   return (
-    <div className="flex items-center justify-between px-2">
+    <div className="flex items-center justify-between px-4 md:px-2">
       <div>
         <h4 className="text-base font-semibold">{format(month, "MMMM yyyy", { locale: localeId })}</h4>
       </div>
@@ -166,15 +166,16 @@ function DayButton({ className, children, day, }: DayButtonProps) {
             <div className="mx-auto md:mx-0 md:px-4 mt-2">
               <p
                 className={cn(
-                  "h-6 w-6 flex items-center gap-1 justify-center rounded-full text-xs font-medium md:font-semibold",
-                  isToday && "bg-primary text-white")
+                  "h-8 w-8 md:h-6 md:w-6 flex items-center gap-1 justify-center rounded-full text-[11px] md:text-xs font-medium md:font-semibold",
+                  isToday && "md:w-full bg-primary md:text-white",
+                )
                 }
               >
-                {children === "1" ?
-                  <span>
+                {children === "1" && (
+                  <span className="hidden md:inline">
                     {format(date, "MMM", { locale: localeId })}
                   </span>
-                  : null}
+                )}
                 <span>
                   {children}
                 </span>
@@ -189,7 +190,7 @@ function DayButton({ className, children, day, }: DayButtonProps) {
           </div>
         </div>
       </SheetTrigger>
-      <SheetContent className="w-[420px]">
+      <SheetContent className="w-full md:w-[420px]">
         <div className="relative">
           <div className="h-screen py-4 flex flex-col gap-4">
             <SheetTitle>
