@@ -87,8 +87,8 @@ function Content() {
   )
 
   return (
-    <div className="flex flex-col gap-4">
-      <div className="hidden md:flex items-center gap-4 py-4">
+    <div className="flex flex-col gap-2">
+      <div className="hidden md:flex items-center gap-4 py-2">
         <BackButton />
         <div>
           <h4 className="text-lg font-bold">Investasi Saham</h4>

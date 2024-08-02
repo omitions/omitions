@@ -61,7 +61,7 @@ export default function Login() {
             mybucks
           </h2>
         </div>
-        <Card className="w-[90%] max-w-sm md:min-w-sm mx-auto">
+        <Card className="w-[90%] max-w-sm md:min-w-sm mx-auto border">
           <CardHeader>
             <CardTitle className="text-xl">Log in ke akun kamu</CardTitle>
             <CardDescription>
