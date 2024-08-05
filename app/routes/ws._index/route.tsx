@@ -14,6 +14,7 @@ import {
 } from "~/components/ui/dropdown-menu";
 import UpdateWorkspace from "~/components/update-workspace";
 
+import { generateDash } from "~/utils/misc";
 import { getWorkspaces, type TWorkspaces } from "~/utils/workspaces.server";
 
 import { ActionType } from "../ws/route";
@@ -90,7 +91,8 @@ function CardComp({
         />
       </div>
       <Link
-        to={"/ws/" + _id}
+        to={"/ws/" + `${generateDash(name)}-${_id}`}
+        prefetch="intent"
         className="rounded-2xl"
       >
         <div

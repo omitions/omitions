@@ -4,6 +4,8 @@ export async function createWorkspace(form: FormData, request: Request) {
   const name = form.get("name");
   const description = form.get("description");
 
+  if (!name || !description) throw new Error("Error");
+
   const session = await sessionStorage.getSession(request.headers.get("Cookie"));
   const token = session.get("user").access_token;
 
@@ -11,7 +13,7 @@ export async function createWorkspace(form: FormData, request: Request) {
   const fetched = await fetch("https://api.mybucks.today/workspaces/create", {
     method: "POST",
     body: JSON.stringify({
-      name,
+      name: name.toString().trim(),
       description
     }),
     headers: {
@@ -29,6 +31,8 @@ export async function updateWorkspace(form: FormData, request: Request) {
   const description = form.get("description");
   const _id = form.get("_id");
 
+  if (!name || !description) throw new Error("Error");
+
   const session = await sessionStorage.getSession(request.headers.get("Cookie"));
   const token = session.get("user").access_token;
 
@@ -37,7 +41,7 @@ export async function updateWorkspace(form: FormData, request: Request) {
     method: "POST",
     body: JSON.stringify({
       _id,
-      name,
+      name: name.toString().trim(),
       description,
     }),
     headers: {

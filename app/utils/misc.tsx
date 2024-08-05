@@ -55,4 +55,24 @@ const AnchorOrLink = React.forwardRef<
   }
 })
 
-export { AnchorOrLink }
+function generateDash(text: string) {
+  const str = text;
+
+  return str.split(" ").join("-");
+}
+
+function regenerateDash(text: string) {
+  const str = text;
+
+  const withoutTheLast = () => str.split('-').slice(0, -1).join(' ');
+  const getTheLast = () => str.split('-').pop();
+  const defaultText = () => str.split("-").join(" ");
+
+  return {
+    defaultText,
+    withoutTheLast,
+    getTheLast
+  }
+}
+
+export { AnchorOrLink, generateDash, regenerateDash }

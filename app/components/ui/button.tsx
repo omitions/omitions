@@ -84,6 +84,7 @@ const ButtonLink = React.forwardRef<
       <Comp
         ref={ref}
         disabled={disabled}
+        prefetch="intent"
         onClick={() => delay ? redirectTo() : null}
         {...props}
       >

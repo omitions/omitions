@@ -6,6 +6,7 @@ import { Button, ButtonLink } from '~/components/ui/button';
 
 import { cn } from '~/lib/utils';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
+import { CommandDialogDemo } from './search';
 
 export default function Sidebar() {
   return (
@@ -22,11 +23,12 @@ export default function Sidebar() {
           iconName="ScrollText"
           title="Beranda"
         />
-        <NavItem
-          href="/searchs"
-          iconName="Search"
-          title="Cari apapun"
-        />
+        <CommandDialogDemo>
+          <NavItem
+            iconName="Search"
+            title="Cari apapun.."
+          />
+        </CommandDialogDemo>
         <NavItem
           href="/settings"
           iconName="Settings"
@@ -50,15 +52,16 @@ function NavItem({
   iconName,
   title,
   disabled,
+  ...props
 }: {
-  href: string
+  href?: string
   prefetch?: LinkProps['prefetch']
   iconName: keyof typeof icons
   title: string
   disabled?: boolean
 }) {
   const location = useLocation();
-  const isMatch = location.pathname.split("/")[1].includes(href?.split("/")[1]);
+  const isMatch = href ? location.pathname.split("/")[1].includes(href?.split("/")[1]) : false;
 
   // eslint-disable-next-line import/namespace
   const Icon = icons[iconName];
@@ -77,6 +80,7 @@ function NavItem({
               'justify-center hover:bg-primary/20 h-9 w-9 rounded-full p-2',
               isMatch && "bg-primary/20",
             )}
+            {...props}
           >
             <Icon
               size={18}
@@ -90,6 +94,14 @@ function NavItem({
           sideOffset={3}
         >
           <p className={cn(isMatch ? "font-semibold" : "font-medium")}>{title}</p>
+          {iconName === 'Search' && (
+            <p className="text-xs mt-1 text-muted-foreground">
+              Tekan{" "}
+              <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                <span className="text-xs">⌘</span>K
+              </kbd>
+            </p>
+          )}
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>

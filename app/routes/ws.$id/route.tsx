@@ -1,10 +1,12 @@
 import { MetaFunction } from "@remix-run/node";
-import { useNavigate } from "@remix-run/react";
+import { useNavigate, useParams } from "@remix-run/react";
 
 import { ArrowLeft, ChevronLeft } from "lucide-react";
 
 import { Button } from "~/components/ui/button";
 import BigCalendar from "~/components/big-calendar";
+
+import { regenerateDash } from "~/utils/misc";
 
 import Sidebar from "../ws/sidebar";
 
@@ -60,17 +62,16 @@ function Page() {
         </div>
         <Content />
       </div>
-      {/* <div className="border-l bg-background">
-        heisssss
-      </div> */}
     </div>
   )
 }
 
 function Content() {
   const navigate = useNavigate();
-  // const params = useParams();
-  // params.id
+  const params = useParams();
+
+  // const workspaceId = params.id ? regenerateDash(params.id).getTheLast() : null;
+  const title = params.id ? regenerateDash(params.id).withoutTheLast() : "-";
 
   const BackButton = () => (
     <Button
@@ -88,10 +89,10 @@ function Content() {
 
   return (
     <div className="flex flex-col gap-2">
-      <div className="hidden md:flex items-center gap-4 py-2">
+      <div className="hidden md:flex items-center gap-4 py-3">
         <BackButton />
         <div>
-          <h4 className="text-lg font-bold">Investasi Saham</h4>
+          <h4 className="text-xl font-semibold">{title}</h4>
         </div>
       </div>
       <BigCalendar />
