@@ -146,13 +146,13 @@ function DayButton({ className, children, day, }: DayButtonProps) {
           </div>
         </div>
       </SheetTrigger>
-      <SheetContent className="w-full md:w-[400px]">
+      <SheetContent className="w-full md:w-[600px]">
         <div className="relative min-h-screen">
-          <div className="h-screen py-4 flex flex-col gap-4">
+          <div className="h-screen p-6 flex flex-col gap-6">
             <SheetTitle>
               {format(date, "d MMMM yyyy", { locale: localeId })}
             </SheetTitle>
-            <div className="flex flex-col divide-y">
+            <div className="flex flex-col divide-y border rounded-xl px-6 py-2">
               <Transaction
                 type="cash_in"
                 amount={24000000}
@@ -169,12 +169,15 @@ function DayButton({ className, children, day, }: DayButtonProps) {
               />
             </div>
           </div>
-          <div className="sticky w-full bottom-0 right-0 py-4 flex flex-col gap-2">
+          <div
+            className="sticky w-full p-6 bottom-0 right-0 flex flex-col gap-2"
+            style={{ boxShadow: "0 4px 16px #0000001f" }}
+          >
             <Button
               variant="default"
               className="w-full"
             >
-              Buat Transaksi
+              Buat Transaksiss
             </Button>
             <SheetClose asChild>
               <Button

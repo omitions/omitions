@@ -21,6 +21,9 @@ const config = {
       boxShadow: {
         "3xl": "rgba(0, 200, 6, 0.03) 0px 7px 32px 0px"
       },
+      backdropBlur: {
+        xs: '2px',
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
