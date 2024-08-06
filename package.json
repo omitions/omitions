@@ -23,6 +23,7 @@
     "@remix-run/node": "^2.10.3",
     "@remix-run/react": "^2.10.3",
     "@remix-run/serve": "^2.10.3",
+    "@rollup/rollup-darwin-arm64": "^4.20.0",
     "@use-gesture/react": "^10.3.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
