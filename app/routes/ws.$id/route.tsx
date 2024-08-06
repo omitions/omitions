@@ -61,7 +61,7 @@ function Page() {
   )
 
   return (
-    <div className="flex min-h-screen gap-4">
+    <div className="flex min-h-screen mb-32 gap-4">
       <div className="flex-1">
         <div className='flex md:hidden h-14 w-full justify-start px-4 md:px-0 items-center bg-white z-50'>
           <BackButton />
