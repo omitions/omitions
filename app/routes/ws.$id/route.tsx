@@ -1,4 +1,4 @@
-import { MetaFunction } from "@remix-run/node";
+import { json, LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
 import { useNavigate, useParams } from "@remix-run/react";
 
 import { ArrowLeft, ChevronLeft } from "lucide-react";
@@ -10,9 +10,15 @@ import { regenerateDash } from "~/utils/misc";
 
 import Sidebar from "../ws/sidebar";
 
-export const meta: MetaFunction = () => {
+export async function loader({ params }: LoaderFunctionArgs) {
+  return json({
+    workspaceName: params.id ? regenerateDash(params.id).withoutTheLast() : "-",
+  });
+}
+
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
   return [
-    { title: " | mybucks.today" },
+    { title: data?.workspaceName + " | mybucks.today" },
     { name: "description", content: "Welcome to Remix!" },
   ];
 };

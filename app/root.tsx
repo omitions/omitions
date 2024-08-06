@@ -8,6 +8,7 @@ import {
 } from "@remix-run/react";
 
 import Navbar from "./components/navbar";
+import { TooltipProvider } from "./components/ui/tooltip";
 
 import { sessionStorage } from "./utils/auth.server";
 
@@ -48,7 +49,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
 export default function App() {
   return (
     <main>
-      <Outlet />
+      <TooltipProvider delayDuration={300}>
+        <Outlet />
+      </TooltipProvider>
       <div className="block md:hidden fixed bottom-0">
         <Navbar />
       </div>

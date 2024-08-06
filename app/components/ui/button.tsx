@@ -1,11 +1,18 @@
-import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
+import { useNavigate } from "@remix-run/react"
+
 import { cva, type VariantProps } from "class-variance-authority"
+import * as React from "react"
 
 import { cn } from "~/lib/utils"
 import { AnchorOrLink } from "~/utils/misc"
+
 import Loading from "../loading"
-import { useNavigate } from "@remix-run/react"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger
+} from "./tooltip"
 
 const buttonVariants = cva(
   "relative inline-flex items-center justify-center whitespace-nowrap font-semibold tracking-tight ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-80",
@@ -39,12 +46,37 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
   VariantProps<typeof buttonVariants> {
   asChild?: boolean,
-  loading?: boolean
+  loading?: boolean,
+  tooltip?: string
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, loading = false, asChild = false, ...props }, ref) => {
+  ({ className, variant, size, loading = false, asChild = false, tooltip = "", ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
+
+    if (tooltip) {
+      return (
+        <Tooltip disableHoverableContent delayDuration={200}>
+          <TooltipTrigger asChild>
+            <Comp
+              className={cn(buttonVariants({ variant, size, className }))}
+              ref={ref}
+              {...props}
+            >
+              {loading ? <Loading /> : props.children}
+            </Comp>
+          </TooltipTrigger>
+          <TooltipContent
+            align="center"
+            side="bottom"
+            sideOffset={3}
+          >
+            <p className="font-medium">{tooltip}</p>
+          </TooltipContent>
+        </Tooltip>
+      )
+    }
+
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}
@@ -73,7 +105,8 @@ const ButtonLink = React.forwardRef<
     if (href) navigate(href);
   }
 
-  const Comp = delay ? Slot : AnchorOrLink
+  const Comp = delay ? Slot : AnchorOrLink;
+
   return (
     <Button
       asChild

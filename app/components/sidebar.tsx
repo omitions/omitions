@@ -5,7 +5,8 @@ import { icons } from 'lucide-react';
 import { Button, ButtonLink } from '~/components/ui/button';
 
 import { cn } from '~/lib/utils';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
+
+import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip';
 import { CommandDialogDemo } from './search';
 
 export default function Sidebar() {
@@ -68,42 +69,40 @@ function NavItem({
 
   const Comp = href ? ButtonLink : Button
   return (
-    <TooltipProvider delayDuration={300}>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Comp
-            disabled={disabled}
-            href={href}
-            prefetch={prefetch}
-            variant="ghost"
-            className={cn(
-              'justify-center hover:bg-primary/20 h-9 w-9 rounded-full p-2',
-              isMatch && "bg-primary/20",
-            )}
-            {...props}
-          >
-            <Icon
-              size={18}
-              strokeWidth={isMatch ? 2.5 : 2}
-            />
-          </Comp>
-        </TooltipTrigger>
-        <TooltipContent
-          align="center"
-          side="right"
-          sideOffset={3}
-        >
-          <p className={cn(isMatch ? "font-semibold" : "font-medium")}>{title}</p>
-          {iconName === 'Search' && (
-            <p className="text-xs mt-1 text-muted-foreground">
-              Tekan{" "}
-              <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                <span className="text-xs">⌘</span>K
-              </kbd>
-            </p>
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Comp
+          disabled={disabled}
+          href={href}
+          prefetch={prefetch}
+          variant="ghost"
+          className={cn(
+            'justify-center hover:bg-primary/20 h-9 w-9 rounded-full p-2',
+            isMatch && "bg-primary/20",
           )}
-        </TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
+          {...props}
+        >
+          <Icon
+            size={18}
+            strokeWidth={isMatch ? 2.5 : 2}
+          />
+        </Comp>
+      </TooltipTrigger>
+      <TooltipContent
+        align="center"
+        side="right"
+        sideOffset={3}
+      >
+        <p className={cn(isMatch ? "font-semibold" : "font-medium")}>{title}</p>
+        {iconName === 'Search' && (
+          <p className="text-xs mt-1 text-muted-foreground">
+            Tekan{" "}
+            <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+              <span className="text-xs">⌘</span>K
+            </kbd>
+          </p>
+        )}
+      </TooltipContent>
+    </Tooltip>
   )
 }
