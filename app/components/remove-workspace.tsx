@@ -32,7 +32,7 @@ export default function RemoveWorkspace({
       <DialogTrigger asChild>
         {children}
       </DialogTrigger>
-      <DialogContent className="sm:max-w-sm">
+      <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Hapus Workspace</DialogTitle>
         </DialogHeader>

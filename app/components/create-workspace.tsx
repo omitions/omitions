@@ -23,7 +23,7 @@ export default function CreateWorkspace({ actionType }: { actionType: string }) 
           <span>Buat workspace</span>
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-sm">
+      <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Workspace Baru</DialogTitle>
         </DialogHeader>
