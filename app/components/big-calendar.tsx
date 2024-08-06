@@ -8,7 +8,6 @@ import {
   ArrowRight,
   ChevronLeft,
   ChevronRight,
-  Plus,
   XIcon
 } from "lucide-react"
 
@@ -27,71 +26,93 @@ import {
   SheetTrigger
 } from "./ui/sheet"
 
+import CreateTransacation from "./create-transaction"
+import { useSearchParams } from "@remix-run/react"
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker>
 
-export default function BigCalendar() {
+export default function BigCalendar({ isValid }: { isValid: boolean }) {
   const [month, setMonth] = React.useState(new Date());
 
+  if (!isValid) return <>Sorry</>
   return (
     <div className="relative overflow-hidden">
-      <Header
-        month={month}
-        setMonth={setMonth}
-      />
-      <div>
-        <DayPicker
-          hideNavigation
-          showOutsideDays
-          onDayClick={(v) => {
-            console.log('v >>> ', v)
-          }}
-          month={month}
-          weekStartsOn={0}
-          locale={localeId}
-          classNames={{
-            root: "relative",
+      <div className="flex">
+        <div className="w-full">
+          <Header
+            month={month}
+            setMonth={setMonth}
+          />
+          <DayPicker
+            hideNavigation
+            showOutsideDays
+            onDayClick={_ => _}
+            month={month}
+            weekStartsOn={0}
+            locale={localeId}
+            classNames={{
+              root: "relative",
 
-            month: "relative w-full mt-4",
-            months: "relative w-full",
-            month_grid: "mt-8 w-full h-[calc(100vh_-_145px)]",
+              month: "relative w-full mt-4",
+              months: "relative w-full",
+              month_grid: "mt-8 w-full h-[calc(100vh_-_145px)]",
 
-            week: "relative p-0 last:border-b",
-            weekdays: "flex absolute top-0 w-full",
-            weekday: "flex-1 text-[10px] font-semibold z-50 font-medium h-full py-2 flex items-center justify-center md:justify-start md:px-4 first:text-red-500 md:uppercase",
+              week: "relative p-0 last:border-b",
+              weekdays: "flex absolute top-0 w-full",
+              weekday: "flex-1 text-[10px] font-medium z-50 font-medium h-full py-2 flex items-center justify-center md:justify-start md:px-4 first:text-red-500 md:uppercase",
 
-            caption_label: "border border-red-500 absolute -top-11 right-0 hidden",
-            day: "p-0 border-transparent md:border-border first:border-l border-r border-t first:text-red-500",
-            day_button: "hover:rounded-xl border h-full border-transparent hover:border-primary",
-            outside: "text-muted-foreground/50"
-          }}
-          components={{
-            DayButton: (props: DayButtonProps) => (
-              <DayButton {...props} />
-            ),
-          }}
-        />
+              caption_label: "border border-red-500 absolute -top-11 right-0 hidden",
+              day: "p-0 border-transparent md:border-border first:border-l border-r border-t first:text-red-500",
+              day_button: "hover:rounded-2xl border h-full border-transparent hover:border-primary",
+              outside: "text-muted-foreground/50"
+            }}
+            components={{
+              DayButton: (props: DayButtonProps) => (
+                <DayButton
+                  {...props}
+                />
+              ),
+            }}
+          />
+        </div>
       </div>
     </div>
   )
 }
 
 function Header({ month, setMonth }: { month: Date, setMonth: React.Dispatch<React.SetStateAction<Date>> }) {
+  const [, setSearchParams] = useSearchParams();
+
   const today = new Date();
+  const params = new URLSearchParams();
 
   const nextMonth = addMonths(month, 1);
   const prevMonth = subMonths(month, 1);
 
+  React.useEffect(() => {
+    params.set("d", `${new Date().getFullYear()}-${new Date().getMonth() + 1}`);
+    setSearchParams(params, {
+      preventScrollReset: true,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   return (
     <div className="flex items-center justify-between px-4 md:px-2">
       <div>
-        <h4 className="text-sm font-semibold">{format(month, "MMMM yyyy", { locale: localeId })}</h4>
+        <h4 className="text-sm font-medium">{format(month, "MMMM yyyy", { locale: localeId })}</h4>
       </div>
       <div className="flex items-center gap-2">
         <Button
           variant="ghost"
           size="icon"
-          onClick={() => setMonth(prevMonth)}
+          onClick={() => {
+            setMonth(prevMonth)
+            params.set("d", `${prevMonth.getFullYear()}-${prevMonth.getMonth() + 1}`);
+            setSearchParams(params, {
+              preventScrollReset: true,
+            });
+          }}
         >
           <ChevronLeft
             size={22}
@@ -101,7 +122,7 @@ function Header({ month, setMonth }: { month: Date, setMonth: React.Dispatch<Rea
         <Button
           variant="ghost"
           size="sm"
-          className="text-sm font-semibold"
+          className="text-sm font-medium"
           onClick={() => setMonth(today)}
         >
           Hari ini
@@ -109,7 +130,13 @@ function Header({ month, setMonth }: { month: Date, setMonth: React.Dispatch<Rea
         <Button
           variant="ghost"
           size="icon"
-          onClick={() => setMonth(nextMonth)}
+          onClick={() => {
+            setMonth(nextMonth)
+            params.set("d", `${nextMonth.getFullYear()}-${nextMonth.getMonth() + 1}`);
+            setSearchParams(params, {
+              preventScrollReset: true,
+            });
+          }}
         >
           <ChevronRight
             size={22}
@@ -121,18 +148,17 @@ function Header({ month, setMonth }: { month: Date, setMonth: React.Dispatch<Rea
   )
 }
 
-function DayButton({ className, children, day, }: DayButtonProps) {
+function DayButton({ className, children, day }: DayButtonProps) {
   const date = day.date;
   const isToday = day.dateLib.isSameDay(new Date(date), new Date())
 
   return (
-    <Sheet modal={false}>
+    <Sheet>
       <SheetTrigger asChild>
-        <div
-          role="button"
+        <button
           className={cn(
             className,
-            "flex items-start justify-start",
+            "flex items-start w-full justify-start",
             isToday && "bg-background"
           )}
         >
@@ -140,7 +166,7 @@ function DayButton({ className, children, day, }: DayButtonProps) {
             <div className="mx-auto md:mx-0 md:px-2 mt-2">
               <p
                 className={cn(
-                  "h-8 w-8 flex items-center border-2 border-transparent gap-1 justify-center rounded-full text-[11px] md:text-xs font-medium md:font-semibold",
+                  "h-8 w-8 flex items-center border-2 border-transparent gap-1 justify-center rounded-full text-[11px] md:text-xs font-medium md:font-medium",
                   isToday && "border-blue-400 bg-blue-100"
                 )}
               >
@@ -155,23 +181,19 @@ function DayButton({ className, children, day, }: DayButtonProps) {
               </p>
             </div>
           </div>
-        </div>
+        </button>
       </SheetTrigger>
-      <SheetContent className="w-full md:w-[54vw] md:max-w-[700px]">
+      <SheetContent className="w-full md:w-[50vw] md:max-w-[650px]">
         <div className="relative min-h-screen">
           <div className="sticky w-full px-6 top-0 right-0 flex flex-col gap-2">
             <div className="py-4">
-              <Button
-                variant="default"
-                className="w-fit px-3.5 h-16 fixed bottom-12 shadow-lg hover:bg-primary right-12 rounded-xl text-sm font-semibold gap-2"
-              >
-                <Plus size={18} strokeWidth={2} />
-                <span>Buat transaksi</span>
-              </Button>
+              <div className="fixed bottom-12 right-12">
+                <CreateTransacation />
+              </div>
               <div className="flex gap-4 items-center justify-between px-3 relative">
                 <div>
-                  <p className={cn("text-xs font-semibold text-muted-foreground uppercase", isToday && "text-blue-400")}>{format(date, "EEEE", { locale: localeId })}</p>
-                  <p className="text-lg font-bold">{format(date, "d MMMM yyyy", { locale: localeId })}</p>
+                  <p className={cn("text-xs font-medium text-muted-foreground uppercase", isToday && "text-blue-400")}>{format(date, "EEEE", { locale: localeId })}</p>
+                  <p className="text-lg font-medium">{format(date, "d MMMM yyyy", { locale: localeId })}</p>
                 </div>
                 <SheetClose asChild>
                   <Button
@@ -253,7 +275,7 @@ function Transaction({
       <div className="flex gap-4 items-start justify-between w-full">
         <div className="flex flex-col w-full">
           <p className="text-xs text-muted-foreground font-normal">{dateTime}</p>
-          <p className="text-base font-semibold text-black">{title}</p>
+          <p className="text-base font-medium text-black">{title}</p>
           <p className="text-sm text-muted-foreground font-normal">{description}</p>
         </div>
         <div className="mt-1.5 w-full flex justify-end">

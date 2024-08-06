@@ -76,7 +76,7 @@ function Content() {
   const navigate = useNavigate();
   const params = useParams();
 
-  // const workspaceId = params.id ? regenerateDash(params.id).getTheLast() : null;
+  const workspaceId = params.id ? regenerateDash(params.id).getTheLast() : null;
   const title = params.id ? regenerateDash(params.id).withoutTheLast() : "-";
 
   const BackButton = () => (
@@ -98,10 +98,10 @@ function Content() {
       <div className="hidden md:flex items-center gap-4 py-3">
         <BackButton />
         <div>
-          <h4 className="text-xl font-semibold">{title}</h4>
+          <h4 className="text-xl font-medium">{title}</h4>
         </div>
       </div>
-      <BigCalendar />
+      <BigCalendar isValid={!!title && !!workspaceId} />
     </div>
   )
 }

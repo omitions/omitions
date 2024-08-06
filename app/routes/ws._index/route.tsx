@@ -91,7 +91,7 @@ function CardComp({
         />
       </div>
       <Link
-        to={"/ws/" + `${generateDash(name)}-${_id}`}
+        to={"/ws/" + `${generateDash(name)}-${_id}` + `?d=${new Date().getFullYear()}-${new Date().getMonth() + 1}`}
         prefetch="intent"
         className="rounded-2xl"
       >
@@ -107,7 +107,7 @@ function CardComp({
           "
         >
           <div className="w-10/12 md:w-full flex flex-col flex-wrap gap-0.5 md:gap-1">
-            <h4 className="text-sm font-medium md:font-semibold">
+            <h4 className="text-sm font-medium md:font-medium">
               {name.length > 30
                 ? `${name.substring(0, 30)}..`
                 : name}

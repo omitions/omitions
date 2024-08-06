@@ -125,7 +125,7 @@ function Desktop({ workspaceCount }: { workspaceCount: number }) {
               to="/ws"
               className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 rounded-sm"
             >
-              <h2 className="text-xl mx-2 font-semibold">Beranda</h2>
+              <h2 className="text-xl mx-2 font-medium">Beranda</h2>
             </Link>
           </div>
           <div className="flex flex-col gap-6">
@@ -163,7 +163,7 @@ function SidebarFooter({ count }: { count: number }) {
     >
       <div className="border w-full rounded-xl px-4 py-6 flex flex-col gap-3 cursor-pointer border-input bg-background">
         <div className="flex items-center justify-between">
-          <h4 className="text-xs font-semibold">{count || 0}/10 Workspace</h4>
+          <h4 className="text-xs font-medium">{count || 0}/10 Workspace</h4>
           <p className="text-xs font-medium text-muted-foreground">Gratis</p>
         </div>
         <Progress value={33} />
@@ -203,7 +203,7 @@ function NavItem({
       size="sm"
       className={cn(
         'w-full justify-start gap-3 text-sm rounded-full py-3 px-4',
-        isMatch && "bg-primary/20 hover:bg-primary/20 font-semibold",
+        isMatch && "bg-primary/20 hover:bg-primary/20 font-medium",
       )}
     >
       <div className='flex items-center gap-3'>

@@ -105,7 +105,7 @@ function Desktop() {
             to="/ws/settings"
             className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 rounded-sm"
           >
-            <h2 className="text-xl mx-2 font-semibold">Pengaturan</h2>
+            <h2 className="text-xl mx-2 font-medium">Pengaturan</h2>
           </Link>
         </div>
         <div className="flex flex-col gap-6">
@@ -158,7 +158,7 @@ function NavItem({
       size="sm"
       className={cn(
         'w-full justify-start gap-3 text-sm rounded-full py-3 px-4',
-        isMatch && "bg-primary/20 hover:bg-primary/20 font-semibold",
+        isMatch && "bg-primary/20 hover:bg-primary/20 font-medium",
       )}
     >
       <div className='flex items-center gap-3'>

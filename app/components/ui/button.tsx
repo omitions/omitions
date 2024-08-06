@@ -71,7 +71,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             side="bottom"
             sideOffset={3}
           >
-            <p className="font-medium">{tooltip}</p>
+            <p className="font-semibold">{tooltip}</p>
           </TooltipContent>
         </Tooltip>
       )

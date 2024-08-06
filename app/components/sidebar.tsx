@@ -93,7 +93,7 @@ function NavItem({
         side="right"
         sideOffset={3}
       >
-        <p className={cn(isMatch ? "font-semibold" : "font-medium")}>{title}</p>
+        <p className={cn(isMatch ? "font-medium" : "font-medium")}>{title}</p>
         {iconName === 'Search' && (
           <p className="text-xs mt-1 text-muted-foreground">
             Tekan{" "}
