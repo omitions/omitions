@@ -1,38 +1,42 @@
-import * as React from "react"
+import * as React from "react";
 import {
   DayPicker,
   type DayButtonProps
-} from "react-day-picker"
+} from "react-day-picker";
 import {
   ArrowLeft,
   ArrowRight,
   ChevronLeft,
   ChevronRight,
   XIcon
-} from "lucide-react"
+} from "lucide-react";
 
-import { addMonths, format, subMonths } from "date-fns"
-import { id as localeId } from "date-fns/locale"
+import { useSearchParams } from "@remix-run/react";
 
-import { cn } from "~/lib/utils"
+import { addMonths, format, subMonths } from "date-fns";
+import { id as localeId } from "date-fns/locale";
 
-import toIDR from "~/utils/currency"
+import { cn } from "~/lib/utils";
 
-import { Button } from "./ui/button"
+import toIDR from "~/utils/currency";
+
+import { Button } from "./ui/button";
 import {
   Sheet,
   SheetClose,
   SheetContent,
   SheetTrigger
-} from "./ui/sheet"
+} from "./ui/sheet";
 
 import CreateTransacation from "./create-transaction"
-import { useSearchParams } from "@remix-run/react"
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker>
 
 export default function BigCalendar({ isValid }: { isValid: boolean }) {
-  const [month, setMonth] = React.useState(new Date());
+  const [searchParams] = useSearchParams();
+
+  const date = searchParams.get("d");
+  const [month, setMonth] = React.useState(date ? new Date(date) : new Date());
 
   if (!isValid) return <>Sorry</>
   return (
@@ -89,14 +93,6 @@ function Header({ month, setMonth }: { month: Date, setMonth: React.Dispatch<Rea
   const nextMonth = addMonths(month, 1);
   const prevMonth = subMonths(month, 1);
 
-  React.useEffect(() => {
-    params.set("d", `${new Date().getFullYear()}-${new Date().getMonth() + 1}`);
-    setSearchParams(params, {
-      preventScrollReset: true,
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
   return (
     <div className="flex items-center justify-between px-4 md:px-2">
       <div>
@@ -115,7 +111,7 @@ function Header({ month, setMonth }: { month: Date, setMonth: React.Dispatch<Rea
           }}
         >
           <ChevronLeft
-            size={22}
+            size={18}
             strokeWidth={2}
           />
         </Button>
@@ -139,7 +135,7 @@ function Header({ month, setMonth }: { month: Date, setMonth: React.Dispatch<Rea
           }}
         >
           <ChevronRight
-            size={22}
+            size={18}
             strokeWidth={2}
           />
         </Button>
@@ -155,7 +151,8 @@ function DayButton({ className, children, day }: DayButtonProps) {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <button
+        <div
+          role="button"
           className={cn(
             className,
             "flex items-start w-full justify-start",
@@ -181,14 +178,14 @@ function DayButton({ className, children, day }: DayButtonProps) {
               </p>
             </div>
           </div>
-        </button>
+        </div>
       </SheetTrigger>
       <SheetContent className="w-full md:w-[50vw] md:max-w-[650px]">
         <div className="relative min-h-screen">
           <div className="sticky w-full px-6 top-0 right-0 flex flex-col gap-2">
             <div className="py-4">
               <div className="fixed bottom-12 right-12">
-                <CreateTransacation />
+                <CreateTransacation date={date} />
               </div>
               <div className="flex gap-4 items-center justify-between px-3 relative">
                 <div>

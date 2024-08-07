@@ -18,8 +18,8 @@ export default function CreateWorkspace({ actionType }: { actionType: string }) 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline" className="w-fit px-3.5 h-16 rounded-xl text-sm font-semibold gap-2">
-          <Plus size={18} strokeWidth={2} />
+        <Button variant="outline" className="w-fit px-4 h-16 rounded-xl text-sm font-bold gap-2">
+          <Plus size={20} strokeWidth={2.5} />
           <span>Buat workspace</span>
         </Button>
       </DialogTrigger>
@@ -37,11 +37,13 @@ export default function CreateWorkspace({ actionType }: { actionType: string }) 
               type="text"
               name="name"
               required
+              variant="ghost"
               placeholder="Nama"
             />
             <Textarea
               name="description"
               required
+              variant="ghost"
               placeholder="Deskripsi"
             />
           </div>

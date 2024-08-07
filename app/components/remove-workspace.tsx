@@ -47,7 +47,7 @@ export default function RemoveWorkspace({
               type="text"
               name="title"
               required
-              isError
+              variant="destructive"
               onChange={(v) => setConfirmationText(v.target.value)}
             />
           </div>

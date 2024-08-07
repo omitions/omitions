@@ -76,7 +76,7 @@ export default function Login() {
                   id="email"
                   type="email"
                   name="email"
-                  isError={!!error}
+                  variant={error ? "destructive" : "default"}
                 />
               </div>
               <div className="grid gap-2">
@@ -84,8 +84,8 @@ export default function Login() {
                 <Input
                   id="password"
                   type="password"
-                  isError={!!error}
                   name="password"
+                  variant={error ? "destructive" : "default"}
                 />
                 {error ? <div className="text-sm text-red-500">{error.message}</div> : null}
               </div>

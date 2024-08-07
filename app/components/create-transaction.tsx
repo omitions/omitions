@@ -1,5 +1,12 @@
 import { Form } from "@remix-run/react";
+
 import { Plus } from "lucide-react";
+import { NumericFormat } from 'react-number-format';
+
+import { format } from "date-fns";
+import { id as localeId } from "date-fns/locale";
+
+import { cn } from "~/lib/utils";
 
 import { Button } from "./ui/button";
 import {
@@ -11,41 +18,74 @@ import {
   DialogTitle,
   DialogTrigger
 } from "./ui/dialog";
-import { Input } from "./ui/input";
+import { Input, inputVariants } from "./ui/input";
 import { Textarea } from "./ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from "./ui/select";
 
-export default function CreateTransacation() {
+export default function CreateTransacation({ date }: { date: Date }) {
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Button
           variant="default"
-          className="w-fit px-3.5 h-16 shadow-lg hover:bg-primary rounded-xl text-sm font-semibold gap-2"
+          className="w-fit px-4 h-16 shadow-lg hover:bg-primary rounded-xl text-sm font-bold gap-2"
         >
-          <Plus size={18} strokeWidth={2} />
+          <Plus size={20} strokeWidth={2.5} />
           <span>Buat transaksi</span>
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Workspace Baru</DialogTitle>
+          <DialogTitle>Buat transaksi pada tanggal  {format(date, "d MMMM yyyy", { locale: localeId })}</DialogTitle>
         </DialogHeader>
         <Form
           action="/ws"
           method="post"
           className="flex flex-col gap-6"
         >
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-6">
             <Input
               type="text"
               name="name"
               required
-              placeholder="Nama"
+              placeholder="Tambahkan judul transaksi"
+              variant="ghost"
+              className="text-base font-medium text-black"
             />
+            <Select>
+              <SelectTrigger className="w-full text-black">
+                <SelectValue placeholder="Tipe transaksi" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="system">Invoice</SelectItem>
+                <SelectItem value="light">Pemasukan</SelectItem>
+                <SelectItem value="dark">Pengeluaran</SelectItem>
+              </SelectContent>
+            </Select>
             <Textarea
               name="description"
               required
-              placeholder="Deskripsi"
+              placeholder="Tambahkan deskripsi transaksi"
+              className="text-black placeholder:font-normal"
+            />
+            <NumericFormat
+              thousandSeparator="."
+              decimalSeparator=","
+              name="amount"
+              allowLeadingZeros
+              allowNegative={false}
+              placeholder="Nominal"
+              prefix="Rp"
+              className={cn(
+                inputVariants({ variant: "ghost" }),
+                "text-xl font-bold text-black"
+              )}
             />
           </div>
           <DialogFooter>
@@ -54,14 +94,7 @@ export default function CreateTransacation() {
                 type="button"
                 variant="outline"
               >
-                Tutup
-              </Button>
-            </DialogClose>
-            <DialogClose asChild>
-              <Button
-                type="submit"
-              >
-                Buat Sekarang
+                Batalkan
               </Button>
             </DialogClose>
           </DialogFooter>

@@ -46,12 +46,14 @@ export default function UpdateWorkspace({
               name="name"
               required
               defaultValue={workspaceName}
+              variant="ghost"
               placeholder="Nama"
             />
             <Textarea
               name="description"
               required
               defaultValue={workspaceDescription}
+              variant="ghost"
               placeholder="Deskripsi"
             />
           </div>
