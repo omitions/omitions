@@ -180,7 +180,7 @@ function DayButton({ className, children, day }: DayButtonProps) {
           </div>
         </div>
       </SheetTrigger>
-      <SheetContent className="w-full md:w-[50vw] md:max-w-[650px]">
+      <SheetContent className="w-full md:w-[45vw] md:max-w-[600px]">
         <div className="relative min-h-screen">
           <div className="sticky w-full px-6 top-0 right-0 flex flex-col gap-2">
             <div className="py-4">

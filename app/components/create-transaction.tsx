@@ -1,6 +1,7 @@
 import { Form } from "@remix-run/react";
 
-import { Plus } from "lucide-react";
+// import React from "react";
+import { Plus, ArrowRight, ArrowLeft, FileInput } from "lucide-react";
 import { NumericFormat } from 'react-number-format';
 
 import { format } from "date-fns";
@@ -27,8 +28,12 @@ import {
   SelectTrigger,
   SelectValue
 } from "./ui/select";
+// import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
+// import { Calendar } from "./ui/calendar";
 
 export default function CreateTransacation({ date }: { date: Date }) {
+  // const [time, setTime] = React.useState<Date>();
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -56,16 +61,52 @@ export default function CreateTransacation({ date }: { date: Date }) {
               required
               placeholder="Tambahkan judul transaksi"
               variant="ghost"
-              className="text-base font-medium text-black"
+              className="text-base font-medium text-black placeholder:font-normal"
             />
+            {/* <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant={"outline"}
+                  className={cn(
+                    "w-[240px] justify-start text-left font-normal",
+                    !date && "text-muted-foreground"
+                  )}
+                >
+                  <CalendarIcon className="mr-2 h-4 w-4" />
+                  {date ? format(date, "PPP") : <span>Pick a date</span>}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0" align="start">
+                <Calendar
+                  mode="single"
+                  selected={time}
+                  onSelect={setTime}
+                />
+              </PopoverContent>
+            </Popover> */}
             <Select>
               <SelectTrigger className="w-full text-black">
                 <SelectValue placeholder="Tipe transaksi" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="system">Invoice</SelectItem>
-                <SelectItem value="light">Pemasukan</SelectItem>
-                <SelectItem value="dark">Pengeluaran</SelectItem>
+                <SelectItem value="invoice">
+                  <div className="flex gap-2">
+                    <FileInput size={18} strokeWidth={1.5} />
+                    <span>Invoice</span>
+                  </div>
+                </SelectItem>
+                <SelectItem value="cash_in">
+                  <div className="flex gap-2">
+                    <ArrowRight size={18} strokeWidth={1.5} />
+                    <span>Pemasukan</span>
+                  </div>
+                </SelectItem>
+                <SelectItem value="cash_out">
+                  <div className="flex gap-2">
+                    <ArrowLeft size={18} strokeWidth={1.5} />
+                    <span>Pengeluaran</span>
+                  </div>
+                </SelectItem>
               </SelectContent>
             </Select>
             <Textarea
@@ -84,7 +125,7 @@ export default function CreateTransacation({ date }: { date: Date }) {
               prefix="Rp"
               className={cn(
                 inputVariants({ variant: "ghost" }),
-                "text-xl font-bold text-black"
+                "text-xl font-bold text-black placeholder:font-normal"
               )}
             />
           </div>
