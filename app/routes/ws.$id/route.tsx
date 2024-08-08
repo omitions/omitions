@@ -98,7 +98,7 @@ function Content() {
       <div className="hidden md:flex items-center gap-4 py-3">
         <BackButton />
         <div>
-          <h4 className="text-xl font-medium">{title}</h4>
+          <h1 className="text-xl font-bold">{title}</h1>
         </div>
       </div>
       <BigCalendar isValid={!!title && !!workspaceId} />

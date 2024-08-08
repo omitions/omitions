@@ -118,14 +118,14 @@ function Mobile() {
 function Desktop({ workspaceCount }: { workspaceCount: number }) {
   return (
     <div className="fixed left-[var(--sidebar-width)] hidden h-ful w-full max-w-[var(--sidebar-width-xl)] md:block">
-      <div className="px-3 py-6 my-1 flex flex-col justify-between min-h-screen">
+      <div className="pl-3 py-6 my-1 flex flex-col justify-between min-h-screen">
         <div className='flex flex-col gap-8'>
           <div className="flex items-center">
             <Link
               to="/ws"
               className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 rounded-sm"
             >
-              <h2 className="text-xl mx-2 font-medium">Beranda</h2>
+              <h2 className="text-xl mx-2 font-bold">Beranda</h2>
             </Link>
           </div>
           <div className="flex flex-col gap-6">
@@ -135,11 +135,6 @@ function Desktop({ workspaceCount }: { workspaceCount: number }) {
                 title="Workspaces"
                 href="/ws"
                 iconName="FileText"
-              />
-              <NavItem
-                title="Koleksi"
-                href="/ws/collections"
-                iconName="FolderOpen"
               />
               <NavItem
                 title="Pengingat"
@@ -202,13 +197,13 @@ function NavItem({
       variant="ghost"
       size="sm"
       className={cn(
-        'w-full justify-start gap-3 text-sm rounded-full py-3 px-4',
-        isMatch && "bg-primary/20 hover:bg-primary/20 font-medium",
+        'w-full justify-start gap-3 text-sm rounded-full font-medium py-3 px-4',
+        isMatch && "bg-primary/20 hover:bg-primary/20 font-semibold",
       )}
     >
-      <div className='flex items-center gap-3'>
+      <div className='flex items-center gap-2'>
         <Icon
-          size={16}
+          size={18}
           strokeWidth={isMatch ? 2.5 : 2}
         />
         <span>{title}</span>

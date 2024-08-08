@@ -59,9 +59,9 @@ export default function CreateTransacation({ date }: { date: Date }) {
         <Form
           action="/ws"
           method="post"
-          className="flex flex-col gap-6"
+          className="flex flex-col gap-6 mt-2"
         >
-          <div className="flex flex-col gap-5">
+          <div className="flex flex-col gap-4">
             <Input
               type="text"
               name="name"
@@ -104,19 +104,19 @@ export default function CreateTransacation({ date }: { date: Date }) {
               <SelectContent>
                 <SelectItem value="invoice">
                   <div className="flex gap-2">
-                    <FileInput size={18} strokeWidth={1.5} />
+                    <FileInput size={18} strokeWidth={2} />
                     <span>Invoice</span>
                   </div>
                 </SelectItem>
                 <SelectItem value="cash_in">
                   <div className="flex gap-2">
-                    <ArrowRight size={18} strokeWidth={1.5} />
+                    <ArrowRight size={18} strokeWidth={2} />
                     <span>Pemasukan</span>
                   </div>
                 </SelectItem>
                 <SelectItem value="cash_out">
                   <div className="flex gap-2">
-                    <ArrowLeft size={18} strokeWidth={1.5} />
+                    <ArrowLeft size={18} strokeWidth={2} />
                     <span>Pengeluaran</span>
                   </div>
                 </SelectItem>
@@ -124,11 +124,11 @@ export default function CreateTransacation({ date }: { date: Date }) {
             </Select>
             <div className="flex flex-col gap-2">
               <p className="text-sm">Tambahkan waktu atau atur perulangan</p>
-              <div className="border rounded-lg shadow-sm p-4 flex flex-col gap-2">
-                <label className={cn(buttonVariants({ variant: "ghost" }), "w-fit flex gap-1 px-3")}>
+              <div className="border rounded-lg shadow-sm px-3 bg-background py-6 flex flex-col gap-4">
+                <label className={cn(buttonVariants({ variant: "outline" }), "w-fit flex gap-1 px-3 bg-white")}>
                   <span>{format(date, "d MMMM yyyy", { locale: localeId })}</span>
                   <span>:</span>
-                  <input type="time" value={timeValue} onChange={handleTimeChange} />
+                  <input type="time" value={timeValue} onChange={handleTimeChange} className="bg-transparent" />
                 </label>
                 <div className="flex items-center gap-4">
                   <Select
@@ -136,7 +136,7 @@ export default function CreateTransacation({ date }: { date: Date }) {
                     value={loopType}
                     onValueChange={(v) => setLoopType(v)}
                   >
-                    <SelectTrigger className="w-fit text-black">
+                    <SelectTrigger className="w-fit text-black bg-white rounded-xl">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
@@ -164,7 +164,7 @@ export default function CreateTransacation({ date }: { date: Date }) {
                       prefix="x"
                       allowLeadingZeros
                       allowNegative={false}
-                      placeholder="Ulangi berapa kali? maksimal 40 kali ya.."
+                      placeholder="Masukan pengulangan"
                       className={cn(
                         inputVariants({ variant: "ghost" }),
                         "text-black placeholder:font-normal"

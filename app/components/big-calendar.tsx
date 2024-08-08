@@ -183,14 +183,14 @@ function DayButton({ className, children, day }: DayButtonProps) {
       <SheetContent className="w-full md:w-[45vw] md:max-w-[600px]">
         <div className="relative min-h-screen">
           <div className="sticky w-full px-6 top-0 right-0 flex flex-col gap-2">
-            <div className="py-4">
+            <div className="py-6">
               <div className="fixed bottom-12 right-12">
                 <CreateTransacation date={date} />
               </div>
               <div className="flex gap-4 items-center justify-between px-3 relative">
                 <div>
                   <p className={cn("text-xs font-medium text-muted-foreground uppercase", isToday && "text-blue-400")}>{format(date, "EEEE", { locale: localeId })}</p>
-                  <p className="text-lg font-medium">{format(date, "d MMMM yyyy", { locale: localeId })}</p>
+                  <p className="text-lg font-bold">{format(date, "d MMMM yyyy", { locale: localeId })}</p>
                 </div>
                 <SheetClose asChild>
                   <Button
