@@ -1,4 +1,4 @@
-import { Form } from "@remix-run/react";
+import { FetcherWithComponents } from "@remix-run/react";
 
 import { ArrowLeft, ArrowRight, FileInput, Plus } from "lucide-react";
 import React from "react";
@@ -8,7 +8,7 @@ import { format } from "date-fns";
 import { id as localeId } from "date-fns/locale";
 
 import toIDR from "~/utils/currency";
-import { generateDash } from "~/utils/misc";
+// import { generateDash } from "~/utils/misc";
 
 import { cn } from "~/lib/utils";
 
@@ -37,12 +37,14 @@ export default function CreateTransaction({
   date,
   workspaceId,
   workspaceName,
-  actionType
+  actionType,
+  fetcherProps
 }: {
   date: Date,
   workspaceId: string,
   workspaceName: string
-  actionType: string
+  actionType: string,
+  fetcherProps: FetcherWithComponents<unknown>
 }) {
   const [loopType, setLoopType] = React.useState("none");
   const [trxType, setTrxType] = React.useState<string | undefined>(undefined);
@@ -52,6 +54,8 @@ export default function CreateTransaction({
     const time = e.target.value;
     setTimeValue(time);
   };
+
+  const fetcher = fetcherProps;
 
   return (
     <Dialog>
@@ -69,8 +73,10 @@ export default function CreateTransaction({
         <DialogHeader>
           <DialogTitle>Buat transaksi pada tanggal  {format(date, "d MMMM yyyy", { locale: localeId })}</DialogTitle>
         </DialogHeader>
-        <Form
-          action={"/ws/" + `${generateDash(workspaceName)}-${workspaceId}` + `?d=${new Date().getFullYear()}-${format(new Date().setDate(new Date().getDate() - 1), "MM")}&date=${format(new Date().setDate(new Date().getDate() - 1), "dd")}`}
+        <fetcher.Form
+          action="."
+          key="create-transaction"
+          // action={"/ws/" + `${generateDash(workspaceName)}-${workspaceId}` + `?d=${new Date(date).getFullYear()}-${format(new Date(date).setDate(new Date().getDate() - 1), "MM")}&date=${format(new Date(date), "dd")}`}
           method="post"
           className="flex flex-col gap-6 mt-2"
         >
@@ -247,10 +253,15 @@ export default function CreateTransaction({
           />
           <input
             type="hidden"
+            name="workspace_name"
+            value={workspaceName}
+          />
+          <input
+            type="hidden"
             name="_action"
             value={actionType}
           />
-        </Form>
+        </fetcher.Form>
       </DialogContent>
     </Dialog>
   )

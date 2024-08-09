@@ -2,7 +2,8 @@ import {
   ActionFunctionArgs,
   LoaderFunctionArgs,
   json,
-  MetaFunction
+  MetaFunction,
+  redirect
 } from "@remix-run/node";
 import { useLoaderData, useNavigate, useParams } from "@remix-run/react";
 
@@ -10,12 +11,12 @@ import { ArrowLeft, ChevronLeft } from "lucide-react";
 
 import BigCalendar from "~/components/big-calendar";
 import { Button, ButtonLink } from "~/components/ui/button";
-import { toast } from "~/components/ui/use-toast";
 
-import { regenerateDash } from "~/utils/misc";
+import { generateDash, regenerateDash } from "~/utils/misc";
 import { createTransaction, getTransactions, TTransactions } from "~/utils/workspaces.server";
 
 import Sidebar from "../ws/sidebar";
+import { format } from "date-fns";
 
 export enum ActionType {
   CREATE_TRANSACTION = 'CREATE_TRANSACTION',
@@ -51,16 +52,17 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 
   const _action = formPayload['_action'] as keyof typeof ActionType;
 
+  const workspace_name = formData.get("workspace_name");
+  const workspaces_id = formData.get("workspaces_id");
+  const date_time = formData.get("date_time");
+
   switch (_action) {
     case ActionType.CREATE_TRANSACTION:
-      return await createTransaction(formData, request).then(() => {
-        const date_time = formData.get("date_time");
-        console.log('here ????????? ')
-        return toast({
-          title: "Berhasil",
-          description: "Transaksi pada " + date_time + "telah dibuat",
-        })
-      })
+      await createTransaction(formData, request);
+
+      if (!date_time || typeof date_time != "string" || !workspace_name) return {}
+
+      return redirect("/ws/" + `${generateDash(workspace_name.toString())}-${workspaces_id}` + `?d=${new Date(date_time.toString()).getFullYear()}-${format(new Date(date_time.toString()).setDate(new Date().getDate() - 1), "MM")}&date=${format(new Date(date_time.toString()), "dd")}`)
     default:
       return {}
   }

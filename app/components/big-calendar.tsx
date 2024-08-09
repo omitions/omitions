@@ -12,7 +12,7 @@ import {
   type DayButtonProps
 } from "react-day-picker";
 
-import { useParams, useSearchParams } from "@remix-run/react";
+import { FetcherWithComponents, useFetcher, useParams, useSearchParams } from "@remix-run/react";
 
 import { addMonths, format, subMonths } from "date-fns";
 import { id as localeId } from "date-fns/locale";
@@ -47,6 +47,7 @@ export default function BigCalendar({
   workspaceId: string,
   transactions: TTransactions[]
 }) {
+  const fetcher = useFetcher({ key: "create-transaction" });
   const [searchParams] = useSearchParams();
 
   const date = searchParams.get("d");
@@ -57,6 +58,7 @@ export default function BigCalendar({
     <div className="relative overflow-hidden">
       <div className="flex">
         <div className="w-full">
+          {fetcher.state}
           <Header
             month={month}
             setMonth={setMonth}
@@ -90,6 +92,7 @@ export default function BigCalendar({
                   {...props}
                   workspaceId={workspaceId}
                   transactions={transactions}
+                  fetcherProps={fetcher}
                 />
               )
             }}
@@ -163,10 +166,12 @@ function DayButton({
   children,
   day,
   workspaceId,
-  transactions
+  transactions,
+  fetcherProps
 }: DayButtonProps & {
   workspaceId: string,
-  transactions: TTransactions[]
+  transactions: TTransactions[],
+  fetcherProps: FetcherWithComponents<unknown>
 }) {
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -178,10 +183,12 @@ function DayButton({
 
   const queryDate = searchParams.get('date');
 
-  if (!queryDate) return <></>
+  const fetcher = fetcherProps;
+
+  if (!queryDate || fetcher.state !== "idle") return <></>
   return (
     <Sheet
-      open={+queryDate === date.getDate()}
+      open={+queryDate === date.getDate() && fetcher.state === "idle"}
       onOpenChange={(bool) => {
         if (!bool) {
           setSearchParams((prev) => {
@@ -236,6 +243,7 @@ function DayButton({
           workspaceId={workspaceId}
           workspaceName={workspaceName}
           transactions={transactions}
+          fetcherProps={fetcherProps}
         />
       </SheetContent>
     </Sheet>
@@ -246,12 +254,14 @@ function Content({
   day,
   workspaceId,
   workspaceName,
-  transactions
+  transactions,
+  fetcherProps
 }: {
   day: CalendarDay,
   workspaceId: string,
   workspaceName: string,
-  transactions: TTransactions[]
+  transactions: TTransactions[],
+  fetcherProps: FetcherWithComponents<unknown>
 }) {
   const date = day.date;
   const isToday = day.dateLib.isSameDay(new Date(date), new Date());
@@ -266,6 +276,7 @@ function Content({
               workspaceId={workspaceId}
               workspaceName={workspaceName}
               actionType={ActionType.CREATE_TRANSACTION}
+              fetcherProps={fetcherProps}
             />
           </div>
           <div className="flex gap-4 items-center justify-between px-3 relative">
@@ -300,27 +311,6 @@ function Content({
               date_time={props.date_time}
             />
           ))}
-          {/* <Transaction
-            type="cash_in"
-            amount={24000000}
-            description="Bonus ditransfer menggunakan Livin Mandiri ke norek 12000249276552"
-            title="Transfer"
-            dateTime="12:06"
-          />
-          <Transaction
-            type="cash_out"
-            amount={1890024}
-            title="QR Bayar"
-            description="Bayar hutang ke Martin"
-            dateTime="12:42"
-          />
-          <Transaction
-            type="cash_out"
-            amount={9508900}
-            title="Beli monitor"
-            description="Monitor merek samsung 12inc untuk kerja dirumah (WFH)"
-            dateTime="17:20"
-          /> */}
         </div>
       </div>
     </div>
