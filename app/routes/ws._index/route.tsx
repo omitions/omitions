@@ -19,6 +19,7 @@ import { getWorkspaces, type TWorkspaces } from "~/utils/workspaces.server";
 
 import { ActionType } from "../ws/route";
 import Sidebar from "../ws/sidebar";
+import { format } from "date-fns";
 
 export const meta: MetaFunction = () => {
   return [
@@ -91,7 +92,7 @@ function CardComp({
         />
       </div>
       <Link
-        to={"/ws/" + `${generateDash(name)}-${_id}` + `?d=${new Date().getFullYear()}-${new Date().getMonth() + 1}&date=0`}
+        to={"/ws/" + `${generateDash(name)}-${_id}` + `?d=${new Date().getFullYear()}-${format(new Date().setDate(new Date().getDate() - 1), "MM")}&date=0`}
         prefetch="intent"
         className="rounded-2xl"
       >

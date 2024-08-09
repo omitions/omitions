@@ -34,15 +34,18 @@ import {
 
 import { regenerateDash } from "~/utils/misc";
 import CreateTransaction from "./create-transaction";
+import { TTransactions } from "~/utils/workspaces.server";
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker>
 
 export default function BigCalendar({
   isValid,
-  workspaceId
+  workspaceId,
+  transactions
 }: {
   isValid: boolean,
-  workspaceId: string
+  workspaceId: string,
+  transactions: TTransactions[]
 }) {
   const [searchParams] = useSearchParams();
 
@@ -82,7 +85,13 @@ export default function BigCalendar({
               outside: "text-muted-foreground/50"
             }}
             components={{
-              DayButton: (props: DayButtonProps) => <DayButton {...props} workspaceId={workspaceId} />
+              DayButton: (props: DayButtonProps) => (
+                <DayButton
+                  {...props}
+                  workspaceId={workspaceId}
+                  transactions={transactions}
+                />
+              )
             }}
           />
         </div>
@@ -95,8 +104,6 @@ function Header({ month, setMonth }: { month: Date, setMonth: React.Dispatch<Rea
   const [, setSearchParams] = useSearchParams();
 
   const today = new Date();
-  const params = new URLSearchParams();
-
   const nextMonth = addMonths(month, 1);
   const prevMonth = subMonths(month, 1);
 
@@ -111,10 +118,10 @@ function Header({ month, setMonth }: { month: Date, setMonth: React.Dispatch<Rea
           size="icon"
           onClick={() => {
             setMonth(prevMonth)
-            params.set("d", `${prevMonth.getFullYear()}-${prevMonth.getMonth() + 1}`);
-            setSearchParams(params, {
-              preventScrollReset: true,
-            });
+            setSearchParams((prev) => {
+              prev.set("d", `${new Date(prevMonth).getFullYear()}-${format(new Date(prevMonth).setDate(new Date().getDate() - 1), "MM")}`);
+              return prev;
+            }, { preventScrollReset: true });
           }}
         >
           <ChevronLeft
@@ -135,10 +142,10 @@ function Header({ month, setMonth }: { month: Date, setMonth: React.Dispatch<Rea
           size="icon"
           onClick={() => {
             setMonth(nextMonth)
-            params.set("d", `${nextMonth.getFullYear()}-${nextMonth.getMonth() + 1}`);
-            setSearchParams(params, {
-              preventScrollReset: true,
-            });
+            setSearchParams((prev) => {
+              prev.set("d", `${new Date(nextMonth).getFullYear()}-${format(new Date(nextMonth).setDate(new Date().getDate() - 1), "MM")}`);
+              return prev;
+            }, { preventScrollReset: true });
           }}
         >
           <ChevronRight
@@ -155,17 +162,44 @@ function DayButton({
   className,
   children,
   day,
-  workspaceId
-}: DayButtonProps & { workspaceId: string }) {
-  const params = useParams();
+  workspaceId,
+  transactions
+}: DayButtonProps & {
+  workspaceId: string,
+  transactions: TTransactions[]
+}) {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const routeParams = useParams();
 
   const date = day.date;
   const isToday = day.dateLib.isSameDay(new Date(date), new Date());
-  const workspaceName = params.id ? regenerateDash(params.id).withoutTheLast() : "-";
+  const workspaceName = routeParams.id ? regenerateDash(routeParams.id).withoutTheLast() : "-";
 
+  const queryDate = searchParams.get('date');
+
+  if (!queryDate) return <></>
   return (
-    <Sheet>
-      <SheetTrigger asChild>
+    <Sheet
+      open={+queryDate === date.getDate()}
+      onOpenChange={(bool) => {
+        if (!bool) {
+          setSearchParams((prev) => {
+            prev.set("date", "0");
+            return prev;
+          }, { preventScrollReset: true });
+        }
+      }}
+    >
+      <SheetTrigger
+        asChild
+        onClick={() => {
+          setSearchParams((prev) => {
+            prev.set("date", format(new Date(date), "dd"));
+            return prev;
+          }, { preventScrollReset: true });
+        }}
+      >
         <div
           role="button"
           className={cn(
@@ -201,6 +235,7 @@ function DayButton({
           day={day}
           workspaceId={workspaceId}
           workspaceName={workspaceName}
+          transactions={transactions}
         />
       </SheetContent>
     </Sheet>
@@ -210,23 +245,16 @@ function DayButton({
 function Content({
   day,
   workspaceId,
-  workspaceName
+  workspaceName,
+  transactions
 }: {
   day: CalendarDay,
   workspaceId: string,
-  workspaceName: string
+  workspaceName: string,
+  transactions: TTransactions[]
 }) {
-  const [, setSearchParams] = useSearchParams();
-
   const date = day.date;
   const isToday = day.dateLib.isSameDay(new Date(date), new Date());
-
-  React.useEffect(() => {
-    setSearchParams((prev) => {
-      prev.set("date", date.getDate().toString());
-      return prev;
-    });
-  }, [date, setSearchParams]);
 
   return (
     <div className="relative min-h-screen">
@@ -263,7 +291,16 @@ function Content({
       </div>
       <div className="h-screen py-2 px-8 flex flex-col gap-6 overflow-scroll">
         <div className="flex flex-col divide-y border rounded-2xl px-6 py-1 mb-60">
-          <Transaction
+          {transactions.map((props) => (
+            <Transaction
+              key={props._id}
+              type={props.type}
+              amount={props.amount}
+              description={props.description}
+              date_time={props.date_time}
+            />
+          ))}
+          {/* <Transaction
             type="cash_in"
             amount={24000000}
             description="Bonus ditransfer menggunakan Livin Mandiri ke norek 12000249276552"
@@ -283,7 +320,7 @@ function Content({
             title="Beli monitor"
             description="Monitor merek samsung 12inc untuk kerja dirumah (WFH)"
             dateTime="17:20"
-          />
+          /> */}
         </div>
       </div>
     </div>
@@ -294,15 +331,8 @@ function Transaction({
   type,
   amount,
   description,
-  title,
-  dateTime
-}: {
-  type: "cash_in" | "cash_out",
-  amount: number,
-  description: string,
-  title: string,
-  dateTime: string
-}) {
+  date_time
+}: Pick<TTransactions, "type" | "amount" | "description" | "date_time">) {
   return (
     <div className="flex items-start gap-6 py-4">
       <div className="w-fit mt-1.5">
@@ -322,9 +352,9 @@ function Transaction({
       </div>
       <div className="flex gap-4 items-start justify-between w-full">
         <div className="flex flex-col w-full">
-          <p className="text-xs text-muted-foreground font-normal">{dateTime}</p>
-          <p className="text-base font-medium text-black">{title}</p>
-          <p className="text-sm text-muted-foreground font-normal">{description}</p>
+          <p className="text-xs text-muted-foreground font-normal">{date_time.split(" ")[1]}</p>
+          <p className="text-base font-medium text-black">{description}</p>
+          {/* <p className="text-sm text-muted-foreground font-normal">{description}</p> */}
         </div>
         <div className="mt-1.5 w-full flex justify-end">
           <h4 className={cn("text-base font-bold", type === "cash_in" && "text-primary")}>

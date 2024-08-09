@@ -1,5 +1,10 @@
-import { ActionFunctionArgs, json, LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
-import { useNavigate, useParams } from "@remix-run/react";
+import {
+  ActionFunctionArgs,
+  LoaderFunctionArgs,
+  json,
+  MetaFunction
+} from "@remix-run/node";
+import { useLoaderData, useNavigate, useParams } from "@remix-run/react";
 
 import { ArrowLeft, ChevronLeft } from "lucide-react";
 
@@ -8,7 +13,7 @@ import { Button, ButtonLink } from "~/components/ui/button";
 import { toast } from "~/components/ui/use-toast";
 
 import { regenerateDash } from "~/utils/misc";
-import { createTransaction, getTransactions } from "~/utils/workspaces.server";
+import { createTransaction, getTransactions, TTransactions } from "~/utils/workspaces.server";
 
 import Sidebar from "../ws/sidebar";
 
@@ -118,6 +123,8 @@ function Page() {
 }
 
 function Content() {
+  const { transactions } = useLoaderData<typeof loader>();
+
   const params = useParams();
 
   const workspaceId = params.id ? regenerateDash(params.id).getTheLast() : null;
@@ -148,6 +155,7 @@ function Content() {
       <BigCalendar
         isValid={!!title && !!workspaceId}
         workspaceId={workspaceId ?? ""}
+        transactions={transactions as TTransactions[]}
       />
     </div>
   )

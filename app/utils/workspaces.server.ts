@@ -152,10 +152,14 @@ export async function createTransaction(form: FormData, request: Request) {
 }
 
 export type TTransactions = {
-  _id: string,
-  description: string,
-  name: string,
-  user_id: string,
+  _id: string
+  amount: number
+  type: "cash_in" | "cash_out"
+  description: string
+  loop_type: string
+  loop_count: number
+  workspaces_id: string
+  date_time: string
 }
 export async function getTransactions(request: Request, workspaceId: string | null | undefined, d:string, date: string): Promise<unknown[] | object> {
   const session = await sessionStorage.getSession(request.headers.get("Cookie"));

@@ -70,7 +70,7 @@ export default function CreateTransaction({
           <DialogTitle>Buat transaksi pada tanggal  {format(date, "d MMMM yyyy", { locale: localeId })}</DialogTitle>
         </DialogHeader>
         <Form
-          action={"/ws/" + `${generateDash(workspaceName)}-${workspaceId}` + `?d=${new Date(date).getFullYear()}-${new Date(date).getMonth() + 1}&date=0`}
+          action={"/ws/" + `${generateDash(workspaceName)}-${workspaceId}` + `?d=${new Date().getFullYear()}-${format(new Date().setDate(new Date().getDate() - 1), "MM")}&date=${format(new Date().setDate(new Date().getDate() - 1), "dd")}`}
           method="post"
           className="flex flex-col gap-6 mt-2"
         >
@@ -271,14 +271,14 @@ function SourceOfFund({
   return (
     <ToggleGroupItem
       value={value}
-      className="bg-white w-full h-full flex items-center justify-between gap-4 p-3 border rounded-xl data-[state=on]:border-primary data-[state=on]:text-black"
+      className="bg-white w-full h-full flex items-center justify-between gap-4 p-4 border-2 border-input rounded-xl data-[state=on]:border-primary data-[state=on]:text-black"
     >
-      <div className="flex flex-col gap-1 text-left">
+      <div className="flex flex-col text-left">
         <h3 className="text-sm font-semibold">{name}</h3>
         <p className="text-sm text-muted-foreground font-normal">{accountNumber}</p>
       </div>
       <div>
-        <h2 className="text-base font-bold text-black">{toIDR(balance)}</h2>
+        <h2 className="text-sm font-bold">{toIDR(balance)}</h2>
       </div>
     </ToggleGroupItem>
   )
