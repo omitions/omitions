@@ -1,8 +1,3 @@
-import * as React from "react";
-import {
-  DayPicker,
-  type DayButtonProps
-} from "react-day-picker";
 import {
   ArrowLeft,
   ArrowRight,
@@ -10,8 +5,14 @@ import {
   ChevronRight,
   XIcon
 } from "lucide-react";
+import * as React from "react";
+import {
+  CalendarDay,
+  DayPicker,
+  type DayButtonProps
+} from "react-day-picker";
 
-import { useSearchParams } from "@remix-run/react";
+import { useParams, useSearchParams } from "@remix-run/react";
 
 import { addMonths, format, subMonths } from "date-fns";
 import { id as localeId } from "date-fns/locale";
@@ -20,25 +21,35 @@ import { cn } from "~/lib/utils";
 
 import toIDR from "~/utils/currency";
 
+import { ActionType } from "~/routes/ws.$id/route";
+
 import { Button } from "./ui/button";
 import {
   Sheet,
   SheetClose,
   SheetContent,
+  SheetTitle,
   SheetTrigger
 } from "./ui/sheet";
 
-import CreateTransacation from "./create-transaction"
+import { regenerateDash } from "~/utils/misc";
+import CreateTransaction from "./create-transaction";
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker>
 
-export default function BigCalendar({ isValid }: { isValid: boolean }) {
+export default function BigCalendar({
+  isValid,
+  workspaceId
+}: {
+  isValid: boolean,
+  workspaceId: string
+}) {
   const [searchParams] = useSearchParams();
 
   const date = searchParams.get("d");
   const [month, setMonth] = React.useState(date ? new Date(date) : new Date());
 
-  if (!isValid) return <>Sorry</>
+  if (!isValid || !workspaceId) return <>Sorry</>
   return (
     <div className="relative overflow-hidden">
       <div className="flex">
@@ -71,11 +82,7 @@ export default function BigCalendar({ isValid }: { isValid: boolean }) {
               outside: "text-muted-foreground/50"
             }}
             components={{
-              DayButton: (props: DayButtonProps) => (
-                <DayButton
-                  {...props}
-                />
-              ),
+              DayButton: (props: DayButtonProps) => <DayButton {...props} workspaceId={workspaceId} />
             }}
           />
         </div>
@@ -144,9 +151,17 @@ function Header({ month, setMonth }: { month: Date, setMonth: React.Dispatch<Rea
   )
 }
 
-function DayButton({ className, children, day }: DayButtonProps) {
+function DayButton({
+  className,
+  children,
+  day,
+  workspaceId
+}: DayButtonProps & { workspaceId: string }) {
+  const params = useParams();
+
   const date = day.date;
-  const isToday = day.dateLib.isSameDay(new Date(date), new Date())
+  const isToday = day.dateLib.isSameDay(new Date(date), new Date());
+  const workspaceName = params.id ? regenerateDash(params.id).withoutTheLast() : "-";
 
   return (
     <Sheet>
@@ -181,61 +196,97 @@ function DayButton({ className, children, day }: DayButtonProps) {
         </div>
       </SheetTrigger>
       <SheetContent className="w-full md:w-[45vw] md:max-w-[600px]">
-        <div className="relative min-h-screen">
-          <div className="sticky w-full px-6 top-0 right-0 flex flex-col gap-2">
-            <div className="py-6">
-              <div className="fixed bottom-12 right-12">
-                <CreateTransacation date={date} />
-              </div>
-              <div className="flex gap-4 items-center justify-between px-3 relative">
-                <div>
-                  <p className={cn("text-xs font-medium text-muted-foreground uppercase", isToday && "text-blue-400")}>{format(date, "EEEE", { locale: localeId })}</p>
-                  <p className="text-lg font-bold">{format(date, "d MMMM yyyy", { locale: localeId })}</p>
-                </div>
-                <SheetClose asChild>
-                  <Button
-                    variant="ghost"
-                    className="w-full"
-                    size="icon"
-                    tooltip="Tutup"
-                  >
-                    <XIcon
-                      size={20}
-                      strokeWidth={2.5}
-                    />
-                  </Button>
-                </SheetClose>
-              </div>
-            </div>
-          </div>
-          <div className="h-screen py-2 px-8 flex flex-col gap-6 overflow-scroll">
-            <div className="flex flex-col divide-y border rounded-2xl px-6 py-1 mb-60">
-              <Transaction
-                type="cash_in"
-                amount={24000000}
-                description="Bonus ditransfer menggunakan Livin Mandiri ke norek 12000249276552"
-                title="Transfer"
-                dateTime="12:06"
-              />
-              <Transaction
-                type="cash_out"
-                amount={1890024}
-                title="QR Bayar"
-                description="Bayar hutang ke Martin"
-                dateTime="12:42"
-              />
-              <Transaction
-                type="cash_out"
-                amount={9508900}
-                title="Beli monitor"
-                description="Monitor merek samsung 12inc untuk kerja dirumah (WFH)"
-                dateTime="17:20"
-              />
-            </div>
-          </div>
-        </div>
+        <SheetTitle></SheetTitle>
+        <Content
+          day={day}
+          workspaceId={workspaceId}
+          workspaceName={workspaceName}
+        />
       </SheetContent>
     </Sheet>
+  )
+}
+
+function Content({
+  day,
+  workspaceId,
+  workspaceName
+}: {
+  day: CalendarDay,
+  workspaceId: string,
+  workspaceName: string
+}) {
+  const [, setSearchParams] = useSearchParams();
+
+  const date = day.date;
+  const isToday = day.dateLib.isSameDay(new Date(date), new Date());
+
+  React.useEffect(() => {
+    setSearchParams((prev) => {
+      prev.set("date", date.getDate().toString());
+      return prev;
+    });
+  }, [date, setSearchParams]);
+
+  return (
+    <div className="relative min-h-screen">
+      <div className="sticky w-full px-6 top-0 right-0 flex flex-col gap-2">
+        <div className="py-6">
+          <div className="fixed bottom-12 right-12">
+            <CreateTransaction
+              date={date}
+              workspaceId={workspaceId}
+              workspaceName={workspaceName}
+              actionType={ActionType.CREATE_TRANSACTION}
+            />
+          </div>
+          <div className="flex gap-4 items-center justify-between px-3 relative">
+            <div>
+              <p className={cn("text-xs font-medium text-muted-foreground uppercase", isToday && "text-blue-400")}>{format(date, "EEEE", { locale: localeId })}</p>
+              <p className="text-lg font-bold">{format(date, "d MMMM yyyy", { locale: localeId })}</p>
+            </div>
+            <SheetClose asChild>
+              <Button
+                variant="ghost"
+                className="w-full"
+                size="icon"
+                tooltip="Tutup"
+              >
+                <XIcon
+                  size={20}
+                  strokeWidth={2.5}
+                />
+              </Button>
+            </SheetClose>
+          </div>
+        </div>
+      </div>
+      <div className="h-screen py-2 px-8 flex flex-col gap-6 overflow-scroll">
+        <div className="flex flex-col divide-y border rounded-2xl px-6 py-1 mb-60">
+          <Transaction
+            type="cash_in"
+            amount={24000000}
+            description="Bonus ditransfer menggunakan Livin Mandiri ke norek 12000249276552"
+            title="Transfer"
+            dateTime="12:06"
+          />
+          <Transaction
+            type="cash_out"
+            amount={1890024}
+            title="QR Bayar"
+            description="Bayar hutang ke Martin"
+            dateTime="12:42"
+          />
+          <Transaction
+            type="cash_out"
+            amount={9508900}
+            title="Beli monitor"
+            description="Monitor merek samsung 12inc untuk kerja dirumah (WFH)"
+            dateTime="17:20"
+          />
+        </div>
+      </div>
+    </div>
   )
 }
 

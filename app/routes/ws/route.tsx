@@ -13,7 +13,7 @@ import {
 export enum ActionType {
   CREATE_WORKSPACES = 'CREATE_WORKSPACES',
   REMOVE_WORKSPACES = 'REMOVE_WORKSPACES',
-  UPDATE_WORKSPACES = 'UPDATE_WORKSPACES',
+  UPDATE_WORKSPACES = 'UPDATE_WORKSPACES'
 }
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {

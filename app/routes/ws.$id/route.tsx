@@ -1,20 +1,65 @@
-import { json, LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
+import { ActionFunctionArgs, json, LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
 import { useNavigate, useParams } from "@remix-run/react";
 
 import { ArrowLeft, ChevronLeft } from "lucide-react";
 
-import { Button } from "~/components/ui/button";
 import BigCalendar from "~/components/big-calendar";
+import { Button, ButtonLink } from "~/components/ui/button";
+import { toast } from "~/components/ui/use-toast";
 
 import { regenerateDash } from "~/utils/misc";
+import { createTransaction, getTransactions } from "~/utils/workspaces.server";
 
 import Sidebar from "../ws/sidebar";
 
-export async function loader({ params }: LoaderFunctionArgs) {
+export enum ActionType {
+  CREATE_TRANSACTION = 'CREATE_TRANSACTION',
+}
+
+export async function loader({ params, request }: LoaderFunctionArgs) {
+  const { searchParams } = new URL(request.url);
+
+  const d = searchParams.get("d");
+  const date = searchParams.get("date");
+  const workspaceId = params.id ? regenerateDash(params.id).getTheLast() : null;
+
+  if (!workspaceId || !d || !date) return json({
+    workspaceName: "-",
+    error: "Error loader",
+    transactions: []
+  })
+
+  let transactions = null;
+  if (+date) {
+    transactions = await getTransactions(request, workspaceId, d, date)
+  }
+
   return json({
     workspaceName: params.id ? regenerateDash(params.id).withoutTheLast() : "-",
+    transactions
   });
 }
+
+export const action = async ({ request }: ActionFunctionArgs) => {
+  const formData = await request.formData();
+  const formPayload = Object.fromEntries(formData);
+
+  const _action = formPayload['_action'] as keyof typeof ActionType;
+
+  switch (_action) {
+    case ActionType.CREATE_TRANSACTION:
+      return await createTransaction(formData, request).then(() => {
+        const date_time = formData.get("date_time");
+        console.log('here ????????? ')
+        return toast({
+          title: "Berhasil",
+          description: "Transaksi pada " + date_time + "telah dibuat",
+        })
+      })
+    default:
+      return {}
+  }
+};
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
   return [
@@ -73,24 +118,23 @@ function Page() {
 }
 
 function Content() {
-  const navigate = useNavigate();
   const params = useParams();
 
   const workspaceId = params.id ? regenerateDash(params.id).getTheLast() : null;
   const title = params.id ? regenerateDash(params.id).withoutTheLast() : "-";
 
   const BackButton = () => (
-    <Button
+    <ButtonLink
       variant="ghost"
       size="icon"
-      className=""
-      onClick={() => navigate(-1)}
+      href="/ws"
+      prefetch="intent"
     >
       <ArrowLeft
         size={20}
         strokeWidth={2}
       />
-    </Button>
+    </ButtonLink>
   )
 
   return (
@@ -101,7 +145,10 @@ function Content() {
           <h1 className="text-xl font-bold">{title}</h1>
         </div>
       </div>
-      <BigCalendar isValid={!!title && !!workspaceId} />
+      <BigCalendar
+        isValid={!!title && !!workspaceId}
+        workspaceId={workspaceId ?? ""}
+      />
     </div>
   )
 }

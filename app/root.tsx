@@ -9,6 +9,7 @@ import {
 
 import Navbar from "./components/navbar";
 import { TooltipProvider } from "./components/ui/tooltip";
+import { Toaster } from "./components/ui/toaster";
 
 import { sessionStorage } from "./utils/auth.server";
 
@@ -40,6 +41,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         {children}
         <ScrollRestoration />
         <Scripts />
+        <Toaster />
         <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/ripple.js"></script>
       </body>
     </html>

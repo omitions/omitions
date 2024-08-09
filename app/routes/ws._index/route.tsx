@@ -91,7 +91,7 @@ function CardComp({
         />
       </div>
       <Link
-        to={"/ws/" + `${generateDash(name)}-${_id}` + `?d=${new Date().getFullYear()}-${new Date().getMonth() + 1}`}
+        to={"/ws/" + `${generateDash(name)}-${_id}` + `?d=${new Date().getFullYear()}-${new Date().getMonth() + 1}&date=0`}
         prefetch="intent"
         className="rounded-2xl"
       >
