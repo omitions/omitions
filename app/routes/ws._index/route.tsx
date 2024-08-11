@@ -101,7 +101,7 @@ function WorkspaceItem({
           data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0
         "
       >
-        <div className="p-4 relative flex gap-2">
+        <div className="px-8 mb-4 relative flex gap-2">
           <UpdateWorkspace
             actionType={ActionType.UPDATE_WORKSPACES}
             workspaceName={name}
@@ -146,13 +146,13 @@ function WorkspaceItem({
         <div
           data-state={isHover ? "open" : "closed"}
           className="
-            w-full h-full md:min-h-52 justify-start rounded-2xl
+            w-full h-full md:min-h-56 justify-start rounded-2xl
             px-0 md:px-6 md:py-6
             ring-offset-background
             border-transparent md:border md:border-input
             bg-gradient-to-t
-            md:hover:from-primary/10 
-            md:data-[state=open]:from-primary/10
+            md:hover:from-primary/5 
+            md:data-[state=open]:from-primary/5
           "
         >
           <div className="w-10/12 md:w-full flex flex-col flex-wrap gap-0.5 md:gap-1">
@@ -161,9 +161,9 @@ function WorkspaceItem({
                 ? `${name.substring(0, 30)}..`
                 : name}
             </h4>
-            <p className="text-xs md:text-sm font-normaltext-muted-foreground leading-relaxed text-wrap">
-              {description.length > 160
-                ? `${description.substring(0, 160)}..`
+            <p className="text-xs md:text-sm font-normal text-muted-foreground leading-relaxed text-wrap">
+              {description.length > 130
+                ? `${description.substring(0, 130)}..`
                 : description}
             </p>
           </div>

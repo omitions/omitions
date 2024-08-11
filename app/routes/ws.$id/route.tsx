@@ -1,22 +1,28 @@
 import {
   ActionFunctionArgs,
-  LoaderFunctionArgs,
   json,
+  LoaderFunctionArgs,
   MetaFunction,
   redirect
 } from "@remix-run/node";
-import { useLoaderData, useNavigate, useParams } from "@remix-run/react";
+import { Link, useLoaderData, useNavigate, useParams, useSearchParams } from "@remix-run/react";
 
-import { ArrowLeft, ChevronLeft } from "lucide-react";
+import {
+  addMonths,
+  subMonths,
+  format
+} from "date-fns";
+import { id as localeId } from "date-fns/locale";
+import { ArrowLeft, ChevronLeft, ChevronRight } from "lucide-react";
 
-import BigCalendar from "~/components/big-calendar";
-import { Button, ButtonLink } from "~/components/ui/button";
+import { Button } from "~/components/ui/button";
 
 import { generateDash, regenerateDash } from "~/utils/misc";
 import { createTransaction, getTransactions, TTransactions } from "~/utils/workspaces.server";
 
+import React from "react";
 import Sidebar from "../ws/sidebar";
-import { format } from "date-fns";
+import BigCalendar from "./big-calendar";
 
 export enum ActionType {
   CREATE_TRANSACTION = 'CREATE_TRANSACTION',
@@ -83,7 +89,7 @@ export default function Index() {
         />
         <div className="relative h-full w-full md:ml-auto md:w-[calc(100%_-_var(--sidebar-width-xl))]">
           <div className="relative h-full w-full">
-            <div className="max-w-screen-2xl mx-auto">
+            <div className="mx-auto mt-[var(--header-height)] max-w-screen-2xl md:mt-0 border-input">
               <Page />
             </div>
           </div>
@@ -126,37 +132,114 @@ function Content() {
   const { transactions } = useLoaderData<typeof loader>();
 
   const params = useParams();
+  const [searchParams] = useSearchParams();
 
   const workspaceId = params.id ? regenerateDash(params.id).getTheLast() : null;
   const title = params.id ? regenerateDash(params.id).withoutTheLast() : "-";
 
+  const date = searchParams.get("d");
+  const [month, setMonth] = React.useState(date ? new Date(date) : new Date());
+
   const BackButton = () => (
-    <ButtonLink
-      variant="ghost"
-      size="icon"
-      href="/ws"
-      prefetch="intent"
-    >
-      <ArrowLeft
-        size={20}
-        strokeWidth={2}
-      />
-    </ButtonLink>
+    <Link to="/ws" prefetch="intent" className="w-fit">
+      <p className="text-sm flex items-center gap-2 text-muted-foreground font-normal">
+        <ArrowLeft
+          size={18}
+          strokeWidth={1.5}
+        />
+        <span>Kembali</span>
+      </p>
+    </Link>
   )
 
   return (
-    <div className="flex flex-col gap-2">
-      <div className="hidden md:flex items-center gap-4 py-3">
-        <BackButton />
-        <div>
-          <h1 className="text-xl font-bold">{title}</h1>
+    <div className="md:pl-3 py-6 my-1">
+      <div className="flex flex-col gap-8">
+        <div className="flex justify-between items-center">
+          <div className="hidden md:flex flex-col gap-0.5">
+            <BackButton />
+            <h2 className="text-xl font-bold">
+              {title.length > 35
+                ? `${title.substring(0, 35)}..`
+                : title}
+            </h2>
+            <h4 className="text-base font-semibold">{format(month, "MMMM yyyy", { locale: localeId })}</h4>
+          </div>
+          <MonthNavigation
+            month={month}
+            setMonth={setMonth}
+          />
         </div>
+        <BigCalendar
+          month={month}
+          setMonth={setMonth}
+          isValid={!!title && !!workspaceId}
+          workspaceId={workspaceId ?? ""}
+          transactions={transactions as TTransactions[]}
+        />
       </div>
-      <BigCalendar
-        isValid={!!title && !!workspaceId}
-        workspaceId={workspaceId ?? ""}
-        transactions={transactions as TTransactions[]}
-      />
+    </div>
+  )
+}
+
+function MonthNavigation({
+  month,
+  setMonth
+}: {
+  month: Date,
+  setMonth: React.Dispatch<React.SetStateAction<Date>>
+}) {
+  const [, setSearchParams] = useSearchParams();
+
+  const today = new Date();
+  const nextMonth = addMonths(month, 1);
+  const prevMonth = subMonths(month, 1);
+
+  return (
+    <div className="flex items-center gap-2">
+      <Button
+        variant="outline"
+        size="sm"
+        className="gap-2"
+        onClick={() => {
+          setMonth(prevMonth)
+          setSearchParams((prev) => {
+            prev.set("d", `${new Date(prevMonth).getFullYear()}-${format(new Date(prevMonth).setDate(new Date().getDate() - 1), "MM")}`);
+            return prev;
+          }, { preventScrollReset: true });
+        }}
+      >
+        <ChevronLeft
+          size={18}
+          strokeWidth={2}
+        />
+        <span>Sebelumnya</span>
+      </Button>
+      <Button
+        variant="outline"
+        size="sm"
+        onClick={() => setMonth(today)}
+      >
+        Hari ini
+      </Button>
+      <Button
+        variant="outline"
+        size="sm"
+        className="gap-2"
+        onClick={() => {
+          setMonth(nextMonth)
+          setSearchParams((prev) => {
+            prev.set("d", `${new Date(nextMonth).getFullYear()}-${format(new Date(nextMonth).setDate(new Date().getDate() - 1), "MM")}`);
+            return prev;
+          }, { preventScrollReset: true });
+        }}
+      >
+        <span>Selanjutnya</span>
+        <ChevronRight
+          size={18}
+          strokeWidth={2}
+        />
+      </Button>
     </div>
   )
 }
