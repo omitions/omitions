@@ -1,6 +1,7 @@
 import { json, LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 
+import { format } from "date-fns";
 import { ArrowUpRight, Ellipsis, PenLine, Trash } from "lucide-react";
 
 import RemoveWorkspace from "~/components/remove-workspace";
@@ -19,8 +20,7 @@ import { getWorkspaces, type TWorkspaces } from "~/utils/workspaces.server";
 
 import { ActionType } from "../ws/route";
 import Sidebar from "../ws/sidebar";
-import { format } from "date-fns";
-
+import React from "react";
 export const meta: MetaFunction = () => {
   return [
     { title: "Workspaces | mybucks.today" }
@@ -41,7 +41,7 @@ export default function Index() {
         <Sidebar workspaceCount={workspaces?.length} />
         <div className="relative h-full w-full md:ml-auto md:w-[calc(100%_-_var(--sidebar-width-xl))]">
           <div className="relative h-full w-full">
-            <div className="max-w-screen-2xl md:p-2 mx-auto m-4">
+            <div className="mx-auto mt-[var(--header-height)] max-w-screen-2xl md:mt-0 border-input">
               <Page />
             </div>
           </div>
@@ -56,33 +56,80 @@ function Page() {
 
   if (!workspaces.length) return <p>Belum ada data</p>
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-4 gap-5 md:gap-6">
-      <div className="block md:hidden">
-        <h4 className="text-[11px] text-muted-foreground">SEMUA WORKSPACE ANDA</h4>
+    <div className="md:pl-3 py-6 my-1">
+      <div className="flex flex-col gap-8">
+        <div className="block md:hidden">
+          <h4 className="text-[11px] text-muted-foreground">SEMUA WORKSPACE ANDA</h4>
+        </div>
+        <div className="hidden md:flex flex-col gap-0.5">
+          <h2 className="text-2xl font-bold">Workspaces</h2>
+          <p className="text-sm text-muted-foreground font-normal">Semua catatan keuangan Anda ada disini</p>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 md:gap-4">
+          {workspaces.map((item) => (
+            <WorkspaceItem
+              key={item._id}
+              {...item}
+            />
+          ))}
+        </div>
       </div>
-      {workspaces.map((item) => (
-        <CardComp
-          key={item._id}
-          {...item}
-        />
-      ))}
     </div>
   )
 }
 
-function CardComp({
+function WorkspaceItem({
   _id,
   name,
   description
 }: TWorkspaces) {
+  const [isHover, setIsHover] = React.useState(false)
+
   return (
-    <div className="relative">
-      <div className="hidden md:block bottom-3 left-6 peer absolute">
-        <MoreMenu
-          _id={_id}
-          name={name}
-          description={description}
-        />
+    <div
+      className="relative overflow-hidden"
+      onMouseEnter={() => setIsHover(true)}
+      onMouseLeave={() => setIsHover(false)}
+    >
+      <div
+        data-state={isHover ? "open" : "closed"}
+        className="
+          w-full z-50 hidden md:block absolute 
+          data-[state=closed]:-bottom-[80px] data-[state=open]:bottom-0 
+          data-[state=open]:duration-300 
+          data-[state=open]:animate-in data-[state=closed]:animate-out 
+          data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0
+        "
+      >
+        <div className="p-4 relative flex gap-2">
+          <UpdateWorkspace
+            actionType={ActionType.UPDATE_WORKSPACES}
+            workspaceName={name}
+            workspaceDescription={description}
+            workspaceId={_id}
+          >
+            <Button
+              className="w-full rounded-full bg-white"
+              variant="outline"
+              onMouseEnter={() => setIsHover(true)}
+            >
+              Ubah
+            </Button>
+          </UpdateWorkspace>
+          <RemoveWorkspace
+            actionType={ActionType.REMOVE_WORKSPACES}
+            workspaceName={name}
+            workspaceId={_id}
+          >
+            <Button
+              className="w-full rounded-full"
+              variant="outline"
+              onMouseEnter={() => setIsHover(true)}
+            >
+              Hapus
+            </Button>
+          </RemoveWorkspace>
+        </div>
       </div>
       <div className="block md:hidden top-1 right-0 absolute rotate-90">
         <MoreMenu
@@ -97,25 +144,26 @@ function CardComp({
         className="rounded-2xl"
       >
         <div
+          data-state={isHover ? "open" : "closed"}
           className="
-            w-full h-full md:min-h-40 justify-start rounded-2xl
+            w-full h-full md:min-h-52 justify-start rounded-2xl
             px-0 md:px-6 md:py-6
             ring-offset-background
-            md:focus-visible:outline-none md:focus-visible:ring-2 md:focus-visible:ring-ring md:focus-visible:ring-offset-0
-            md:hover:border-primary md:hover:ring-2 md:hover:ring-primary/30
             border-transparent md:border md:border-input
-            md:peer-hover:border-primary md:peer-hover:ring-2 md:peer-hover:ring-primary/30
+            bg-gradient-to-t
+            md:hover:from-primary/10 
+            md:data-[state=open]:from-primary/10
           "
         >
           <div className="w-10/12 md:w-full flex flex-col flex-wrap gap-0.5 md:gap-1">
-            <h4 className="text-sm font-medium md:font-medium">
+            <h4 className="text-lg font-medium md:font-semibold">
               {name.length > 30
                 ? `${name.substring(0, 30)}..`
                 : name}
             </h4>
             <p className="text-xs md:text-sm font-normaltext-muted-foreground leading-relaxed text-wrap">
-              {description.length > 90
-                ? `${description.substring(0, 90)}..`
+              {description.length > 160
+                ? `${description.substring(0, 160)}..`
                 : description}
             </p>
           </div>

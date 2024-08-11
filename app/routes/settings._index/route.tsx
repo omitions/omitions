@@ -28,7 +28,7 @@ export default function Index() {
 
 function Page() {
   return (
-    <div className="pl-3 py-6 my-1">
+    <div className="md:pl-3 py-6 my-1">
       <div className="flex flex-col gap-8 max-w-screen-md">
         <h2 className="text-xl font-bold">Edit Profil</h2>
         <div>

@@ -118,7 +118,7 @@ function Mobile() {
 function Desktop({ workspaceCount }: { workspaceCount: number }) {
   return (
     <div className="fixed left-[var(--sidebar-width)] hidden h-ful w-full max-w-[var(--sidebar-width-xl)] md:block">
-      <div className="pl-3 py-6 my-1 flex flex-col justify-between min-h-screen">
+      <div className="md:pl-3 py-6 my-1 flex flex-col justify-between min-h-screen">
         <div className='flex flex-col gap-8'>
           <div className="flex items-center">
             <Link

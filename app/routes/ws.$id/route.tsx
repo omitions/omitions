@@ -51,7 +51,6 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   const formPayload = Object.fromEntries(formData);
 
   const _action = formPayload['_action'] as keyof typeof ActionType;
-
   const workspace_name = formData.get("workspace_name");
   const workspaces_id = formData.get("workspaces_id");
   const date_time = formData.get("date_time");
@@ -61,7 +60,6 @@ export const action = async ({ request }: ActionFunctionArgs) => {
       await createTransaction(formData, request);
 
       if (!date_time || typeof date_time != "string" || !workspace_name) return {}
-
       return redirect("/ws/" + `${generateDash(workspace_name.toString())}-${workspaces_id}` + `?d=${new Date(date_time.toString()).getFullYear()}-${format(new Date(date_time.toString()).setDate(new Date().getDate() - 1), "MM")}&date=${format(new Date(date_time.toString()), "dd")}`)
     default:
       return {}

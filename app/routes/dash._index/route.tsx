@@ -47,9 +47,12 @@ export default function Index() {
 
 function Page() {
   return (
-    <div className="pl-3 py-6 my-1">
+    <div className="md:pl-3 py-6 my-1">
       <div className="flex flex-col gap-8">
-        <h2 className="text-xl font-bold">Ringkasan</h2>
+        <div className="hidden md:flex flex-col gap-0.5">
+          <h2 className="text-2xl font-bold">Ringkasan</h2>
+          <p className="text-sm text-muted-foreground font-normal">Data Anda teranalisa disini</p>
+        </div>
         <div>
           <Chart1 />
         </div>
