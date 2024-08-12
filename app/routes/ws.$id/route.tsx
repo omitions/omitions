@@ -5,7 +5,7 @@ import {
   MetaFunction,
   redirect
 } from "@remix-run/node";
-import { Link, useLoaderData, useNavigate, useParams, useSearchParams } from "@remix-run/react";
+import { Link, useNavigate, useParams, useSearchParams } from "@remix-run/react";
 
 import {
   addMonths,
@@ -18,7 +18,7 @@ import { ArrowLeft, ChevronLeft } from "lucide-react";
 import { Button } from "~/components/ui/button";
 
 import { generateDash, regenerateDash } from "~/utils/misc";
-import { createTransaction, getTransactions, TTransactions } from "~/utils/workspaces.server";
+import { createTransaction, getTransactions } from "~/utils/transactions.server";
 
 import React from "react";
 import Sidebar from "../ws/sidebar";
@@ -81,7 +81,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 
 export default function Index() {
   return (
-    <div className="h-full fixed left-0 top-0 md:top-auto md:left-auto md:relative w-screen md:w-full overflow-hidden">
+    <div className="h-full fixed left-0 top-0 md:top-auto md:left-auto md:relative w-screen md:w-full">
       <div className="flex">
         <Sidebar
           workspaceCount={0}
@@ -89,7 +89,7 @@ export default function Index() {
         />
         <div className="relative h-full w-full md:ml-auto md:w-[calc(100%_-_var(--sidebar-width-xl))]">
           <div className="relative h-full w-full">
-            <div className="mx-auto mt-[var(--header-height)] max-w-screen-2xl md:mt-0 border-input">
+            <div className="mx-auto md:mt-0 border-input">
               <Page />
             </div>
           </div>
@@ -129,8 +129,6 @@ function Page() {
 }
 
 function Content() {
-  const { transactions } = useLoaderData<typeof loader>();
-
   const params = useParams();
   const [searchParams] = useSearchParams();
 
@@ -145,7 +143,7 @@ function Content() {
       <p className="text-sm flex items-center gap-2 text-muted-foreground font-normal">
         <ArrowLeft
           size={18}
-          strokeWidth={1.5}
+          strokeWidth={1}
         />
         <span>Kembali</span>
       </p>
@@ -155,15 +153,15 @@ function Content() {
   return (
     <div className="md:pl-3 py-6 my-1">
       <div className="flex flex-col gap-8">
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-start">
           <div className="hidden md:flex flex-col gap-0.5">
             <BackButton />
-            <h2 className="text-xl font-bold">
+            <h2 className="text-2xl font-bold">
               {title.length > 35
                 ? `${title.substring(0, 35)}..`
                 : title}
             </h2>
-            <h4 className="text-base font-semibold">{format(month, "MMMM yyyy", { locale: localeId })}</h4>
+            <p className="text-sm font-normal">{format(month, "MMMM yyyy", { locale: localeId })}</p>
           </div>
           <MonthNavigation
             month={month}
@@ -174,8 +172,6 @@ function Content() {
           month={month}
           setMonth={setMonth}
           isValid={!!title && !!workspaceId}
-          workspaceId={workspaceId ?? ""}
-          transactions={transactions as TTransactions[]}
         />
       </div>
     </div>
@@ -198,7 +194,7 @@ function MonthNavigation({
   return (
     <div className="flex items-center gap-2">
       <Button
-        variant="outline"
+        variant="ghost"
         size="sm"
         className="gap-2"
         onClick={() => {
@@ -219,7 +215,7 @@ function MonthNavigation({
         Hari ini
       </Button>
       <Button
-        variant="outline"
+        variant="ghost"
         size="sm"
         className="gap-2"
         onClick={() => {

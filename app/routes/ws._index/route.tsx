@@ -41,7 +41,7 @@ export default function Index() {
         <Sidebar workspaceCount={workspaces?.length} />
         <div className="relative h-full w-full md:ml-auto md:w-[calc(100%_-_var(--sidebar-width-xl))]">
           <div className="relative h-full w-full">
-            <div className="mx-auto mt-[var(--header-height)] max-w-screen-2xl md:mt-0 border-input">
+            <div className="mx-auto mt-[var(--header-height)] max-w-screen-xl md:mt-0 border-input">
               <Page />
             </div>
           </div>
@@ -101,7 +101,7 @@ function WorkspaceItem({
           data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0
         "
       >
-        <div className="px-8 mb-4 relative flex gap-2">
+        <div className="px-6 mb-4 relative flex gap-2">
           <UpdateWorkspace
             actionType={ActionType.UPDATE_WORKSPACES}
             workspaceName={name}
@@ -151,8 +151,8 @@ function WorkspaceItem({
             ring-offset-background
             border-transparent md:border md:border-input
             bg-gradient-to-t
-            md:hover:from-primary/5 
-            md:data-[state=open]:from-primary/5
+            md:hover:from-primary/15 
+            md:data-[state=open]:from-primary/15
           "
         >
           <div className="w-10/12 md:w-full flex flex-col flex-wrap gap-0.5 md:gap-1">

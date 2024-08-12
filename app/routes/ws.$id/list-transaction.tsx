@@ -1,4 +1,4 @@
-import { FetcherWithComponents } from "@remix-run/react";
+import { FetcherWithComponents, useLoaderData } from "@remix-run/react";
 
 import { format } from "date-fns";
 import { id as localeId } from "date-fns/locale";
@@ -11,24 +11,21 @@ import { SheetClose } from "~/components/ui/sheet";
 import { cn } from "~/lib/utils";
 
 import toIDR from "~/utils/currency";
-import { TTransactions } from "~/utils/workspaces.server";
+import { TTransactions } from "~/utils/transactions.server";
 
 import CreateTransaction from "./create-transaction";
-import { ActionType } from "./route";
+import { ActionType, loader } from "./route";
 
 export default function ListTransaction({
   day,
-  workspaceId,
-  workspaceName,
-  transactions,
   fetcherProps
 }: {
   day: CalendarDay,
-  workspaceId: string,
-  workspaceName: string,
-  transactions: TTransactions[],
   fetcherProps: FetcherWithComponents<unknown>
 }) {
+  const { transactions } = useLoaderData<typeof loader>();
+
+  const data = transactions as TTransactions[]
   const date = day.date;
 
   return (
@@ -38,15 +35,13 @@ export default function ListTransaction({
           <div className="fixed bottom-12 right-12">
             <CreateTransaction
               date={date}
-              workspaceId={workspaceId}
-              workspaceName={workspaceName}
               actionType={ActionType.CREATE_TRANSACTION}
               fetcherProps={fetcherProps}
             />
           </div>
           <div className="flex gap-4 items-center justify-between px-3 relative">
             <div>
-              <p className={cn("text-xs font-medium text-muted-foreground uppercase")}>{format(date, "EEEE", { locale: localeId })}</p>
+              <p className="text-xs font-medium text-muted-foreground uppercase">{format(date, "EEEE", { locale: localeId })}</p>
               <p className="text-lg font-bold">{format(date, "d MMMM yyyy", { locale: localeId })}</p>
             </div>
             <SheetClose asChild>
@@ -67,7 +62,7 @@ export default function ListTransaction({
       </div>
       <div className="h-screen py-2 px-8 flex flex-col gap-6 overflow-scroll">
         <div className="flex flex-col divide-y border rounded-2xl px-6 py-1 mb-60">
-          {transactions.map((props) => (
+          {data?.length ? data.map((props) => (
             <Transaction
               key={props._id}
               type={props.type}
@@ -75,7 +70,9 @@ export default function ListTransaction({
               description={props.description}
               date_time={props.date_time}
             />
-          ))}
+          )) : (
+            <p className="text-sm py-6 text-center">Belum Ada Transakasi</p>
+          )}
         </div>
       </div>
     </div>
@@ -108,7 +105,7 @@ function Transaction({
       <div className="flex gap-4 items-start justify-between w-full">
         <div className="flex flex-col w-full">
           <p className="text-xs text-muted-foreground font-normal">{date_time.split(" ")[1]}</p>
-          <p className="text-base font-medium text-black">{description}</p>
+          <p className="text-sm font-medium text-black">{description}</p>
           {/* <p className="text-sm text-muted-foreground font-normal">{description}</p> */}
         </div>
         <div className="mt-1.5 w-full flex justify-end">

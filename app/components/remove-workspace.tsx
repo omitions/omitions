@@ -25,10 +25,11 @@ export default function RemoveWorkspace({
   workspaceName: string,
   workspaceId: string
 }) {
+  const [isOpen, setIsOpen] = React.useState(false);
   const [confirmationText, setConfirmationText] = React.useState("");
 
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         {children}
       </DialogTrigger>
@@ -40,6 +41,7 @@ export default function RemoveWorkspace({
           action="/ws"
           method="post"
           className="flex flex-col gap-6"
+          onSubmit={() => setIsOpen(false)}
         >
           <div className="flex flex-col gap-3">
             <p className="text-sm text-muted-foreground font-medium text-red-500">Ketikan nama workspace <b>{workspaceName}</b> untuk menkonfirmasi.</p>
@@ -60,15 +62,13 @@ export default function RemoveWorkspace({
                 Batalkan
               </Button>
             </DialogClose>
-            <DialogClose asChild>
-              <Button
-                type="submit"
-                variant="destructive"
-                disabled={confirmationText !== workspaceName}
-              >
-                Konfirmasi
-              </Button>
-            </DialogClose>
+            <Button
+              type="submit"
+              variant="destructive"
+              disabled={confirmationText !== workspaceName}
+            >
+              Konfirmasi
+            </Button>
           </DialogFooter>
           <input
             type="hidden"

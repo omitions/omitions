@@ -25,13 +25,13 @@ const buttonVariants = cva(
 
         destructive: "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
         outline: "border border-input bg-background shadow-sm hover:border-primary hover:ring-2 hover:ring-primary/30 focus-visible:border-primary focus-visible:ring-primary/30",
-        default: "bg-primary text-primary-foreground shadow hover:bg-primary/90 hover:ring-2 hover:ring-ring font-bold",
+        default: "bg-primary text-primary-foreground shadow hover:bg-primary/90 hover:ring-2 hover:ring-ring",
         ghost: 'hover:bg-background focus-visible:bg-primary/20',
       },
       size: {
-        default: "h-12 px-6 py-3 rounded-xl text-sm",
-        sm: "h-10 md:h-8 rounded-lg px-4 text-xs",
-        lg: "h-12 rounded-2xl px-8",
+        default: "h-12 px-7 py-3 rounded-full text-sm",
+        sm: "h-10 md:h-8 rounded-full px-4 text-xs",
+        lg: "h-12 rounded-full px-8",
         icon: "h-9 w-9 md:h-8 md:w-8 rounded-full",
       },
     },

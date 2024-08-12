@@ -1,4 +1,4 @@
-import { FetcherWithComponents } from "@remix-run/react";
+import { FetcherWithComponents, useParams, useSearchParams } from "@remix-run/react";
 
 import { ArrowLeft, ArrowRight, FileInput, Plus } from "lucide-react";
 import React from "react";
@@ -8,8 +8,6 @@ import { format } from "date-fns";
 import { id as localeId } from "date-fns/locale";
 
 import toIDR from "~/utils/currency";
-// import { generateDash } from "~/utils/misc";
-
 import { cn } from "~/lib/utils";
 
 import { Button, buttonVariants } from "~/components/ui/button";
@@ -31,21 +29,24 @@ import {
   SelectValue
 } from "~/components/ui/select";
 import { ToggleGroup, ToggleGroupItem } from "~/components/ui/toggle-group";
-// import { toast } from "./ui/use-toast";
+
+import { regenerateDash } from "~/utils/misc";
 
 export default function CreateTransaction({
   date,
-  workspaceId,
-  workspaceName,
   actionType,
   fetcherProps
 }: {
   date: Date,
-  workspaceId: string,
-  workspaceName: string
   actionType: string,
   fetcherProps: FetcherWithComponents<unknown>
 }) {
+  const [, setSearchParams] = useSearchParams();
+
+  const params = useParams();
+  const workspaceId = params.id ? regenerateDash(params.id).getTheLast() : "";
+  const workspaceName = params.id ? regenerateDash(params.id).withoutTheLast() : "-";
+
   const [loopType, setLoopType] = React.useState("none");
   const [trxType, setTrxType] = React.useState<string | undefined>(undefined);
   const [timeValue, setTimeValue] = React.useState<string>("00:00");
@@ -54,7 +55,6 @@ export default function CreateTransaction({
     const time = e.target.value;
     setTimeValue(time);
   };
-
   const fetcher = fetcherProps;
 
   return (
@@ -78,6 +78,12 @@ export default function CreateTransaction({
           key="create-transaction"
           method="post"
           className="flex flex-col gap-6 mt-2"
+          onSubmit={() => {
+            setSearchParams((prev) => {
+              prev.set("date", "0");
+              return prev;
+            }, { preventScrollReset: true });
+          }}
         >
           <div className="flex flex-col gap-4">
             <Input

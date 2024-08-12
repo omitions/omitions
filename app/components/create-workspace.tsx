@@ -1,6 +1,8 @@
 import { Form } from "@remix-run/react";
 import { Plus } from "lucide-react";
 
+import React from "react";
+
 import { Button } from "./ui/button";
 import {
   Dialog,
@@ -15,8 +17,10 @@ import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 
 export default function CreateWorkspace({ actionType }: { actionType: string }) {
+  const [isOpen, setIsOpen] = React.useState(false);
+
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button variant="outline" className="w-fit px-4 h-16 rounded-xl text-sm font-bold gap-2">
           <Plus size={20} strokeWidth={2.5} />
@@ -31,6 +35,7 @@ export default function CreateWorkspace({ actionType }: { actionType: string }) 
           action="/ws"
           method="post"
           className="flex flex-col gap-6"
+          onSubmit={() => setIsOpen(false)}
         >
           <div className="flex flex-col gap-4">
             <Input
@@ -56,13 +61,9 @@ export default function CreateWorkspace({ actionType }: { actionType: string }) 
                 Tutup
               </Button>
             </DialogClose>
-            <DialogClose asChild>
-              <Button
-                type="submit"
-              >
-                Buat Sekarang
-              </Button>
-            </DialogClose>
+            <Button type="submit">
+              Buat Sekarang
+            </Button>
           </DialogFooter>
           <input
             type="hidden"

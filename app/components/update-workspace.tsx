@@ -1,5 +1,7 @@
 import { Form } from "@remix-run/react";
 
+import React from "react";
+
 import { Button } from "./ui/button";
 import {
   Dialog,
@@ -26,8 +28,10 @@ export default function UpdateWorkspace({
   workspaceDescription: string,
   workspaceId: string
 }) {
+  const [isOpen, setIsOpen] = React.useState(false);
+
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         {children}
       </DialogTrigger>
@@ -39,6 +43,7 @@ export default function UpdateWorkspace({
           action="/ws"
           method="post"
           className="flex flex-col gap-6"
+          onSubmit={() => setIsOpen(false)}
         >
           <div className="flex flex-col gap-4">
             <Input
@@ -66,13 +71,11 @@ export default function UpdateWorkspace({
                 Batalkan
               </Button>
             </DialogClose>
-            <DialogClose asChild>
-              <Button
-                type="submit"
-              >
-                Ubah Sekarang
-              </Button>
-            </DialogClose>
+            <Button
+              type="submit"
+            >
+              Ubah Sekarang
+            </Button>
           </DialogFooter>
           <input
             type="hidden"
