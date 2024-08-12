@@ -69,14 +69,13 @@ export default function CreateTransaction({
           <span>Buat transaksi</span>
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-xl">
         <DialogHeader>
           <DialogTitle>Buat transaksi pada tanggal  {format(date, "d MMMM yyyy", { locale: localeId })}</DialogTitle>
         </DialogHeader>
         <fetcher.Form
           action="."
           key="create-transaction"
-          // action={"/ws/" + `${generateDash(workspaceName)}-${workspaceId}` + `?d=${new Date(date).getFullYear()}-${format(new Date(date).setDate(new Date().getDate() - 1), "MM")}&date=${format(new Date(date), "dd")}`}
           method="post"
           className="flex flex-col gap-6 mt-2"
         >
@@ -87,7 +86,20 @@ export default function CreateTransaction({
               required
               placeholder="Tambahkan judul transaksi"
               variant="ghost"
-              className="text-base font-medium text-black placeholder:font-normal"
+              className="text-base font-semibold text-black placeholder:font-normal"
+            />
+            <NumericFormat
+              thousandSeparator="."
+              decimalSeparator=","
+              name="amount"
+              allowLeadingZeros
+              allowNegative={false}
+              placeholder="Nominal"
+              prefix="Rp"
+              className={cn(
+                inputVariants({ variant: "ghost" }),
+                "text-base font-semibold text-black placeholder:font-normal"
+              )}
             />
             <Select
               value={trxType}
@@ -174,19 +186,6 @@ export default function CreateTransaction({
                 </div>
               </div>
             </div>
-            <NumericFormat
-              thousandSeparator="."
-              decimalSeparator=","
-              name="amount"
-              allowLeadingZeros
-              allowNegative={false}
-              placeholder="Nominal"
-              prefix="Rp"
-              className={cn(
-                inputVariants({ variant: "ghost" }),
-                "text-2xl font-bold text-black placeholder:font-normal"
-              )}
-            />
           </div>
           <div className="flex flex-col gap-2">
             <p className="text-sm">Sumber rekening</p>
@@ -219,13 +218,6 @@ export default function CreateTransaction({
             </DialogClose>
             <Button
               type="submit"
-            // type="button"
-            // onClick={() => {
-            //   toast({
-            //     title: "Berhasil",
-            //     description: "Transaksi pada " + "telah dibuat",
-            //   })
-            // }}
             >
               Buat Transaksi
             </Button>

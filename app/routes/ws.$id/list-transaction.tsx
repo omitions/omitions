@@ -12,6 +12,7 @@ import { cn } from "~/lib/utils";
 
 import toIDR from "~/utils/currency";
 import { TTransactions } from "~/utils/workspaces.server";
+
 import CreateTransaction from "./create-transaction";
 import { ActionType } from "./route";
 
@@ -29,7 +30,6 @@ export default function ListTransaction({
   fetcherProps: FetcherWithComponents<unknown>
 }) {
   const date = day.date;
-  // const isToday = day.dateLib.isSameDay(new Date(date), new Date());
 
   return (
     <div className="relative min-h-screen">

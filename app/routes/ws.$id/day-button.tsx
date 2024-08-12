@@ -14,7 +14,6 @@ import { cn } from "~/lib/utils";
 
 import { regenerateDash } from "~/utils/misc";
 import { TTransactions } from "~/utils/workspaces.server";
-// import toIDR from "~/utils/currency";
 
 import ListTransaction from "./list-transaction";
 
@@ -42,16 +41,16 @@ export default function DayButton({
 
   const fetcher = fetcherProps;
 
-  if (!queryDate || fetcher.state !== "idle") return <></>
+  if (!queryDate) return <></>
   return (
     <Sheet
-      open={+queryDate === date.getDate() && fetcher.state === "idle"}
+      open={Number(queryDate) === Number(date.getDate()) && parseInt(queryDate) > 0 && fetcher.state === 'idle'}
       onOpenChange={(bool) => {
         if (!bool) {
           setSearchParams((prev) => {
             prev.set("date", "0");
             return prev;
-          }, { preventScrollReset: true });
+          }, {});
         }
       }}
     >
@@ -61,7 +60,7 @@ export default function DayButton({
           setSearchParams((prev) => {
             prev.set("date", format(new Date(date), "dd"));
             return prev;
-          }, { preventScrollReset: true });
+          }, {});
         }}
       >
         <div
@@ -91,11 +90,7 @@ export default function DayButton({
               </p>
             </div>
             <div className="w-full h-full absolute top-10">
-              {date.getDate() === 3 && (
-                <div className="bg-gradient-to-t from-primary/30 border border-primary/30 rounded-lg">
-                  hei
-                </div>
-              )}
+              {/* content here */}
             </div>
           </div>
         </div>

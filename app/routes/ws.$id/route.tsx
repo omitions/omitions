@@ -13,7 +13,7 @@ import {
   format
 } from "date-fns";
 import { id as localeId } from "date-fns/locale";
-import { ArrowLeft, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowLeft, ChevronLeft } from "lucide-react";
 
 import { Button } from "~/components/ui/button";
 
@@ -150,7 +150,7 @@ function Content() {
         <span>Kembali</span>
       </p>
     </Link>
-  )
+  );
 
   return (
     <div className="md:pl-3 py-6 my-1">
@@ -209,10 +209,6 @@ function MonthNavigation({
           }, { preventScrollReset: true });
         }}
       >
-        <ChevronLeft
-          size={18}
-          strokeWidth={2}
-        />
         <span>Sebelumnya</span>
       </Button>
       <Button
@@ -235,10 +231,6 @@ function MonthNavigation({
         }}
       >
         <span>Selanjutnya</span>
-        <ChevronRight
-          size={18}
-          strokeWidth={2}
-        />
       </Button>
     </div>
   )
