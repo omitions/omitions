@@ -1,5 +1,5 @@
 export default function Loading({
-  size = 22,
+  size = 20,
   fill = "#000",
   strokeWidth = 10,
 }: {

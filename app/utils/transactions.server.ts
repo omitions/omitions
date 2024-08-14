@@ -68,7 +68,6 @@ export type TTransactions = {
 export async function getTransactions(
   request: Request,
   workspaceId: string | null | undefined,
-  d: string,
   date: string,
 ): Promise<TTransactions[]> {
   const session = await sessionStorage.getSession(
@@ -78,7 +77,7 @@ export async function getTransactions(
 
   let resp = null;
   const fetched = await fetch(
-    `https://api.mybucks.today/cashflows/list?workspace_id=${workspaceId}&date=${d}-${date}`,
+    `https://api.mybucks.today/cashflows/list?workspace_id=${workspaceId}-${date}`,
     {
       method: "GET",
       headers: {

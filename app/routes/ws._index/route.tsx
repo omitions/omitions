@@ -90,7 +90,7 @@ function WorkspaceItem({ _id, name, description }: TWorkspaces) {
         data-state={isHover ? "open" : "closed"}
         className="absolute z-50 hidden w-full data-[state=closed]:-bottom-[80px] data-[state=open]:bottom-0 data-[state=open]:duration-300 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 md:block"
       >
-        <div className="relative mb-4 flex gap-2 px-6">
+        <div className="relative mb-4 flex gap-4 px-4">
           <UpdateWorkspace
             actionType={ActionType.UPDATE_WORKSPACES}
             workspaceName={name}
@@ -127,7 +127,7 @@ function WorkspaceItem({ _id, name, description }: TWorkspaces) {
         to={
           "/ws/" +
           `${generateDash(name)}-${_id}` +
-          `?d=${new Date().getFullYear()}-${format(new Date().setDate(new Date().getDate() - 1), "MM")}&date=0`
+          `?d=${new Date().getFullYear()}-${format(new Date().setDate(new Date().getDate() - 1), "MM")}`
         }
         prefetch="intent"
         className="rounded-2xl"

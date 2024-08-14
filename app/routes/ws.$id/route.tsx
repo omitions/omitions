@@ -6,55 +6,49 @@ import {
   MetaFunction,
   redirect,
 } from "@remix-run/node";
-import {
-  Link,
-  useNavigate,
-  useParams,
-  useSearchParams,
-} from "@remix-run/react";
 
-import { addMonths, format, subMonths } from "date-fns";
-import { id as localeId } from "date-fns/locale";
-import { ArrowLeft, ChevronLeft } from "lucide-react";
-import React from "react";
+import { format } from "date-fns";
 
-import { Button } from "~/components/ui/button";
-
+import { getCalendar } from "~/utils/cashflows.server";
 import { generateDash, regenerateDash } from "~/utils/misc";
-import {
-  createTransaction,
-  getTransactions,
-} from "~/utils/transactions.server";
+import { createTransaction } from "~/utils/transactions.server";
 
 import Sidebar from "../ws/sidebar";
-import BigCalendar from "./big-calendar";
+
+import Page from "./page";
 
 export enum ActionType {
   CREATE_TRANSACTION = "CREATE_TRANSACTION",
 }
 
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
+  return [
+    { title: data?.workspaceName + " | mybucks.today" },
+    { name: "description", content: "Welcome to Remix!" },
+  ];
+};
+
 export async function loader({ params, request }: LoaderFunctionArgs) {
-  const { searchParams } = new URL(request.url);
+  let { searchParams } = new URL(request.url);
 
-  const d = searchParams.get("d");
-  const date = searchParams.get("date");
-  const workspaceId = params.id ? regenerateDash(params.id).getTheLast() : null;
+  let d = searchParams.get("d");
+  let workspaceId = params.id ? regenerateDash(params.id).getTheLast() : null;
 
-  if (!workspaceId || !d || !date)
+  if (!workspaceId || !d)
     return json({
       workspaceName: "-",
       error: "Error loader",
-      transactions: [],
+      calendar: [],
     });
 
-  let transactions = null;
-  if (+date) {
-    transactions = await getTransactions(request, workspaceId, d, date);
-  }
+  let workspaceName = params.id
+    ? regenerateDash(params.id).withoutTheLast()
+    : "-";
+  let calendar = await getCalendar(request, workspaceId, d);
 
   return defer({
-    workspaceName: params.id ? regenerateDash(params.id).withoutTheLast() : "-",
-    transactions,
+    workspaceName,
+    calendar,
   });
 }
 
@@ -76,18 +70,11 @@ export const action = async ({ request }: ActionFunctionArgs) => {
       return redirect(
         "/ws/" +
           `${generateDash(workspace_name.toString())}-${workspaces_id}` +
-          `?d=${new Date(date_time.toString()).getFullYear()}-${format(new Date(date_time.toString()).setDate(new Date().getDate() - 1), "MM")}&date=${format(new Date(date_time.toString()), "dd")}`,
+          `?d=${new Date(date_time.toString()).getFullYear()}-${format(new Date(date_time.toString()).setDate(new Date().getDate() - 1), "MM")}`,
       );
     default:
       return {};
   }
-};
-
-export const meta: MetaFunction<typeof loader> = ({ data }) => {
-  return [
-    { title: data?.workspaceName + " | mybucks.today" },
-    { name: "description", content: "Welcome to Remix!" },
-  ];
 };
 
 export default function Index() {
@@ -103,138 +90,6 @@ export default function Index() {
           </div>
         </div>
       </div>
-    </div>
-  );
-}
-
-function Page() {
-  const navigate = useNavigate();
-
-  const BackButton = () => (
-    <Button
-      variant="ghost"
-      size="icon"
-      className=""
-      onClick={() => navigate(-1)}
-    >
-      <ChevronLeft size={24} strokeWidth={2} />
-    </Button>
-  );
-
-  return (
-    <div className="flex min-h-screen gap-4">
-      <div className="flex-1">
-        <div className="z-50 flex h-14 w-full items-center justify-start bg-white px-4 md:hidden md:px-0">
-          <BackButton />
-        </div>
-        <Content />
-      </div>
-    </div>
-  );
-}
-
-function Content() {
-  const params = useParams();
-  const [searchParams] = useSearchParams();
-
-  const workspaceId = params.id ? regenerateDash(params.id).getTheLast() : null;
-  const title = params.id ? regenerateDash(params.id).withoutTheLast() : "-";
-
-  const date = searchParams.get("d");
-  const [month, setMonth] = React.useState(date ? new Date(date) : new Date());
-
-  const BackButton = () => (
-    <Link to="/ws" prefetch="intent" className="w-fit">
-      <p className="flex items-center gap-2 text-sm font-normal text-muted-foreground">
-        <ArrowLeft size={18} strokeWidth={1} />
-        <span>Kembali</span>
-      </p>
-    </Link>
-  );
-
-  return (
-    <div className="my-1 py-6 md:pl-3">
-      <div className="flex flex-col gap-8">
-        <div className="flex items-start justify-between">
-          <div className="hidden flex-col gap-0.5 md:flex">
-            <BackButton />
-            <h2 className="text-2xl font-bold">
-              {title.length > 35 ? `${title.substring(0, 35)}..` : title}
-            </h2>
-            <p className="text-sm font-normal">
-              {format(month, "MMMM yyyy", { locale: localeId })}
-            </p>
-          </div>
-          <MonthNavigation month={month} setMonth={setMonth} />
-        </div>
-        <BigCalendar
-          month={month}
-          setMonth={setMonth}
-          isValid={!!title && !!workspaceId}
-        />
-      </div>
-    </div>
-  );
-}
-
-function MonthNavigation({
-  month,
-  setMonth,
-}: {
-  month: Date;
-  setMonth: React.Dispatch<React.SetStateAction<Date>>;
-}) {
-  const [, setSearchParams] = useSearchParams();
-
-  const today = new Date();
-  const nextMonth = addMonths(month, 1);
-  const prevMonth = subMonths(month, 1);
-
-  return (
-    <div className="flex items-center gap-2">
-      <Button
-        variant="ghost"
-        size="sm"
-        className="gap-2"
-        onClick={() => {
-          setMonth(prevMonth);
-          setSearchParams(
-            (prev) => {
-              prev.set(
-                "d",
-                `${new Date(prevMonth).getFullYear()}-${format(new Date(prevMonth).setDate(new Date().getDate() - 1), "MM")}`,
-              );
-              return prev;
-            },
-            { preventScrollReset: true },
-          );
-        }}
-      >
-        <span>Sebelumnya</span>
-      </Button>
-      <Button variant="outline" size="sm" onClick={() => setMonth(today)}>
-        Hari ini
-      </Button>
-      <Button
-        variant="ghost"
-        size="sm"
-        className="gap-2"
-        onClick={() => {
-          setMonth(nextMonth);
-          setSearchParams(
-            (prev) => {
-              prev.set(
-                "d",
-                `${new Date(nextMonth).getFullYear()}-${format(new Date(nextMonth).setDate(new Date().getDate() - 1), "MM")}`,
-              );
-              return prev;
-            },
-            { preventScrollReset: true },
-          );
-        }}
-      >
-        <span>Selanjutnya</span>
-      </Button>
     </div>
   );
 }

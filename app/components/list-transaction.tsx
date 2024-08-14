@@ -14,7 +14,7 @@ import toIDR from "~/utils/currency";
 import { TTransactions } from "~/utils/transactions.server";
 
 import CreateTransaction from "./create-transaction";
-import { ActionType, loader } from "./route";
+import { ActionType, loader } from "../routes/ws.$id/route";
 
 export default function ListTransaction({
   day,
