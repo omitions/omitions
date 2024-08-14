@@ -48,6 +48,7 @@ export async function loader({ params, request }: LoaderFunctionArgs) {
 
   return defer({
     workspaceName,
+    error: "",
     calendar,
   });
 }

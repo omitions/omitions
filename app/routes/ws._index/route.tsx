@@ -62,7 +62,7 @@ function Page() {
           </h4>
         </div>
         <div className="hidden flex-col gap-0.5 md:flex">
-          <h2 className="text-2xl font-bold">Workspaces</h2>
+          <h2 className="text-xl font-bold">Workspaces</h2>
           <p className="text-sm font-normal text-muted-foreground">
             Semua catatan keuangan Anda ada disini
           </p>

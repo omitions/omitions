@@ -1,13 +1,10 @@
-import { useNavigate, useParams } from "@remix-run/react";
-import { MetaFunction } from "@remix-run/node";
-
-import { ArrowLeft, ChevronLeft } from "lucide-react";
-
-import { Button } from "~/components/ui/button";
+import { defer, json, LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
 
 import { regenerateDash } from "~/utils/misc";
+import { getTransactions } from "~/utils/transactions.server";
 
 import Sidebar from "../ws/sidebar";
+import Page from "./page";
 
 export const meta: MetaFunction = () => {
   return [
@@ -15,6 +12,25 @@ export const meta: MetaFunction = () => {
     { name: "description", content: "Welcome to Remix!" },
   ];
 };
+
+export async function loader({ params, request }: LoaderFunctionArgs) {
+  let { searchParams } = new URL(request.url);
+
+  let d = searchParams.get("d");
+  let workspaceId = params.id ? regenerateDash(params.id).getTheLast() : null;
+
+  if (!workspaceId || !d)
+    return json({
+      transactions: [],
+      error: "Error loader",
+    });
+
+  let transactions = await getTransactions(request, workspaceId, d);
+
+  return defer({
+    transactions,
+  });
+}
 
 export default function WorkspaceDay() {
   return (
@@ -26,62 +42,6 @@ export default function WorkspaceDay() {
             <div className="mx-auto border-input md:mt-0">
               <Page />
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function Page() {
-  const navigate = useNavigate();
-
-  const BackButton = () => (
-    <Button
-      variant="ghost"
-      size="icon"
-      className=""
-      onClick={() => navigate(-1)}
-    >
-      <ChevronLeft size={24} strokeWidth={2} />
-    </Button>
-  );
-
-  return (
-    <div className="flex min-h-screen gap-4">
-      <div className="flex-1">
-        <div className="z-50 flex h-14 w-full items-center justify-start bg-white px-4 md:hidden md:px-0">
-          <BackButton />
-        </div>
-        <Content />
-      </div>
-    </div>
-  );
-}
-
-function Content() {
-  const navigation = useNavigate();
-  const params = useParams();
-  const title = params.id ? regenerateDash(params.id).withoutTheLast() : "-";
-
-  const BackButton = () => (
-    <button onClick={() => navigation(-1)}>
-      <p className="flex items-center gap-2 text-sm font-normal text-muted-foreground">
-        <ArrowLeft size={18} strokeWidth={1} />
-        <span>Kembali</span>
-      </p>
-    </button>
-  );
-
-  return (
-    <div className="my-1 py-6 md:pl-3">
-      <div className="flex flex-col gap-8">
-        <div className="flex items-start justify-between">
-          <div className="hidden flex-col gap-0.5 md:flex">
-            <BackButton />
-            <h2 className="text-2xl font-bold">
-              {title.length > 35 ? `${title.substring(0, 35)}..` : title}
-            </h2>
           </div>
         </div>
       </div>

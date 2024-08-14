@@ -1,8 +1,11 @@
-import { FetcherWithComponents, Link } from "@remix-run/react";
+import { FetcherWithComponents, Link, useParams } from "@remix-run/react";
+import { format } from "date-fns";
 
 import { DayButtonProps } from "react-day-picker";
 
 import { cn } from "~/lib/utils";
+
+import { generateDash, regenerateDash } from "~/utils/misc";
 
 export default function DayButton({
   className,
@@ -14,9 +17,18 @@ export default function DayButton({
   const date = day.date;
   const isToday = day.dateLib.isSameDay(new Date(date), new Date());
 
+  const params = useParams();
+  const _id = params.id ? regenerateDash(params.id).getTheLast() : "";
+  const name = params.id ? regenerateDash(params.id).withoutTheLast() : "-";
+
   return (
     <Link
-      to="/ws/day/12"
+      to={
+        "/ws/day/" +
+        `${generateDash(name)}-${_id}` +
+        `?d=${new Date().getFullYear()}-${format(new Date(date), "MM-dd")}`
+      }
+      prefetch="intent"
       className={cn(
         className,
         "flex w-full items-start justify-start",
@@ -24,7 +36,7 @@ export default function DayButton({
       )}
     >
       <div className="relative flex h-full w-full flex-col gap-1.5">
-        <div className="mx-auto my-2 md:mx-0 md:px-2">
+        <div className="mx-auto my-2 md:mx-0 md:px-6">
           <p
             className={cn(
               "flex h-7 w-7 items-center justify-center gap-1 rounded-full border-2 border-transparent text-[11px] font-medium md:text-xs md:font-medium",

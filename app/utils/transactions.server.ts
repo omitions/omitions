@@ -58,7 +58,7 @@ export async function createTransaction(form: FormData, request: Request) {
 export type TTransactions = {
   _id: string;
   amount: number;
-  type: "cash_in" | "cash_out";
+  type: "cash_in" | "cash_out" | "invoice";
   description: string;
   loop_type: string;
   loop_count: number;
@@ -69,24 +69,24 @@ export async function getTransactions(
   request: Request,
   workspaceId: string | null | undefined,
   date: string,
-): Promise<TTransactions[]> {
+): Promise<TTransactions[] | null> {
   const session = await sessionStorage.getSession(
     request.headers.get("Cookie"),
   );
   const token = session.get("user").access_token;
 
   let resp = null;
-  const fetched = await fetch(
-    `https://api.mybucks.today/cashflows/list?workspace_id=${workspaceId}-${date}`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    },
-  );
-  resp = await fetched.json();
-  console.log("response: ", resp);
+  // const fetched = await fetch(
+  //   `https://api.mybucks.today/cashflows/list?workspace_id=${workspaceId}-${date}`,
+  //   {
+  //     method: "GET",
+  //     headers: {
+  //       Authorization: `Bearer ${token}`,
+  //       "Content-Type": "application/json",
+  //     },
+  //   },
+  // );
+  // resp = await fetched.json();
+  // console.log("response: ", resp);
   return resp;
 }

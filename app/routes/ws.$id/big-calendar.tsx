@@ -18,7 +18,7 @@ export default function BigCalendar({
 
   if (!isValid) return <>Sorry</>;
   return (
-    <div className="relative !overflow-hidden">
+    <div className="relative !overflow-hidden rounded-2xl border border-input bg-white pt-6">
       <DayPicker
         hideNavigation
         showOutsideDays
@@ -29,14 +29,14 @@ export default function BigCalendar({
         classNames={{
           root: "relative",
 
-          month: "relative w-full mt-4",
+          month: "relative w-full",
           months: "relative w-full",
           month_grid: "mt-8 w-full max-h-[800px]",
 
-          week: "relative p-0",
+          week: "relative",
           weekdays: "flex absolute top-0 w-full",
           weekday:
-            "flex-1 text-[10px] font-medium z-50 font-medium h-full py-2 flex items-center justify-center md:justify-start md:px-4 first:text-red-500 md:uppercase",
+            "flex-1 text-[10px] font-medium z-50 font-medium h-full py-2 flex items-center justify-center md:justify-start md:px-8 first:text-red-500 md:uppercase",
 
           caption_label: "border border-red-500 absolute right-0 hidden",
           day: "p-0 border-transparent md:border-input border-r last:border-r-transparent border-t first:text-red-500",

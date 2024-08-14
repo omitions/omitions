@@ -54,8 +54,8 @@ function Content() {
 
   const BackButton = () => (
     <Link to="/ws" prefetch="intent" className="w-fit">
-      <p className="flex items-center gap-2 text-sm font-normal text-muted-foreground">
-        <ArrowLeft size={18} strokeWidth={1} />
+      <p className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
+        <ArrowLeft size={18} strokeWidth={2} />
         <span>Kembali</span>
       </p>
     </Link>
@@ -67,7 +67,7 @@ function Content() {
         <div className="flex items-start justify-between">
           <div className="hidden flex-col gap-0.5 md:flex">
             <BackButton />
-            <h2 className="text-2xl font-bold">
+            <h2 className="text-xl font-bold">
               {title.length > 35 ? `${title.substring(0, 35)}..` : title}
             </h2>
           </div>
@@ -100,7 +100,7 @@ function MonthNavigation({
 
   return (
     <div className="flex items-center gap-6">
-      <h3 className="text-lg font-medium">
+      <h3 className="text-base font-medium">
         {format(month, "MMMM yyyy", { locale: localeId })}
       </h3>
       <div className="flex items-center gap-1">

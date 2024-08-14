@@ -54,7 +54,7 @@ function Page() {
     <div className="my-1 py-6 md:pl-3">
       <div className="flex flex-col gap-8">
         <div className="hidden flex-col gap-0.5 md:flex">
-          <h2 className="text-2xl font-bold">Ringkasan</h2>
+          <h2 className="text-xl font-bold">Ringkasan</h2>
           <p className="text-sm font-normal text-muted-foreground">
             Data Anda teranalisa disini
           </p>
