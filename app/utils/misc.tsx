@@ -1,16 +1,16 @@
-import { Link, LinkProps } from "@remix-run/react"
-import React from "react"
+import { Link, LinkProps } from "@remix-run/react";
+import React from "react";
 
 type AnchorProps = React.DetailedHTMLProps<
   React.AnchorHTMLAttributes<HTMLAnchorElement>,
   HTMLAnchorElement
->
+>;
 const AnchorOrLink = React.forwardRef<
   HTMLAnchorElement,
   AnchorProps & {
-    reload?: boolean
-    to?: LinkProps['to']
-    prefetch?: LinkProps['prefetch']
+    reload?: boolean;
+    to?: LinkProps["to"];
+    prefetch?: LinkProps["prefetch"];
   }
 >(function AnchorOrLink(props, ref) {
   const {
@@ -21,23 +21,24 @@ const AnchorOrLink = React.forwardRef<
     prefetch,
     children,
     ...rest
-  } = props
-  let toUrl = ''
-  let shouldUserRegularAnchor = reload || download
+  } = props;
+  let toUrl = "";
+  let shouldUserRegularAnchor = reload || download;
 
-  if (!shouldUserRegularAnchor && typeof href === 'string') {
-    shouldUserRegularAnchor = href.includes(':') || href.startsWith('#')
+  if (!shouldUserRegularAnchor && typeof href === "string") {
+    shouldUserRegularAnchor = href.includes(":") || href.startsWith("#");
   }
 
-  if (!shouldUserRegularAnchor && typeof to === 'string') {
-    toUrl = to
-    shouldUserRegularAnchor = to.includes(':')
+  if (!shouldUserRegularAnchor && typeof to === "string") {
+    toUrl = to;
+    shouldUserRegularAnchor = to.includes(":");
   }
 
-  if (!shouldUserRegularAnchor && typeof to === 'object') {
-    toUrl = `${to.pathname ?? ''}${to.hash ? `#${to.hash}` : ''}${to.search ? `?${to.search}` : ''
-      }`
-    shouldUserRegularAnchor = to.pathname?.includes(':')
+  if (!shouldUserRegularAnchor && typeof to === "object") {
+    toUrl = `${to.pathname ?? ""}${to.hash ? `#${to.hash}` : ""}${
+      to.search ? `?${to.search}` : ""
+    }`;
+    shouldUserRegularAnchor = to.pathname?.includes(":");
   }
 
   if (shouldUserRegularAnchor) {
@@ -45,15 +46,15 @@ const AnchorOrLink = React.forwardRef<
       <a {...rest} download={download} href={href ?? toUrl} ref={ref}>
         {children}
       </a>
-    )
+    );
   } else {
     return (
-      <Link prefetch={prefetch} to={to ?? href ?? ''} {...rest} ref={ref}>
+      <Link prefetch={prefetch} to={to ?? href ?? ""} {...rest} ref={ref}>
         {children}
       </Link>
-    )
+    );
   }
-})
+});
 
 function generateDash(text: string) {
   const str = text;
@@ -64,15 +65,15 @@ function generateDash(text: string) {
 function regenerateDash(text: string) {
   const str = text;
 
-  const withoutTheLast = () => str.split('-').slice(0, -1).join(' ');
-  const getTheLast = () => str.split('-').pop();
+  const withoutTheLast = () => str.split("-").slice(0, -1).join(" ");
+  const getTheLast = () => str.split("-").pop();
   const defaultText = () => str.split("-").join(" ");
 
   return {
     defaultText,
     withoutTheLast,
-    getTheLast
-  }
+    getTheLast,
+  };
 }
 
 function escapeRegexNumber(input: string) {
@@ -80,9 +81,4 @@ function escapeRegexNumber(input: string) {
   return input.replace(specialChars, "");
 }
 
-export {
-  AnchorOrLink,
-  generateDash,
-  regenerateDash,
-  escapeRegexNumber
-}
+export { AnchorOrLink, generateDash, regenerateDash, escapeRegexNumber };

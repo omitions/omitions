@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from "react";
 import {
   CalendarIcon,
   EnvelopeClosedIcon,
@@ -6,7 +6,7 @@ import {
   GearIcon,
   PersonIcon,
   RocketIcon,
-} from "@radix-ui/react-icons"
+} from "@radix-ui/react-icons";
 
 import {
   CommandDialog,
@@ -17,27 +17,31 @@ import {
   CommandList,
   CommandSeparator,
   CommandShortcut,
-} from "./ui/command"
+} from "./ui/command";
 
 export function CommandDialogDemo({ children }: { children: JSX.Element }) {
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = React.useState(false);
 
   React.useEffect(() => {
     const down = (e: KeyboardEvent) => {
       if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
-        e.preventDefault()
-        setOpen((open) => !open)
+        e.preventDefault();
+        setOpen((open) => !open);
       }
-    }
+    };
 
-    document.addEventListener("keydown", down)
-    return () => document.removeEventListener("keydown", down)
-  }, [])
+    document.addEventListener("keydown", down);
+    return () => document.removeEventListener("keydown", down);
+  }, []);
 
   return (
     <>
-      {React.Children.map(children, child => {
-        return React.cloneElement(child, { onClick: () => setOpen(true) }, null)
+      {React.Children.map(children, (child) => {
+        return React.cloneElement(
+          child,
+          { onClick: () => setOpen(true) },
+          null,
+        );
       })}
       <CommandDialog open={open} onOpenChange={setOpen}>
         <CommandInput placeholder="Type a command or search..." />
@@ -78,5 +82,5 @@ export function CommandDialogDemo({ children }: { children: JSX.Element }) {
         </CommandList>
       </CommandDialog>
     </>
-  )
+  );
 }

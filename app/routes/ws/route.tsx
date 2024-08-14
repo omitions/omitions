@@ -11,9 +11,9 @@ import {
 } from "~/utils/workspaces.server";
 
 export enum ActionType {
-  CREATE_WORKSPACES = 'CREATE_WORKSPACES',
-  REMOVE_WORKSPACES = 'REMOVE_WORKSPACES',
-  UPDATE_WORKSPACES = 'UPDATE_WORKSPACES'
+  CREATE_WORKSPACES = "CREATE_WORKSPACES",
+  REMOVE_WORKSPACES = "REMOVE_WORKSPACES",
+  UPDATE_WORKSPACES = "UPDATE_WORKSPACES",
 }
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
@@ -25,17 +25,17 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
   const formPayload = Object.fromEntries(formData);
 
-  const _action = formPayload['_action'] as keyof typeof ActionType;
+  const _action = formPayload["_action"] as keyof typeof ActionType;
 
   switch (_action) {
     case ActionType.CREATE_WORKSPACES:
-      return await createWorkspace(formData, request)
+      return await createWorkspace(formData, request);
     case ActionType.UPDATE_WORKSPACES:
-      return await updateWorkspace(formData, request)
+      return await updateWorkspace(formData, request);
     case ActionType.REMOVE_WORKSPACES:
-      return await removeWorkspace(formData, request)
+      return await removeWorkspace(formData, request);
     default:
-      return {}
+      return {};
   }
 };
 
@@ -43,17 +43,17 @@ export default function Shell() {
   return (
     <div className="h-full">
       <div className="flex">
-        <div className="border-input fixed z-50 h-full w-full max-w-[var(--sidebar-width)] border-r hidden md:block">
+        <div className="fixed z-50 hidden h-full w-full max-w-[var(--sidebar-width)] border-r border-input md:block">
           <RootSidebar />
         </div>
         <div className="relative h-full w-full md:ml-auto md:w-[calc(100%_-_var(--sidebar-width))]">
           <div className="relative h-full w-full">
-            <div className="mx-auto mt-[var(--header-height)] md:mt-0 px-4 mb-28 md:mb-0 overflow-hidden">
+            <div className="mx-auto mb-28 mt-[var(--header-height)] overflow-hidden px-4 md:mb-0 md:mt-0">
               <Outlet />
             </div>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -1,8 +1,12 @@
-import { FetcherWithComponents, useParams, useSearchParams } from "@remix-run/react";
+import {
+  FetcherWithComponents,
+  useParams,
+  useSearchParams,
+} from "@remix-run/react";
 
 import { ArrowLeft, ArrowRight, FileInput, Plus } from "lucide-react";
 import React from "react";
-import { NumericFormat } from 'react-number-format';
+import { NumericFormat } from "react-number-format";
 
 import { format } from "date-fns";
 import { id as localeId } from "date-fns/locale";
@@ -18,7 +22,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger
+  DialogTrigger,
 } from "~/components/ui/dialog";
 import { Input, inputVariants } from "~/components/ui/input";
 import {
@@ -26,7 +30,7 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue
+  SelectValue,
 } from "~/components/ui/select";
 import { ToggleGroup, ToggleGroupItem } from "~/components/ui/toggle-group";
 
@@ -35,17 +39,19 @@ import { regenerateDash } from "~/utils/misc";
 export default function CreateTransaction({
   date,
   actionType,
-  fetcherProps
+  fetcherProps,
 }: {
-  date: Date,
-  actionType: string,
-  fetcherProps: FetcherWithComponents<unknown>
+  date: Date;
+  actionType: string;
+  fetcherProps: FetcherWithComponents<unknown>;
 }) {
   const [, setSearchParams] = useSearchParams();
 
   const params = useParams();
   const workspaceId = params.id ? regenerateDash(params.id).getTheLast() : "";
-  const workspaceName = params.id ? regenerateDash(params.id).withoutTheLast() : "-";
+  const workspaceName = params.id
+    ? regenerateDash(params.id).withoutTheLast()
+    : "-";
 
   const [loopType, setLoopType] = React.useState("none");
   const [trxType, setTrxType] = React.useState<string | undefined>(undefined);
@@ -63,7 +69,7 @@ export default function CreateTransaction({
         <Button
           type="button"
           variant="default"
-          className="w-fit px-4 h-16 shadow-lg hover:bg-primary rounded-xl text-sm font-bold gap-2"
+          className="h-16 w-fit gap-2 rounded-xl px-4 text-sm font-bold shadow-lg hover:bg-primary"
         >
           <Plus size={20} strokeWidth={2.5} />
           <span>Buat transaksi</span>
@@ -71,18 +77,24 @@ export default function CreateTransaction({
       </DialogTrigger>
       <DialogContent className="sm:max-w-xl">
         <DialogHeader>
-          <DialogTitle>Buat transaksi pada tanggal  {format(date, "d MMMM yyyy", { locale: localeId })}</DialogTitle>
+          <DialogTitle>
+            Buat transaksi pada tanggal{" "}
+            {format(date, "d MMMM yyyy", { locale: localeId })}
+          </DialogTitle>
         </DialogHeader>
         <fetcher.Form
           action="."
           key="create-transaction"
           method="post"
-          className="flex flex-col gap-6 mt-2"
+          className="mt-2 flex flex-col gap-6"
           onSubmit={() => {
-            setSearchParams((prev) => {
-              prev.set("date", "0");
-              return prev;
-            }, { preventScrollReset: true });
+            setSearchParams(
+              (prev) => {
+                prev.set("date", "0");
+                return prev;
+              },
+              { preventScrollReset: true },
+            );
           }}
         >
           <div className="flex flex-col gap-4">
@@ -104,13 +116,10 @@ export default function CreateTransaction({
               prefix="Rp"
               className={cn(
                 inputVariants({ variant: "ghost" }),
-                "text-base font-semibold text-black placeholder:font-normal"
+                "text-base font-semibold text-black placeholder:font-normal",
               )}
             />
-            <Select
-              value={trxType}
-              onValueChange={(v) => setTrxType(v)}
-            >
+            <Select value={trxType} onValueChange={(v) => setTrxType(v)}>
               <SelectTrigger className="w-full text-black">
                 <SelectValue placeholder="Tipe transaksi" />
               </SelectTrigger>
@@ -137,9 +146,16 @@ export default function CreateTransaction({
             </Select>
             <div className="flex flex-col gap-2">
               <p className="text-sm">Tambahkan waktu atau atur perulangan</p>
-              <div className="border rounded-lg shadow-sm px-3 bg-background py-6 flex flex-col gap-4">
-                <label className={cn(buttonVariants({ variant: "outline" }), "w-fit flex gap-1 px-3 bg-white")}>
-                  <span>{format(date, "d MMMM yyyy", { locale: localeId })}</span>
+              <div className="flex flex-col gap-4 rounded-lg border bg-background px-3 py-6 shadow-sm">
+                <label
+                  className={cn(
+                    buttonVariants({ variant: "outline" }),
+                    "flex w-fit gap-1 bg-white px-3",
+                  )}
+                >
+                  <span>
+                    {format(date, "d MMMM yyyy", { locale: localeId })}
+                  </span>
                   <span>:</span>
                   <input
                     type="time"
@@ -154,7 +170,7 @@ export default function CreateTransaction({
                     value={loopType}
                     onValueChange={(v) => setLoopType(v)}
                   >
-                    <SelectTrigger className="w-fit text-black bg-white rounded-xl">
+                    <SelectTrigger className="w-fit rounded-xl bg-white text-black">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
@@ -185,7 +201,7 @@ export default function CreateTransaction({
                       placeholder="Masukan pengulangan"
                       className={cn(
                         inputVariants({ variant: "ghost" }),
-                        "text-black placeholder:font-normal"
+                        "text-black placeholder:font-normal",
                       )}
                     />
                   )}
@@ -197,7 +213,7 @@ export default function CreateTransaction({
             <p className="text-sm">Sumber rekening</p>
             <ToggleGroup
               type="single"
-              className="border rounded-lg shadow-sm px-3 bg-background py-6 flex flex-col gap-4"
+              className="flex flex-col gap-4 rounded-lg border bg-background px-3 py-6 shadow-sm"
             >
               <SourceOfFund
                 value="a"
@@ -215,80 +231,54 @@ export default function CreateTransaction({
           </div>
           <DialogFooter>
             <DialogClose asChild>
-              <Button
-                type="button"
-                variant="outline"
-              >
+              <Button type="button" variant="outline">
                 Batalkan
               </Button>
             </DialogClose>
-            <Button
-              type="submit"
-            >
-              Buat Transaksi
-            </Button>
+            <Button type="submit">Buat Transaksi</Button>
           </DialogFooter>
 
-          <input
-            type="hidden"
-            name="type"
-            value={trxType}
-          />
-          <input
-            type="hidden"
-            name="loop_type"
-            value={loopType}
-          />
+          <input type="hidden" name="type" value={trxType} />
+          <input type="hidden" name="loop_type" value={loopType} />
           <input
             type="hidden"
             name="date_time"
             value={`${format(new Date(date), "yyyy-MM-dd")} ${timeValue}`}
           />
-          <input
-            type="hidden"
-            name="workspaces_id"
-            value={workspaceId}
-          />
-          <input
-            type="hidden"
-            name="workspace_name"
-            value={workspaceName}
-          />
-          <input
-            type="hidden"
-            name="_action"
-            value={actionType}
-          />
+          <input type="hidden" name="workspaces_id" value={workspaceId} />
+          <input type="hidden" name="workspace_name" value={workspaceName} />
+          <input type="hidden" name="_action" value={actionType} />
         </fetcher.Form>
       </DialogContent>
     </Dialog>
-  )
+  );
 }
-
 
 function SourceOfFund({
   name,
   accountNumber,
   balance,
-  value
+  value,
 }: {
-  name: string,
-  accountNumber: number
-  balance: number,
-  value: string
+  name: string;
+  accountNumber: number;
+  balance: number;
+  value: string;
 }) {
   return (
     <ToggleGroupItem
       value={value}
-      className="bg-white w-full h-full flex items-center justify-between gap-4 p-4 border-2 border-input rounded-xl data-[state=on]:border-primary data-[state=on]:text-black"
+      className="flex h-full w-full items-center justify-between gap-4 rounded-xl border-2 border-input bg-white p-4 data-[state=on]:border-primary data-[state=on]:text-black"
     >
       <div className="flex flex-col text-left">
         <h3 className="text-sm font-semibold">{name}</h3>
-        <p className="text-sm text-muted-foreground font-normal">{accountNumber}</p>
+        <p className="text-sm font-normal text-muted-foreground">
+          {accountNumber}
+        </p>
       </div>
       <div>
         <h2 className="text-sm font-bold">{toIDR(balance)}</h2>
       </div>
     </ToggleGroupItem>
-  )
+  );
 }

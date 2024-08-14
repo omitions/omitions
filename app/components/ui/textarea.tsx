@@ -8,34 +8,34 @@ const textareaVariants = cva(
   {
     variants: {
       variant: {
-        default: "focus:border-primary focus-visible:ring-2 focus-visible:ring-primary/30",
-        destructive: "bg-red-100/50 border-red-500 focus:border-red-500 focus-visible:ring-red-500/30",
-        ghost: "border-transparent border-b-border rounded-none outline-none focus:border-b-primary p-0"
+        default:
+          "focus:border-primary focus-visible:ring-2 focus-visible:ring-primary/30",
+        destructive:
+          "bg-red-100/50 border-red-500 focus:border-red-500 focus-visible:ring-red-500/30",
+        ghost:
+          "border-transparent border-b-border rounded-none outline-none focus:border-b-primary p-0",
       },
     },
     defaultVariants: {
       variant: "default",
     },
-  }
-)
+  },
+);
 export interface TextareaProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement>,
-  VariantProps<typeof textareaVariants> { }
+    VariantProps<typeof textareaVariants> {}
 
 const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ className, variant, ...props }, ref) => {
     return (
       <textarea
-        className={cn(
-          textareaVariants({ variant }),
-          className
-        )}
+        className={cn(textareaVariants({ variant }), className)}
         ref={ref}
         {...props}
       />
-    )
-  }
-)
-Textarea.displayName = "Textarea"
+    );
+  },
+);
+Textarea.displayName = "Textarea";
 
-export { Textarea }
+export { Textarea };

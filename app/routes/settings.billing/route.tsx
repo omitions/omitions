@@ -11,30 +11,28 @@ export const meta: MetaFunction = () => {
 
 export default function Index() {
   return (
-    <div className="h-full mt-14 md:mt-0">
+    <div className="mt-14 h-full md:mt-0">
       <div className="flex">
         <SettingsSidebar />
         <div className="relative h-full w-full md:ml-auto md:w-[calc(100%_-_var(--sidebar-width-xl))]">
           <div className="relative h-full w-full">
-            <div className="mx-auto mt-[var(--header-height)] max-w-screen-2xl md:mt-0 min-h-screen border-input">
+            <div className="mx-auto mt-[var(--header-height)] min-h-screen max-w-screen-2xl border-input md:mt-0">
               <Page />
             </div>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 function Page() {
   return (
-    <div className="md:pl-3 py-6 my-1">
-      <div className="flex flex-col gap-8 max-w-screen-md">
+    <div className="my-1 py-6 md:pl-3">
+      <div className="flex max-w-screen-md flex-col gap-8">
         <h2 className="text-xl font-bold">Billing</h2>
-        <div>
-          content
-        </div>
+        <div>content</div>
       </div>
     </div>
-  )
+  );
 }

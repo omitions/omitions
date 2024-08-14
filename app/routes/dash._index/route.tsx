@@ -7,7 +7,7 @@ import {
   Rectangle,
   ReferenceLine,
   XAxis,
-} from "recharts"
+} from "recharts";
 
 import {
   Card,
@@ -15,9 +15,13 @@ import {
   CardDescription,
   CardFooter,
   CardHeader,
-  CardTitle
+  CardTitle,
 } from "~/components/ui/card";
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from "~/components/ui/chart";
+import {
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "~/components/ui/chart";
 
 import DashboardSidebar from "../dash/sidebar";
 
@@ -30,42 +34,42 @@ export const meta: MetaFunction = () => {
 
 export default function Index() {
   return (
-    <div className="h-full mt-14 md:mt-0">
+    <div className="mt-14 h-full md:mt-0">
       <div className="flex">
         <DashboardSidebar />
         <div className="relative h-full w-full md:ml-auto md:w-[calc(100%_-_var(--sidebar-width-xl))]">
           <div className="relative h-full w-full">
-            <div className="mx-auto mt-[var(--header-height)] max-w-screen-2xl md:mt-0 min-h-screen border-input">
+            <div className="mx-auto mt-[var(--header-height)] min-h-screen max-w-screen-2xl border-input md:mt-0">
               <Page />
             </div>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 function Page() {
   return (
-    <div className="md:pl-3 py-6 my-1">
+    <div className="my-1 py-6 md:pl-3">
       <div className="flex flex-col gap-8">
-        <div className="hidden md:flex flex-col gap-0.5">
+        <div className="hidden flex-col gap-0.5 md:flex">
           <h2 className="text-2xl font-bold">Ringkasan</h2>
-          <p className="text-sm text-muted-foreground font-normal">Data Anda teranalisa disini</p>
+          <p className="text-sm font-normal text-muted-foreground">
+            Data Anda teranalisa disini
+          </p>
         </div>
         <div>
           <Chart1 />
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 function Chart1() {
   return (
-    <Card
-      className="lg:max-w-md" x-chunk="charts-01-chunk-0"
-    >
+    <Card className="lg:max-w-md" x-chunk="charts-01-chunk-0">
       <CardHeader className="space-y-0 pb-2">
         <CardDescription>Today</CardDescription>
         <CardTitle className="text-4xl tabular-nums">
@@ -136,7 +140,7 @@ function Chart1() {
               tickFormatter={(value) => {
                 return new Date(value).toLocaleDateString("en-US", {
                   weekday: "short",
-                })
+                });
               }}
             />
             <ChartTooltip
@@ -149,7 +153,7 @@ function Chart1() {
                       day: "numeric",
                       month: "long",
                       year: "numeric",
-                    })
+                    });
                   }}
                 />
               }
@@ -185,11 +189,10 @@ function Chart1() {
           <span className="font-medium text-foreground">53,305</span> steps.
         </CardDescription>
         <CardDescription>
-          You need{" "}
-          <span className="font-medium text-foreground">12,584</span> more
-          steps to reach your goal.
+          You need <span className="font-medium text-foreground">12,584</span>{" "}
+          more steps to reach your goal.
         </CardDescription>
       </CardFooter>
     </Card>
-  )
+  );
 }

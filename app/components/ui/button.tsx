@@ -1,18 +1,14 @@
-import { Slot } from "@radix-ui/react-slot"
-import { useNavigate } from "@remix-run/react"
+import { Slot } from "@radix-ui/react-slot";
+import { useNavigate } from "@remix-run/react";
 
-import { cva, type VariantProps } from "class-variance-authority"
-import * as React from "react"
+import { cva, type VariantProps } from "class-variance-authority";
+import * as React from "react";
 
-import { cn } from "~/lib/utils"
-import { AnchorOrLink } from "~/utils/misc"
+import { cn } from "~/lib/utils";
+import { AnchorOrLink } from "~/utils/misc";
 
-import Loading from "../loading"
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger
-} from "./tooltip"
+import Loading from "../loading";
+import { Tooltip, TooltipContent, TooltipTrigger } from "./tooltip";
 
 const buttonVariants = cva(
   "relative inline-flex items-center justify-center whitespace-nowrap font-semibold border border-transparent tracking-tight ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-80",
@@ -23,10 +19,13 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
         link: "text-primary underline-offset-4 hover:underline",
 
-        destructive: "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
-        outline: "border border-input bg-background shadow-sm hover:border-primary hover:ring-2 hover:ring-primary/30 focus-visible:border-primary focus-visible:ring-primary/30",
-        default: "bg-primary text-primary-foreground shadow hover:bg-primary/90 hover:ring-2 hover:ring-ring",
-        ghost: 'hover:bg-background focus-visible:bg-primary/20',
+        destructive:
+          "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
+        outline:
+          "border border-input bg-background shadow-sm hover:border-primary hover:ring-2 hover:ring-primary/30 focus-visible:border-primary focus-visible:ring-primary/30",
+        default:
+          "bg-primary text-primary-foreground shadow hover:bg-primary/90 hover:ring-2 hover:ring-ring",
+        ghost: "hover:bg-background focus-visible:bg-primary/20",
       },
       size: {
         default: "h-12 px-7 py-3 rounded-full text-sm",
@@ -39,19 +38,30 @@ const buttonVariants = cva(
       variant: "default",
       size: "default",
     },
-  }
-)
+  },
+);
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-  VariantProps<typeof buttonVariants> {
-  asChild?: boolean,
-  loading?: boolean,
-  tooltip?: string
+    VariantProps<typeof buttonVariants> {
+  asChild?: boolean;
+  loading?: boolean;
+  tooltip?: string;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, loading = false, asChild = false, tooltip = "", ...props }, ref) => {
+  (
+    {
+      className,
+      variant,
+      size,
+      loading = false,
+      asChild = false,
+      tooltip = "",
+      ...props
+    },
+    ref,
+  ) => {
     const Comp = asChild ? Slot : "button";
 
     if (tooltip) {
@@ -66,15 +76,11 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
               {loading ? <Loading /> : props.children}
             </Comp>
           </TooltipTrigger>
-          <TooltipContent
-            align="center"
-            side="bottom"
-            sideOffset={3}
-          >
+          <TooltipContent align="center" side="bottom" sideOffset={3}>
             <p className="font-semibold">{tooltip}</p>
           </TooltipContent>
         </Tooltip>
-      )
+      );
     }
 
     return (
@@ -85,17 +91,18 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       >
         {loading ? <Loading /> : props.children}
       </Comp>
-    )
-  }
-)
-Button.displayName = "Button"
+    );
+  },
+);
+Button.displayName = "Button";
 
 /**
  * A button that looks like a link
  */
 const ButtonLink = React.forwardRef<
   HTMLAnchorElement,
-  React.ComponentPropsWithRef<typeof AnchorOrLink> & ButtonProps & { delay?: number }
+  React.ComponentPropsWithRef<typeof AnchorOrLink> &
+    ButtonProps & { delay?: number }
 >(function ButtonLink({ delay = 0, ...props }, ref) {
   const { variant, size, disabled, href } = props;
 
@@ -103,35 +110,30 @@ const ButtonLink = React.forwardRef<
   const redirectTo = async () => {
     await wait(delay);
     if (href) navigate(href);
-  }
+  };
 
   const Comp = delay ? Slot : AnchorOrLink;
 
   return (
-    <Button
-      asChild
-      variant={variant}
-      size={size}
-      className={props.className}
-    >
+    <Button asChild variant={variant} size={size} className={props.className}>
       <Comp
         ref={ref}
         disabled={disabled}
         prefetch="intent"
-        onClick={() => delay ? redirectTo() : null}
+        onClick={() => (delay ? redirectTo() : null)}
         {...props}
       >
         {props.children}
       </Comp>
     </Button>
-  )
-})
-ButtonLink.displayName = 'ButtonLink'
+  );
+});
+ButtonLink.displayName = "ButtonLink";
 
 function wait(time: number) {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     setTimeout(resolve, time);
   });
 }
 
-export { Button, ButtonLink, buttonVariants }
+export { Button, ButtonLink, buttonVariants };

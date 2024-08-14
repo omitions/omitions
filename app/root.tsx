@@ -19,8 +19,10 @@ import "./globals.css";
 export const links: LinksFunction = () => [];
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
-  const session = await sessionStorage.getSession(request.headers.get("Cookie"));
-  const isAuth = !!session.get("user")
+  const session = await sessionStorage.getSession(
+    request.headers.get("Cookie"),
+  );
+  const isAuth = !!session.get("user");
   return json({ isAuth });
 };
 
@@ -28,12 +30,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
-        <link
-          rel="stylesheet"
-          href="https://unpkg.com/@material-tailwind/html@latest/styles/material-tailwind.css"
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1.0, viewport-fit=cover"
         />
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
       </head>
@@ -54,7 +54,7 @@ export default function App() {
       <TooltipProvider delayDuration={300}>
         <Outlet />
       </TooltipProvider>
-      <div className="block md:hidden fixed bottom-0">
+      <div className="fixed bottom-0 block md:hidden">
         <Navbar />
       </div>
     </main>

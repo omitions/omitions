@@ -11,18 +11,25 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger
+  DialogTrigger,
 } from "./ui/dialog";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 
-export default function CreateWorkspace({ actionType }: { actionType: string }) {
+export default function CreateWorkspace({
+  actionType,
+}: {
+  actionType: string;
+}) {
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline" className="w-fit px-4 h-16 rounded-xl text-sm font-bold gap-2">
+        <Button
+          variant="outline"
+          className="h-16 w-fit gap-2 rounded-xl px-4 text-sm font-bold"
+        >
           <Plus size={20} strokeWidth={2.5} />
           <span>Buat workspace</span>
         </Button>
@@ -54,24 +61,15 @@ export default function CreateWorkspace({ actionType }: { actionType: string }) 
           </div>
           <DialogFooter>
             <DialogClose asChild>
-              <Button
-                type="button"
-                variant="outline"
-              >
+              <Button type="button" variant="outline">
                 Tutup
               </Button>
             </DialogClose>
-            <Button type="submit">
-              Buat Sekarang
-            </Button>
+            <Button type="submit">Buat Sekarang</Button>
           </DialogFooter>
-          <input
-            type="hidden"
-            name="_action"
-            value={actionType}
-          />
+          <input type="hidden" name="_action" value={actionType} />
         </Form>
       </DialogContent>
     </Dialog>
-  )
+  );
 }

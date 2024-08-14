@@ -1,14 +1,9 @@
 import type {
   ActionFunctionArgs,
   LoaderFunctionArgs,
-  MetaFunction
+  MetaFunction,
 } from "@remix-run/node";
-import {
-  json,
-  Link,
-  useFetcher,
-  useLoaderData,
-} from "@remix-run/react";
+import { json, Link, useFetcher, useLoaderData } from "@remix-run/react";
 
 import { Button } from "~/components/ui/button";
 import {
@@ -17,7 +12,7 @@ import {
   CardDescription,
   CardFooter,
   CardHeader,
-  CardTitle
+  CardTitle,
 } from "~/components/ui/card";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
@@ -54,14 +49,12 @@ export default function Login() {
   const loading = fetcher.state == "submitting" || fetcher.state === "loading";
 
   return (
-    <div className="flex items-center h-screen bg-background">
-      <div className="w-full flex flex-col items-center gap-6 md:gap-8">
+    <div className="flex h-screen items-center bg-background">
+      <div className="flex w-full flex-col items-center gap-6 md:gap-8">
         <div>
-          <h2 className="text-4xl font-bold text-primary">
-            mybucks
-          </h2>
+          <h2 className="text-4xl font-bold text-primary">mybucks</h2>
         </div>
-        <Card className="w-[90%] max-w-sm md:min-w-sm mx-auto border">
+        <Card className="md:min-w-sm mx-auto w-[90%] max-w-sm border">
           <CardHeader>
             <CardTitle className="text-xl">Log in ke akun kamu</CardTitle>
             <CardDescription>
@@ -87,7 +80,9 @@ export default function Login() {
                   name="password"
                   variant={error ? "destructive" : "default"}
                 />
-                {error ? <div className="text-sm text-red-500">{error.message}</div> : null}
+                {error ? (
+                  <div className="text-sm text-red-500">{error.message}</div>
+                ) : null}
               </div>
             </CardContent>
             <CardFooter>
@@ -104,13 +99,13 @@ export default function Login() {
         </Card>
         <div>
           <p className="text-sm">
-            <span className="text-muted-foreground">Belum memiliki akun?{" "}</span>
+            <span className="text-muted-foreground">Belum memiliki akun? </span>
             <Link to="/register">
-              <span className="text-primary-foreground font-bold">Daftar</span>
+              <span className="font-bold text-primary-foreground">Daftar</span>
             </Link>
           </p>
         </div>
       </div>
     </div>
-  )
+  );
 }

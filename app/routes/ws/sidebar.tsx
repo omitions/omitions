@@ -1,63 +1,45 @@
-import {
-  Link,
-  LinkProps,
-  useLocation
-} from '@remix-run/react';
-import {
-  icons,
-  MenuIcon,
-  XIcon
-} from 'lucide-react';
+import { Link, LinkProps, useLocation } from "@remix-run/react";
+import { icons, MenuIcon, XIcon } from "lucide-react";
 
-import CreateWorkspace from '~/components/create-workspace';
-import { ButtonLink } from '~/components/ui/button';
-import { Progress } from '~/components/ui/progress';
+import CreateWorkspace from "~/components/create-workspace";
+import { ButtonLink } from "~/components/ui/button";
+import { Progress } from "~/components/ui/progress";
 import {
   Sheet,
   SheetClose,
   SheetContent,
-  SheetTrigger
-} from '~/components/ui/sheet';
+  SheetTrigger,
+} from "~/components/ui/sheet";
 
-import { cn } from '~/lib/utils';
+import { cn } from "~/lib/utils";
 
-import { ActionType } from './route';
+import { ActionType } from "./route";
 
 export default function WorkspaceSidebar({
   workspaceCount,
-  withoutMobile = false
+  withoutMobile = false,
 }: {
-  workspaceCount: number,
-  withoutMobile?: boolean,
+  workspaceCount: number;
+  withoutMobile?: boolean;
 }) {
   return (
     <>
       <Desktop workspaceCount={workspaceCount} />
       {!withoutMobile && <Mobile />}
     </>
-  )
+  );
 }
 
 function Mobile() {
   return (
-    <div className='flex md:hidden fixed top-0 left-0 h-14 px-4 justify-start items-center w-screen border-b border-border bg-white z-50'>
+    <div className="fixed left-0 top-0 z-50 flex h-14 w-screen items-center justify-start border-b border-border bg-white px-4 md:hidden">
       <Sheet>
         <SheetTrigger asChild>
           <button
-            className="
-              middle center
-              absolute
-              flex justify-center items-center
-              w-12 h-12
-              rounded-full
-              transition-all
-            "
+            className="middle center absolute flex h-12 w-12 items-center justify-center rounded-full transition-all"
             data-ripple-dark="true"
           >
-            <MenuIcon
-              size={24}
-              strokeWidth={2}
-            />
+            <MenuIcon size={24} strokeWidth={2} />
           </button>
         </SheetTrigger>
         <SheetContent side="left">
@@ -65,19 +47,10 @@ function Mobile() {
             <div>
               <SheetClose>
                 <button
-                  className="
-                    middle center
-                    flex justify-center items-center
-                    w-12 h-12
-                    rounded-full
-                    transition-all
-                  "
+                  className="middle center flex h-12 w-12 items-center justify-center rounded-full transition-all"
                   data-ripple-dark="true"
                 >
-                  <XIcon
-                    size={24}
-                    strokeWidth={2}
-                  />
+                  <XIcon size={24} strokeWidth={2} />
                 </button>
               </SheetClose>
             </div>
@@ -112,30 +85,26 @@ function Mobile() {
         </SheetContent>
       </Sheet>
     </div>
-  )
+  );
 }
 
 function Desktop({ workspaceCount }: { workspaceCount: number }) {
   return (
-    <div className="fixed left-[var(--sidebar-width)] hidden h-ful w-full max-w-[var(--sidebar-width-xl)] md:block">
-      <div className="md:pl-3 py-6 my-1 flex flex-col justify-between min-h-screen">
-        <div className='flex flex-col gap-8'>
+    <div className="h-ful fixed left-[var(--sidebar-width)] hidden w-full max-w-[var(--sidebar-width-xl)] md:block">
+      <div className="my-1 flex min-h-screen flex-col justify-between py-6 md:pl-3">
+        <div className="flex flex-col gap-8">
           <div className="flex items-center">
             <Link
               to="/ws"
-              className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 rounded-sm"
+              className="rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0"
             >
-              <h2 className="text-xl mx-2 font-bold">Beranda</h2>
+              <h2 className="mx-2 text-xl font-bold">Beranda</h2>
             </Link>
           </div>
           <div className="flex flex-col gap-6">
             <CreateWorkspace actionType={ActionType.CREATE_WORKSPACES} />
             <div className="flex flex-col">
-              <NavItem
-                title="Workspaces"
-                href="/ws"
-                iconName="FileText"
-              />
+              <NavItem title="Workspaces" href="/ws" iconName="FileText" />
               <NavItem
                 title="Pengingat"
                 href="/ws/collectionss"
@@ -147,16 +116,16 @@ function Desktop({ workspaceCount }: { workspaceCount: number }) {
         <SidebarFooter count={workspaceCount} />
       </div>
     </div>
-  )
+  );
 }
 
 function SidebarFooter({ count }: { count: number }) {
   return (
     <Link
       to="/ws/:id"
-      className="focus-visible:outline-none focus-visible:ring-2 mx-2 focus-visible:ring-ring focus-visible:ring-offset-0 rounded-xl"
+      className="mx-2 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0"
     >
-      <div className="border w-full rounded-xl px-4 py-6 flex flex-col gap-3 cursor-pointer border-input bg-background">
+      <div className="flex w-full cursor-pointer flex-col gap-3 rounded-xl border border-input bg-background px-4 py-6">
         <div className="flex items-center justify-between">
           <h4 className="text-xs font-medium">{count || 0}/10 Workspace</h4>
           <p className="text-xs font-medium text-muted-foreground">Gratis</p>
@@ -164,7 +133,7 @@ function SidebarFooter({ count }: { count: number }) {
         <Progress value={33} />
       </div>
     </Link>
-  )
+  );
 }
 
 function NavItem({
@@ -173,14 +142,14 @@ function NavItem({
   iconName,
   title,
   disabled,
-  delay
+  delay,
 }: {
-  href?: string
-  prefetch?: LinkProps['prefetch']
-  iconName: keyof typeof icons
-  title: string
-  disabled?: boolean,
-  delay?: number
+  href?: string;
+  prefetch?: LinkProps["prefetch"];
+  iconName: keyof typeof icons;
+  title: string;
+  disabled?: boolean;
+  delay?: number;
 }) {
   const location = useLocation();
   const isMatch = location.pathname === href;
@@ -197,17 +166,14 @@ function NavItem({
       variant="ghost"
       size="sm"
       className={cn(
-        'w-full justify-start gap-3 text-sm rounded-full font-medium py-3 px-4',
-        isMatch && "bg-primary/20 hover:bg-primary/20 font-semibold",
+        "w-full justify-start gap-3 rounded-full px-4 py-3 text-sm font-medium",
+        isMatch && "bg-primary/20 font-semibold hover:bg-primary/20",
       )}
     >
-      <div className='flex items-center gap-2'>
-        <Icon
-          size={18}
-          strokeWidth={isMatch ? 2.5 : 2}
-        />
+      <div className="flex items-center gap-2">
+        <Icon size={18} strokeWidth={isMatch ? 2.5 : 2} />
         <span>{title}</span>
       </div>
     </ButtonLink>
-  )
+  );
 }

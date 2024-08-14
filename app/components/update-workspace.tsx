@@ -10,7 +10,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger
+  DialogTrigger,
 } from "./ui/dialog";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
@@ -20,24 +20,24 @@ export default function UpdateWorkspace({
   children,
   workspaceName,
   workspaceDescription,
-  workspaceId
+  workspaceId,
 }: {
-  actionType: string,
-  children: React.ReactNode,
-  workspaceName: string,
-  workspaceDescription: string,
-  workspaceId: string
+  actionType: string;
+  children: React.ReactNode;
+  workspaceName: string;
+  workspaceDescription: string;
+  workspaceId: string;
 }) {
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger asChild>
-        {children}
-      </DialogTrigger>
+      <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Ubah <b>{workspaceName}</b> Workspace</DialogTitle>
+          <DialogTitle>
+            Ubah <b>{workspaceName}</b> Workspace
+          </DialogTitle>
         </DialogHeader>
         <Form
           action="/ws"
@@ -64,31 +64,16 @@ export default function UpdateWorkspace({
           </div>
           <DialogFooter>
             <DialogClose asChild>
-              <Button
-                type="button"
-                variant="outline"
-              >
+              <Button type="button" variant="outline">
                 Batalkan
               </Button>
             </DialogClose>
-            <Button
-              type="submit"
-            >
-              Ubah Sekarang
-            </Button>
+            <Button type="submit">Ubah Sekarang</Button>
           </DialogFooter>
-          <input
-            type="hidden"
-            name="_action"
-            value={actionType}
-          />
-          <input
-            type="hidden"
-            name="_id"
-            value={workspaceId}
-          />
+          <input type="hidden" name="_action" value={actionType} />
+          <input type="hidden" name="_id" value={workspaceId} />
         </Form>
       </DialogContent>
     </Dialog>
-  )
+  );
 }

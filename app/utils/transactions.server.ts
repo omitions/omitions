@@ -15,7 +15,8 @@ export async function createTransaction(form: FormData, request: Request) {
     typeof amount !== "string" ||
     !loop_count ||
     typeof loop_count !== "string"
-  ) throw new Error("Error");
+  )
+    throw new Error("Error");
 
   // console.log(">>>> payload", {
   //   amount: +escapeRegexNumber(amount),
@@ -27,54 +28,66 @@ export async function createTransaction(form: FormData, request: Request) {
   //   date_time,
   // })
 
-  const session = await sessionStorage.getSession(request.headers.get("Cookie"));
+  const session = await sessionStorage.getSession(
+    request.headers.get("Cookie"),
+  );
   const token = session.get("user").access_token;
 
   let resp = null;
   const fetched = await fetch("https://api.mybucks.today/cashflows/create", {
     method: "POST",
     body: JSON.stringify({
-    amount: +escapeRegexNumber(amount),
-    description: description?.toString().trim(),
-    type,
-    loop_type,
-    loop_count: +escapeRegexNumber(loop_count),
-    workspaces_id,
-    date_time,
-  }),
+      amount: +escapeRegexNumber(amount),
+      description: description?.toString().trim(),
+      type,
+      loop_type,
+      loop_count: +escapeRegexNumber(loop_count),
+      workspaces_id,
+      date_time,
+    }),
     headers: {
-      "Authorization": `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
   });
   resp = await fetched.json();
   // console.log('response: ', resp);
-  return {...resp}
+  return { ...resp };
 }
 
 export type TTransactions = {
-  _id: string
-  amount: number
-  type: "cash_in" | "cash_out"
-  description: string
-  loop_type: string
-  loop_count: number
-  workspaces_id: string
-  date_time: string
-}
-export async function getTransactions(request: Request, workspaceId: string | null | undefined, d:string, date: string): Promise<TTransactions[]> {
-  const session = await sessionStorage.getSession(request.headers.get("Cookie"));
+  _id: string;
+  amount: number;
+  type: "cash_in" | "cash_out";
+  description: string;
+  loop_type: string;
+  loop_count: number;
+  workspaces_id: string;
+  date_time: string;
+};
+export async function getTransactions(
+  request: Request,
+  workspaceId: string | null | undefined,
+  d: string,
+  date: string,
+): Promise<TTransactions[]> {
+  const session = await sessionStorage.getSession(
+    request.headers.get("Cookie"),
+  );
   const token = session.get("user").access_token;
 
   let resp = null;
-  const fetched = await fetch(`https://api.mybucks.today/cashflows/list?workspace_id=${workspaceId}&date=${d}-${date}`, {
-    method: "GET",
-    headers: {
-      "Authorization": `Bearer ${token}`,
-      "Content-Type": "application/json",
+  const fetched = await fetch(
+    `https://api.mybucks.today/cashflows/list?workspace_id=${workspaceId}&date=${d}-${date}`,
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
     },
-  });
+  );
   resp = await fetched.json();
-  console.log('response: ', resp);
-  return resp
+  console.log("response: ", resp);
+  return resp;
 }

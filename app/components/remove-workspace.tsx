@@ -10,7 +10,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger
+  DialogTrigger,
 } from "./ui/dialog";
 import { Input } from "./ui/input";
 
@@ -18,21 +18,19 @@ export default function RemoveWorkspace({
   actionType,
   children,
   workspaceName,
-  workspaceId
+  workspaceId,
 }: {
-  actionType: string,
-  children: React.ReactNode,
-  workspaceName: string,
-  workspaceId: string
+  actionType: string;
+  children: React.ReactNode;
+  workspaceName: string;
+  workspaceId: string;
 }) {
   const [isOpen, setIsOpen] = React.useState(false);
   const [confirmationText, setConfirmationText] = React.useState("");
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger asChild>
-        {children}
-      </DialogTrigger>
+      <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Hapus Workspace</DialogTitle>
@@ -44,7 +42,9 @@ export default function RemoveWorkspace({
           onSubmit={() => setIsOpen(false)}
         >
           <div className="flex flex-col gap-3">
-            <p className="text-sm text-muted-foreground font-medium text-red-500">Ketikan nama workspace <b>{workspaceName}</b> untuk menkonfirmasi.</p>
+            <p className="text-sm font-medium text-muted-foreground text-red-500">
+              Ketikan nama workspace <b>{workspaceName}</b> untuk menkonfirmasi.
+            </p>
             <Input
               type="text"
               name="title"
@@ -55,10 +55,7 @@ export default function RemoveWorkspace({
           </div>
           <DialogFooter>
             <DialogClose asChild>
-              <Button
-                type="button"
-                variant="ghost"
-              >
+              <Button type="button" variant="ghost">
                 Batalkan
               </Button>
             </DialogClose>
@@ -70,18 +67,10 @@ export default function RemoveWorkspace({
               Konfirmasi
             </Button>
           </DialogFooter>
-          <input
-            type="hidden"
-            name="_action"
-            value={actionType}
-          />
-          <input
-            type="hidden"
-            name="_id"
-            value={workspaceId}
-          />
+          <input type="hidden" name="_action" value={actionType} />
+          <input type="hidden" name="_id" value={workspaceId} />
         </Form>
       </DialogContent>
     </Dialog>
-  )
+  );
 }

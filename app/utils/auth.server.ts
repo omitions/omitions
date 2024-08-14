@@ -30,7 +30,7 @@ auth.use(
       method: "POST",
       body: JSON.stringify({
         email,
-        password
+        password,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -38,10 +38,8 @@ auth.use(
     });
     resp = await fetched.json();
 
-    if (
-      resp.message === "Wrong password" ||
-      resp.message === "User not found"
-    ) throw new AuthorizationError("Invalid credentials");
-    return { ...resp.data }
+    if (resp.message === "Wrong password" || resp.message === "User not found")
+      throw new AuthorizationError("Invalid credentials");
+    return { ...resp.data };
   }),
 );

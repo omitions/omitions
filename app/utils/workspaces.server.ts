@@ -6,7 +6,9 @@ export async function createWorkspace(form: FormData, request: Request) {
 
   if (!name || !description) throw new Error("Error");
 
-  const session = await sessionStorage.getSession(request.headers.get("Cookie"));
+  const session = await sessionStorage.getSession(
+    request.headers.get("Cookie"),
+  );
   const token = session.get("user").access_token;
 
   let resp = null;
@@ -14,16 +16,16 @@ export async function createWorkspace(form: FormData, request: Request) {
     method: "POST",
     body: JSON.stringify({
       name: name.toString().trim(),
-      description
+      description,
     }),
     headers: {
-      "Authorization": `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
   });
   resp = await fetched.json();
-  console.log('response: ', resp);
-  return {...resp}
+  console.log("response: ", resp);
+  return { ...resp };
 }
 
 export async function updateWorkspace(form: FormData, request: Request) {
@@ -33,7 +35,9 @@ export async function updateWorkspace(form: FormData, request: Request) {
 
   if (!name || !description) throw new Error("Error");
 
-  const session = await sessionStorage.getSession(request.headers.get("Cookie"));
+  const session = await sessionStorage.getSession(
+    request.headers.get("Cookie"),
+  );
   const token = session.get("user").access_token;
 
   let resp = null;
@@ -45,19 +49,21 @@ export async function updateWorkspace(form: FormData, request: Request) {
       description,
     }),
     headers: {
-      "Authorization": `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
   });
   resp = await fetched.json();
   // console.log('response: ', resp);
-  return {...resp}
+  return { ...resp };
 }
 
 export async function removeWorkspace(form: FormData, request: Request) {
   const _id = form.get("_id");
 
-  const session = await sessionStorage.getSession(request.headers.get("Cookie"));
+  const session = await sessionStorage.getSession(
+    request.headers.get("Cookie"),
+  );
   const token = session.get("user").access_token;
 
   let resp = null;
@@ -67,34 +73,36 @@ export async function removeWorkspace(form: FormData, request: Request) {
       _id,
     }),
     headers: {
-      "Authorization": `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
   });
   resp = await fetched.json();
   // console.log('response: ', resp);
-  return {...resp}
+  return { ...resp };
 }
 
 export type TWorkspaces = {
-  _id: string,
-  description: string,
-  name: string,
-  user_id: string,
-}
+  _id: string;
+  description: string;
+  name: string;
+  user_id: string;
+};
 export async function getWorkspaces(request: Request): Promise<TWorkspaces[]> {
-  const session = await sessionStorage.getSession(request.headers.get("Cookie"));
+  const session = await sessionStorage.getSession(
+    request.headers.get("Cookie"),
+  );
   const token = session.get("user").access_token;
 
   let resp = null;
   const fetched = await fetch("https://api.mybucks.today/workspaces/list", {
     method: "GET",
     headers: {
-      "Authorization": `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
   });
   resp = await fetched.json();
   // console.log('response: ', resp);
-  return resp
+  return resp;
 }

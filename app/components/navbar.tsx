@@ -1,8 +1,4 @@
-import {
-  Link,
-  useLocation,
-  useRouteLoaderData
-} from "@remix-run/react";
+import { Link, useLocation, useRouteLoaderData } from "@remix-run/react";
 
 import { icons } from "lucide-react";
 
@@ -17,38 +13,27 @@ export default function Navbar() {
   const location = useLocation();
   const isMatch = routeMatcher.includes(location.pathname.split("/")[1]);
 
-  if (!rootData?.isAuth || !isMatch) return <div className="block md:hidden"></div>
+  if (!rootData?.isAuth || !isMatch)
+    return <div className="block md:hidden"></div>;
   return (
-    <div className="block md:hidden border-t border-border/50 shadow-2xl h-16 w-screen">
-      <div className="flex gap-1 h-full w-full bg-white">
-        <Navigation
-          href="/ws"
-          iconName="ScrollText"
-          title="Beranda"
-        />
-        <Navigation
-          href="/dash"
-          iconName="Telescope"
-          title="Analisa"
-        />
-        <Navigation
-          href="/settings"
-          iconName="Settings"
-          title="Pengaturan"
-        />
+    <div className="block h-16 w-screen border-t border-border/50 shadow-2xl md:hidden">
+      <div className="flex h-full w-full gap-1 bg-white">
+        <Navigation href="/ws" iconName="ScrollText" title="Beranda" />
+        <Navigation href="/dash" iconName="Telescope" title="Analisa" />
+        <Navigation href="/settings" iconName="Settings" title="Pengaturan" />
       </div>
     </div>
-  )
+  );
 }
 
 function Navigation({
   href,
   iconName,
-  title
+  title,
 }: {
-  href: string
-  iconName: keyof typeof icons
-  title: string
+  href: string;
+  iconName: keyof typeof icons;
+  title: string;
 }) {
   const location = useLocation();
   const isMatch = location.pathname.split("/")[1].includes(href?.split("/")[1]);
@@ -59,18 +44,10 @@ function Navigation({
   return (
     <Link
       to={href}
-      className="w-full h-full flex justify-center relative overflow-hidden"
+      className="relative flex h-full w-full justify-center overflow-hidden"
     >
       <button
-        className="
-          middle center
-          flex flex-col gap-1 justify-center items-center
-          w-full h-32
-          -top-8
-          absolute
-          rounded-full
-          transition-all
-        "
+        className="middle center absolute -top-8 flex h-32 w-full flex-col items-center justify-center gap-1 rounded-full transition-all"
         data-ripple-dark="true"
       >
         <Icon
@@ -78,8 +55,10 @@ function Navigation({
           strokeWidth={1.5}
           color={isMatch ? "#1ad55f" : "currentColor"}
         />
-        <span className={cn("text-[11px]", isMatch && "text-[#1ad55f]")}>{title}</span>
+        <span className={cn("text-[11px]", isMatch && "text-[#1ad55f]")}>
+          {title}
+        </span>
       </button>
     </Link>
-  )
+  );
 }

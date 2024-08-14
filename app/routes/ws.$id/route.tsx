@@ -1,31 +1,36 @@
 import {
   ActionFunctionArgs,
+  defer,
   json,
   LoaderFunctionArgs,
   MetaFunction,
-  redirect
+  redirect,
 } from "@remix-run/node";
-import { Link, useNavigate, useParams, useSearchParams } from "@remix-run/react";
-
 import {
-  addMonths,
-  subMonths,
-  format
-} from "date-fns";
+  Link,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from "@remix-run/react";
+
+import { addMonths, format, subMonths } from "date-fns";
 import { id as localeId } from "date-fns/locale";
 import { ArrowLeft, ChevronLeft } from "lucide-react";
+import React from "react";
 
 import { Button } from "~/components/ui/button";
 
 import { generateDash, regenerateDash } from "~/utils/misc";
-import { createTransaction, getTransactions } from "~/utils/transactions.server";
+import {
+  createTransaction,
+  getTransactions,
+} from "~/utils/transactions.server";
 
-import React from "react";
 import Sidebar from "../ws/sidebar";
 import BigCalendar from "./big-calendar";
 
 export enum ActionType {
-  CREATE_TRANSACTION = 'CREATE_TRANSACTION',
+  CREATE_TRANSACTION = "CREATE_TRANSACTION",
 }
 
 export async function loader({ params, request }: LoaderFunctionArgs) {
@@ -35,20 +40,21 @@ export async function loader({ params, request }: LoaderFunctionArgs) {
   const date = searchParams.get("date");
   const workspaceId = params.id ? regenerateDash(params.id).getTheLast() : null;
 
-  if (!workspaceId || !d || !date) return json({
-    workspaceName: "-",
-    error: "Error loader",
-    transactions: []
-  })
+  if (!workspaceId || !d || !date)
+    return json({
+      workspaceName: "-",
+      error: "Error loader",
+      transactions: [],
+    });
 
   let transactions = null;
   if (+date) {
-    transactions = await getTransactions(request, workspaceId, d, date)
+    transactions = await getTransactions(request, workspaceId, d, date);
   }
 
-  return json({
+  return defer({
     workspaceName: params.id ? regenerateDash(params.id).withoutTheLast() : "-",
-    transactions
+    transactions,
   });
 }
 
@@ -56,7 +62,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
   const formPayload = Object.fromEntries(formData);
 
-  const _action = formPayload['_action'] as keyof typeof ActionType;
+  const _action = formPayload["_action"] as keyof typeof ActionType;
   const workspace_name = formData.get("workspace_name");
   const workspaces_id = formData.get("workspaces_id");
   const date_time = formData.get("date_time");
@@ -65,10 +71,15 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     case ActionType.CREATE_TRANSACTION:
       await createTransaction(formData, request);
 
-      if (!date_time || typeof date_time != "string" || !workspace_name) return {}
-      return redirect("/ws/" + `${generateDash(workspace_name.toString())}-${workspaces_id}` + `?d=${new Date(date_time.toString()).getFullYear()}-${format(new Date(date_time.toString()).setDate(new Date().getDate() - 1), "MM")}&date=${format(new Date(date_time.toString()), "dd")}`)
+      if (!date_time || typeof date_time != "string" || !workspace_name)
+        return {};
+      return redirect(
+        "/ws/" +
+          `${generateDash(workspace_name.toString())}-${workspaces_id}` +
+          `?d=${new Date(date_time.toString()).getFullYear()}-${format(new Date(date_time.toString()).setDate(new Date().getDate() - 1), "MM")}&date=${format(new Date(date_time.toString()), "dd")}`,
+      );
     default:
-      return {}
+      return {};
   }
 };
 
@@ -81,22 +92,19 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 
 export default function Index() {
   return (
-    <div className="h-full fixed left-0 top-0 md:top-auto md:left-auto md:relative w-screen md:w-full">
+    <div className="fixed left-0 top-0 h-full w-screen md:relative md:left-auto md:top-auto md:w-full">
       <div className="flex">
-        <Sidebar
-          workspaceCount={0}
-          withoutMobile
-        />
+        <Sidebar workspaceCount={0} withoutMobile />
         <div className="relative h-full w-full md:ml-auto md:w-[calc(100%_-_var(--sidebar-width-xl))]">
           <div className="relative h-full w-full">
-            <div className="mx-auto md:mt-0 border-input">
+            <div className="mx-auto border-input md:mt-0">
               <Page />
             </div>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 function Page() {
@@ -109,23 +117,20 @@ function Page() {
       className=""
       onClick={() => navigate(-1)}
     >
-      <ChevronLeft
-        size={24}
-        strokeWidth={2}
-      />
+      <ChevronLeft size={24} strokeWidth={2} />
     </Button>
-  )
+  );
 
   return (
     <div className="flex min-h-screen gap-4">
       <div className="flex-1">
-        <div className='flex md:hidden h-14 w-full justify-start px-4 md:px-0 items-center bg-white z-50'>
+        <div className="z-50 flex h-14 w-full items-center justify-start bg-white px-4 md:hidden md:px-0">
           <BackButton />
         </div>
         <Content />
       </div>
     </div>
-  )
+  );
 }
 
 function Content() {
@@ -140,33 +145,27 @@ function Content() {
 
   const BackButton = () => (
     <Link to="/ws" prefetch="intent" className="w-fit">
-      <p className="text-sm flex items-center gap-2 text-muted-foreground font-normal">
-        <ArrowLeft
-          size={18}
-          strokeWidth={1}
-        />
+      <p className="flex items-center gap-2 text-sm font-normal text-muted-foreground">
+        <ArrowLeft size={18} strokeWidth={1} />
         <span>Kembali</span>
       </p>
     </Link>
   );
 
   return (
-    <div className="md:pl-3 py-6 my-1">
+    <div className="my-1 py-6 md:pl-3">
       <div className="flex flex-col gap-8">
-        <div className="flex justify-between items-start">
-          <div className="hidden md:flex flex-col gap-0.5">
+        <div className="flex items-start justify-between">
+          <div className="hidden flex-col gap-0.5 md:flex">
             <BackButton />
             <h2 className="text-2xl font-bold">
-              {title.length > 35
-                ? `${title.substring(0, 35)}..`
-                : title}
+              {title.length > 35 ? `${title.substring(0, 35)}..` : title}
             </h2>
-            <p className="text-sm font-normal">{format(month, "MMMM yyyy", { locale: localeId })}</p>
+            <p className="text-sm font-normal">
+              {format(month, "MMMM yyyy", { locale: localeId })}
+            </p>
           </div>
-          <MonthNavigation
-            month={month}
-            setMonth={setMonth}
-          />
+          <MonthNavigation month={month} setMonth={setMonth} />
         </div>
         <BigCalendar
           month={month}
@@ -175,15 +174,15 @@ function Content() {
         />
       </div>
     </div>
-  )
+  );
 }
 
 function MonthNavigation({
   month,
-  setMonth
+  setMonth,
 }: {
-  month: Date,
-  setMonth: React.Dispatch<React.SetStateAction<Date>>
+  month: Date;
+  setMonth: React.Dispatch<React.SetStateAction<Date>>;
 }) {
   const [, setSearchParams] = useSearchParams();
 
@@ -198,20 +197,22 @@ function MonthNavigation({
         size="sm"
         className="gap-2"
         onClick={() => {
-          setMonth(prevMonth)
-          setSearchParams((prev) => {
-            prev.set("d", `${new Date(prevMonth).getFullYear()}-${format(new Date(prevMonth).setDate(new Date().getDate() - 1), "MM")}`);
-            return prev;
-          }, { preventScrollReset: true });
+          setMonth(prevMonth);
+          setSearchParams(
+            (prev) => {
+              prev.set(
+                "d",
+                `${new Date(prevMonth).getFullYear()}-${format(new Date(prevMonth).setDate(new Date().getDate() - 1), "MM")}`,
+              );
+              return prev;
+            },
+            { preventScrollReset: true },
+          );
         }}
       >
         <span>Sebelumnya</span>
       </Button>
-      <Button
-        variant="outline"
-        size="sm"
-        onClick={() => setMonth(today)}
-      >
+      <Button variant="outline" size="sm" onClick={() => setMonth(today)}>
         Hari ini
       </Button>
       <Button
@@ -219,15 +220,21 @@ function MonthNavigation({
         size="sm"
         className="gap-2"
         onClick={() => {
-          setMonth(nextMonth)
-          setSearchParams((prev) => {
-            prev.set("d", `${new Date(nextMonth).getFullYear()}-${format(new Date(nextMonth).setDate(new Date().getDate() - 1), "MM")}`);
-            return prev;
-          }, { preventScrollReset: true });
+          setMonth(nextMonth);
+          setSearchParams(
+            (prev) => {
+              prev.set(
+                "d",
+                `${new Date(nextMonth).getFullYear()}-${format(new Date(nextMonth).setDate(new Date().getDate() - 1), "MM")}`,
+              );
+              return prev;
+            },
+            { preventScrollReset: true },
+          );
         }}
       >
         <span>Selanjutnya</span>
       </Button>
     </div>
-  )
+  );
 }
