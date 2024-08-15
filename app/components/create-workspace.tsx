@@ -30,7 +30,7 @@ export default function CreateWorkspace({
           variant="outline"
           className="h-16 w-fit gap-2 rounded-xl px-4 text-sm font-bold"
         >
-          <Plus size={20} strokeWidth={2.5} />
+          <Plus size={20} strokeWidth={2} />
           <span>Buat workspace</span>
         </Button>
       </DialogTrigger>

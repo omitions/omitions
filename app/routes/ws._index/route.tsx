@@ -26,7 +26,7 @@ export default function Index() {
         <Sidebar workspaceCount={workspaces?.length} />
         <div className="relative h-full w-full md:ml-auto md:w-[calc(100%_-_var(--sidebar-width-xl))]">
           <div className="relative h-full w-full">
-            <div className="mx-auto mt-[var(--header-height)] max-w-screen-xl border-input md:mt-0">
+            <div className="mx-auto mt-[var(--header-height)] w-full max-w-screen-lg border-input md:mt-0">
               <Page />
             </div>
           </div>

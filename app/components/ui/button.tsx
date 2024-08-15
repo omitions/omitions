@@ -11,12 +11,12 @@ import Loading from "../loading";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./tooltip";
 
 const buttonVariants = cva(
-  "relative inline-flex items-center justify-center whitespace-nowrap font-semibold border border-transparent tracking-tight ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-80",
+  "relative inline-flex items-center justify-center whitespace-nowrap font-bold border border-transparent tracking-tight ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-80",
   {
     variants: {
       variant: {
         secondary:
-          "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
+          "bg-primary/30 text-primary-foreground shadow-sm hover:bg-primary/40 hover:ring-2 hover:ring-ring",
         link: "text-primary underline-offset-4 hover:underline",
 
         destructive:
@@ -29,7 +29,7 @@ const buttonVariants = cva(
       },
       size: {
         sm: "h-10 md:h-8 rounded-full px-4 text-xs",
-        lg: "h-11 px-6 py-3 rounded-full text-sm",
+        lg: "h-10 px-5 rounded-full text-sm",
         icon: "h-9 w-9 md:h-11 md:w-11 rounded-full",
       },
     },

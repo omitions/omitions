@@ -55,7 +55,7 @@ export default function ListTransaction({
                 size="icon"
                 tooltip="Tutup"
               >
-                <XIcon size={20} strokeWidth={2.5} />
+                <XIcon size={20} strokeWidth={2} />
               </Button>
             </SheetClose>
           </div>
@@ -98,9 +98,9 @@ function Transaction({
           )}
         >
           {type === "cash_in" ? (
-            <ArrowRight size={15} strokeWidth={2.5} />
+            <ArrowRight size={15} strokeWidth={2} />
           ) : (
-            <ArrowLeft size={15} strokeWidth={2.5} />
+            <ArrowLeft size={15} strokeWidth={2} />
           )}
         </div>
       </div>

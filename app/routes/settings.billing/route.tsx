@@ -16,7 +16,7 @@ export default function Index() {
         <SettingsSidebar />
         <div className="relative h-full w-full md:ml-auto md:w-[calc(100%_-_var(--sidebar-width-xl))]">
           <div className="relative h-full w-full">
-            <div className="mx-auto mt-[var(--header-height)] min-h-screen max-w-screen-2xl border-input md:mt-0">
+            <div className="mx-auto mt-[var(--header-height)] min-h-screen w-full max-w-screen-lg border-input md:mt-0">
               <Page />
             </div>
           </div>

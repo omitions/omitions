@@ -1,7 +1,7 @@
 import { Link } from "@remix-run/react";
 
 import { format } from "date-fns";
-import { Plus } from "lucide-react";
+import { Plus, Trash, Trash2 } from "lucide-react";
 import React from "react";
 
 import { Button } from "~/components/ui/button";
@@ -18,7 +18,12 @@ export default function Wallets() {
         </h4>
       </div>
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-4 xl:grid-cols-3">
-        <WalletItem _id="asala" name="Mandiri" description="nono" user_id="123" />
+        <WalletItem
+          _id="asala"
+          name="Mandiri"
+          description="nono"
+          user_id="123"
+        />
         <CreateWallet />
       </div>
     </div>
@@ -46,6 +51,16 @@ function WalletItem({ _id, name, description }: TWorkspaces) {
           >
             Ubah Bank JAGO
           </Button>
+          <div>
+            <Button
+              className="h-full w-full rounded-full bg-white"
+              variant="outline"
+              size="icon"
+              onMouseEnter={() => setIsHover(true)}
+            >
+              <Trash2 size={20} strokeWidth={2} />
+            </Button>
+          </div>
         </div>
       </div>
       <Link
@@ -61,8 +76,8 @@ function WalletItem({ _id, name, description }: TWorkspaces) {
           data-state={isHover ? "open" : "closed"}
           className="h-full w-full justify-start rounded-2xl border-transparent bg-white px-0 ring-offset-background md:min-h-40 md:border md:border-input md:px-6 md:py-6 md:hover:bg-background/50 md:data-[state=open]:bg-background/50"
         >
-          <div className="flex w-10/12 h-full flex-col justify-between flex-wrap gap-0.5 md:w-full md:gap-1">
-            <div>
+          <div className="flex h-full w-10/12 flex-col flex-wrap justify-between md:w-full md:gap-1">
+            <div className="flex flex-col gap-0.5">
               <p className="text-wrap text-xs font-normal leading-relaxed text-muted-foreground md:text-sm">
                 Saldo
               </p>
@@ -83,10 +98,10 @@ function WalletItem({ _id, name, description }: TWorkspaces) {
 function CreateWallet() {
   return (
     <div className="relative overflow-hidden">
-      <button className="h-full w-full justify-start rounded-2xl dashed-line-border bg-white px-0 ring-offset-background md:min-h-40 md:px-6 md:py-6 md:bg-background/50 md:data-[state=open]:bg-background/50">
-        <div className="flex items-center h-full flex-col justify-center flex-wrap gap-0.5 md:w-full md:gap-3">
-          <Plus size={20} strokeWidth={2.5} />
-          <h3 className="text-sm font-bold">Buat dompet</h3>
+      <button className="dashed-line-border md:hover:dashed-line-border-primary h-full w-full justify-start rounded-2xl bg-white px-0 ring-offset-background md:min-h-40 md:px-6 md:py-6">
+        <div className="flex h-full flex-col flex-wrap items-center justify-center gap-0.5 md:w-full md:gap-3">
+          <Plus size={20} strokeWidth={2} />
+          <h3 className="text-xs font-semibold md:text-sm">Buat dompet</h3>
         </div>
       </button>
     </div>

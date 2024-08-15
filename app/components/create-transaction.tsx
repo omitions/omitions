@@ -71,7 +71,7 @@ export default function CreateTransaction({
           variant="default"
           className="h-16 w-fit gap-2 rounded-xl px-4 text-sm font-bold shadow-lg hover:bg-primary"
         >
-          <Plus size={20} strokeWidth={2.5} />
+          <Plus size={20} strokeWidth={2} />
           <span>Buat transaksi</span>
         </Button>
       </DialogTrigger>

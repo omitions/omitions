@@ -52,7 +52,7 @@ function Navigation({
       >
         <Icon
           size={22}
-          strokeWidth={1.5}
+          strokeWidth={2}
           color={isMatch ? "#1ad55f" : "currentColor"}
         />
         <span className={cn("text-[11px]", isMatch && "text-[#1ad55f]")}>

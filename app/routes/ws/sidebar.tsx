@@ -64,22 +64,6 @@ function Mobile() {
                   delay={150}
                 />
               </SheetClose>
-              <SheetClose>
-                <NavItem
-                  title="Koleksi"
-                  href="/ws/collections"
-                  iconName="FolderOpen"
-                  delay={150}
-                />
-              </SheetClose>
-              <SheetClose>
-                <NavItem
-                  title="Pengingat"
-                  href="/ws/collectionss"
-                  iconName="AlarmClock"
-                  delay={150}
-                />
-              </SheetClose>
             </div>
           </div>
         </SheetContent>
@@ -106,9 +90,9 @@ function Desktop({ workspaceCount }: { workspaceCount: number }) {
             <div className="flex flex-col">
               <NavItem title="Workspaces" href="/ws" iconName="FileText" />
               <NavItem
-                title="Pengingat"
-                href="/ws/collectionss"
-                iconName="AlarmClock"
+                title="Dompet"
+                href="/ws/wallet"
+                iconName="WalletCards"
               />
             </div>
           </div>

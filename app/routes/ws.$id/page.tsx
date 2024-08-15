@@ -65,7 +65,7 @@ function Content() {
     <div className="my-1 py-6 md:pl-3">
       <div className="flex flex-col gap-8">
         <div className="flex items-center justify-between">
-          <div className="hidden flex-col gap-0.5 md:flex">
+          <div className="hidden flex-col gap-2 md:flex">
             <BackButton />
             <h2 className="text-xl font-bold">
               {title.length > 35 ? `${title.substring(0, 35)}..` : title}
