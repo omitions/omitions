@@ -11,9 +11,8 @@ import { CommandDialogDemo } from "./search";
 
 export default function Sidebar() {
   return (
-    <div className="flex h-full flex-col justify-between gap-1 px-2 py-4">
-      <div></div>
-      <div className="flex flex-col items-center gap-2">
+    <div className="mt-1 flex h-full flex-col justify-between gap-1 bg-background px-2 pb-4 pt-6">
+      <div className="flex flex-col items-center gap-2.5">
         <NavItem href="/dash" iconName="Telescope" title="Analisa" />
         <NavItem href="/ws" iconName="ScrollText" title="Beranda" />
         <CommandDialogDemo>
@@ -21,6 +20,7 @@ export default function Sidebar() {
         </CommandDialogDemo>
         <NavItem href="/settings" iconName="Settings" title="Pengaturan" />
       </div>
+      <div></div>
       <div>
         <NavItem href="/logout" iconName="LogOut" title="Keluar" />
       </div>
