@@ -1,20 +1,14 @@
-import { useNavigate, useParams, useSearchParams } from "@remix-run/react";
+import { Link, useNavigate, useParams, useSearchParams } from "@remix-run/react";
 
 import { format } from "date-fns";
 import { id as localeId } from "date-fns/locale";
-import {
-  ArrowLeft,
-  ChevronLeft,
-  Filter,
-  Plus,
-  ReceiptText,
-} from "lucide-react";
+import { ArrowLeft, ChevronLeft, Filter, Plus } from "lucide-react";
 
 import { Button } from "~/components/ui/button";
 
-import { regenerateDash } from "~/utils/misc";
+import { generateDash, regenerateDash } from "~/utils/misc";
 
-import ListTransactions from "./list-transactions";
+import List from "./list";
 
 export default function Page() {
   const navigate = useNavigate();
@@ -45,7 +39,12 @@ export default function Page() {
 function Content() {
   const navigation = useNavigate();
   const params = useParams();
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const workspaceId = params.id ? regenerateDash(params.id).getTheLast() : "";
+  const workspaceName = params.id
+    ? regenerateDash(params.id).withoutTheLast()
+    : "-";
 
   const date = searchParams.get("d");
   const title = params.id ? regenerateDash(params.id).withoutTheLast() : "-";
@@ -59,7 +58,17 @@ function Content() {
     </button>
   );
 
-  if (!date) return <></>;
+  let prevDate, nextDate;
+
+  if (date) {
+    prevDate = new Date(date);
+    prevDate.setDate(prevDate.getDate() - 1);
+
+    nextDate = new Date(date);
+    nextDate.setDate(nextDate.getDate() + 1);
+  }
+
+  if (!date || !prevDate || !nextDate) return <></>;
   return (
     <div className="my-1 py-6 md:pl-3">
       <div className="flex flex-col gap-8">
@@ -69,16 +78,65 @@ function Content() {
             <h2 className="text-xl font-bold">
               {format(new Date(date), "d MMMM yyyy", { locale: localeId })}
             </h2>
+            <Link
+              to={
+                "/ws/" +
+                `${generateDash(workspaceName)}-${workspaceId}` +
+                `?d=${format(new Date().setDate(new Date().getDate() - 1), "yyyy-MM")}`
+              }
+            >
+              <h3 className="text-base font-medium underline">
+                {title.length > 35 ? `${title.substring(0, 35)}..` : title}
+              </h3>
+            </Link>
           </div>
           <div className="flex items-center gap-6">
-            <h3 className="text-base font-medium">
-              {title.length > 35 ? `${title.substring(0, 35)}..` : title}
-            </h3>
+            <div className="flex items-center gap-1">
+              <Button
+                variant="ghost"
+                className="h-10 w-10"
+                onClick={() => {
+                  setSearchParams(
+                    (prev) => {
+                      prev.set(
+                        "d",
+                        `${format(new Date(prevDate), "yyyy-MM-dd")}`,
+                      );
+                      return prev;
+                    },
+                    { preventScrollReset: true },
+                  );
+                }}
+              >
+                {new Date(prevDate).getDate()}
+              </Button>
+              <Button variant="outline" className="h-10 w-10">
+                {new Date(date).getDate()}
+              </Button>
+              <Button
+                variant="ghost"
+                className="h-10 w-10"
+                onClick={() => {
+                  setSearchParams(
+                    (prev) => {
+                      prev.set(
+                        "d",
+                        `${format(new Date(nextDate), "yyyy-MM-dd")}`,
+                      );
+                      return prev;
+                    },
+                    { preventScrollReset: true },
+                  );
+                }}
+              >
+                {new Date(nextDate).getDate()}
+              </Button>
+            </div>
           </div>
         </div>
         <div className="divide-y divide-input">
           <Header />
-          <ListTransactions />
+          <List />
         </div>
       </div>
     </div>

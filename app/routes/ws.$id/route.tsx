@@ -71,7 +71,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
       return redirect(
         "/ws/" +
           `${generateDash(workspace_name.toString())}-${workspaces_id}` +
-          `?d=${new Date(date_time.toString()).getFullYear()}-${format(new Date(date_time.toString()).setDate(new Date().getDate() - 1), "MM")}`,
+          `?d=${format(new Date(date_time.toString()).setDate(new Date().getDate() - 1), "yyyy-MM")}`,
       );
     default:
       return {};

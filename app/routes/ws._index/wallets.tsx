@@ -1,12 +1,10 @@
-import { Link } from "@remix-run/react";
-
-import { format } from "date-fns";
-import { Plus, Trash, Trash2 } from "lucide-react";
+import { Plus, Trash2 } from "lucide-react";
 import React from "react";
 
+import CreateWallet from "~/components/create-wallet";
 import { Button } from "~/components/ui/button";
+import UpdateWallet from "~/components/update-wallet";
 
-import { generateDash } from "~/utils/misc";
 import { TWorkspaces } from "~/utils/workspaces.server";
 
 export default function Wallets() {
@@ -18,24 +16,18 @@ export default function Wallets() {
         </h4>
       </div>
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-4 xl:grid-cols-3">
-        <WalletItem
-          _id="asala"
-          name="Mandiri"
-          description="nono"
-          user_id="123"
-        />
-        <CreateWallet />
+        <WalletItem />
+        <ButtonCreateWallet />
       </div>
     </div>
   );
 }
 
-function WalletItem({ _id, name, description }: TWorkspaces) {
+function WalletItem() {
   const [isHover, setIsHover] = React.useState(false);
 
   return (
-    <div
-      className="relative overflow-hidden"
+    <div className="relative overflow-hidden"
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
     >
@@ -44,16 +36,18 @@ function WalletItem({ _id, name, description }: TWorkspaces) {
         className="absolute z-50 hidden w-full data-[state=closed]:-bottom-[80px] data-[state=open]:bottom-0 data-[state=open]:duration-300 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 md:block"
       >
         <div className="relative mb-4 flex gap-4 px-4">
-          <Button
-            className="w-full rounded-full bg-white"
-            variant="outline"
-            onMouseEnter={() => setIsHover(true)}
-          >
-            Ubah Bank JAGO
-          </Button>
+          <UpdateWallet actionType="UPDATEE__WE">
+            <Button
+              className="w-full rounded-full bg-white"
+              variant="outline"
+              onMouseEnter={() => setIsHover(true)}
+            >
+              Ubah Bank JAGO
+            </Button>
+          </UpdateWallet>
           <div>
             <Button
-              className="h-full w-full rounded-full bg-white"
+              className="h-full w-full rounded-full"
               variant="outline"
               size="icon"
               onMouseEnter={() => setIsHover(true)}
@@ -63,15 +57,7 @@ function WalletItem({ _id, name, description }: TWorkspaces) {
           </div>
         </div>
       </div>
-      <Link
-        to={
-          "/ws/" +
-          `${generateDash(name)}-${_id}` +
-          `?d=${new Date().getFullYear()}-${format(new Date().setDate(new Date().getDate() - 1), "MM")}`
-        }
-        prefetch="intent"
-        className="rounded-2xl"
-      >
+      <div className="rounded-2xl h-full">
         <div
           data-state={isHover ? "open" : "closed"}
           className="h-full w-full justify-start rounded-2xl border-transparent bg-white px-0 ring-offset-background md:min-h-40 md:border md:border-input md:px-6 md:py-6 md:hover:bg-background/50 md:data-[state=open]:bg-background/50"
@@ -81,29 +67,31 @@ function WalletItem({ _id, name, description }: TWorkspaces) {
               <p className="text-wrap text-xs font-normal leading-relaxed text-muted-foreground md:text-sm">
                 Saldo
               </p>
-              <h4 className="text-lg font-medium md:font-semibold">
+              <h4 className="text-base font-medium md:font-semibold">
                 IDR 80.900
               </h4>
             </div>
-            <p className="text-wrap text-xs font-medium leading-relaxed md:text-sm">
+            <p className="text-wrap text-xs font-medium leading-relaxed md:text-sm md:font-bold">
               Bank JAGO
             </p>
           </div>
         </div>
-      </Link>
+      </div>
     </div>
   );
 }
 
-function CreateWallet() {
+function ButtonCreateWallet() {
   return (
     <div className="relative overflow-hidden">
-      <button className="dashed-line-border md:hover:dashed-line-border-primary h-full w-full justify-start rounded-2xl bg-white px-0 ring-offset-background md:min-h-40 md:px-6 md:py-6">
-        <div className="flex h-full flex-col flex-wrap items-center justify-center gap-0.5 md:w-full md:gap-3">
-          <Plus size={20} strokeWidth={2} />
-          <h3 className="text-xs font-semibold md:text-sm">Buat dompet</h3>
-        </div>
-      </button>
+      <CreateWallet actionType="HELLOO">
+        <button className="dashed-line-border h-full w-full justify-start rounded-2xl bg-white px-0 ring-offset-background md:min-h-40 md:px-6 md:py-6">
+          <div className="flex h-full flex-col flex-wrap items-center justify-center gap-0.5 md:w-full md:gap-3">
+            <Plus size={20} strokeWidth={2} />
+            <h3 className="text-xs font-semibold md:text-sm">Buat dompet</h3>
+          </div>
+        </button>
+      </CreateWallet>
     </div>
   );
 }

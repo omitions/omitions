@@ -103,16 +103,16 @@ function MonthNavigation({
       <h3 className="text-base font-medium">
         {format(month, "MMMM yyyy", { locale: localeId })}
       </h3>
-      <div className="flex items-center gap-1">
+      <div className="flex items-center gap-2">
         <Button
-          variant="outline"
+          variant="secondary"
           onClick={() => {
             setMonth(today);
             setSearchParams(
               (prev) => {
                 prev.set(
                   "d",
-                  `${new Date(today).getFullYear()}-${format(new Date(today).setDate(new Date().getDate() - 1), "MM")}`,
+                  `${format(new Date(today).setDate(new Date().getDate() - 1), "yyyy-MM")}`,
                 );
                 return prev;
               },
@@ -125,14 +125,13 @@ function MonthNavigation({
         <Button
           variant="ghost"
           size="icon"
-          className="gap-2"
           onClick={() => {
             setMonth(prevMonth);
             setSearchParams(
               (prev) => {
                 prev.set(
                   "d",
-                  `${new Date(prevMonth).getFullYear()}-${format(new Date(prevMonth).setDate(new Date().getDate() - 1), "MM")}`,
+                  `${format(new Date(prevMonth).setDate(new Date().getDate() - 1), "yyyy-MM")}`,
                 );
                 return prev;
               },
@@ -145,14 +144,13 @@ function MonthNavigation({
         <Button
           variant="ghost"
           size="icon"
-          className="gap-2"
           onClick={() => {
             setMonth(nextMonth);
             setSearchParams(
               (prev) => {
                 prev.set(
                   "d",
-                  `${new Date(nextMonth).getFullYear()}-${format(new Date(nextMonth).setDate(new Date().getDate() - 1), "MM")}`,
+                  `${format(new Date(nextMonth).setDate(new Date().getDate() - 1), "yyyy-MM")}`,
                 );
                 return prev;
               },

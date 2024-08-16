@@ -26,12 +26,12 @@ export default function DayButton({
       to={
         "/ws/day/" +
         `${generateDash(name)}-${_id}` +
-        `?d=${new Date().getFullYear()}-${format(new Date(date), "MM-dd")}`
+        `?d=${format(new Date(date), "yyyy-MM-dd")}`
       }
       prefetch="intent"
       className={cn(
         className,
-        "flex w-full items-start justify-start",
+        "flex w-full h-fit items-start justify-start",
         isToday && "bg-background",
       )}
     >

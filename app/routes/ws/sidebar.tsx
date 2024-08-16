@@ -89,11 +89,7 @@ function Desktop({ workspaceCount }: { workspaceCount: number }) {
             <CreateWorkspace actionType={ActionType.CREATE_WORKSPACES} />
             <div className="flex flex-col">
               <NavItem title="Workspaces" href="/ws" iconName="FileText" />
-              <NavItem
-                title="Dompet"
-                href="/ws/wallet"
-                iconName="WalletCards"
-              />
+              <NavItem title="Pengingat" href="/ws/reminder" iconName="Clock" />
             </div>
           </div>
         </div>

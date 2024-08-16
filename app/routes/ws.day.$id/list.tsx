@@ -2,6 +2,8 @@ import { useLoaderData } from "@remix-run/react";
 
 import { ArrowUp, MoveHorizontal, Plus, Wallet } from "lucide-react";
 
+import { Button } from "~/components/ui/button";
+
 import toIDR from "~/utils/currency";
 import { TTransactions } from "~/utils/transactions.server";
 
@@ -9,26 +11,45 @@ import { cn } from "~/lib/utils";
 
 import { loader } from "./route";
 
-export default function ListTransactions() {
+export default function List() {
   const { transactions } = useLoaderData<typeof loader>();
 
+  const data = transactions as TTransactions[];
   return (
-    <div>
-      <div className="flex flex-col divide-y divide-input">
-        {data?.length ? (
-          data.map((props) => (
-            <Transaction
-              key={props._id}
-              type={props.type}
-              amount={props.amount}
-              description={props.description}
-              date_time={props.date_time}
-            />
-          ))
-        ) : (
-          <p className="py-6 text-center text-sm">Belum Ada Transakasi</p>
-        )}
-      </div>
+    <div className="flex flex-col divide-y divide-input">
+      {data?.length ? (
+        data.map((props) => (
+          <Transaction
+            key={props._id}
+            type={props.type}
+            amount={props.amount}
+            description={props.description}
+            date_time={props.date_time}
+          />
+        ))
+      ) : (
+        <div className="dashed-line-border mt-6 flex h-[400px] items-center justify-center">
+          <div className="flex flex-col items-center justify-center gap-6">
+            <div className="flex flex-col gap-1">
+              <h3 className="text-center text-base font-semibold">
+                Data kosong
+              </h3>
+              <p className="max-w-sm text-center text-sm">
+                Belum memiliki catatan transaksi, silahkan klik tombol dibawah
+                ini untuk memulai menulis transaksi Anda..
+              </p>
+            </div>
+            <Button
+              size="sm"
+              variant="secondary"
+              className="flex !h-12 gap-1.5 px-12"
+            >
+              <Plus size={18} strokeWidth={2} />
+              <span>Catat transaksi</span>
+            </Button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -90,76 +111,3 @@ function Transaction({
     </div>
   );
 }
-
-const data: TTransactions[] = [
-  {
-    _id: "66ba242a786c228fd276e730",
-    amount: 19500,
-    date_time: "2024-08-14 12:30",
-    description: "QR Bayar",
-    loop_count: 1,
-    loop_type: "daily",
-    type: "cash_out",
-    workspaces_id: "66a001309c21ba93639358d3",
-  },
-  {
-    _id: "66ba269f786c228fd276e731",
-    amount: 5600,
-    date_time: "2024-08-14 12:40",
-    description: "QR Bayar",
-    loop_count: 1,
-    loop_type: "daily",
-    type: "cash_out",
-    workspaces_id: "66a001309c21ba93639358d3",
-  },
-  {
-    _id: "66ba26e4786c228fd276e734",
-    amount: 7500,
-    date_time: "2024-08-11 12:50",
-    description: "QR Bayar",
-    loop_count: 1,
-    loop_type: "daily",
-    type: "cash_out",
-    workspaces_id: "66a001309c21ba93639358d3",
-  },
-  {
-    _id: "66ba26e4786c228fd276e732",
-    amount: 7500,
-    date_time: "2024-08-11 12:50",
-    description: "QR Bayar",
-    loop_count: 1,
-    loop_type: "daily",
-    type: "invoice",
-    workspaces_id: "66a001309c21ba93639358d4",
-  },
-  {
-    _id: "66ba2846786c228fd276e733",
-    amount: 7800000,
-    date_time: "2024-09-30 12:45",
-    description: "Gajian",
-    loop_count: 1,
-    loop_type: "daily",
-    type: "cash_in",
-    workspaces_id: "66a001309c21ba93639358d3",
-  },
-  {
-    _id: "66ba28b7786c228fd276e734",
-    amount: 56900,
-    date_time: "2024-09-30 01:42",
-    description: "QR Bayar",
-    loop_count: 1,
-    loop_type: "daily",
-    type: "cash_out",
-    workspaces_id: "66a001309c21ba93639358d3",
-  },
-  {
-    _id: "66ba28ed786c228fd276e735",
-    amount: 5500,
-    date_time: "2024-09-30 12:02",
-    description: "QR Bayar",
-    loop_count: 1,
-    loop_type: "daily",
-    type: "cash_out",
-    workspaces_id: "66a001309c21ba93639358d3",
-  },
-];

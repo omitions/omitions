@@ -29,7 +29,7 @@ const buttonVariants = cva(
       },
       size: {
         sm: "h-10 md:h-8 rounded-full px-4 text-xs",
-        lg: "h-10 px-5 rounded-full text-sm",
+        lg: "h-11 px-5 rounded-full text-sm",
         icon: "h-9 w-9 md:h-11 md:w-11 rounded-full",
       },
     },
@@ -42,7 +42,7 @@ const buttonVariants = cva(
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+  VariantProps<typeof buttonVariants> {
   asChild?: boolean;
   loading?: boolean;
   tooltip?: string;
@@ -101,7 +101,7 @@ Button.displayName = "Button";
 const ButtonLink = React.forwardRef<
   HTMLAnchorElement,
   React.ComponentPropsWithRef<typeof AnchorOrLink> &
-    ButtonProps & { delay?: number }
+  ButtonProps & { delay?: number }
 >(function ButtonLink({ delay = 0, ...props }, ref) {
   const { variant, size, disabled, href } = props;
 
