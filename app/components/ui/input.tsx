@@ -12,7 +12,7 @@ const inputVariants = cva(
           "focus:border-primary focus-visible:ring-2 focus-visible:ring-primary/30 shadow-sm border rounded-lg",
         destructive:
           "bg-red-100/50 border-red-500 focus:border-red-500 focus-visible:ring-2 focus-visible:ring-red-500/30 shadow-sm border rounded-lg",
-        ghost: "border-b-2 rounded-none outline-none focus:border-primary p-0",
+        ghost: "border-b rounded-none outline-none focus:border-primary p-0",
       },
     },
     defaultVariants: {

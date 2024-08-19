@@ -7,7 +7,6 @@ import { cn } from "~/lib/utils";
 
 import { Button } from "./ui/button";
 import { Input, inputVariants } from "./ui/input";
-import { Textarea } from "./ui/textarea";
 import {
   Sheet,
   SheetContent,
@@ -58,7 +57,7 @@ export default function CreateWallet({
             />
           </div>
           <Button type="submit" variant="secondary">
-            Buat
+            Buat Dompet
           </Button>
           <input type="hidden" name="_action" value={actionType} />
         </Form>

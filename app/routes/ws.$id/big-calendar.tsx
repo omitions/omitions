@@ -18,7 +18,7 @@ export default function BigCalendar({
 
   if (!isValid) return <>Sorry</>;
   return (
-    <div className="relative !overflow-hidden rounded-2xl border border-input bg-white pt-6">
+    <div className="relative !overflow-hidden rounded-lg border border-input bg-white pt-6">
       <DayPicker
         hideNavigation
         showOutsideDays

@@ -107,14 +107,14 @@ function WorkspaceItem({ _id, name, description }: TWorkspaces) {
           `?d=${format(new Date().setDate(new Date().getDate() - 1), "yyyy-MM")}`
         }
         prefetch="intent"
-        className="relative rounded-2xl"
+        className="relative rounded-lg"
       >
         <div
           data-state={isHover ? "open" : "closed"}
-          className="h-full w-full justify-start rounded-2xl border-transparent bg-white px-0 ring-offset-background md:min-h-44 md:border md:border-input md:px-6 md:py-6 md:hover:bg-background/50 md:data-[state=open]:bg-background/50"
+          className="h-full w-full justify-start rounded-lg border-transparent bg-white px-0 ring-offset-background md:min-h-44 md:border md:border-input md:px-6 md:py-6 md:hover:bg-background/50 md:data-[state=open]:bg-background/50"
         >
           <div className="flex w-10/12 flex-col flex-wrap gap-0.5 md:w-full md:gap-1">
-            <h4 className="text-lg font-medium md:font-semibold">
+            <h4 className="text-base font-medium md:font-semibold">
               {name.length > 30 ? `${name.substring(0, 30)}..` : name}
             </h4>
             <p className="text-wrap text-xs font-normal leading-relaxed text-muted-foreground md:text-sm">
@@ -191,7 +191,7 @@ function ButtonCreateWorkspace() {
   return (
     <div className="relative overflow-hidden">
       <CreateWorkspace actionType={ActionType.CREATE_WORKSPACES}>
-        <button className="h-full w-full justify-start rounded-2xl border border-dashed px-0 ring-offset-background md:min-h-44 md:px-6 md:py-6">
+        <button className="h-full w-full justify-start rounded-lg border border-dashed px-0 ring-offset-background md:min-h-44 md:px-6 md:py-6">
           <div className="flex h-full flex-col flex-wrap items-center justify-center gap-0.5 md:w-full md:gap-3">
             <CirclePlus size={24} strokeWidth={2} />
             <h3 className="text-xs font-semibold md:text-sm">Buat workspace</h3>

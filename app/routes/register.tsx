@@ -37,7 +37,7 @@ export async function action({ request }: ActionFunctionArgs) {
       error: {
         message: "Akun dengan email tersebut telah terdaftar",
       },
-      success: false
+      success: false,
     });
   }
 
@@ -76,25 +76,43 @@ function RegisterForm() {
       <div className="flex w-full flex-col gap-4">
         <div className="grid w-full items-center gap-2.5">
           <Label htmlFor="name">Nama Lengkap</Label>
-          <Input id="name" type="text" name="fullName" required placeholder="Masukkan nama lengkap Anda" />
+          <Input
+            id="name"
+            type="text"
+            name="fullName"
+            required
+            placeholder="Masukkan nama lengkap Anda"
+          />
         </div>
         <div className="grid w-full items-center gap-2.5">
           <Label htmlFor="email">Alamat Email</Label>
-          <Input id="email" type="email" name="email" required placeholder="Masukkan email Anda" />
+          <Input
+            id="email"
+            type="email"
+            name="email"
+            required
+            placeholder="Masukkan email Anda"
+          />
         </div>
         <div className="grid w-full items-center gap-2.5">
           <Label htmlFor="password">Kata Sandi</Label>
-          <Input id="password" type="password" name="password" required placeholder="Masukkan kata sandi" />
+          <Input
+            id="password"
+            type="password"
+            name="password"
+            required
+            placeholder="Masukkan kata sandi"
+          />
         </div>
-        {actionData?.error.message ? <div className="text-sm text-red-500">{actionData?.error?.message}</div> : null}
+        {actionData?.error.message ? (
+          <div className="text-sm text-red-500">
+            {actionData?.error?.message}
+          </div>
+        ) : null}
       </div>
       <footer className="flex w-full flex-col gap-8">
         <div>
-          <Button
-            size="lg"
-            className="w-full"
-            type="submit"
-          >
+          <Button size="lg" className="w-full" type="submit">
             Daftar Sekarang
           </Button>
           <div className="mt-6 text-center">
@@ -107,7 +125,7 @@ function RegisterForm() {
         </div>
       </footer>
     </Form>
-  )
+  );
 }
 
 function RedirectPage() {

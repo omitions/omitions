@@ -46,7 +46,7 @@ function WalletItem() {
           </UpdateWallet>
           <div>
             <Button
-              className="h-full w-full rounded-full"
+              className="!h-11 !w-11 rounded-full"
               variant="outline"
               size="icon"
               onMouseEnter={() => setIsHover(true)}
@@ -56,10 +56,10 @@ function WalletItem() {
           </div>
         </div>
       </div>
-      <div className="h-full rounded-2xl">
+      <div className="h-full rounded-lg">
         <div
           data-state={isHover ? "open" : "closed"}
-          className="h-full w-full justify-start rounded-2xl border-transparent bg-white px-0 ring-offset-background md:min-h-44 md:border md:border-input md:px-6 md:py-6 md:hover:bg-background/50 md:data-[state=open]:bg-background/50"
+          className="h-full w-full justify-start rounded-lg border-transparent bg-white px-0 ring-offset-background md:min-h-44 md:border md:border-input md:px-6 md:py-6 md:hover:bg-background/50 md:data-[state=open]:bg-background/50"
         >
           <div className="flex h-full w-10/12 flex-col flex-wrap justify-between md:w-full md:gap-1">
             <div className="flex flex-col gap-0.5">
@@ -84,7 +84,7 @@ function ButtonCreateWallet() {
   return (
     <div className="relative overflow-hidden">
       <CreateWallet actionType="HELLOO">
-        <button className="h-full w-full justify-start rounded-2xl border border-dashed px-0 ring-offset-background md:min-h-44 md:px-6 md:py-6">
+        <button className="h-full w-full justify-start rounded-lg border border-dashed px-0 ring-offset-background md:min-h-44 md:px-6 md:py-6">
           <div className="flex h-full flex-col flex-wrap items-center justify-center gap-0.5 md:w-full md:gap-3">
             <CirclePlus size={24} strokeWidth={2} />
             <h3 className="text-xs font-semibold md:text-sm">Buat dompet</h3>

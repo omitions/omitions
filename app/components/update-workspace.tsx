@@ -3,19 +3,17 @@ import { Form } from "@remix-run/react";
 import React from "react";
 
 import { Button } from "./ui/button";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "./ui/dialog";
 import { Input } from "./ui/input";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "./ui/sheet";
 import { Textarea } from "./ui/textarea";
 
-export default function UpdateWorkspace({
+export default function CreateWorkspace({
   actionType,
   children,
   workspaceName,
@@ -31,21 +29,19 @@ export default function UpdateWorkspace({
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="sm:max-w-md">
-        <DialogHeader>
-          <DialogTitle>
-            Ubah <b>{workspaceName}</b> Workspace
-          </DialogTitle>
-        </DialogHeader>
+    <Sheet open={isOpen} onOpenChange={setIsOpen}>
+      <SheetTrigger asChild>{children}</SheetTrigger>
+      <SheetContent withCloseButton className="sm:max-w-lg">
+        <SheetHeader>
+          <SheetTitle>Ubah Workspace Baru</SheetTitle>
+        </SheetHeader>
         <Form
           action="/ws"
           method="post"
-          className="flex flex-col gap-6"
+          className="flex flex-col gap-8 px-8"
           onSubmit={() => setIsOpen(false)}
         >
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-6">
             <Input
               type="text"
               name="name"
@@ -62,18 +58,13 @@ export default function UpdateWorkspace({
               placeholder="Deskripsi"
             />
           </div>
-          <DialogFooter>
-            <DialogClose asChild>
-              <Button type="button" variant="outline">
-                Batalkan
-              </Button>
-            </DialogClose>
-            <Button type="submit">Ubah Sekarang</Button>
-          </DialogFooter>
+          <Button type="submit" variant="secondary">
+            Buat Workspace
+          </Button>
           <input type="hidden" name="_action" value={actionType} />
           <input type="hidden" name="_id" value={workspaceId} />
         </Form>
-      </DialogContent>
-    </Dialog>
+      </SheetContent>
+    </Sheet>
   );
 }

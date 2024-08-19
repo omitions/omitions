@@ -42,7 +42,7 @@ const buttonVariants = cva(
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-  VariantProps<typeof buttonVariants> {
+    VariantProps<typeof buttonVariants> {
   asChild?: boolean;
   loading?: boolean;
   tooltip?: string;
@@ -101,7 +101,7 @@ Button.displayName = "Button";
 const ButtonLink = React.forwardRef<
   HTMLAnchorElement,
   React.ComponentPropsWithRef<typeof AnchorOrLink> &
-  ButtonProps & { delay?: number }
+    ButtonProps & { delay?: number }
 >(function ButtonLink({ delay = 0, ...props }, ref) {
   const { variant, size, disabled, href } = props;
 
