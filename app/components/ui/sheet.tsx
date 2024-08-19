@@ -51,7 +51,7 @@ const sheetVariants = cva(
 
 interface SheetContentProps
   extends React.ComponentPropsWithoutRef<typeof SheetPrimitive.Content>,
-  VariantProps<typeof sheetVariants> { }
+    VariantProps<typeof sheetVariants> {}
 
 const SheetContent = React.forwardRef<
   React.ElementRef<typeof SheetPrimitive.Content>,
@@ -97,7 +97,7 @@ const SheetHeader = ({
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
     className={cn(
-      "flex flex-col space-y-2 py-6 px-8 text-center sm:text-left",
+      "flex flex-col space-y-2 px-8 py-6 text-center sm:text-left",
       className,
     )}
     {...props}
@@ -111,7 +111,7 @@ const SheetFooter = ({
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
     className={cn(
-      "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2 py-6 px-8",
+      "flex flex-col-reverse px-8 py-6 sm:flex-row sm:justify-end sm:space-x-2",
       className,
     )}
     {...props}

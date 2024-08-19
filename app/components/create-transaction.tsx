@@ -36,14 +36,18 @@ import { ToggleGroup, ToggleGroupItem } from "~/components/ui/toggle-group";
 
 import { regenerateDash } from "~/utils/misc";
 
+import { ActionType } from "../routes/ws.day.$id/route";
+
 export default function CreateTransaction({
   date,
   actionType,
-  fetcherProps,
+  fetcher,
+  children,
 }: {
   date: Date;
-  actionType: string;
-  fetcherProps: FetcherWithComponents<unknown>;
+  actionType: keyof typeof ActionType;
+  fetcher: FetcherWithComponents<unknown>;
+  children: React.ReactNode;
 }) {
   const [, setSearchParams] = useSearchParams();
 
@@ -61,20 +65,10 @@ export default function CreateTransaction({
     const time = e.target.value;
     setTimeValue(time);
   };
-  const fetcher = fetcherProps;
 
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <Button
-          type="button"
-          variant="default"
-          className="h-16 w-fit gap-2 rounded-xl px-4 text-sm font-bold shadow-lg hover:bg-primary"
-        >
-          <Plus size={20} strokeWidth={2} />
-          <span>Buat transaksi</span>
-        </Button>
-      </DialogTrigger>
+      <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="sm:max-w-xl">
         <DialogHeader>
           <DialogTitle>

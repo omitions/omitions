@@ -1,25 +1,11 @@
-import {
-  ActionFunctionArgs,
-  defer,
-  json,
-  LoaderFunctionArgs,
-  MetaFunction,
-  redirect,
-} from "@remix-run/node";
-
-import { format } from "date-fns";
+import { defer, json, LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
 
 import { getCalendar } from "~/utils/cashflows.server";
-import { generateDash, regenerateDash } from "~/utils/misc";
-import { createTransaction } from "~/utils/transactions.server";
+import { regenerateDash } from "~/utils/misc";
 
 import Sidebar from "../ws/sidebar";
 
 import Page from "./page";
-
-export enum ActionType {
-  CREATE_TRANSACTION = "CREATE_TRANSACTION",
-}
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
   return [
@@ -52,31 +38,6 @@ export async function loader({ params, request }: LoaderFunctionArgs) {
     calendar,
   });
 }
-
-export const action = async ({ request }: ActionFunctionArgs) => {
-  const formData = await request.formData();
-  const formPayload = Object.fromEntries(formData);
-
-  const _action = formPayload["_action"] as keyof typeof ActionType;
-  const workspace_name = formData.get("workspace_name");
-  const workspaces_id = formData.get("workspaces_id");
-  const date_time = formData.get("date_time");
-
-  switch (_action) {
-    case ActionType.CREATE_TRANSACTION:
-      await createTransaction(formData, request);
-
-      if (!date_time || typeof date_time != "string" || !workspace_name)
-        return {};
-      return redirect(
-        "/ws/" +
-          `${generateDash(workspace_name.toString())}-${workspaces_id}` +
-          `?d=${format(new Date(date_time.toString()).setDate(new Date().getDate() - 1), "yyyy-MM")}`,
-      );
-    default:
-      return {};
-  }
-};
 
 export default function Index() {
   return (

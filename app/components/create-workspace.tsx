@@ -1,7 +1,9 @@
 import { Form } from "@remix-run/react";
-import { Plus } from "lucide-react";
 
+import { Plus } from "lucide-react";
 import React from "react";
+
+import { ActionType } from "~/routes/ws/route";
 
 import { Button } from "./ui/button";
 import {
@@ -18,22 +20,16 @@ import { Textarea } from "./ui/textarea";
 
 export default function CreateWorkspace({
   actionType,
+  children,
 }: {
-  actionType: string;
+  actionType: keyof typeof ActionType;
+  children: React.ReactNode;
 }) {
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger asChild>
-        <Button
-          variant="outline"
-          className="h-16 w-fit gap-2 rounded-xl px-4 text-sm font-bold"
-        >
-          <Plus size={20} strokeWidth={2} />
-          <span>Buat workspace</span>
-        </Button>
-      </DialogTrigger>
+      <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Workspace Baru</DialogTitle>

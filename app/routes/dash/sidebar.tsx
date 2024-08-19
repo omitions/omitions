@@ -48,7 +48,7 @@ function Mobile() {
                 </button>
               </SheetClose>
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col gap-1">
               <SheetClose>
                 <NavItem
                   title="Ringkasan"
@@ -78,7 +78,7 @@ function Desktop() {
           </Link>
         </div>
         <div className="flex flex-col gap-6">
-          <div className="flex flex-col">
+          <div className="flex flex-col gap-1">
             <NavItem title="Ringkasan" href="/dash" iconName="GanttChart" />
           </div>
         </div>

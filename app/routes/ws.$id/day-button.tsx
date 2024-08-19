@@ -31,7 +31,7 @@ export default function DayButton({
       prefetch="intent"
       className={cn(
         className,
-        "flex w-full h-fit items-start justify-start",
+        "flex h-fit w-full items-start justify-start",
         isToday && "bg-background",
       )}
     >

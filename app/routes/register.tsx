@@ -1,26 +1,17 @@
 import type { ActionFunctionArgs, MetaFunction } from "@remix-run/node";
-import { Form, json, Link, useActionData } from "@remix-run/react";
+import { Form, json, Link, useActionData, useFetcher } from "@remix-run/react";
 
 import { Button, ButtonLink } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
+    { title: "Registrasi | mybucks.today" },
+    { name: "description", content: "" },
   ];
 };
 
-type ActionError = { message: string } | undefined | null;
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
 
@@ -41,14 +32,16 @@ export async function action({ request }: ActionFunctionArgs) {
   });
 
   const resp = await fetched.json();
-  if (!resp.id || resp.message === "User already exists") {
-    const error = {
-      message: "Akun dengan email tersebut telah terdaftar",
-    } as ActionError;
-    return json({ error, success: false });
+  if (resp.message === "User already exists") {
+    return json({
+      error: {
+        message: "Akun dengan email tersebut telah terdaftar",
+      },
+      success: false
+    });
   }
 
-  return json({ error: null as ActionError, success: true });
+  return json({ error: { message: "" }, success: true });
 }
 
 export default function Register() {
@@ -56,63 +49,70 @@ export default function Register() {
 
   if (actionData?.success) return <RedirectPage />;
   return (
-    <div className="flex h-screen items-center bg-background">
-      <div className="flex w-full flex-col items-center gap-6 md:gap-8">
-        <div>
-          <h2 className="text-4xl font-bold text-primary">mybucks</h2>
-        </div>
-        <Card className="md:min-w-sm mx-auto w-[90%] max-w-sm border">
-          <CardHeader>
-            <CardTitle className="text-xl">Buat akun baru</CardTitle>
-            <CardDescription>
-              Nikmati kemudahan mencatat keuangan Anda
-            </CardDescription>
-          </CardHeader>
-          <Form action="." method="post">
-            <CardContent className="grid gap-4">
-              <div className="grid gap-2">
-                <Label htmlFor="name">Nama Lengkap</Label>
-                <Input id="name" type="text" name="fullName" required />
-              </div>
-              <div className="grid gap-2">
-                <Label htmlFor="email">Email</Label>
-                <Input id="email" type="email" name="email" required />
-              </div>
-              <div className="grid gap-2">
-                <Label htmlFor="password">Kata Sandi</Label>
-                <Input id="password" type="password" name="password" required />
-              </div>
-              {actionData?.error ? (
-                <div className="text-sm text-red-500">
-                  {actionData?.error?.message}
-                </div>
-              ) : null}
-            </CardContent>
-            <CardFooter>
-              <Button className="w-full" size="lg">
-                Daftar Sekarang
-              </Button>
-            </CardFooter>
-          </Form>
-        </Card>
-        <div>
-          <p className="text-sm">
-            <span className="text-muted-foreground">Sudah memiliki akun? </span>
-            <Link to="/">
-              <span className="font-bold text-primary-foreground">
-                Masuk di sini
-              </span>
-            </Link>
-          </p>
-        </div>
+    <div className="mx-auto mb-24 flex min-h-screen w-screen overflow-y-scroll lg:overflow-auto">
+      <div className="flex w-full items-center justify-center p-5">
+        <RegisterForm />
       </div>
     </div>
   );
 }
 
+function RegisterForm() {
+  const actionData = useActionData<typeof action>();
+
+  return (
+    <Form
+      action="."
+      method="post"
+      className="flex w-full flex-col gap-8 lg:max-w-[354px]"
+    >
+      <header className="flex flex-col gap-2">
+        <div className="mb-20 block lg:hidden">logo</div>
+        <span className="text-4xl font-semibold">Daftar</span>
+        <span className="text-sm font-normal text-muted-foreground">
+          Nikmati kemudahan mencatat keuangan Anda.
+        </span>
+      </header>
+      <div className="flex w-full flex-col gap-4">
+        <div className="grid w-full items-center gap-2.5">
+          <Label htmlFor="name">Nama Lengkap</Label>
+          <Input id="name" type="text" name="fullName" required placeholder="Masukkan nama lengkap Anda" />
+        </div>
+        <div className="grid w-full items-center gap-2.5">
+          <Label htmlFor="email">Alamat Email</Label>
+          <Input id="email" type="email" name="email" required placeholder="Masukkan email Anda" />
+        </div>
+        <div className="grid w-full items-center gap-2.5">
+          <Label htmlFor="password">Kata Sandi</Label>
+          <Input id="password" type="password" name="password" required placeholder="Masukkan kata sandi" />
+        </div>
+        {actionData?.error.message ? <div className="text-sm text-red-500">{actionData?.error?.message}</div> : null}
+      </div>
+      <footer className="flex w-full flex-col gap-8">
+        <div>
+          <Button
+            size="lg"
+            className="w-full"
+            type="submit"
+          >
+            Daftar Sekarang
+          </Button>
+          <div className="mt-6 text-center">
+            <Link to="/" className="w-fit">
+              <span className="text-sm font-normal">Sudah memiliki akun?</span>
+              <span> </span>
+              <span className="text-sm font-bold">Masuk di sini</span>
+            </Link>
+          </div>
+        </div>
+      </footer>
+    </Form>
+  )
+}
+
 function RedirectPage() {
   return (
-    <div className="flex h-screen items-center bg-background">
+    <div className="flex h-screen items-center">
       <div className="flex w-full flex-col items-center gap-6 md:gap-8">
         <div className="flex flex-col items-center justify-center">
           <img src="/assets/success.png" className="w-[600px]" alt="" />

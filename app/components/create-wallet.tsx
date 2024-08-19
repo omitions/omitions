@@ -54,12 +54,12 @@ export default function CreateWallet({
               allowNegative={false}
               placeholder="Saldo dompet Anda"
               prefix="Rp"
-              className={cn(
-                inputVariants({ variant: "ghost" }),
-              )}
+              className={cn(inputVariants({ variant: "ghost" }))}
             />
           </div>
-          <Button type="submit" variant="secondary">Buat</Button>
+          <Button type="submit" variant="secondary">
+            Buat
+          </Button>
           <input type="hidden" name="_action" value={actionType} />
         </Form>
       </SheetContent>

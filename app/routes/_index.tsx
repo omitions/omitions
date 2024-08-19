@@ -6,22 +6,15 @@ import type {
 import { json, Link, useFetcher, useLoaderData } from "@remix-run/react";
 
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
+
 import { auth, sessionStorage } from "~/utils/auth.server";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "Log in | mybucks" },
-    { name: "description", content: "Welcome to Remix!" },
+    { title: "Log In | mybucks.today" },
+    { name: "description", content: "" },
   ];
 };
 
@@ -43,69 +36,79 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 };
 
 export default function Login() {
+  return (
+    <div className="mx-auto mb-24 flex min-h-screen w-screen overflow-y-scroll lg:overflow-auto">
+      <div className="flex w-full items-center justify-center p-5">
+        <LoginForm />
+      </div>
+    </div>
+  );
+}
+
+function LoginForm() {
   const { error } = useLoaderData<typeof loader>();
 
   const fetcher = useFetcher();
   const loading = fetcher.state == "submitting" || fetcher.state === "loading";
 
   return (
-    <div className="flex h-screen items-center bg-background">
-      <div className="flex w-full flex-col items-center gap-6 md:gap-8">
-        <div>
-          <h2 className="text-4xl font-bold text-primary">mybucks</h2>
+    <fetcher.Form
+      action="."
+      method="post"
+      className="flex w-full flex-col gap-8 lg:max-w-[354px]"
+    >
+      <header className="flex flex-col gap-2">
+        <div className="mb-20 block lg:hidden">logo</div>
+        <span className="text-4xl font-semibold">Log In</span>
+        <span className="text-sm font-normal text-muted-foreground">
+          Welcome back! silakan masukkan detail Anda.
+        </span>
+      </header>
+      <div className="flex w-full flex-col gap-4">
+        <div className="grid w-full items-center gap-2.5">
+          <Label htmlFor="email">Alamat Email</Label>
+          <Input
+            name="email"
+            required
+            type="email"
+            id="email"
+            placeholder="Masukkan email Anda"
+          />
         </div>
-        <Card className="md:min-w-sm mx-auto w-[90%] max-w-sm border">
-          <CardHeader>
-            <CardTitle className="text-xl">Log in ke akun kamu</CardTitle>
-            <CardDescription>
-              Nikmati kemudahan mencatat keuangan Anda
-            </CardDescription>
-          </CardHeader>
-          <fetcher.Form action="." method="post">
-            <CardContent className="grid gap-4">
-              <div className="grid gap-2">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  name="email"
-                  variant={error ? "destructive" : "default"}
-                />
-              </div>
-              <div className="grid gap-2">
-                <Label htmlFor="password">Kata Sandi</Label>
-                <Input
-                  id="password"
-                  type="password"
-                  name="password"
-                  variant={error ? "destructive" : "default"}
-                />
-                {error ? (
-                  <div className="text-sm text-red-500">{error.message}</div>
-                ) : null}
-              </div>
-            </CardContent>
-            <CardFooter>
-              <Button
-                className="w-full"
-                size="lg"
-                disabled={loading}
-                loading={loading}
-              >
-                Masuk
-              </Button>
-            </CardFooter>
-          </fetcher.Form>
-        </Card>
-        <div>
-          <p className="text-sm">
-            <span className="text-muted-foreground">Belum memiliki akun? </span>
-            <Link to="/register">
-              <span className="font-bold text-primary-foreground">Daftar</span>
-            </Link>
-          </p>
+        <div className="grid w-full items-center gap-2.5">
+          <Label htmlFor="password">Kata Sandi</Label>
+          <Input
+            required
+            name="password"
+            type="password"
+            id="password"
+            placeholder="Masukkan kata sandi Anda"
+          />
+          {error ? (
+            <div className="text-sm text-red-500">{error.message}</div>
+          ) : null}
         </div>
       </div>
-    </div>
+      <footer className="flex w-full flex-col gap-8">
+        <div>
+          <Button
+            size="lg"
+            className="w-full"
+            type="submit"
+            disabled={loading}
+            loading={loading}
+          >
+            Masuk
+          </Button>
+          <div className="mt-6 text-center">
+            <Link to="/register" className="w-fit">
+              <span className="text-sm font-normal">Tidak memiliki akun?</span>
+              <span> </span>
+              <span className="text-sm font-bold">Daftar</span>
+            </Link>
+          </div>
+        </div>
+      </footer>
+    </fetcher.Form>
   );
 }

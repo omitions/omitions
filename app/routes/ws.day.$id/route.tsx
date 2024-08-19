@@ -1,7 +1,14 @@
-import { defer, json, LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
+import {
+  ActionFunctionArgs,
+  defer,
+  json,
+  LoaderFunctionArgs,
+  MetaFunction,
+  redirect,
+} from "@remix-run/node";
 
 import { regenerateDash } from "~/utils/misc";
-import { getTransactions } from "~/utils/transactions.server";
+import { createTransaction, getTransactions } from "~/utils/cashflows.server";
 
 import Sidebar from "../ws/sidebar";
 import Page from "./page";
@@ -31,6 +38,24 @@ export async function loader({ params, request }: LoaderFunctionArgs) {
     transactions,
   });
 }
+
+export enum ActionType {
+  CREATE_TRANSACTION = "CREATE_TRANSACTION",
+}
+
+export const action = async ({ request }: ActionFunctionArgs) => {
+  const formData = await request.formData();
+  const formPayload = Object.fromEntries(formData);
+
+  const _action = formPayload["_action"] as keyof typeof ActionType;
+
+  switch (_action) {
+    case ActionType.CREATE_TRANSACTION:
+      return await createTransaction(formData, request);
+    default:
+      return {};
+  }
+};
 
 export default function WorkspaceDay() {
   return (

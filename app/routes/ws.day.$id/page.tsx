@@ -1,14 +1,23 @@
-import { Link, useNavigate, useParams, useSearchParams } from "@remix-run/react";
+import {
+  Link,
+  useFetcher,
+  useLoaderData,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from "@remix-run/react";
 
 import { format } from "date-fns";
 import { id as localeId } from "date-fns/locale";
 import { ArrowLeft, ChevronLeft, Filter, Plus } from "lucide-react";
 
 import { Button } from "~/components/ui/button";
+import CreateTransaction from "~/components/create-transaction";
 
 import { generateDash, regenerateDash } from "~/utils/misc";
 
 import List from "./list";
+import { loader } from "./route";
 
 export default function Page() {
   const navigate = useNavigate();
@@ -93,8 +102,9 @@ function Content() {
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-1">
               <Button
+                size="sm"
                 variant="ghost"
-                className="h-10 w-10"
+                className="!h-10 !w-10 p-0"
                 onClick={() => {
                   setSearchParams(
                     (prev) => {
@@ -110,12 +120,13 @@ function Content() {
               >
                 {new Date(prevDate).getDate()}
               </Button>
-              <Button variant="outline" className="h-10 w-10">
+              <Button size="sm" variant="outline" className="!h-10 !w-10 p-0">
                 {new Date(date).getDate()}
               </Button>
               <Button
+                size="sm"
                 variant="ghost"
-                className="h-10 w-10"
+                className="!h-10 !w-10 p-0"
                 onClick={() => {
                   setSearchParams(
                     (prev) => {
@@ -144,9 +155,12 @@ function Content() {
 }
 
 function Header() {
-  const [searchParams] = useSearchParams();
+  const { transactions } = useLoaderData<typeof loader>();
 
-  const date = searchParams.get("d");
+  const [searchParams] = useSearchParams();
+  const fetcher = useFetcher({ key: "create-transaction" });
+
+  const date = new Date(searchParams.get("d")?.toString() || "") ?? new Date();
 
   if (!date) return <></>;
   return (
@@ -156,16 +170,26 @@ function Header() {
           {format(date, "EEEE", { locale: localeId })}
         </p>
       </div>
-      <div className="flex items-center gap-3">
-        <Button size="sm" variant="secondary" className="flex gap-1.5">
-          <Filter size={18} strokeWidth={2} />
-          <span>Filters</span>
-        </Button>
-        <Button size="sm" variant="secondary" className="flex gap-1.5">
-          <Plus size={18} strokeWidth={2} />
-          <span>Catat transaksi</span>
-        </Button>
-      </div>
+      {transactions?.length ? (
+        <div className="flex items-center gap-3">
+          <Button size="sm" variant="secondary" className="flex gap-1.5">
+            <Filter size={18} strokeWidth={2} />
+            <span>Filters</span>
+          </Button>
+          <CreateTransaction
+            actionType="CREATE_TRANSACTION"
+            date={date}
+            fetcher={fetcher}
+          >
+            <Button size="sm" variant="secondary" className="flex gap-1.5">
+              <Plus size={18} strokeWidth={2} />
+              <span>Catat transaksi</span>
+            </Button>
+          </CreateTransaction>
+        </div>
+      ) : (
+        <div></div>
+      )}
     </div>
   );
 }

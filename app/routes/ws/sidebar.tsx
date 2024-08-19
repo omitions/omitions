@@ -1,7 +1,6 @@
 import { Link, LinkProps, useLocation } from "@remix-run/react";
 import { icons, MenuIcon, XIcon } from "lucide-react";
 
-import CreateWorkspace from "~/components/create-workspace";
 import { ButtonLink } from "~/components/ui/button";
 import { Progress } from "~/components/ui/progress";
 import {
@@ -54,11 +53,10 @@ function Mobile() {
                 </button>
               </SheetClose>
             </div>
-            <CreateWorkspace actionType={ActionType.CREATE_WORKSPACES} />
-            <div className="flex flex-col">
+            <div className="flex flex-col gap-1">
               <SheetClose>
                 <NavItem
-                  title="Workspaces"
+                  title="Semua Workspace"
                   href="/ws"
                   iconName="FileText"
                   delay={150}
@@ -86,9 +84,8 @@ function Desktop({ workspaceCount }: { workspaceCount: number }) {
             </Link>
           </div>
           <div className="flex flex-col gap-6">
-            <CreateWorkspace actionType={ActionType.CREATE_WORKSPACES} />
-            <div className="flex flex-col">
-              <NavItem title="Workspaces" href="/ws" iconName="FileText" />
+            <div className="flex flex-col gap-1">
+              <NavItem title="Semua Workspace" href="/ws" iconName="FileText" />
               <NavItem title="Pengingat" href="/ws/reminder" iconName="Clock" />
             </div>
           </div>

@@ -105,6 +105,7 @@ function MonthNavigation({
       </h3>
       <div className="flex items-center gap-2">
         <Button
+          size="sm"
           variant="secondary"
           onClick={() => {
             setMonth(today);

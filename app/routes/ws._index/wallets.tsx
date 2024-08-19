@@ -1,11 +1,9 @@
-import { Plus, Trash2 } from "lucide-react";
+import { CirclePlus, Trash2 } from "lucide-react";
 import React from "react";
 
 import CreateWallet from "~/components/create-wallet";
 import { Button } from "~/components/ui/button";
 import UpdateWallet from "~/components/update-wallet";
-
-import { TWorkspaces } from "~/utils/workspaces.server";
 
 export default function Wallets() {
   return (
@@ -15,7 +13,7 @@ export default function Wallets() {
           SEMUA WORKSPACE ANDA
         </h4>
       </div>
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-4 xl:grid-cols-3">
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-6 xl:grid-cols-3">
         <WalletItem />
         <ButtonCreateWallet />
       </div>
@@ -27,7 +25,8 @@ function WalletItem() {
   const [isHover, setIsHover] = React.useState(false);
 
   return (
-    <div className="relative overflow-hidden"
+    <div
+      className="relative overflow-hidden"
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
     >
@@ -57,10 +56,10 @@ function WalletItem() {
           </div>
         </div>
       </div>
-      <div className="rounded-2xl h-full">
+      <div className="h-full rounded-2xl">
         <div
           data-state={isHover ? "open" : "closed"}
-          className="h-full w-full justify-start rounded-2xl border-transparent bg-white px-0 ring-offset-background md:min-h-40 md:border md:border-input md:px-6 md:py-6 md:hover:bg-background/50 md:data-[state=open]:bg-background/50"
+          className="h-full w-full justify-start rounded-2xl border-transparent bg-white px-0 ring-offset-background md:min-h-44 md:border md:border-input md:px-6 md:py-6 md:hover:bg-background/50 md:data-[state=open]:bg-background/50"
         >
           <div className="flex h-full w-10/12 flex-col flex-wrap justify-between md:w-full md:gap-1">
             <div className="flex flex-col gap-0.5">
@@ -85,9 +84,9 @@ function ButtonCreateWallet() {
   return (
     <div className="relative overflow-hidden">
       <CreateWallet actionType="HELLOO">
-        <button className="dashed-line-border h-full w-full justify-start rounded-2xl bg-white px-0 ring-offset-background md:min-h-40 md:px-6 md:py-6">
+        <button className="h-full w-full justify-start rounded-2xl border border-dashed px-0 ring-offset-background md:min-h-44 md:px-6 md:py-6">
           <div className="flex h-full flex-col flex-wrap items-center justify-center gap-0.5 md:w-full md:gap-3">
-            <Plus size={20} strokeWidth={2} />
+            <CirclePlus size={24} strokeWidth={2} />
             <h3 className="text-xs font-semibold md:text-sm">Buat dompet</h3>
           </div>
         </button>

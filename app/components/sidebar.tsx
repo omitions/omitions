@@ -11,7 +11,7 @@ import { CommandDialogDemo } from "./search";
 
 export default function Sidebar() {
   return (
-    <div className="mt-1 flex h-full flex-col justify-between gap-1 bg-background px-2 pb-4 pt-6">
+    <div className="mt-1 flex h-full flex-col justify-between gap-1 px-2 pb-4 pt-6">
       <div className="flex flex-col items-center gap-2.5">
         <NavItem href="/dash" iconName="Telescope" title="Analisa" />
         <NavItem href="/ws" iconName="ScrollText" title="Beranda" />

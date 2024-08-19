@@ -1,11 +1,12 @@
-import { useLoaderData } from "@remix-run/react";
+import { useFetcher, useLoaderData, useSearchParams } from "@remix-run/react";
 
 import { ArrowUp, MoveHorizontal, Plus, Wallet } from "lucide-react";
 
 import { Button } from "~/components/ui/button";
+import CreateTransaction from "~/components/create-transaction";
 
 import toIDR from "~/utils/currency";
-import { TTransactions } from "~/utils/transactions.server";
+import { TTransactions } from "~/utils/cashflows.server";
 
 import { cn } from "~/lib/utils";
 
@@ -14,7 +15,13 @@ import { loader } from "./route";
 export default function List() {
   const { transactions } = useLoaderData<typeof loader>();
 
+  const fetcher = useFetcher({ key: "create-transaction" });
+  const [searchParams] = useSearchParams();
+
   const data = transactions as TTransactions[];
+  const date = new Date(searchParams.get("d")?.toString() || "") ?? new Date();
+
+  if (!date) return <></>;
   return (
     <div className="flex flex-col divide-y divide-input">
       {data?.length ? (
@@ -28,7 +35,7 @@ export default function List() {
           />
         ))
       ) : (
-        <div className="dashed-line-border mt-6 flex h-[400px] items-center justify-center">
+        <div className="mt-6 flex h-[400px] items-center justify-center rounded-2xl border border-dashed border-input">
           <div className="flex flex-col items-center justify-center gap-6">
             <div className="flex flex-col gap-1">
               <h3 className="text-center text-base font-semibold">
@@ -39,14 +46,16 @@ export default function List() {
                 ini untuk memulai menulis transaksi Anda..
               </p>
             </div>
-            <Button
-              size="sm"
-              variant="secondary"
-              className="flex !h-12 gap-1.5 px-12"
+            <CreateTransaction
+              actionType="CREATE_TRANSACTION"
+              date={date}
+              fetcher={fetcher}
             >
-              <Plus size={18} strokeWidth={2} />
-              <span>Catat transaksi</span>
-            </Button>
+              <Button size="sm" variant="secondary" className="flex gap-1.5">
+                <Plus size={18} strokeWidth={2} />
+                <span>Catat transaksi</span>
+              </Button>
+            </CreateTransaction>
           </div>
         </div>
       )}

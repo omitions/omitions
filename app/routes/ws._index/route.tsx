@@ -37,9 +37,6 @@ export default function Index() {
 }
 
 function Page() {
-  const { workspaces } = useLoaderData<typeof loader>();
-
-  if (!workspaces.length) return <p>Belum ada data</p>;
   return (
     <div className="my-1 flex flex-col gap-12 py-6 md:pl-3">
       <Wallets />
