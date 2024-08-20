@@ -51,7 +51,7 @@ const sheetVariants = cva(
 
 interface SheetContentProps
   extends React.ComponentPropsWithoutRef<typeof SheetPrimitive.Content>,
-    VariantProps<typeof sheetVariants> {}
+  VariantProps<typeof sheetVariants> { }
 
 const SheetContent = React.forwardRef<
   React.ElementRef<typeof SheetPrimitive.Content>,
@@ -76,7 +76,7 @@ const SheetContent = React.forwardRef<
                 type="button"
                 variant="ghost"
                 size="icon"
-                className="absolute right-3 top-3"
+                className="absolute right-5 top-5"
               >
                 <X size={20} strokeWidth={2} />
                 <span className="sr-only">Close</span>

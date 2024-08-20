@@ -23,7 +23,7 @@ export default function Header() {
               className="text-muted-foreground"
             />
             <span className="text-xs font-normal text-muted-foreground">
-              Cari apapun, atau tekan ⌘ + K
+              Cari apapun
             </span>
           </Button>
         </SearchDialog>
