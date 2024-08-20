@@ -14,19 +14,15 @@ import {
 } from "./ui/dialog";
 import { Input } from "./ui/input";
 
-export default function RemoveWorkspace({
+export default function RemoveWallet({
   actionType,
   children,
-  workspaceName,
-  workspaceId,
 }: {
   actionType: string;
   children: React.ReactNode;
-  workspaceName: string;
-  workspaceId: string;
 }) {
   const [isOpen, setIsOpen] = React.useState(false);
-  const [confirmationText, setConfirmationText] = React.useState("");
+  // const [confirmationText, setConfirmationText] = React.useState("");
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -43,14 +39,14 @@ export default function RemoveWorkspace({
         >
           <div className="flex flex-col gap-3">
             <p className="text-sm font-medium text-muted-foreground text-red-500">
-              Apakah Anda yakin? ketikan nama workspace <b>{workspaceName}</b> untuk menkonfirmasi.
+              Apakah Anda yakin? ketikan nama dompet  untuk menkonfirmasi.
             </p>
             <Input
               type="text"
               name="title"
               required
               variant="destructive"
-              onChange={(v) => setConfirmationText(v.target.value)}
+            // onChange={(v) => setConfirmationText(v.target.value)}
             />
           </div>
           <DialogFooter>
@@ -62,13 +58,11 @@ export default function RemoveWorkspace({
             <Button
               type="submit"
               variant="destructive"
-              disabled={confirmationText !== workspaceName}
             >
               Konfirmasi
             </Button>
           </DialogFooter>
           <input type="hidden" name="_action" value={actionType} />
-          <input type="hidden" name="_id" value={workspaceId} />
         </Form>
       </DialogContent>
     </Dialog>

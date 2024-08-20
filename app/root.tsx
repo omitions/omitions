@@ -42,7 +42,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <ScrollRestoration />
         <Scripts />
         <Toaster />
-        <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/ripple.js"></script>
       </body>
     </html>
   );

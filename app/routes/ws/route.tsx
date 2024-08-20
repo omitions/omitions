@@ -2,6 +2,7 @@ import { ActionFunctionArgs, json, LoaderFunctionArgs } from "@remix-run/node";
 import { Outlet } from "@remix-run/react";
 
 import RootSidebar from "~/components/sidebar";
+import { Input } from "~/components/ui/input";
 
 import { auth } from "~/utils/auth.server";
 import {

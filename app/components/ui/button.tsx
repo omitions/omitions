@@ -16,13 +16,13 @@ const buttonVariants = cva(
     variants: {
       variant: {
         secondary:
-          "bg-primary/30 text-primary-foreground shadow-sm hover:bg-primary/40 disabled:ring-none disabled:ring-transparent ring-1 ring-ring",
+          "bg-primary/20 text-primary-foreground shadow-sm hover:bg-primary/40 disabled:ring-none disabled:ring-transparent ring-1 ring-ring",
         link: "text-primary underline-offset-4 hover:underline",
 
         destructive:
           "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
         outline:
-          "border border-input bg-background shadow-sm hover:border-primary hover:ring-2 hover:ring-primary/30 focus-visible:border-primary focus-visible:ring-primary/30",
+          "border border-input bg-background shadow-sm hover:border-primary hover:ring-2 hover:ring-primary/20 focus-visible:border-primary focus-visible:ring-primary/30",
         default:
           "bg-primary text-primary-foreground shadow hover:bg-primary/90 ring-1 ring-foreground",
         ghost: "hover:bg-background focus-visible:bg-primary/20",
@@ -42,7 +42,7 @@ const buttonVariants = cva(
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+  VariantProps<typeof buttonVariants> {
   asChild?: boolean;
   loading?: boolean;
   tooltip?: string;
@@ -101,7 +101,7 @@ Button.displayName = "Button";
 const ButtonLink = React.forwardRef<
   HTMLAnchorElement,
   React.ComponentPropsWithRef<typeof AnchorOrLink> &
-    ButtonProps & { delay?: number }
+  ButtonProps & { delay?: number }
 >(function ButtonLink({ delay = 0, ...props }, ref) {
   const { variant, size, disabled, href } = props;
 

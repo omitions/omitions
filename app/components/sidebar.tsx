@@ -7,7 +7,7 @@ import { Button, ButtonLink } from "~/components/ui/button";
 import { cn } from "~/lib/utils";
 
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
-import { CommandDialogDemo } from "./search";
+import { SearchDialog } from "./search";
 
 export default function Sidebar() {
   return (
@@ -15,9 +15,9 @@ export default function Sidebar() {
       <div className="flex flex-col items-center gap-2.5">
         <NavItem href="/dash" iconName="Telescope" title="Analisa" />
         <NavItem href="/ws" iconName="ScrollText" title="Beranda" />
-        <CommandDialogDemo>
+        <SearchDialog>
           <NavItem iconName="Search" title="Cari apapun.." />
-        </CommandDialogDemo>
+        </SearchDialog>
         <NavItem href="/settings" iconName="Settings" title="Pengaturan" />
       </div>
       <div></div>

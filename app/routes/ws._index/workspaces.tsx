@@ -35,14 +35,14 @@ export default function Workspaces() {
   const { workspaces } = useLoaderData<typeof loader>();
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-5">
       <div className="block md:hidden">
         <h4 className="text-[11px] text-muted-foreground">
           SEMUA WORKSPACE ANDA
         </h4>
       </div>
       <div className="hidden flex-col gap-0.5 md:flex">
-        <h2 className="text-xl font-bold">Workspaces</h2>
+        <h2 className="text-xl font-bold">Spaces</h2>
         <p className="text-sm font-normal text-muted-foreground">
           Semua catatan keuangan Anda ada disini
         </p>
@@ -68,7 +68,7 @@ function WorkspaceItem({ _id, name, description }: TWorkspaces) {
     >
       <div
         data-state={isHover ? "open" : "closed"}
-        className="absolute z-50 hidden w-full data-[state=closed]:-bottom-[80px] data-[state=open]:bottom-0 data-[state=open]:duration-300 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 md:block"
+        className="absolute z-40 hidden w-full data-[state=closed]:-bottom-[80px] data-[state=open]:bottom-0 data-[state=open]:duration-300 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 md:block"
       >
         <div className="relative mb-4 flex gap-4 px-4">
           <UpdateWorkspace
@@ -199,7 +199,7 @@ function ButtonCreateWorkspace() {
         <button className="h-full w-full justify-start rounded-lg border border-dashed border-input px-0 ring-offset-background md:min-h-44 md:px-6 md:py-6">
           <div className="flex h-full flex-col flex-wrap items-center justify-center gap-0.5 md:w-full md:gap-3">
             <CirclePlus size={24} strokeWidth={2} />
-            <h3 className="text-xs font-semibold md:text-sm">Buat workspace</h3>
+            <h3 className="text-xs font-medium md:text-sm">Buat workspace</h3>
           </div>
         </button>
       </CreateWorkspace>

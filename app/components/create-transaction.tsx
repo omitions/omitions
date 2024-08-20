@@ -107,7 +107,7 @@ export default function CreateTransaction({
               allowLeadingZeros
               allowNegative={false}
               placeholder="Nominal"
-              prefix="Rp"
+              prefix="IDR "
               className={cn(
                 inputVariants({ variant: "ghost" }),
                 "text-base font-semibold text-black placeholder:font-normal",

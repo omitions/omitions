@@ -76,7 +76,7 @@ function Mobile() {
 function Desktop() {
   return (
     <div className="fixed left-[var(--sidebar-width)] hidden h-full w-full max-w-[var(--sidebar-width-xl)] border-r border-input bg-background/40 md:block">
-      <div className="my-1 flex min-h-screen flex-col gap-8 py-6 md:px-4">
+      <div className="my-1 flex min-h-screen flex-col gap-8 py-6 md:px-3">
         <div className="flex items-center">
           <Link
             to="/ws/settings"

@@ -54,7 +54,7 @@ function Mobile() {
             <div className="flex flex-col gap-1">
               <SheetClose>
                 <NavItem
-                  title="Semua Workspace"
+                  title="Semua Spaces"
                   href="/ws"
                   iconName="FileText"
                   delay={150}
@@ -71,7 +71,7 @@ function Mobile() {
 function Desktop({ workspaceCount }: { workspaceCount: number }) {
   return (
     <div className="fixed left-[var(--sidebar-width)] hidden h-full w-full max-w-[var(--sidebar-width-xl)] border-r border-input bg-background/40 md:block">
-      <div className="my-1 flex min-h-screen flex-col justify-between py-6 md:px-4">
+      <div className="my-1 flex min-h-screen flex-col justify-between py-6 md:px-3">
         <div className="flex flex-col gap-8">
           <div className="flex items-center">
             <Link
@@ -83,7 +83,7 @@ function Desktop({ workspaceCount }: { workspaceCount: number }) {
           </div>
           <div className="flex flex-col gap-6">
             <div className="flex flex-col gap-1">
-              <NavItem title="Semua Workspace" href="/ws" iconName="FileText" />
+              <NavItem title="Semua Spaces" href="/ws" iconName="FileText" />
               <NavItem title="Pengingat" href="/ws/reminder" iconName="Clock" />
             </div>
           </div>

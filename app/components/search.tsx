@@ -19,7 +19,7 @@ import {
   CommandShortcut,
 } from "./ui/command";
 
-export function CommandDialogDemo({ children }: { children: JSX.Element }) {
+export function SearchDialog({ children }: { children: JSX.Element }) {
   const [open, setOpen] = React.useState(false);
 
   React.useEffect(() => {
@@ -36,13 +36,11 @@ export function CommandDialogDemo({ children }: { children: JSX.Element }) {
 
   return (
     <>
-      {React.Children.map(children, (child) => {
-        return React.cloneElement(
-          child,
-          { onClick: () => setOpen(true) },
-          null,
-        );
-      })}
+      {React.Children.map(children, (child, index) =>
+        React.cloneElement(child, {
+          onClick: () => setOpen(true)
+        })
+      )}
       <CommandDialog open={open} onOpenChange={setOpen}>
         <CommandInput placeholder="Type a command or search..." />
         <CommandList>

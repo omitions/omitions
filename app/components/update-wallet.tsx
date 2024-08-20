@@ -53,11 +53,11 @@ export default function UpdateWallet({
               allowLeadingZeros
               allowNegative={false}
               placeholder="Saldo dompet Anda"
-              prefix="Rp"
+              prefix="IDR "
               className={cn(inputVariants({ variant: "ghost" }))}
             />
           </div>
-          <Button type="submit" variant="secondary">
+          <Button type="submit">
             Buat
           </Button>
           <input type="hidden" name="_action" value={actionType} />
