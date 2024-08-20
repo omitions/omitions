@@ -11,7 +11,6 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
     --primary: 140 67% 51%;
-    /* --primary: 142 78% 47%; */
     --primary-foreground: 0 0% 6%;
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 142 78% 47%;
@@ -31,11 +30,11 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
 
-    --sidebar-width: 50px;
+    --sidebar-width: 45px;
     --sidebar-width-xl: 230px;
-    --sidebar-width-all: 280px;
+    --sidebar-width-all: 275px;
 
-    --header-height: 70px;
+    --header-height: 86px;
   }
 }
 

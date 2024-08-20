@@ -51,7 +51,7 @@ export default function Index() {
 
 function Page() {
   return (
-    <div className="py-6 md:px-6">
+    <div className="py-6 md:px-5">
       <div className="flex flex-col gap-8">
         <div className="hidden flex-col gap-0.5 md:flex">
           <h2 className="text-xl font-bold">Ringkasan</h2>

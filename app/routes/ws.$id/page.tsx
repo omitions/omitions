@@ -62,7 +62,7 @@ function Content() {
   );
 
   return (
-    <div className="py-6 md:px-6">
+    <div className="py-6 md:px-5">
       <div className="flex flex-col gap-8">
         <div className="flex items-center justify-between">
           <div className="hidden flex-col gap-2 md:flex">
