@@ -1,4 +1,4 @@
-import { CirclePlus, Trash2 } from "lucide-react";
+import { CirclePlus, PencilLine, Trash2 } from "lucide-react";
 import React from "react";
 
 import CreateWallet from "~/components/create-wallet";
@@ -13,7 +13,7 @@ export default function Wallets() {
           SEMUA WORKSPACE ANDA
         </h4>
       </div>
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-6 xl:grid-cols-3">
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-6 xl:grid-cols-3 2xl:grid-cols-4">
         <WalletItem />
         <ButtonCreateWallet />
       </div>
@@ -37,16 +37,17 @@ function WalletItem() {
         <div className="relative mb-4 flex gap-4 px-4">
           <UpdateWallet actionType="UPDATEE__WE">
             <Button
-              className="w-full rounded-full bg-white"
+              className="w-full gap-2 rounded-full bg-white px-0"
               variant="outline"
               onMouseEnter={() => setIsHover(true)}
             >
-              Ubah Bank JAGO
+              <PencilLine size={16} strokeWidth={2} />
+              <span>Ubah Bank JAGO</span>
             </Button>
           </UpdateWallet>
           <div>
             <Button
-              className="!h-11 !w-11 rounded-full"
+              className="!h-11 !w-11 rounded-full px-0"
               variant="outline"
               size="icon"
               onMouseEnter={() => setIsHover(true)}
@@ -67,7 +68,7 @@ function WalletItem() {
                 Saldo
               </p>
               <h4 className="text-base font-medium md:font-semibold">
-                IDR 80.900
+                IDR 17.240.900
               </h4>
             </div>
             <p className="text-wrap text-xs font-medium leading-relaxed md:text-sm md:font-bold">
@@ -84,7 +85,7 @@ function ButtonCreateWallet() {
   return (
     <div className="relative overflow-hidden">
       <CreateWallet actionType="HELLOO">
-        <button className="h-full w-full justify-start rounded-lg border border-dashed px-0 ring-offset-background md:min-h-44 md:px-6 md:py-6">
+        <button className="h-full w-full justify-start rounded-lg border border-dashed border-input px-0 ring-offset-background md:min-h-44 md:px-6 md:py-6">
           <div className="flex h-full flex-col flex-wrap items-center justify-center gap-0.5 md:w-full md:gap-3">
             <CirclePlus size={24} strokeWidth={2} />
             <h3 className="text-xs font-semibold md:text-sm">Buat dompet</h3>

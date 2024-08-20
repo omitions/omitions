@@ -65,7 +65,7 @@ function NavItem({
           )}
           {...props}
         >
-          <Icon size={18} strokeWidth={isMatch ? 2.5 : 2} />
+          <Icon size={18} strokeWidth={isMatch ? 2 : 1.5} />
         </Comp>
       </TooltipTrigger>
       <TooltipContent align="center" side="right" sideOffset={3}>

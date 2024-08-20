@@ -12,8 +12,6 @@ import {
 
 import { cn } from "~/lib/utils";
 
-import { ActionType } from "./route";
-
 export default function WorkspaceSidebar({
   workspaceCount,
   withoutMobile = false,
@@ -72,15 +70,15 @@ function Mobile() {
 
 function Desktop({ workspaceCount }: { workspaceCount: number }) {
   return (
-    <div className="h-ful fixed left-[var(--sidebar-width)] hidden w-full max-w-[var(--sidebar-width-xl)] md:block">
-      <div className="my-1 flex min-h-screen flex-col justify-between py-6 md:pl-3">
+    <div className="fixed left-[var(--sidebar-width)] hidden h-full w-full max-w-[var(--sidebar-width-xl)] border-r border-input bg-background/40 md:block">
+      <div className="my-1 flex min-h-screen flex-col justify-between py-6 md:px-4">
         <div className="flex flex-col gap-8">
           <div className="flex items-center">
             <Link
               to="/ws"
               className="rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0"
             >
-              <h2 className="mx-2 text-xl font-bold">Beranda</h2>
+              <h2 className="ml-4 text-xl font-bold">Beranda</h2>
             </Link>
           </div>
           <div className="flex flex-col gap-6">
@@ -148,7 +146,7 @@ function NavItem({
       )}
     >
       <div className="flex items-center gap-2">
-        <Icon size={18} strokeWidth={isMatch ? 2.5 : 2} />
+        <Icon size={18} strokeWidth={isMatch ? 2 : 1.5} />
         <span>{title}</span>
       </div>
     </ButtonLink>

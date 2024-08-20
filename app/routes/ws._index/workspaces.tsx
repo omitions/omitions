@@ -6,8 +6,11 @@ import {
   ArrowUpRight,
   CirclePlus,
   Ellipsis,
+  Pencil,
+  PencilLine,
   PenLine,
   Trash,
+  Trash2,
 } from "lucide-react";
 
 import RemoveWorkspace from "~/components/remove-workspace";
@@ -44,7 +47,7 @@ export default function Workspaces() {
           Semua catatan keuangan Anda ada disini
         </p>
       </div>
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-6 xl:grid-cols-3">
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-6 xl:grid-cols-3 2xl:grid-cols-4">
         {workspaces.map((item) => (
           <WorkspaceItem key={item._id} {...item} />
         ))}
@@ -75,11 +78,12 @@ function WorkspaceItem({ _id, name, description }: TWorkspaces) {
             workspaceId={_id}
           >
             <Button
-              className="w-full rounded-full bg-white"
+              className="w-full gap-2 rounded-full bg-white px-0"
               variant="outline"
               onMouseEnter={() => setIsHover(true)}
             >
-              Ubah
+              <PencilLine size={16} strokeWidth={2} />
+              <span>Ubah</span>
             </Button>
           </UpdateWorkspace>
           <RemoveWorkspace
@@ -88,11 +92,12 @@ function WorkspaceItem({ _id, name, description }: TWorkspaces) {
             workspaceId={_id}
           >
             <Button
-              className="w-full rounded-full"
+              className="w-full gap-2 rounded-full px-0"
               variant="outline"
               onMouseEnter={() => setIsHover(true)}
             >
-              Hapus
+              <Trash2 size={16} strokeWidth={2} />
+              <span>Hapus</span>
             </Button>
           </RemoveWorkspace>
         </div>
@@ -114,12 +119,12 @@ function WorkspaceItem({ _id, name, description }: TWorkspaces) {
           className="h-full w-full justify-start rounded-lg border-transparent bg-white px-0 ring-offset-background md:min-h-44 md:border md:border-input md:px-6 md:py-6 md:hover:bg-background/50 md:data-[state=open]:bg-background/50"
         >
           <div className="flex w-10/12 flex-col flex-wrap gap-0.5 md:w-full md:gap-1">
-            <h4 className="text-base font-medium md:font-semibold">
+            <h4 className="text-base font-medium md:font-bold">
               {name.length > 30 ? `${name.substring(0, 30)}..` : name}
             </h4>
             <p className="text-wrap text-xs font-normal leading-relaxed text-muted-foreground md:text-sm">
-              {description.length > 130
-                ? `${description.substring(0, 130)}..`
+              {description.length > 60
+                ? `${description.substring(0, 60)}..`
                 : description}
             </p>
           </div>
@@ -191,7 +196,7 @@ function ButtonCreateWorkspace() {
   return (
     <div className="relative overflow-hidden">
       <CreateWorkspace actionType={ActionType.CREATE_WORKSPACES}>
-        <button className="h-full w-full justify-start rounded-lg border border-dashed px-0 ring-offset-background md:min-h-44 md:px-6 md:py-6">
+        <button className="h-full w-full justify-start rounded-lg border border-dashed border-input px-0 ring-offset-background md:min-h-44 md:px-6 md:py-6">
           <div className="flex h-full flex-col flex-wrap items-center justify-center gap-0.5 md:w-full md:gap-3">
             <CirclePlus size={24} strokeWidth={2} />
             <h3 className="text-xs font-semibold md:text-sm">Buat workspace</h3>

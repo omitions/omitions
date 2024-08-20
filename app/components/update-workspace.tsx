@@ -48,14 +48,14 @@ export default function CreateWorkspace({
               required
               defaultValue={workspaceName}
               variant="ghost"
-              placeholder="Nama"
+              placeholder="Masukkan nama workspace"
             />
             <Textarea
               name="description"
               required
               defaultValue={workspaceDescription}
               variant="ghost"
-              placeholder="Deskripsi"
+              placeholder="Masukkan deskripsi workspace"
             />
           </div>
           <Button type="submit" variant="secondary">
