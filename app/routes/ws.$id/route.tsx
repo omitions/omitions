@@ -47,7 +47,7 @@ export default function Index() {
         <Sidebar workspaceCount={0} withoutMobile />
         <div className="relative h-full w-full md:ml-auto md:w-[calc(100%_-_var(--sidebar-width-xl))]">
           <div className="h-full w-full">
-            <div className="z-50 bg-white/70 backdrop-blur-sm w-[calc(100%_-_var(--sidebar-width-all))] fixed left-[var(--sidebar-width-all)] top-0">
+            <div className="fixed left-[var(--sidebar-width-all)] top-0 z-50 w-[calc(100%_-_var(--sidebar-width-all))] bg-white/70 backdrop-blur-sm">
               <Header />
             </div>
             <div className="mx-auto mt-[var(--header-height)] w-full max-w-screen-xl border-input">

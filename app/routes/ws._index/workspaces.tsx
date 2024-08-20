@@ -116,7 +116,7 @@ function WorkspaceItem({ _id, name, description }: TWorkspaces) {
       >
         <div
           data-state={isHover ? "open" : "closed"}
-          className="h-full w-full justify-start rounded-lg border-transparent bg-white px-0 ring-offset-background md:min-h-44 md:border md:border-input md:px-6 md:py-6 md:hover:bg-background/50 md:data-[state=open]:bg-background/50"
+          className="h-full w-full justify-start rounded-lg border-transparent bg-white px-0 ring-offset-background md:min-h-44 md:border md:border-input md:p-5 md:hover:bg-background/50 md:data-[state=open]:bg-background/50"
         >
           <div className="flex w-10/12 flex-col flex-wrap gap-0.5 md:w-full md:gap-1">
             <h4 className="text-base font-medium md:font-bold">

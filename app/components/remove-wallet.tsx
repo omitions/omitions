@@ -39,14 +39,14 @@ export default function RemoveWallet({
         >
           <div className="flex flex-col gap-3">
             <p className="text-sm font-medium text-muted-foreground text-red-500">
-              Apakah Anda yakin? ketikan nama dompet  untuk menkonfirmasi.
+              Apakah Anda yakin? ketikan nama dompet untuk menkonfirmasi.
             </p>
             <Input
               type="text"
               name="title"
               required
               variant="destructive"
-            // onChange={(v) => setConfirmationText(v.target.value)}
+              // onChange={(v) => setConfirmationText(v.target.value)}
             />
           </div>
           <DialogFooter>
@@ -55,10 +55,7 @@ export default function RemoveWallet({
                 Batalkan
               </Button>
             </DialogClose>
-            <Button
-              type="submit"
-              variant="destructive"
-            >
+            <Button type="submit" variant="destructive">
               Konfirmasi
             </Button>
           </DialogFooter>

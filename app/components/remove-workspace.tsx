@@ -43,7 +43,8 @@ export default function RemoveWorkspace({
         >
           <div className="flex flex-col gap-3">
             <p className="text-sm font-medium text-muted-foreground text-red-500">
-              Apakah Anda yakin? ketikan nama workspace <b>{workspaceName}</b> untuk menkonfirmasi.
+              Apakah Anda yakin? ketikan nama workspace <b>{workspaceName}</b>{" "}
+              untuk menkonfirmasi.
             </p>
             <Input
               type="text"

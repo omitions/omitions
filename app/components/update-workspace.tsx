@@ -58,9 +58,7 @@ export default function CreateWorkspace({
               placeholder="Masukkan deskripsi workspace"
             />
           </div>
-          <Button type="submit">
-            Ubah Workspace
-          </Button>
+          <Button type="submit">Ubah Workspace</Button>
           <input type="hidden" name="_action" value={actionType} />
           <input type="hidden" name="_id" value={workspaceId} />
         </Form>

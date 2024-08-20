@@ -7,19 +7,23 @@ import { Button } from "~/components/ui/button";
 
 export default function Header() {
   return (
-    <div className="px-6 h-[var(--header-height)] flex items-center justify-between max-w-screen-xl mx-auto">
+    <div className="mx-auto flex h-[var(--header-height)] max-w-screen-xl items-center justify-between px-6">
       <div>
         <Button size="sm" variant="outline" className="gap-2">
           <BookOpenText size={16} strokeWidth={2.5} />
           <span>Pelajari</span>
         </Button>
       </div>
-      <div className="max-w-sm w-full">
-        <SearchDialog>
-          <Button size="sm" variant="outline" className="w-full h-10 gap-2">
-            <Search size={14} strokeWidth={2.5} className="text-muted-foreground" />
-            <span className="text-xs text-muted-foreground font-normal">
-              Cari apapun, atau tekan command + K
+      <div className="w-full max-w-sm">
+        <SearchDialog withoutK={true}>
+          <Button size="sm" variant="outline" className="h-10 w-full gap-2">
+            <Search
+              size={14}
+              strokeWidth={2.5}
+              className="text-muted-foreground"
+            />
+            <span className="text-xs font-normal text-muted-foreground">
+              Cari apapun, atau tekan ⌘ + K
             </span>
           </Button>
         </SearchDialog>
@@ -29,5 +33,5 @@ export default function Header() {
         <AvatarFallback>CN</AvatarFallback>
       </Avatar>
     </div>
-  )
+  );
 }

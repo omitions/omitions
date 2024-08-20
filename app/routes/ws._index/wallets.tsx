@@ -37,6 +37,26 @@ function WalletItem() {
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
     >
+      <div className="h-full rounded-lg">
+        <div
+          data-state={isHover ? "open" : "closed"}
+          className="h-full w-full justify-start rounded-lg border-transparent bg-white px-0 ring-offset-background md:min-h-44 md:border md:border-input md:p-5 md:hover:bg-background/50 md:data-[state=open]:bg-background/50"
+        >
+          <div className="flex h-full w-10/12 flex-col flex-wrap justify-between md:w-full md:gap-1">
+            <div className="flex flex-col gap-0.5">
+              <p className="text-wrap text-xs font-normal leading-relaxed text-muted-foreground md:text-sm">
+                Saldo
+              </p>
+              <h4 className="text-base font-medium md:font-semibold">
+                IDR 17.240.900
+              </h4>
+            </div>
+            <p className="text-wrap text-xs font-medium leading-relaxed md:text-sm md:font-bold">
+              Bank JAGO
+            </p>
+          </div>
+        </div>
+      </div>
       <div
         data-state={isHover ? "open" : "closed"}
         className="absolute hidden w-full data-[state=closed]:-bottom-[80px] data-[state=open]:bottom-0 data-[state=open]:duration-300 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 md:block"
@@ -64,26 +84,6 @@ function WalletItem() {
               </Button>
             </div>
           </RemoveWallet>
-        </div>
-      </div>
-      <div className="h-full rounded-lg">
-        <div
-          data-state={isHover ? "open" : "closed"}
-          className="h-full w-full justify-start rounded-lg border-transparent bg-white px-0 ring-offset-background md:min-h-44 md:border md:border-input md:px-6 md:py-6 md:hover:bg-background/50 md:data-[state=open]:bg-background/50"
-        >
-          <div className="flex h-full w-10/12 flex-col flex-wrap justify-between md:w-full md:gap-1">
-            <div className="flex flex-col gap-0.5">
-              <p className="text-wrap text-xs font-normal leading-relaxed text-muted-foreground md:text-sm">
-                Saldo
-              </p>
-              <h4 className="text-base font-medium md:font-semibold">
-                IDR 17.240.900
-              </h4>
-            </div>
-            <p className="text-wrap text-xs font-medium leading-relaxed md:text-sm md:font-bold">
-              Bank JAGO
-            </p>
-          </div>
         </div>
       </div>
     </div>

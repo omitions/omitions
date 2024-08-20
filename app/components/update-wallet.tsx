@@ -57,9 +57,7 @@ export default function UpdateWallet({
               className={cn(inputVariants({ variant: "ghost" }))}
             />
           </div>
-          <Button type="submit">
-            Buat
-          </Button>
+          <Button type="submit">Buat</Button>
           <input type="hidden" name="_action" value={actionType} />
         </Form>
       </SheetContent>

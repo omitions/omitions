@@ -50,9 +50,7 @@ export default function CreateWorkspace({
               placeholder="Masukkan deskripsi workspace"
             />
           </div>
-          <Button type="submit">
-            Buat Workspace
-          </Button>
+          <Button type="submit">Buat Workspace</Button>
           <input type="hidden" name="_action" value={actionType} />
         </Form>
       </SheetContent>

@@ -56,9 +56,7 @@ export default function CreateWallet({
               className={cn(inputVariants({ variant: "ghost" }))}
             />
           </div>
-          <Button type="submit">
-            Buat Dompet
-          </Button>
+          <Button type="submit">Buat Dompet</Button>
           <input type="hidden" name="_action" value={actionType} />
         </Form>
       </SheetContent>
