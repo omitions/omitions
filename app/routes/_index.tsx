@@ -57,7 +57,7 @@ function LoginForm() {
       method="post"
       className="flex w-full flex-col gap-8 lg:max-w-[354px]"
     >
-      <header className="flex flex-col gap-2">
+      <header className="flex flex-col gap-0.5">
         <div className="mb-20 block lg:hidden">logo</div>
         <span className="text-4xl font-semibold">Log In</span>
         <span className="text-sm font-normal text-muted-foreground">

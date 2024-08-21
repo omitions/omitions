@@ -66,7 +66,7 @@ function RegisterForm() {
       method="post"
       className="flex w-full flex-col gap-8 lg:max-w-[354px]"
     >
-      <header className="flex flex-col gap-2">
+      <header className="flex flex-col gap-0.5">
         <div className="mb-20 block lg:hidden">logo</div>
         <span className="text-4xl font-semibold">Daftar</span>
         <span className="text-sm font-normal text-muted-foreground">
@@ -134,7 +134,7 @@ function RedirectPage() {
       <div className="flex w-full flex-col items-center gap-6 md:gap-8">
         <div className="flex flex-col items-center justify-center">
           <img src="/assets/success.png" className="w-[600px]" alt="" />
-          <h2 className="ml-2 text-xl font-bold">Selesai</h2>
+          <h2 className="ml-2 text-lg font-bold">Selesai</h2>
           <p className="max-w-sm text-center text-sm">
             Pendaftaran selesai, silahkan klik tombol dibawah ini untuk masuk ke
             akunmu!

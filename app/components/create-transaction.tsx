@@ -138,9 +138,9 @@ export default function CreateTransaction({
                 </SelectItem>
               </SelectContent>
             </Select>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-0.5">
               <p className="text-sm">Tambahkan waktu atau atur perulangan</p>
-              <div className="flex flex-col gap-4 rounded-lg border bg-background px-3 py-6 shadow-sm">
+              <div className="flex flex-col gap-4 rounded-lg border bg-secondary px-3 py-6 shadow-sm">
                 <label
                   className={cn(
                     buttonVariants({ variant: "outline" }),
@@ -203,11 +203,11 @@ export default function CreateTransaction({
               </div>
             </div>
           </div>
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-0.5">
             <p className="text-sm">Sumber rekening</p>
             <ToggleGroup
               type="single"
-              className="flex flex-col gap-4 rounded-lg border bg-background px-3 py-6 shadow-sm"
+              className="flex flex-col gap-4 rounded-lg border bg-secondary px-3 py-6 shadow-sm"
             >
               <SourceOfFund
                 value="a"

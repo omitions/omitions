@@ -1,10 +1,11 @@
 import { defer, json, LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
 
+import Header from "~/components/header";
+
 import { getCalendar } from "~/utils/cashflows.server";
 import { regenerateDash } from "~/utils/misc";
 
 import Sidebar from "../ws/sidebar";
-import Header from "../ws/header";
 
 import Page from "./page";
 
@@ -47,7 +48,7 @@ export default function Index() {
         <Sidebar workspaceCount={0} withoutMobile />
         <div className="relative h-full w-full md:ml-auto md:w-[calc(100%_-_var(--sidebar-width-xl))]">
           <div className="h-full w-full">
-            <div className="fixed left-[var(--sidebar-width-all)] top-0 z-50 w-[calc(100%_-_var(--sidebar-width-all))] bg-white/80 backdrop-blur-sm">
+            <div className="fixed left-[var(--sidebar-width-all)] top-0 z-50 w-[calc(100%_-_var(--sidebar-width-all))] bg-background/80 backdrop-blur-sm">
               <Header />
             </div>
             <div className="mx-auto mt-[var(--header-height)] w-full max-w-screen-xl border-input">

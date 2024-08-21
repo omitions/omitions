@@ -109,17 +109,17 @@ export async function getTransactions(
 
   let resp = null;
   // console.log("payload ??? ", `https://api.mybucks.today/cashflows/list?workspace_id=${workspaceId}&date=${date}`)
-  // const fetched = await fetch(
-  //   `https://api.mybucks.today/cashflows/list?workspace_id=${workspaceId}-${date}`,
-  //   {
-  //     method: "GET",
-  //     headers: {
-  //       Authorization: `Bearer ${token}`,
-  //       "Content-Type": "application/json",
-  //     },
-  //   },
-  // );
-  // resp = await fetched.json();
+  const fetched = await fetch(
+    `https://api.mybucks.today/cashflows/list?workspace_id=${workspaceId}-${date}`,
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    },
+  );
+  resp = await fetched.json();
   // console.log("response: ", resp);
   return resp;
 }

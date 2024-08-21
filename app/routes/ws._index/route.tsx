@@ -1,13 +1,14 @@
 import { json, LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 
+import Header from "~/components/header";
+
 import { getWorkspaces } from "~/utils/workspaces.server";
 
 import Wallets from "./wallets";
 import Workspaces from "./workspaces";
 
 import Sidebar from "../ws/sidebar";
-import Header from "../ws/header";
 
 export const meta: MetaFunction = () => {
   return [{ title: "Workspaces | mybucks.today" }];
@@ -27,7 +28,7 @@ export default function Index() {
         <Sidebar workspaceCount={workspaces?.length} />
         <div className="relative h-full w-full md:ml-auto md:w-[calc(100%_-_var(--sidebar-width-xl))]">
           <div className="h-full w-full">
-            <div className="fixed left-[var(--sidebar-width-all)] top-0 z-50 hidden w-[calc(100%_-_var(--sidebar-width-all))] bg-white/80 backdrop-blur-sm md:block">
+            <div className="fixed left-[var(--sidebar-width-all)] top-0 z-50 hidden w-[calc(100%_-_var(--sidebar-width-all))] bg-background/80 backdrop-blur-sm md:block">
               <Header />
             </div>
             <div className="mx-auto mt-[var(--header-height)] w-full max-w-screen-xl border-input">
@@ -42,7 +43,7 @@ export default function Index() {
 
 function Page() {
   return (
-    <div className="flex flex-col gap-14 py-6 md:px-5">
+    <div className="m-5 flex min-h-[calc(97.9vh_-_var(--header-height))] flex-col gap-14 rounded-2xl bg-white py-6 shadow-sm md:px-6">
       <Wallets />
       <Workspaces />
     </div>

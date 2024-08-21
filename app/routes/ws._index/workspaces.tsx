@@ -6,7 +6,6 @@ import {
   ArrowUpRight,
   CirclePlus,
   Ellipsis,
-  Pencil,
   PencilLine,
   PenLine,
   Trash,
@@ -14,7 +13,7 @@ import {
 } from "lucide-react";
 
 import RemoveWorkspace from "~/components/remove-workspace";
-import { Button } from "~/components/ui/button";
+import { Button, ButtonLink } from "~/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -35,19 +34,19 @@ export default function Workspaces() {
   const { workspaces } = useLoaderData<typeof loader>();
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-6">
       <div className="block md:hidden">
         <h4 className="text-[11px] text-muted-foreground">
           SEMUA WORKSPACE ANDA
         </h4>
       </div>
       <div className="hidden flex-col gap-0.5 md:flex">
-        <h2 className="text-xl font-bold">Spaces</h2>
+        <h2 className="text-lg font-bold">Spaces</h2>
         <p className="text-sm font-normal text-muted-foreground">
           Semua catatan keuangan Anda ada disini
         </p>
       </div>
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-3 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-4 lg:grid-cols-3 xl:grid-cols-4">
         {workspaces.map((item) => (
           <WorkspaceItem key={item._id} {...item} />
         ))}
@@ -58,67 +57,20 @@ export default function Workspaces() {
 }
 
 function WorkspaceItem({ _id, name, description }: TWorkspaces) {
-  const [isHover, setIsHover] = React.useState(false);
-
   return (
-    <div
-      className="relative overflow-hidden"
-      onMouseEnter={() => setIsHover(true)}
-      onMouseLeave={() => setIsHover(false)}
-    >
-      <div
-        data-state={isHover ? "open" : "closed"}
-        className="absolute z-40 hidden w-full data-[state=closed]:-bottom-[80px] data-[state=open]:bottom-0 data-[state=open]:duration-300 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 md:block"
-      >
-        <div className="relative mb-4 flex gap-4 px-4">
-          <UpdateWorkspace
-            actionType={ActionType.UPDATE_WORKSPACES}
-            workspaceName={name}
-            workspaceDescription={description}
-            workspaceId={_id}
-          >
-            <Button
-              className="w-full gap-2 rounded-full bg-white px-0"
-              variant="outline"
-              onMouseEnter={() => setIsHover(true)}
-            >
-              <PencilLine size={16} strokeWidth={2} />
-              <span>Ubah</span>
-            </Button>
-          </UpdateWorkspace>
-          <RemoveWorkspace
-            actionType={ActionType.REMOVE_WORKSPACES}
-            workspaceName={name}
-            workspaceId={_id}
-          >
-            <Button
-              className="w-full gap-2 rounded-full px-0"
-              variant="outline"
-              onMouseEnter={() => setIsHover(true)}
-            >
-              <Trash2 size={16} strokeWidth={2} />
-              <span>Hapus</span>
-            </Button>
-          </RemoveWorkspace>
-        </div>
-      </div>
-      <div className="absolute right-0 top-1 block rotate-90 md:hidden">
-        <MoreMenu _id={_id} name={name} description={description} />
-      </div>
-      <Link
+    <div className="relative">
+      <ButtonLink
+        variant="transparent"
         to={
           "/ws/" +
           `${generateDash(name)}-${_id}` +
           `?d=${format(new Date().setDate(new Date().getDate() - 1), "yyyy-MM")}`
         }
         prefetch="intent"
-        className="relative rounded-lg"
+        className="h-full w-full justify-start rounded-lg border-transparent bg-white px-0 shadow-sm ring-offset-background hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-70 md:min-h-48 md:border md:border-input/30 md:p-5 md:hover:border-input"
       >
-        <div
-          data-state={isHover ? "open" : "closed"}
-          className="h-full w-full justify-start rounded-lg border-transparent bg-white px-0 ring-offset-background md:min-h-44 md:border md:border-input md:p-5 md:hover:bg-background/50 md:data-[state=open]:bg-background/50"
-        >
-          <div className="flex w-10/12 flex-col flex-wrap gap-0.5 md:w-full md:gap-1">
+        <div className="flex h-full w-10/12 flex-col flex-wrap items-start justify-between md:w-full md:gap-1">
+          <div className="flex flex-col items-start gap-0.5">
             <h4 className="text-base font-medium md:font-bold">
               {name.length > 30 ? `${name.substring(0, 30)}..` : name}
             </h4>
@@ -129,7 +81,43 @@ function WorkspaceItem({ _id, name, description }: TWorkspaces) {
             </p>
           </div>
         </div>
-      </Link>
+      </ButtonLink>
+      <div className="absolute right-0 top-1 block rotate-90 md:hidden">
+        <MoreMenu _id={_id} name={name} description={description} />
+      </div>
+      <div className="absolute bottom-0 hidden w-full md:block">
+        <div className="relative mb-4 flex gap-2 px-4">
+          <UpdateWorkspace
+            actionType={ActionType.UPDATE_WORKSPACES}
+            workspaceName={name}
+            workspaceDescription={description}
+            workspaceId={_id}
+          >
+            <Button
+              className="w-full gap-2 rounded-full bg-white px-0"
+              variant="outline"
+            >
+              <PencilLine size={16} strokeWidth={2} />
+              <span>Ubah</span>
+            </Button>
+          </UpdateWorkspace>
+          <RemoveWorkspace
+            actionType={ActionType.REMOVE_WORKSPACES}
+            workspaceName={name}
+            workspaceId={_id}
+          >
+            <div>
+              <Button
+                className="!h-11 !w-11 rounded-full px-0"
+                variant="outline"
+                size="icon"
+              >
+                <Trash2 size={20} strokeWidth={2} />
+              </Button>
+            </div>
+          </RemoveWorkspace>
+        </div>
+      </div>
     </div>
   );
 }
@@ -194,9 +182,9 @@ function MoreMenu({
 
 function ButtonCreateWorkspace() {
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative rounded-lg shadow-sm hover:shadow-md">
       <CreateWorkspace actionType={ActionType.CREATE_WORKSPACES}>
-        <button className="h-full w-full justify-start rounded-lg border border-dashed border-input px-0 ring-offset-background md:min-h-44 md:px-6 md:py-6">
+        <button className="h-full w-full justify-start rounded-lg border border-dashed border-input/30 bg-white px-0 shadow-sm ring-offset-background hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-70 md:min-h-48 md:p-5">
           <div className="flex h-full flex-col flex-wrap items-center justify-center gap-0.5 md:w-full md:gap-3">
             <CirclePlus size={24} strokeWidth={2} />
             <h3 className="text-xs font-medium md:text-sm">Buat workspace</h3>

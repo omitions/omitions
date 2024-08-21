@@ -11,21 +11,22 @@ import Loading from "../loading";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./tooltip";
 
 const buttonVariants = cva(
-  "relative inline-flex items-center justify-center whitespace-nowrap font-bold border border-transparent tracking-tight ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-80",
+  "relative inline-flex items-center justify-center whitespace-nowrap font-bold border border-transparent tracking-tight ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-70",
   {
     variants: {
       variant: {
         secondary:
-          "bg-primary/20 text-primary-foreground shadow-sm hover:bg-primary/40 disabled:ring-none disabled:ring-transparent ring-1 ring-ring",
+          "bg-primary/50 text-primary-foreground shadow-sm hover:bg-primary/40 disabled:ring-none disabled:ring-transparent ring-1 ring-ring",
         link: "text-primary underline-offset-4 hover:underline",
 
         destructive:
           "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
         outline:
-          "border border-input bg-background shadow-sm hover:border-primary hover:ring-2 hover:ring-primary/20 focus-visible:border-primary focus-visible:ring-primary/30",
+          "border border-input bg-secondary shadow-sm hover:border-primary hover:ring-2 hover:ring-primary/20 focus-visible:border-primary focus-visible:ring-primary/30 disabled:bg-red-500",
         default:
           "bg-primary text-primary-foreground shadow hover:bg-primary/90 ring-1 ring-foreground",
-        ghost: "hover:bg-background focus-visible:bg-primary/20",
+        ghost: "hover:bg-secondary focus-visible:bg-primary/50",
+        transparent: "",
       },
       size: {
         sm: "h-10 md:h-8 rounded-full px-6 text-xs",
@@ -103,7 +104,7 @@ const ButtonLink = React.forwardRef<
   React.ComponentPropsWithRef<typeof AnchorOrLink> &
     ButtonProps & { delay?: number }
 >(function ButtonLink({ delay = 0, ...props }, ref) {
-  const { variant, size, disabled, href } = props;
+  const { variant, size, href } = props;
 
   const navigate = useNavigate();
   const redirectTo = async () => {
@@ -112,14 +113,13 @@ const ButtonLink = React.forwardRef<
   };
 
   const Comp = delay ? Slot : AnchorOrLink;
-
   return (
     <Button asChild variant={variant} size={size} className={props.className}>
       <Comp
         ref={ref}
-        disabled={disabled}
         prefetch="intent"
         onClick={() => (delay ? redirectTo() : null)}
+        href={props.href}
         {...props}
       >
         {props.children}

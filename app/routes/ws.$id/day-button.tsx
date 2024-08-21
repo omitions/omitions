@@ -32,7 +32,7 @@ export default function DayButton({
       className={cn(
         className,
         "flex h-fit w-full items-start justify-start",
-        isToday && "bg-background",
+        isToday && "bg-secondary",
       )}
     >
       <div className="relative flex h-full w-full flex-col gap-1.5">

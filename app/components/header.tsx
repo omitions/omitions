@@ -19,7 +19,7 @@ export default function Header() {
           <Button
             size="sm"
             variant="outline"
-            className="!h-11 w-full justify-start gap-3 px-5"
+            className="!h-11 w-full justify-start gap-3 bg-white px-5"
           >
             <Search size={17} strokeWidth={2.5} />
             <span className="text-sm font-normal text-muted-foreground">

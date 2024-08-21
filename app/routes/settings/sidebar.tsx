@@ -53,7 +53,7 @@ function Mobile() {
                 <NavItem
                   title="Akun"
                   href="/settings"
-                  iconName="UserRoundCog"
+                  iconName="UserRound"
                   delay={150}
                 />
               </SheetClose>
@@ -61,7 +61,7 @@ function Mobile() {
                 <NavItem
                   title="Billing"
                   href="/settings/billing"
-                  iconName="ReceiptText"
+                  iconName="CreditCard"
                   delay={150}
                 />
               </SheetClose>
@@ -75,24 +75,30 @@ function Mobile() {
 
 function Desktop() {
   return (
-    <div className="fixed left-[var(--sidebar-width)] hidden h-full w-full max-w-[var(--sidebar-width-xl)] border-r border-input bg-background/40 md:block">
-      <div className="my-1 flex min-h-screen flex-col gap-8 py-6 md:px-3">
-        <div className="flex items-center">
-          <Link
-            to="/ws/settings"
-            className="rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0"
-          >
-            <h2 className="ml-4 text-xl font-bold">Pengaturan</h2>
-          </Link>
-        </div>
-        <div className="flex flex-col gap-6">
-          <div className="flex flex-col gap-1">
-            <NavItem title="Edit Profil" href="/settings" iconName="User" />
-            <NavItem
-              title="Billing"
-              href="/settings/billing"
-              iconName="ReceiptText"
-            />
+    <div className="fixed left-[var(--sidebar-width)] hidden h-full w-full max-w-[var(--sidebar-width-xl)] md:block">
+      <div className="my-1 flex min-h-screen flex-col justify-between py-6 md:pl-3">
+        <div className="flex flex-col gap-8">
+          <div className="flex items-center">
+            <Link
+              to="/ws/settings"
+              className="rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0"
+            >
+              <h2 className="mx-4 text-lg font-bold">Pengaturan</h2>
+            </Link>
+          </div>
+          <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-1">
+              <NavItem
+                title="Edit Profil"
+                href="/settings"
+                iconName="UserRound"
+              />
+              <NavItem
+                title="Billing"
+                href="/settings/billing"
+                iconName="CreditCard"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -131,7 +137,8 @@ function NavItem({
       size="sm"
       className={cn(
         "w-full justify-start gap-3 rounded-full px-4 py-3 text-sm font-medium",
-        isMatch && "bg-primary/20 font-semibold hover:bg-primary/20",
+        isMatch &&
+          "border border-input bg-primary/50 font-semibold hover:bg-primary/50",
       )}
     >
       <div className="flex items-center gap-2">

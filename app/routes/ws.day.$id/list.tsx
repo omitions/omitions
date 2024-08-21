@@ -23,7 +23,7 @@ export default function List() {
 
   if (!date) return <></>;
   return (
-    <div className="flex flex-col divide-y divide-input">
+    <div className="flex flex-col">
       {data?.length ? (
         data.map((props) => (
           <Transaction
@@ -70,10 +70,10 @@ function Transaction({
   date_time,
 }: Pick<TTransactions, "type" | "amount" | "description" | "date_time">) {
   return (
-    <div className="relative flex h-full cursor-pointer items-center justify-between gap-4 overflow-hidden p-4 hover:shadow-md">
+    <div className="relative flex h-full cursor-pointer items-center justify-between gap-4 overflow-hidden border border-transparent p-4 hover:border-input hover:shadow-md">
       <div className="flex items-center gap-4">
         <div>
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-background">
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary">
             {type === "cash_out" && <ArrowUp size={20} strokeWidth={2} />}
             {type === "cash_in" && <Plus size={20} strokeWidth={2} />}
             {type === "invoice" && <MoveHorizontal size={20} strokeWidth={2} />}
@@ -107,7 +107,7 @@ function Transaction({
           </h3>
         </div>
         <div className="flex items-center gap-2">
-          <div className="rounded-full bg-background p-2">
+          <div className="rounded-full bg-secondary p-2">
             <Wallet
               size={18}
               className="stroke-muted-foreground"

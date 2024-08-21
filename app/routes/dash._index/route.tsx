@@ -9,6 +9,7 @@ import {
   XAxis,
 } from "recharts";
 
+import Header from "~/components/header";
 import {
   Card,
   CardContent,
@@ -38,8 +39,11 @@ export default function Index() {
       <div className="flex">
         <DashboardSidebar />
         <div className="relative h-full w-full md:ml-auto md:w-[calc(100%_-_var(--sidebar-width-xl))]">
-          <div className="relative h-full w-full">
-            <div className="mx-auto mt-[var(--header-height)] min-h-screen w-full max-w-screen-xl border-input md:mt-0">
+          <div className="h-full w-full">
+            <div className="fixed left-[var(--sidebar-width-all)] top-0 z-50 hidden w-[calc(100%_-_var(--sidebar-width-all))] bg-background/80 backdrop-blur-sm md:block">
+              <Header />
+            </div>
+            <div className="mx-auto mt-[var(--header-height)] w-full max-w-screen-xl border-input">
               <Page />
             </div>
           </div>
@@ -51,17 +55,15 @@ export default function Index() {
 
 function Page() {
   return (
-    <div className="py-6 md:px-5">
-      <div className="flex flex-col gap-8">
-        <div className="hidden flex-col gap-0.5 md:flex">
-          <h2 className="text-xl font-bold">Ringkasan</h2>
-          <p className="text-sm font-normal text-muted-foreground">
-            Data Anda teranalisa disini
-          </p>
-        </div>
-        <div>
-          <Chart1 />
-        </div>
+    <div className="m-5 flex min-h-[calc(97.9vh_-_var(--header-height))] flex-col gap-14 rounded-2xl bg-white py-6 shadow-sm md:px-6">
+      <div className="flex flex-col gap-0.5">
+        <h2 className="text-lg font-bold">Ringkasan</h2>
+        <p className="text-sm font-normal text-muted-foreground">
+          Data Anda teranalisa disini
+        </p>
+      </div>
+      <div>
+        <Chart1 />
       </div>
     </div>
   );

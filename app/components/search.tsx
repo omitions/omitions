@@ -24,7 +24,7 @@ export function SearchDialog({
   withoutK = false,
 }: {
   children: JSX.Element;
-  withoutK: boolean;
+  withoutK?: boolean;
 }) {
   const [open, setOpen] = React.useState(false);
 

@@ -70,21 +70,30 @@ function Mobile() {
 
 function Desktop({ workspaceCount }: { workspaceCount: number }) {
   return (
-    <div className="fixed left-[var(--sidebar-width)] hidden h-full w-full max-w-[var(--sidebar-width-xl)] border-r border-input bg-background/40 md:block">
-      <div className="my-1 flex min-h-screen flex-col justify-between py-6 md:px-3">
+    <div className="fixed left-[var(--sidebar-width)] hidden h-full w-full max-w-[var(--sidebar-width-xl)] md:block">
+      <div className="my-1 flex min-h-screen flex-col justify-between py-6 md:pl-3">
         <div className="flex flex-col gap-8">
           <div className="flex items-center">
             <Link
               to="/ws"
               className="rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0"
             >
-              <h2 className="ml-4 text-xl font-bold">Beranda</h2>
+              <h2 className="mx-4 text-lg font-bold">Beranda</h2>
             </Link>
           </div>
           <div className="flex flex-col gap-6">
             <div className="flex flex-col gap-1">
-              <NavItem title="Semua Spaces" href="/ws" iconName="FileText" />
-              <NavItem title="Pengingat" href="/ws/reminder" iconName="Clock" />
+              <NavItem title="Spaces" href="/ws" iconName="Folder" />
+              <NavItem
+                title="Pengeluaran"
+                href="/ws/expenses"
+                iconName="ArrowUp"
+              />
+              <NavItem
+                title="Invoice"
+                href="/ws/invoice"
+                iconName="ReceiptText"
+              />
             </div>
           </div>
         </div>
@@ -98,9 +107,9 @@ function SidebarFooter({ count }: { count: number }) {
   return (
     <Link
       to="/ws/:id"
-      className="mx-2 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0"
+      className="mx-2 rounded-2xl shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0"
     >
-      <div className="flex w-full cursor-pointer flex-col gap-3 rounded-lg border border-input bg-background px-4 py-8">
+      <div className="flex w-full cursor-pointer flex-col gap-3 rounded-2xl bg-white px-4 py-8">
         <div className="flex items-center justify-between">
           <h4 className="text-xs font-medium">{count || 0}/10 Workspace</h4>
           <p className="text-xs font-medium text-muted-foreground">Gratis</p>
@@ -142,7 +151,8 @@ function NavItem({
       size="sm"
       className={cn(
         "w-full justify-start gap-3 rounded-full px-4 py-3 text-sm font-medium",
-        isMatch && "bg-primary/20 font-semibold hover:bg-primary/20",
+        isMatch &&
+          "border border-input bg-primary/50 font-semibold hover:bg-primary/50",
       )}
     >
       <div className="flex items-center gap-2">

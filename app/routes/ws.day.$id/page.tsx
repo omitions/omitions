@@ -34,9 +34,9 @@ export default function Page() {
   );
 
   return (
-    <div className="flex min-h-screen gap-4">
+    <div className="m-5 flex min-h-[calc(97.9vh_-_var(--header-height))] gap-4 rounded-2xl bg-white shadow-sm">
       <div className="flex-1">
-        <div className="z-50 flex h-14 w-full items-center justify-start bg-white px-4 md:hidden md:px-0">
+        <div className="z-50 flex h-14 w-full items-center justify-start bg-white px-6 md:hidden md:px-0">
           <BackButton />
         </div>
         <Content />
@@ -79,12 +79,12 @@ function Content() {
 
   if (!date || !prevDate || !nextDate) return <></>;
   return (
-    <div className="py-6 md:px-5">
+    <div className="py-6 md:px-6">
       <div className="flex flex-col gap-8">
         <div className="flex items-start justify-between">
           <div className="hidden flex-col gap-2 md:flex">
             <BackButton />
-            <h2 className="text-xl font-bold">
+            <h2 className="text-lg font-bold">
               {format(new Date(date), "d MMMM yyyy", { locale: localeId })}
             </h2>
             <Link

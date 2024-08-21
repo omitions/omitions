@@ -13,15 +13,15 @@ export default function Sidebar() {
   return (
     <div className="mt-1 flex h-full flex-col justify-between gap-1 px-2 pb-4 pt-5">
       <div className="flex flex-col items-center gap-2.5">
-        <NavItem href="/dash" iconName="Telescope" title="Analisa" />
-        <NavItem href="/ws" iconName="ScrollText" title="Beranda" />
+        <NavItem href="/dash" iconName="FileBarChart2" title="Analisa" />
+        <NavItem href="/ws" iconName="NotebookPen" title="Beranda" />
         <SearchDialog>
           <NavItem iconName="Search" title="Cari apapun.." />
         </SearchDialog>
         <NavItem href="/settings" iconName="Settings" title="Pengaturan" />
       </div>
       <div></div>
-      <div>
+      <div className="flex flex-col items-center">
         <NavItem href="/logout" iconName="LogOut" title="Keluar" />
       </div>
     </div>
@@ -60,8 +60,8 @@ function NavItem({
           prefetch={prefetch}
           variant="ghost"
           className={cn(
-            "h-9 w-9 justify-center rounded-full p-2 hover:bg-primary/20",
-            isMatch && "bg-primary/20",
+            "h-9 w-9 justify-center rounded-full p-2 hover:bg-primary/50",
+            isMatch && "border border-input bg-primary/50",
           )}
           {...props}
         >
