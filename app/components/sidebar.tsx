@@ -11,8 +11,8 @@ import { SearchDialog } from "./search";
 
 export default function Sidebar() {
   return (
-    <div className="mt-1 flex h-full flex-col justify-between gap-1 px-2 pb-4 pt-5">
-      <div className="flex flex-col items-center gap-2.5">
+    <div className="flex h-full flex-col justify-between gap-1 px-2 pb-4 pt-5">
+      <div className="flex flex-col items-center gap-1">
         <NavItem href="/dash" iconName="FileBarChart2" title="Analisa" />
         <NavItem href="/ws" iconName="NotebookPen" title="Beranda" />
         <SearchDialog>

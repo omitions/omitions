@@ -1,7 +1,6 @@
 import { Link, useLoaderData } from "@remix-run/react";
 
 import { format } from "date-fns";
-import React from "react";
 import {
   ArrowUpRight,
   CirclePlus,
@@ -11,7 +10,9 @@ import {
   Trash,
   Trash2,
 } from "lucide-react";
+import React from "react";
 
+import CreateWorkspace from "~/components/create-workspace";
 import RemoveWorkspace from "~/components/remove-workspace";
 import { Button, ButtonLink } from "~/components/ui/button";
 import {
@@ -26,9 +27,10 @@ import UpdateWorkspace from "~/components/update-workspace";
 import { generateDash } from "~/utils/misc";
 import { type TWorkspaces } from "~/utils/workspaces.server";
 
+import { cn } from "~/lib/utils";
+
 import { ActionType } from "../ws/route";
 import { loader } from "./route";
-import CreateWorkspace from "~/components/create-workspace";
 
 export default function Workspaces() {
   const { workspaces } = useLoaderData<typeof loader>();
@@ -57,8 +59,13 @@ export default function Workspaces() {
 }
 
 function WorkspaceItem({ _id, name, description }: TWorkspaces) {
+  const [isActive, setIsActive] = React.useState(false);
   return (
-    <div className="relative">
+    <div
+      className="relative"
+      onMouseEnter={() => setIsActive(true)}
+      onMouseLeave={() => setIsActive(false)}
+    >
       <ButtonLink
         variant="transparent"
         to={
@@ -66,12 +73,13 @@ function WorkspaceItem({ _id, name, description }: TWorkspaces) {
           `${generateDash(name)}-${_id}` +
           `?d=${format(new Date().setDate(new Date().getDate() - 1), "yyyy-MM")}`
         }
+        onFocus={() => setIsActive(true)}
         prefetch="intent"
         className="h-full w-full justify-start rounded-lg border-transparent bg-white px-0 shadow-sm ring-offset-background hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-70 md:min-h-48 md:border md:border-input/30 md:p-5 md:hover:border-input"
       >
         <div className="flex h-full w-10/12 flex-col flex-wrap items-start justify-between md:w-full md:gap-1">
           <div className="flex flex-col items-start gap-0.5">
-            <h4 className="text-base font-medium md:font-bold">
+            <h4 className="text-base font-medium md:font-semibold">
               {name.length > 30 ? `${name.substring(0, 30)}..` : name}
             </h4>
             <p className="text-wrap text-xs font-normal leading-relaxed text-muted-foreground md:text-sm">
@@ -85,7 +93,12 @@ function WorkspaceItem({ _id, name, description }: TWorkspaces) {
       <div className="absolute right-0 top-1 block rotate-90 md:hidden">
         <MoreMenu _id={_id} name={name} description={description} />
       </div>
-      <div className="absolute bottom-0 hidden w-full md:block">
+      <div
+        className={cn(
+          "absolute bottom-0 hidden w-full",
+          isActive && "md:block",
+        )}
+      >
         <div className="relative mb-4 flex gap-2 px-4">
           <UpdateWorkspace
             actionType={ActionType.UPDATE_WORKSPACES}
@@ -96,6 +109,7 @@ function WorkspaceItem({ _id, name, description }: TWorkspaces) {
             <Button
               className="w-full gap-2 rounded-full bg-white px-0"
               variant="outline"
+              onFocus={() => setIsActive(true)}
             >
               <PencilLine size={16} strokeWidth={2} />
               <span>Ubah</span>
@@ -111,6 +125,7 @@ function WorkspaceItem({ _id, name, description }: TWorkspaces) {
                 className="!h-11 !w-11 rounded-full px-0"
                 variant="outline"
                 size="icon"
+                onFocus={() => setIsActive(true)}
               >
                 <Trash2 size={20} strokeWidth={2} />
               </Button>

@@ -71,8 +71,8 @@ function Mobile() {
 function Desktop({ workspaceCount }: { workspaceCount: number }) {
   return (
     <div className="fixed left-[var(--sidebar-width)] hidden h-full w-full max-w-[var(--sidebar-width-xl)] md:block">
-      <div className="my-1 flex min-h-screen flex-col justify-between py-6 md:pl-3">
-        <div className="flex flex-col gap-8">
+      <div className="my-1 flex min-h-screen flex-col justify-between pb-6 pt-5 md:pl-3">
+        <div className="flex flex-col gap-6">
           <div className="flex items-center">
             <Link
               to="/ws"
@@ -107,7 +107,7 @@ function SidebarFooter({ count }: { count: number }) {
   return (
     <Link
       to="/ws/:id"
-      className="mx-2 rounded-2xl shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0"
+      className="mx-2 rounded-2xl shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 md:mx-0"
     >
       <div className="flex w-full cursor-pointer flex-col gap-3 rounded-2xl bg-white px-4 py-8">
         <div className="flex items-center justify-between">

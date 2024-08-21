@@ -68,8 +68,8 @@ function Mobile() {
 function Desktop() {
   return (
     <div className="fixed left-[var(--sidebar-width)] hidden h-full w-full max-w-[var(--sidebar-width-xl)] md:block">
-      <div className="my-1 flex min-h-screen flex-col justify-between py-6 md:pl-3">
-        <div className="flex flex-col gap-8">
+      <div className="my-1 flex min-h-screen flex-col justify-between pb-6 pt-5 md:pl-3">
+        <div className="flex flex-col gap-6">
           <div className="flex items-center">
             <Link
               to="/ws/dash"
@@ -84,7 +84,7 @@ function Desktop() {
               <NavItem
                 title="Laporan"
                 href="/dash/report"
-                iconName="GanttChart"
+                iconName="Calculator"
               />
             </div>
           </div>

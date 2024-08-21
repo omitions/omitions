@@ -50,7 +50,7 @@ function WalletItem() {
               IDR 17.240.900
             </h4>
             <p className="text-wrap text-xs font-medium leading-relaxed md:text-sm">
-              Bank JAGO {isActive ? "active" : "disabled"}
+              Bank JAGO
             </p>
           </div>
         </div>

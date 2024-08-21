@@ -43,7 +43,7 @@ export default function Index() {
 
 function Page() {
   return (
-    <div className="m-5 flex min-h-[calc(97.9vh_-_var(--header-height))] flex-col gap-14 rounded-2xl bg-white py-6 shadow-sm md:px-6">
+    <div className="m-5 flex min-h-[calc(97.5vh_-_var(--header-height))] flex-col gap-14 rounded-2xl bg-white py-6 shadow-sm md:px-6">
       <Wallets />
       <Workspaces />
     </div>
