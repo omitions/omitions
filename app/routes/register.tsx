@@ -1,9 +1,11 @@
 import type { ActionFunctionArgs, MetaFunction } from "@remix-run/node";
-import { Form, json, Link, useActionData, useFetcher } from "@remix-run/react";
+import { Form, json, Link, useActionData } from "@remix-run/react";
 
 import { Button, ButtonLink } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
+import { MybucksLogo } from "~/utils/icons";
+
 
 export const meta: MetaFunction = () => {
   return [
@@ -66,8 +68,13 @@ function RegisterForm() {
       method="post"
       className="flex w-full flex-col gap-8 lg:max-w-[354px]"
     >
-      <header className="flex flex-col gap-0.5">
-        <div className="mb-20 block lg:hidden">logo</div>
+      <header className="flex flex-col gap-2">
+        <div className="mb-20 lg:hidden fixed top-5 left-5">
+          <MybucksLogo />
+        </div>
+        <div className="hidden lg:block fixed top-12 left-12">
+          <MybucksLogo />
+        </div>
         <span className="text-4xl font-semibold">Daftar</span>
         <span className="text-sm font-normal text-muted-foreground">
           Nikmati kemudahan mencatat keuangan Anda.

@@ -2,9 +2,14 @@ import { Link } from "@remix-run/react";
 
 import { Copyright } from "lucide-react";
 
+import { MybucksLogo } from "~/utils/icons";
+
 export default function Footer() {
   return (
     <div className="mx-auto flex max-w-screen-xl flex-col gap-6">
+      <div className="hidden lg:block w-fit mb-14">
+        <MybucksLogo />
+      </div>
       <div className="flex gap-12">
         <Link to="/" className="text-xs font-semibold">
           Syarat & Ketentuan
