@@ -1,14 +1,14 @@
 import { ActionFunctionArgs, json, LoaderFunctionArgs } from "@remix-run/node";
 import { Outlet } from "@remix-run/react";
 
+import Footer from "~/components/footer";
 import RootSidebar from "~/components/sidebar";
-import { Input } from "~/components/ui/input";
 
 import { auth } from "~/utils/auth.server";
 import {
   createWorkspace,
-  updateWorkspace,
   removeWorkspace,
+  updateWorkspace,
 } from "~/utils/workspaces.server";
 
 export enum ActionType {
@@ -51,6 +51,9 @@ export default function Shell() {
           <div className="relative h-full w-full">
             <div className="mx-auto mb-28 mt-[var(--header-height)] min-h-screen overflow-hidden md:mb-0 md:mt-0">
               <Outlet />
+              <div className="ml-[var(--sidebar-width-all)] hidden w-[calc(100%_-_var(--sidebar-width-all))] pb-12 pt-8 md:block">
+                <Footer />
+              </div>
             </div>
           </div>
         </div>

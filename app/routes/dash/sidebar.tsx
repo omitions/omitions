@@ -126,7 +126,7 @@ function NavItem({
       className={cn(
         "w-full justify-start gap-3 rounded-full px-4 py-3 text-sm font-medium",
         isMatch &&
-          "border border-input bg-primary/50 font-semibold hover:bg-primary/50",
+          "border border-black bg-primary/30 font-semibold hover:bg-primary/30",
       )}
     >
       <div className="flex items-center gap-2">

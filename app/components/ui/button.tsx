@@ -16,7 +16,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         secondary:
-          "bg-primary/50 text-primary-foreground shadow-sm hover:bg-primary/40 disabled:ring-none disabled:ring-transparent ring-1 ring-ring",
+          "bg-primary/30 text-primary-foreground shadow-sm hover:bg-primary/40 disabled:ring-none disabled:ring-transparent border border-black",
         link: "text-primary underline-offset-4 hover:underline",
 
         destructive:
@@ -25,7 +25,7 @@ const buttonVariants = cva(
           "border border-input bg-secondary shadow-sm hover:border-primary hover:ring-2 hover:ring-primary/20 focus-visible:border-primary focus-visible:ring-primary/30 disabled:bg-red-500",
         default:
           "bg-primary text-primary-foreground shadow hover:bg-primary/90 ring-1 ring-foreground",
-        ghost: "hover:bg-secondary focus-visible:bg-primary/50",
+        ghost: "hover:bg-secondary focus-visible:bg-primary/30",
         transparent: "",
       },
       size: {

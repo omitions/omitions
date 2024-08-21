@@ -12,7 +12,7 @@ import { SearchDialog } from "./search";
 export default function Sidebar() {
   return (
     <div className="flex h-full flex-col justify-between gap-1 px-2 pb-4 pt-5">
-      <div className="flex flex-col items-center gap-1">
+      <div className="flex flex-col items-center gap-2">
         <NavItem href="/dash" iconName="FileBarChart2" title="Analisa" />
         <NavItem href="/ws" iconName="NotebookPen" title="Beranda" />
         <SearchDialog>
@@ -60,8 +60,8 @@ function NavItem({
           prefetch={prefetch}
           variant="ghost"
           className={cn(
-            "h-9 w-9 justify-center rounded-full p-2 hover:bg-primary/50",
-            isMatch && "border border-input bg-primary/50",
+            "h-9 w-9 justify-center rounded-full p-2 hover:bg-primary/30",
+            isMatch && "border border-black bg-primary/30",
           )}
           {...props}
         >

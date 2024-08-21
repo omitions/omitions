@@ -1,7 +1,7 @@
 export default function Loading({
   size = 20,
   fill = "#000",
-  strokeWidth = 10,
+  strokeWidth = 8,
 }: {
   size?: number;
   fill?: string;
