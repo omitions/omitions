@@ -81,11 +81,7 @@ function Desktop() {
           <div className="flex flex-col gap-6">
             <div className="flex flex-col gap-1">
               <NavItem title="Ringkasan" href="/dash" iconName="GanttChart" />
-              <NavItem
-                title="Laporan"
-                href="/dash/report"
-                iconName="Calculator"
-              />
+              <NavItem title="Laporan" iconName="Calculator" />
             </div>
           </div>
         </div>

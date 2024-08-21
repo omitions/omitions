@@ -88,16 +88,19 @@ function Desktop() {
           </div>
           <div className="flex flex-col gap-6">
             <div className="flex flex-col gap-1">
+              <NavItem title="Privasi" iconName="ShieldCheck" />
+              <NavItem title="Laporkan Masalah" iconName="Info" />
+              <NavItem title="Preferensi" iconName="Settings2" />
+              <p className="mb-1.5 ml-4 mt-6 text-xs font-medium text-muted-foreground">
+                Mengenai akun Anda
+              </p>
               <NavItem
-                title="Billing"
+                title="Langganan"
                 href="/settings/billing"
-                iconName="CreditCard"
+                iconName="Crown"
               />
-              <NavItem
-                title="Edit Profil"
-                href="/settings"
-                iconName="UserRound"
-              />
+              <NavItem title="Akun" href="/settings" iconName="UserRound" />
+              <NavItem title="Keamanan Akun" iconName="Lock" />
             </div>
           </div>
         </div>

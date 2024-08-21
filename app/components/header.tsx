@@ -1,4 +1,4 @@
-import { BookOpenText, Search } from "lucide-react";
+import { BookOpenText, ChevronDown, Search } from "lucide-react";
 
 import { SearchDialog } from "~/components/search";
 
@@ -8,7 +8,7 @@ import { Button } from "~/components/ui/button";
 export default function Header() {
   return (
     <div className="flex h-[var(--header-height)] justify-center">
-      <div className="mx-[19px] flex w-full max-w-screen-xl items-center justify-between bg-background/80 px-5 backdrop-blur-sm">
+      <div className="mx-[19px] flex w-full max-w-screen-xl items-center justify-between bg-background/60 px-5 backdrop-blur-sm">
         <div>
           <Button size="sm" variant="outline" className="gap-2">
             <BookOpenText size={16} strokeWidth={2.5} />
@@ -33,10 +33,16 @@ export default function Header() {
             </Button>
           </SearchDialog>
         </div>
-        <Avatar>
-          <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-          <AvatarFallback>CN</AvatarFallback>
-        </Avatar>
+        <div className="flex items-center gap-6">
+          <Button size="sm" className="gap-1">
+            <span>Buat Transaksi</span>
+            <ChevronDown size={16} strokeWidth={2.5} />
+          </Button>
+          <Avatar>
+            <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
+        </div>
       </div>
     </div>
   );

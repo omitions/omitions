@@ -1,7 +1,7 @@
 import { Link, LinkProps, useLocation } from "@remix-run/react";
 import { icons, MenuIcon, XIcon } from "lucide-react";
 
-import { ButtonLink } from "~/components/ui/button";
+import { Button, ButtonLink } from "~/components/ui/button";
 import { Progress } from "~/components/ui/progress";
 import {
   Sheet,
