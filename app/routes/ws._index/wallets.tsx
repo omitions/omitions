@@ -9,17 +9,14 @@ import { cn } from "~/lib/utils";
 
 export default function Wallets() {
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-4">
       <div className="block md:hidden">
         <h4 className="text-[11px] text-muted-foreground">
           SEMUA WORKSPACE ANDA
         </h4>
       </div>
-      <div className="hidden flex-col gap-0.5 md:flex">
+      <div className="hidden flex-col md:flex">
         <h2 className="text-lg font-bold">Sumber Dana</h2>
-        <p className="text-sm font-normal text-muted-foreground">
-          Sumber dana dari setiap transaksi Anda
-        </p>
       </div>
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-4 lg:grid-cols-3 xl:grid-cols-4 2xl:max-w-screen-2xl">
         <WalletItem />
@@ -46,9 +43,7 @@ function WalletItem() {
             <p className="text-wrap text-xs font-normal leading-relaxed text-muted-foreground md:text-sm">
               Saldo
             </p>
-            <h4 className="text-sm font-medium md:font-bold">
-              IDR 17.240.900
-            </h4>
+            <h4 className="text-sm font-medium md:font-bold">IDR 17.240.900</h4>
             <p className="text-wrap text-xs font-medium leading-relaxed md:text-sm">
               Bank JAGO
             </p>

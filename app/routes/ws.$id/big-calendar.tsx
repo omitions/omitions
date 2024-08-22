@@ -36,7 +36,7 @@ export default function BigCalendar({
           week: "relative",
           weekdays: "flex absolute top-0 w-full",
           weekday:
-            "flex-1 text-[10px] font-medium z-50 font-medium h-full py-2 flex items-center justify-center md:justify-start md:px-8 first:text-red-500 md:uppercase",
+            "flex-1 text-[10px] font-medium font-medium h-full py-2 flex items-center justify-center md:justify-start md:px-8 first:text-red-500 md:uppercase",
 
           caption_label: "border border-red-500 absolute right-0 hidden",
           day: "p-0 border-transparent md:border-input border-r last:border-r-transparent border-t first:text-red-500",

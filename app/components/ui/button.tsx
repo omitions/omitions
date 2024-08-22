@@ -11,7 +11,7 @@ import Loading from "../loading";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./tooltip";
 
 const buttonVariants = cva(
-  "relative inline-flex items-center justify-center whitespace-nowrap font-bold border border-transparent tracking-tight ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-70",
+  "relative inline-flex items-center justify-center whitespace-nowrap font-semibold border border-transparent tracking-tight ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-70",
   {
     variants: {
       variant: {
@@ -29,7 +29,7 @@ const buttonVariants = cva(
         transparent: "",
       },
       size: {
-        sm: "h-10 md:h-8 rounded-full px-6 text-xs",
+        sm: "h-10 md:h-8 rounded-full px-4 text-xs",
         lg: "h-11 px-9 rounded-full text-sm",
         icon: "h-9 w-9 md:h-8 md:w-8 rounded-full",
       },

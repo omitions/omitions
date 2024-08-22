@@ -1,6 +1,6 @@
 import { LinkProps, useLocation } from "@remix-run/react";
 
-import { icons } from "lucide-react";
+import { Command, icons } from "lucide-react";
 
 import { Button, ButtonLink } from "~/components/ui/button";
 
@@ -71,11 +71,16 @@ function NavItem({
       <TooltipContent align="center" side="right" sideOffset={3}>
         <p className={cn(isMatch ? "font-medium" : "font-medium")}>{title}</p>
         {iconName === "Search" && (
-          <p className="mt-1 text-xs text-muted-foreground">
+          <p className="mt-1.5 flex items-center gap-1.5 text-xs text-muted-foreground">
             Tekan{" "}
-            <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-              <span className="text-xs">⌘</span>K
-            </kbd>
+            <span className="flex items-center gap-1">
+              <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                <Command size={10} strokeWidth={2} />
+              </kbd>
+              <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                <span className="text-xs">K</span>
+              </kbd>
+            </span>
           </p>
         )}
       </TooltipContent>

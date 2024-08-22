@@ -106,7 +106,7 @@ function MonthNavigation({
       <div className="flex items-center gap-2">
         <Button
           size="sm"
-          variant="secondary"
+          variant="outline"
           onClick={() => {
             setMonth(today);
             setSearchParams(

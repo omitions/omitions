@@ -85,7 +85,9 @@ function Content() {
           <div className="hidden flex-col gap-2 md:flex">
             <BackButton />
             <h2 className="text-lg font-bold">
-              {format(new Date(date), "d MMMM yyyy", { locale: localeId })}
+              {format(new Date(date), "EEEE dd, MMMM yyyy", {
+                locale: localeId,
+              })}
             </h2>
             <Link
               to={
@@ -158,7 +160,7 @@ function Header() {
   const { transactions } = useLoaderData<typeof loader>();
 
   const [searchParams] = useSearchParams();
-  const fetcher = useFetcher({ key: "create-transaction" });
+  // const fetcher = useFetcher({ key: "create-transaction" });
 
   const date = new Date(searchParams.get("d")?.toString() || "") ?? new Date();
 
@@ -167,25 +169,20 @@ function Header() {
     <div className="flex items-end justify-between gap-3 pb-6">
       <div>
         <p className="text-xs font-semibold uppercase text-muted-foreground">
-          {format(date, "EEEE", { locale: localeId })}
+          Transaksi
         </p>
       </div>
       {transactions?.length ? (
         <div className="flex items-center gap-3">
-          <Button size="sm" variant="secondary" className="flex gap-1.5">
+          <Button size="sm" variant="ghost" className="flex gap-1.5">
             <Filter size={18} strokeWidth={2} />
             <span>Filters</span>
           </Button>
           <CreateTransaction
-            actionType="CREATE_TRANSACTION"
             date={date}
-            fetcher={fetcher}
-          >
-            <Button size="sm" variant="secondary" className="flex gap-1.5">
-              <Plus size={18} strokeWidth={2} />
-              <span>Catat transaksi</span>
-            </Button>
-          </CreateTransaction>
+            // actionType="CREATE_TRANSACTION"
+            // fetcher={fetcher}
+          />
         </div>
       ) : (
         <div></div>

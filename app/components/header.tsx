@@ -1,9 +1,13 @@
-import { BookOpenText, ChevronDown, Search } from "lucide-react";
+import { BookOpenText, ChevronDown, Command, Search } from "lucide-react";
 
 import { SearchDialog } from "~/components/search";
-
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import { Button } from "~/components/ui/button";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "~/components/ui/popover";
 
 export default function Header() {
   return (
@@ -11,7 +15,7 @@ export default function Header() {
       <div className="max-w-screen-3xl mx-[19px] flex w-full items-center justify-between bg-background/60 px-5 backdrop-blur-sm">
         <div>
           <Button size="sm" variant="outline" className="gap-2">
-            <BookOpenText size={16} strokeWidth={2.5} />
+            <BookOpenText size={16} strokeWidth={2} />
             <span>Pelajari</span>
           </Button>
         </div>
@@ -20,7 +24,7 @@ export default function Header() {
             <Button
               size="sm"
               variant="outline"
-              className="!h-11 w-full justify-start gap-2 border-foreground/50 hover:border-foreground bg-white px-5"
+              className="relative !h-11 w-full justify-start gap-2 border-foreground/50 bg-white px-5 hover:border-foreground hover:shadow-sm hover:ring-0"
             >
               <Search
                 size={17}
@@ -30,14 +34,19 @@ export default function Header() {
               <span className="text-sm font-medium text-muted-foreground">
                 Telusuri
               </span>
+              <div className="absolute right-5 flex items-center gap-1.5">
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  <Command size={10} strokeWidth={2} />
+                </kbd>
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  <span className="text-xs">K</span>
+                </kbd>
+              </div>
             </Button>
           </SearchDialog>
         </div>
         <div className="flex items-center gap-6">
-          <Button size="sm" className="gap-1">
-            <span>Buat Transaksi</span>
-            <ChevronDown size={16} strokeWidth={2.5} />
-          </Button>
+          <Create />
           <Avatar>
             <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
             <AvatarFallback>CN</AvatarFallback>
@@ -45,5 +54,26 @@ export default function Header() {
         </div>
       </div>
     </div>
+  );
+}
+
+function Create() {
+  return (
+    <Popover modal={false}>
+      <PopoverTrigger asChild>
+        <Button size="sm" className="gap-2" variant="secondary">
+          <span>Baru</span>
+          <ChevronDown size={16} strokeWidth={2} />
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-56" align="end" sideOffset={12}>
+        <Button
+          variant="transparent"
+          className="w-full rounded-md border border-red-500 p-0 font-medium"
+        >
+          Buat transaksi hari ini?
+        </Button>
+      </PopoverContent>
+    </Popover>
   );
 }

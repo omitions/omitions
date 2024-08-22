@@ -6,6 +6,9 @@ import {
   MetaFunction,
 } from "@remix-run/node";
 
+import { id as localeId } from "date-fns/locale";
+import { format } from "date-fns";
+
 import Header from "~/components/header";
 
 import { regenerateDash } from "~/utils/misc";
@@ -15,9 +18,9 @@ import Sidebar from "../ws/sidebar";
 
 import Page from "./page";
 
-export const meta: MetaFunction = () => {
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
   return [
-    { title: " | mybucks.today" },
+    { title: data?.workspaceName + " | " + data?.date },
     { name: "description", content: "Welcome to Remix!" },
   ];
 };
@@ -32,12 +35,20 @@ export async function loader({ params, request }: LoaderFunctionArgs) {
     return json({
       transactions: [],
       error: "Error loader",
+      workspaceName: "",
+      date: "",
     });
 
   let transactions = await getTransactions(request, workspaceId, d);
+  let workspaceName = params.id
+    ? regenerateDash(params.id).withoutTheLast()
+    : "-";
 
   return defer({
     transactions,
+    error: "",
+    workspaceName,
+    date: format(new Date(d), "dd, MMM yyyy", { locale: localeId }),
   });
 }
 

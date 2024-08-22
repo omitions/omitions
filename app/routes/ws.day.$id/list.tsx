@@ -47,15 +47,10 @@ export default function List() {
               </p>
             </div>
             <CreateTransaction
-              actionType="CREATE_TRANSACTION"
               date={date}
-              fetcher={fetcher}
-            >
-              <Button size="sm" variant="secondary" className="flex gap-1.5">
-                <Plus size={18} strokeWidth={2} />
-                <span>Catat transaksi</span>
-              </Button>
-            </CreateTransaction>
+              // actionType="CREATE_TRANSACTION"
+              // fetcher={fetcher}
+            />
           </div>
         </div>
       )}
