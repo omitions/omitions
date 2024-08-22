@@ -48,7 +48,7 @@ export default function Workspaces() {
           Semua catatan keuangan Anda ada disini
         </p>
       </div>
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-4 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-4 lg:grid-cols-3 xl:grid-cols-4 2xl:max-w-screen-2xl">
         {workspaces.map((item) => (
           <WorkspaceItem key={item._id} {...item} />
         ))}
@@ -79,7 +79,7 @@ function WorkspaceItem({ _id, name, description }: TWorkspaces) {
       >
         <div className="flex h-full w-10/12 flex-col flex-wrap items-start justify-between md:w-full md:gap-1">
           <div className="flex flex-col items-start gap-0.5">
-            <h4 className="text-base font-medium md:font-semibold">
+            <h4 className="text-sm font-medium md:font-bold">
               {name.length > 30 ? `${name.substring(0, 30)}..` : name}
             </h4>
             <p className="text-wrap text-xs font-normal leading-relaxed text-muted-foreground md:text-sm">
@@ -201,7 +201,7 @@ function ButtonCreateWorkspace() {
       <CreateWorkspace actionType={ActionType.CREATE_WORKSPACES}>
         <button className="h-full w-full justify-start rounded-lg border border-dashed border-input/30 bg-white px-0 shadow-sm ring-offset-background hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-70 md:min-h-48 md:p-5">
           <div className="flex h-full flex-col flex-wrap items-center justify-center gap-0.5 md:w-full md:gap-3">
-            <CirclePlus size={24} strokeWidth={2} />
+            <CirclePlus size={24} strokeWidth={1.5} />
             <h3 className="text-xs font-medium md:text-sm">Buat workspace</h3>
           </div>
         </button>

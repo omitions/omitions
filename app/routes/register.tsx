@@ -6,7 +6,6 @@ import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 import { MybucksLogo } from "~/utils/icons";
 
-
 export const meta: MetaFunction = () => {
   return [
     { title: "Registrasi | mybucks.today" },
@@ -69,10 +68,10 @@ function RegisterForm() {
       className="flex w-full flex-col gap-8 lg:max-w-[354px]"
     >
       <header className="flex flex-col gap-2">
-        <div className="mb-20 lg:hidden fixed top-5 left-5">
+        <div className="fixed left-5 top-5 mb-20 lg:hidden">
           <MybucksLogo />
         </div>
-        <div className="hidden lg:block fixed top-12 left-12">
+        <div className="fixed left-12 top-12 hidden lg:block">
           <MybucksLogo />
         </div>
         <span className="text-4xl font-semibold">Daftar</span>

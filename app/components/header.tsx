@@ -8,7 +8,7 @@ import { Button } from "~/components/ui/button";
 export default function Header() {
   return (
     <div className="flex h-[var(--header-height)] justify-center">
-      <div className="mx-[19px] flex w-full max-w-screen-xl items-center justify-between bg-background/60 px-5 backdrop-blur-sm">
+      <div className="max-w-screen-3xl mx-[19px] flex w-full items-center justify-between bg-background/60 px-5 backdrop-blur-sm">
         <div>
           <Button size="sm" variant="outline" className="gap-2">
             <BookOpenText size={16} strokeWidth={2.5} />
@@ -20,7 +20,7 @@ export default function Header() {
             <Button
               size="sm"
               variant="outline"
-              className="!h-11 w-full justify-start gap-2 border-black bg-white px-5"
+              className="!h-11 w-full justify-start gap-2 border-foreground/50 hover:border-foreground bg-white px-5"
             >
               <Search
                 size={17}

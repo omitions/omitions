@@ -6,8 +6,8 @@ import { MybucksLogo } from "~/utils/icons";
 
 export default function Footer() {
   return (
-    <div className="mx-auto flex max-w-screen-xl flex-col gap-6">
-      <div className="hidden lg:block w-fit mb-14">
+    <div className="max-w-screen-3xl mx-auto flex flex-col gap-6">
+      <div className="mb-14 hidden w-fit lg:block">
         <MybucksLogo />
       </div>
       <div className="flex gap-12">
