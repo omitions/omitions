@@ -65,7 +65,7 @@ function Transaction({
   date_time,
 }: Pick<TTransactions, "type" | "amount" | "description" | "date_time">) {
   return (
-    <div className="relative flex h-full cursor-pointer items-center justify-between gap-4 overflow-hidden border border-transparent p-4 hover:border-input hover:shadow-md">
+    <div className="relative flex h-full cursor-pointer items-center justify-between gap-4 overflow-hidden border border-transparent px-6 py-4 last:rounded-b-2xl hover:border-input hover:shadow-md">
       <div className="flex items-center gap-4">
         <div>
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary">
@@ -74,8 +74,8 @@ function Transaction({
             {type === "invoice" && <MoveHorizontal size={20} strokeWidth={2} />}
           </div>
         </div>
-        <div className="flex flex-col gap-0.5">
-          <h3 className="w-full max-w-48 whitespace-nowrap text-base font-semibold">
+        <div className="flex flex-col">
+          <h3 className="w-full max-w-48 whitespace-nowrap text-sm font-bold">
             {description}
           </h3>
           <p className="whitespace-nowrap text-sm font-normal text-muted-foreground">

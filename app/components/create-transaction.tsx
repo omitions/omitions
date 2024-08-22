@@ -2,8 +2,17 @@ import { useParams } from "@remix-run/react";
 
 import { format } from "date-fns";
 import { id as localeId } from "date-fns/locale";
-import { Plus } from "lucide-react";
+import {
+  ArrowDown,
+  ArrowLeft,
+  ArrowRight,
+  ArrowUp,
+  FileInput,
+  MoveHorizontal,
+  Plus,
+} from "lucide-react";
 import React from "react";
+import { NumericFormat } from "react-number-format";
 
 import { Button } from "./ui/button";
 import {
@@ -14,11 +23,24 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "./ui/sheet";
+import { Input, inputVariants } from "./ui/input";
 
 import { regenerateDash } from "~/utils/misc";
 
+import { cn } from "~/lib/utils";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
+import { SelectPortal } from "@radix-ui/react-select";
+
 export default function CreateTransaction({ date }: { date: Date }) {
   const [isOpen, setIsOpen] = React.useState(false);
+  const [trxType, setTrxType] = React.useState<string | undefined>(undefined);
+
   const params = useParams();
 
   const workspaceName = params.id
@@ -43,6 +65,50 @@ export default function CreateTransaction({ date }: { date: Date }) {
             {format(date, "EEEE dd, MMMM yyyy", { locale: localeId })}
           </SheetTitle>
         </SheetHeader>
+        <div className="mx-8 flex flex-col gap-4">
+          <Input
+            type="text"
+            name="description"
+            required
+            placeholder="Tambahkan judul transaksi"
+            className="placeholder:font-normal"
+          />
+          <NumericFormat
+            thousandSeparator="."
+            decimalSeparator=","
+            name="amount"
+            allowLeadingZeros
+            allowNegative={false}
+            placeholder="Nominal"
+            prefix="IDR "
+            className={cn(inputVariants(), "placeholder:font-normal")}
+          />
+          <Select>
+            <SelectTrigger className="w-full gap-1 text-black">
+              <SelectValue placeholder="Tipe transaksi" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="cash_in">
+                <div className="flex items-center gap-3">
+                  <Plus size={16} strokeWidth={2} />
+                  <span>Pemasukan</span>
+                </div>
+              </SelectItem>
+              <SelectItem value="cash_out">
+                <div className="flex items-center gap-3">
+                  <ArrowUp size={16} strokeWidth={2} />
+                  <span>Pengeluaran</span>
+                </div>
+              </SelectItem>
+              <SelectItem value="invoice">
+                <div className="flex items-center gap-3">
+                  <MoveHorizontal size={16} strokeWidth={2} />
+                  <span>Invoice</span>
+                </div>
+              </SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
       </SheetContent>
     </Sheet>
   );

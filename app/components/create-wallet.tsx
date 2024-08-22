@@ -10,6 +10,7 @@ import { Input, inputVariants } from "./ui/input";
 import {
   Sheet,
   SheetContent,
+  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -30,6 +31,7 @@ export default function CreateWallet({
       <SheetContent withCloseButton className="sm:max-w-lg">
         <SheetHeader>
           <SheetTitle>Buat Dompet Baru</SheetTitle>
+          <SheetDescription></SheetDescription>
         </SheetHeader>
         <Form
           action="/ws"
@@ -42,7 +44,7 @@ export default function CreateWallet({
               type="text"
               name="name"
               required
-              variant="ghost"
+              // variant="ghost"
               placeholder="Masukkan nama dompet"
             />
             <NumericFormat
@@ -53,7 +55,7 @@ export default function CreateWallet({
               allowNegative={false}
               placeholder="Saldo dompet Anda"
               prefix="IDR "
-              className={cn(inputVariants({ variant: "ghost" }))}
+              className={cn(inputVariants({}))}
             />
           </div>
           <Button type="submit">Buat Dompet</Button>

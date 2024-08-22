@@ -7,10 +7,10 @@ import { cn } from "~/lib/utils";
 
 import { Button } from "./ui/button";
 import { Input, inputVariants } from "./ui/input";
-import { Textarea } from "./ui/textarea";
 import {
   Sheet,
   SheetContent,
+  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -30,7 +30,8 @@ export default function UpdateWallet({
       <SheetTrigger asChild>{children}</SheetTrigger>
       <SheetContent withCloseButton className="sm:max-w-lg">
         <SheetHeader>
-          <SheetTitle>Update Dompet Anda</SheetTitle>
+          <SheetTitle>Ubah Dompet Anda</SheetTitle>
+          <SheetDescription></SheetDescription>
         </SheetHeader>
         <Form
           action="/ws"
@@ -43,7 +44,7 @@ export default function UpdateWallet({
               type="text"
               name="name"
               required
-              variant="ghost"
+              // variant="ghost"
               placeholder="Masukkan nama dompet"
             />
             <NumericFormat
@@ -54,7 +55,7 @@ export default function UpdateWallet({
               allowNegative={false}
               placeholder="Saldo dompet Anda"
               prefix="IDR "
-              className={cn(inputVariants({ variant: "ghost" }))}
+              className={cn(inputVariants({}))}
             />
           </div>
           <Button type="submit">Buat</Button>

@@ -45,12 +45,9 @@ export default function Header() {
             </Button>
           </SearchDialog>
         </div>
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-4">
           <Create />
-          <Avatar>
-            <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
+          <Account />
         </div>
       </div>
     </div>
@@ -65,6 +62,27 @@ function Create() {
           <span>Baru</span>
           <ChevronDown size={16} strokeWidth={2} />
         </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-56" align="center" sideOffset={12}>
+        <Button
+          variant="transparent"
+          className="w-full rounded-md border border-red-500 p-0 font-medium"
+        >
+          Buat transaksi hari ini?
+        </Button>
+      </PopoverContent>
+    </Popover>
+  );
+}
+
+function Account() {
+  return (
+    <Popover modal={false}>
+      <PopoverTrigger asChild>
+        <Avatar className="cursor-pointer">
+          <AvatarImage src="" alt="@shadcn" />
+          <AvatarFallback>OP</AvatarFallback>
+        </Avatar>
       </PopoverTrigger>
       <PopoverContent className="w-56" align="end" sideOffset={12}>
         <Button

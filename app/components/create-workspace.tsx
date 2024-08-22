@@ -7,6 +7,7 @@ import { Input } from "./ui/input";
 import {
   Sheet,
   SheetContent,
+  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -28,6 +29,7 @@ export default function CreateWorkspace({
       <SheetContent withCloseButton className="sm:max-w-lg">
         <SheetHeader>
           <SheetTitle>Buat Workspace Baru</SheetTitle>
+          <SheetDescription></SheetDescription>
         </SheetHeader>
         <Form
           action="/ws"

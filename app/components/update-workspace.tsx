@@ -7,6 +7,7 @@ import { Input } from "./ui/input";
 import {
   Sheet,
   SheetContent,
+  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -33,7 +34,8 @@ export default function CreateWorkspace({
       <SheetTrigger asChild>{children}</SheetTrigger>
       <SheetContent withCloseButton className="sm:max-w-lg">
         <SheetHeader>
-          <SheetTitle>Ubah Workspace Baru</SheetTitle>
+          <SheetTitle>Ubah Workspace</SheetTitle>
+          <SheetDescription></SheetDescription>
         </SheetHeader>
         <Form
           action="/ws"
@@ -47,14 +49,14 @@ export default function CreateWorkspace({
               name="name"
               required
               defaultValue={workspaceName}
-              variant="ghost"
+              // variant="ghost"
               placeholder="Masukkan nama workspace"
             />
             <Textarea
               name="description"
               required
               defaultValue={workspaceDescription}
-              variant="ghost"
+              // variant="ghost"
               placeholder="Masukkan deskripsi workspace"
             />
           </div>

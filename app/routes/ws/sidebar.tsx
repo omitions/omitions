@@ -7,6 +7,9 @@ import {
   Sheet,
   SheetClose,
   SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
   SheetTrigger,
 } from "~/components/ui/sheet";
 
@@ -40,6 +43,10 @@ function Mobile() {
           </button>
         </SheetTrigger>
         <SheetContent side="left">
+          <SheetHeader>
+            <SheetTitle></SheetTitle>
+            <SheetDescription></SheetDescription>
+          </SheetHeader>
           <div className="flex flex-col gap-6">
             <div>
               <SheetClose>
