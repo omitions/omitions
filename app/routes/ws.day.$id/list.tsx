@@ -1,12 +1,11 @@
 import { useFetcher, useLoaderData, useSearchParams } from "@remix-run/react";
 
-import { ArrowUp, MoveHorizontal, Plus, Wallet } from "lucide-react";
+import { ArrowUp, Plus, ReceiptText, Wallet } from "lucide-react";
 
-import { Button } from "~/components/ui/button";
 import CreateTransaction from "~/components/create-transaction";
 
-import toIDR from "~/utils/currency";
 import { TTransactions } from "~/utils/cashflows.server";
+import toIDR from "~/utils/currency";
 
 import { cn } from "~/lib/utils";
 
@@ -71,7 +70,7 @@ function Transaction({
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary">
             {type === "cash_out" && <ArrowUp size={20} strokeWidth={2} />}
             {type === "cash_in" && <Plus size={20} strokeWidth={2} />}
-            {type === "invoice" && <MoveHorizontal size={20} strokeWidth={2} />}
+            {type === "invoice" && <ReceiptText size={20} strokeWidth={2} />}
           </div>
         </div>
         <div className="flex flex-col">
@@ -105,8 +104,8 @@ function Transaction({
           <div className="rounded-full bg-secondary p-2">
             <Wallet
               size={18}
-              className="stroke-muted-foreground"
               strokeWidth={2}
+              className="stroke-muted-foreground"
             />
           </div>
           <p className="text-sm font-medium text-muted-foreground">Bank JAGO</p>

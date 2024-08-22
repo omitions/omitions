@@ -23,7 +23,7 @@ export default function Footer() {
       </div>
       <p className="hidden items-start gap-1 text-wrap text-xs font-normal leading-relaxed text-muted-foreground md:flex">
         <span>
-          <Copyright size={14} strokeWidth={1.5} className="mt-[3px]" />
+          <Copyright size={14} strokeWidth={1.5} className="mt-[2.5px]" />
         </span>
         <span>
           {new Date().getFullYear()} PT Abadi Digital Bersama, Tbk. Jl. Prof.

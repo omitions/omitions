@@ -5,8 +5,8 @@ import { NumericFormat } from "react-number-format";
 
 import { cn } from "~/lib/utils";
 
-import { Button } from "./ui/button";
-import { Input, inputVariants } from "./ui/input";
+import { Button } from "~/components/ui/button";
+import { Input, inputVariants } from "~/components/ui/input";
 import {
   Sheet,
   SheetContent,
@@ -14,7 +14,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "./ui/sheet";
+} from "~/components/ui/sheet";
 
 export default function UpdateWallet({
   actionType,

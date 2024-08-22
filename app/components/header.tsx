@@ -27,21 +27,21 @@ export default function Header() {
               className="relative !h-11 w-full justify-start gap-2 border-foreground/50 bg-white px-5 hover:border-foreground hover:shadow-sm hover:ring-0"
             >
               <Search
-                size={17}
+                size={18}
                 strokeWidth={2.5}
                 className="text-muted-foreground"
               />
               <span className="text-sm font-medium text-muted-foreground">
                 Telusuri
               </span>
-              <div className="absolute right-5 flex items-center gap-1.5">
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+              <span className="absolute right-5 flex items-center gap-0.5">
+                <kbd className="pointer-events-none inline-flex h-5 w-5 select-none place-content-center items-center gap-1 rounded border bg-muted font-mono text-[10px] font-medium text-muted-foreground opacity-100">
                   <Command size={10} strokeWidth={2} />
                 </kbd>
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                <kbd className="pointer-events-none inline-flex h-5 w-5 select-none place-content-center items-center gap-1 rounded border bg-muted font-mono text-[10px] font-medium text-muted-foreground opacity-100">
                   <span className="text-xs">K</span>
                 </kbd>
-              </div>
+              </span>
             </Button>
           </SearchDialog>
         </div>

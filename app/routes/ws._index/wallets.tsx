@@ -1,10 +1,11 @@
-import { CirclePlus, PencilLine, Trash2 } from "lucide-react";
+import { CirclePlus, CreditCard, PencilLine, Trash2 } from "lucide-react";
 import React from "react";
 
 import CreateWallet from "~/components/create-wallet";
 import RemoveWallet from "~/components/remove-wallet";
 import { Button } from "~/components/ui/button";
 import UpdateWallet from "~/components/update-wallet";
+
 import { cn } from "~/lib/utils";
 
 export default function Wallets() {
@@ -36,17 +37,24 @@ function WalletItem() {
     >
       <button
         onFocus={() => setIsActive(true)}
-        className="h-full w-full justify-start rounded-lg border-transparent bg-white px-0 shadow-sm ring-offset-background hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-70 md:min-h-48 md:border md:border-input/30 md:p-5 md:hover:border-input"
+        className="h-full w-full justify-start rounded-xl border-transparent bg-white px-0 shadow-sm ring-offset-background hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-70 md:min-h-44 md:border md:border-input/50 md:p-5 md:hover:border-input"
       >
         <div className="flex h-full w-10/12 flex-col flex-wrap items-start justify-between md:w-full md:gap-1">
-          <div className="flex flex-col items-start gap-0.5">
-            <p className="text-wrap text-xs font-normal leading-relaxed text-muted-foreground md:text-sm">
-              Saldo
-            </p>
-            <h4 className="text-sm font-medium md:font-bold">IDR 17.240.900</h4>
-            <p className="text-wrap text-xs font-medium leading-relaxed md:text-sm">
-              Bank JAGO
-            </p>
+          <div className="flex items-start gap-3">
+            <div className="mt-0.5 h-[18px] place-content-center rounded-sm border border-orange-400 bg-gradient-to-b from-orange-400/20 to-orange-400/30 px-0.5">
+              <CreditCard size={12} strokeWidth={2.5} className="text-black" />
+            </div>
+            <div className="flex flex-col items-start gap-0.5">
+              <p className="text-xs font-normal text-muted-foreground md:text-sm">
+                Saldo
+              </p>
+              <h4 className="whitespace-nowrap text-wrap text-sm font-medium leading-tight md:font-bold">
+                IDR 17.240.900
+              </h4>
+              <p className="whitespace-nowrap text-wrap text-xs font-medium leading-snug md:text-sm">
+                Bank JAGO
+              </p>
+            </div>
           </div>
         </div>
       </button>
@@ -87,9 +95,9 @@ function WalletItem() {
 
 function ButtonCreateWallet() {
   return (
-    <div className="relative rounded-lg shadow-sm hover:shadow-md">
+    <div className="relative rounded-xl shadow-sm hover:shadow-md">
       <CreateWallet actionType="HELLOO">
-        <button className="h-full w-full justify-start rounded-lg border border-dashed border-input/30 bg-white px-0 shadow-sm ring-offset-background hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-70 md:min-h-48 md:p-5">
+        <button className="h-full w-full justify-start rounded-xl border border-input/50 bg-white px-0 shadow-sm ring-offset-background hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-70 md:min-h-44 md:p-5 md:hover:border-input">
           <div className="flex h-full flex-col flex-wrap items-center justify-center gap-0.5 md:w-full md:gap-3">
             <CirclePlus size={24} strokeWidth={1.5} />
             <h3 className="text-xs font-medium md:text-sm">Buat dompet</h3>

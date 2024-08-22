@@ -2,19 +2,19 @@ import { useParams } from "@remix-run/react";
 
 import { format } from "date-fns";
 import { id as localeId } from "date-fns/locale";
-import {
-  ArrowDown,
-  ArrowLeft,
-  ArrowRight,
-  ArrowUp,
-  FileInput,
-  MoveHorizontal,
-  Plus,
-} from "lucide-react";
+import { ArrowUp, Plus, ReceiptText } from "lucide-react";
 import React from "react";
 import { NumericFormat } from "react-number-format";
 
-import { Button } from "./ui/button";
+import { Button } from "~/components/ui/button";
+import { Input, inputVariants } from "~/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "~/components/ui/select";
 import {
   Sheet,
   SheetContent,
@@ -22,20 +22,11 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "./ui/sheet";
-import { Input, inputVariants } from "./ui/input";
+} from "~/components/ui/sheet";
 
 import { regenerateDash } from "~/utils/misc";
 
 import { cn } from "~/lib/utils";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "./ui/select";
-import { SelectPortal } from "@radix-ui/react-select";
 
 export default function CreateTransaction({ date }: { date: Date }) {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -102,7 +93,7 @@ export default function CreateTransaction({ date }: { date: Date }) {
               </SelectItem>
               <SelectItem value="invoice">
                 <div className="flex items-center gap-3">
-                  <MoveHorizontal size={16} strokeWidth={2} />
+                  <ReceiptText size={16} strokeWidth={2} />
                   <span>Invoice</span>
                 </div>
               </SelectItem>

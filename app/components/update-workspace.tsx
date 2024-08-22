@@ -2,8 +2,8 @@ import { Form } from "@remix-run/react";
 
 import React from "react";
 
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
+import { Button } from "~/components/ui/button";
+import { Input } from "~/components/ui/input";
 import {
   Sheet,
   SheetContent,
@@ -11,8 +11,8 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "./ui/sheet";
-import { Textarea } from "./ui/textarea";
+} from "~/components/ui/sheet";
+import { Textarea } from "~/components/ui/textarea";
 
 export default function CreateWorkspace({
   actionType,

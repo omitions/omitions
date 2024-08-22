@@ -6,29 +6,33 @@ import { Button, ButtonLink } from "~/components/ui/button";
 
 import { cn } from "~/lib/utils";
 
-import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "~/components/ui/tooltip";
 import { SearchDialog } from "./search";
 
 export default function Sidebar() {
   return (
     <div className="flex h-full flex-col justify-between gap-1 px-2 pb-4 pt-5">
       <div className="flex flex-col items-center gap-2">
-        <NavItem href="/dash" iconName="FileBarChart2" title="Analisa" />
-        <NavItem href="/ws" iconName="NotebookPen" title="Beranda" />
+        <RootNavItem href="/dash" iconName="FileBarChart2" title="Analisa" />
+        <RootNavItem href="/ws" iconName="NotebookPen" title="Beranda" />
         <SearchDialog>
-          <NavItem iconName="Search" title="Cari apapun.." />
+          <RootNavItem iconName="Search" title="Cari apapun.." />
         </SearchDialog>
-        <NavItem href="/settings" iconName="Settings" title="Pengaturan" />
+        <RootNavItem href="/settings" iconName="Settings" title="Pengaturan" />
       </div>
       <div></div>
       <div className="flex flex-col items-center">
-        <NavItem href="/logout" iconName="LogOut" title="Keluar" />
+        <RootNavItem href="/logout" iconName="LogOut" title="Keluar" />
       </div>
     </div>
   );
 }
 
-function NavItem({
+function RootNavItem({
   href,
   prefetch,
   iconName,
@@ -65,19 +69,19 @@ function NavItem({
           )}
           {...props}
         >
-          <Icon size={18} strokeWidth={isMatch ? 2 : 1.5} />
+          <Icon size={18} strokeWidth={isMatch ? 2.5 : 2} />
         </Comp>
       </TooltipTrigger>
-      <TooltipContent align="center" side="right" sideOffset={3}>
+      <TooltipContent align="center" side="right" sideOffset={8}>
         <p className={cn(isMatch ? "font-medium" : "font-medium")}>{title}</p>
         {iconName === "Search" && (
           <p className="mt-1.5 flex items-center gap-1.5 text-xs text-muted-foreground">
             Tekan{" "}
-            <span className="flex items-center gap-1">
-              <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+            <span className="flex items-center gap-0.5">
+              <kbd className="pointer-events-none inline-flex h-5 w-5 select-none place-content-center items-center gap-1 rounded border bg-muted font-mono text-[10px] font-medium text-muted-foreground opacity-100">
                 <Command size={10} strokeWidth={2} />
               </kbd>
-              <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+              <kbd className="pointer-events-none inline-flex h-5 w-5 select-none place-content-center items-center gap-1 rounded border bg-muted font-mono text-[10px] font-medium text-muted-foreground opacity-100">
                 <span className="text-xs">K</span>
               </kbd>
             </span>
