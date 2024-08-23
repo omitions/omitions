@@ -80,7 +80,7 @@ function WorkspaceItem({ _id, name, description }: TWorkspaces) {
       >
         <div className="flex h-full w-10/12 flex-col flex-wrap items-start justify-between md:w-full md:gap-1">
           <div className="flex items-start gap-3">
-            <div className="mt-0.5 h-[18px] place-content-center rounded-sm border border-primary bg-gradient-to-b from-primary/20 to-primary/30 px-0.5">
+            <div className="mt-0.5 h-[20px] place-content-center rounded-sm border border-primary bg-gradient-to-b from-primary/20 to-primary/30 px-0.5">
               <Text size={12} strokeWidth={2.5} className="text-black" />
             </div>
             <div className="flex flex-col items-start gap-0.5">
