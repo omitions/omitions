@@ -76,81 +76,82 @@ function Content() {
     nextDate = new Date(date);
     nextDate.setDate(nextDate.getDate() + 1);
   }
-
   if (!date || !prevDate || !nextDate) return <></>;
   return (
-    <div className="pt-6">
+    <div className="">
       <div className="flex flex-col gap-6">
-        <div className="flex items-start justify-between md:px-6">
-          <div className="hidden flex-col gap-2 md:flex">
-            <BackButton />
-            <h2 className="text-lg font-bold">
-              {format(new Date(date), "EEEE dd, MMMM yyyy", {
-                locale: localeId,
-              })}
-            </h2>
-            <Link
-              to={
-                "/ws/" +
-                `${generateDash(workspaceName)}-${workspaceId}` +
-                `?d=${format(new Date().setDate(new Date().getDate() - 1), "yyyy-MM")}`
-              }
-              className="flex items-center gap-2.5"
-            >
-              <WorkspaceIcon />
-              <h3 className="text-base font-medium underline">
-                {title.length > 35 ? `${title.substring(0, 35)}..` : title}
-              </h3>
-            </Link>
-          </div>
-          <div className="flex items-center gap-6">
-            <div className="flex items-center gap-1">
-              <Button
-                size="sm"
-                variant="ghost"
-                className="!h-10 !w-10 p-0"
-                onClick={() => {
-                  setSearchParams(
-                    (prev) => {
-                      prev.set(
-                        "d",
-                        `${format(new Date(prevDate), "yyyy-MM-dd")}`,
-                      );
-                      return prev;
-                    },
-                    { preventScrollReset: true },
-                  );
-                }}
+        <div className="fixed z-50 w-[calc(100%_-_var(--sidebar-width-all)_-_40px)] max-w-screen-2xl rounded-t-2xl border-b border-input bg-white pt-6 2xl:max-w-[1496px]">
+          <div className="flex items-start justify-between md:px-6">
+            <div className="hidden flex-col gap-2 md:flex">
+              <BackButton />
+              <h2 className="text-lg font-bold">
+                {format(new Date(date), "EEEE dd, MMMM yyyy", {
+                  locale: localeId,
+                })}
+              </h2>
+              <Link
+                to={
+                  "/ws/" +
+                  `${generateDash(workspaceName)}-${workspaceId}` +
+                  `?d=${format(new Date().setDate(new Date().getDate() - 1), "yyyy-MM")}`
+                }
+                className="flex items-center gap-2.5"
               >
-                {new Date(prevDate).getDate()}
-              </Button>
-              <Button size="sm" variant="outline" className="!h-10 !w-10 p-0">
-                {new Date(date).getDate()}
-              </Button>
-              <Button
-                size="sm"
-                variant="ghost"
-                className="!h-10 !w-10 p-0"
-                onClick={() => {
-                  setSearchParams(
-                    (prev) => {
-                      prev.set(
-                        "d",
-                        `${format(new Date(nextDate), "yyyy-MM-dd")}`,
-                      );
-                      return prev;
-                    },
-                    { preventScrollReset: true },
-                  );
-                }}
-              >
-                {new Date(nextDate).getDate()}
-              </Button>
+                <WorkspaceIcon />
+                <h3 className="text-base font-medium underline">
+                  {title.length > 35 ? `${title.substring(0, 35)}..` : title}
+                </h3>
+              </Link>
+            </div>
+            <div className="flex items-center gap-6">
+              <div className="flex items-center gap-1">
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  className="!h-10 !w-10 p-0"
+                  onClick={() => {
+                    setSearchParams(
+                      (prev) => {
+                        prev.set(
+                          "d",
+                          `${format(new Date(prevDate), "yyyy-MM-dd")}`,
+                        );
+                        return prev;
+                      },
+                      { preventScrollReset: true },
+                    );
+                  }}
+                >
+                  {new Date(prevDate).getDate()}
+                </Button>
+                <Button size="sm" variant="outline" className="!h-10 !w-10 p-0">
+                  {new Date(date).getDate()}
+                </Button>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  className="!h-10 !w-10 p-0"
+                  onClick={() => {
+                    setSearchParams(
+                      (prev) => {
+                        prev.set(
+                          "d",
+                          `${format(new Date(nextDate), "yyyy-MM-dd")}`,
+                        );
+                        return prev;
+                      },
+                      { preventScrollReset: true },
+                    );
+                  }}
+                >
+                  {new Date(nextDate).getDate()}
+                </Button>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="divide-y divide-input">
           <Header />
+        </div>
+        <div className="mt-[calc(102px_+_var(--header-height))]">
           <List />
         </div>
       </div>
@@ -168,7 +169,7 @@ function Header() {
 
   if (!date) return <></>;
   return (
-    <div className="flex items-end justify-between gap-3 pb-6 md:px-6">
+    <div className="flex min-h-16 items-end justify-between gap-3 pb-6 md:px-6 md:pt-2">
       <div>
         <p className="text-xs font-semibold uppercase text-muted-foreground">
           Transaksi
