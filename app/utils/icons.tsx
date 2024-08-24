@@ -1,4 +1,4 @@
-import { LucideProps, icons } from "lucide-react";
+import { Landmark, LucideProps, Text, icons } from "lucide-react";
 
 function Icon({ name, ...props }: LucideProps & { name: keyof typeof icons }) {
   const LucideIcon = icons[name];
@@ -53,4 +53,20 @@ function MybucksLogo({
   );
 }
 
-export { Icon, BloumIcon, MybucksLogo };
+function WalletIcon() {
+  return (
+    <div className="mt-0.5 flex h-6 w-6 items-center justify-center rounded-md border border-orange-400/60 bg-gradient-to-b from-orange-400/30 to-orange-400/70">
+      <Landmark size={14} strokeWidth={2.5} className="text-foreground" />
+    </div>
+  );
+}
+
+function WorkspaceIcon() {
+  return (
+    <div className="mt-0.5 flex h-6 w-6 items-center justify-center rounded-sm border border-primary/40 bg-gradient-to-b from-primary/20 to-primary/50">
+      <Text size={14} strokeWidth={2.5} className="text-foreground" />
+    </div>
+  );
+}
+
+export { Icon, BloumIcon, MybucksLogo, WalletIcon, WorkspaceIcon };

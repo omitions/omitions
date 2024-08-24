@@ -43,7 +43,7 @@ export default function CreateWorkspace({
           className="flex flex-col gap-8 px-8"
           onSubmit={() => setIsOpen(false)}
         >
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-4">
             <Input
               type="text"
               name="name"

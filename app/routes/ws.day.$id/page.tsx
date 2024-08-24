@@ -1,6 +1,5 @@
 import {
   Link,
-  useFetcher,
   useLoaderData,
   useNavigate,
   useParams,
@@ -9,11 +8,12 @@ import {
 
 import { format } from "date-fns";
 import { id as localeId } from "date-fns/locale";
-import { ArrowLeft, ChevronLeft, Filter, Plus } from "lucide-react";
+import { ArrowLeft, ChevronLeft, Filter } from "lucide-react";
 
-import { Button } from "~/components/ui/button";
 import CreateTransaction from "~/components/create-transaction";
+import { Button } from "~/components/ui/button";
 
+import { WorkspaceIcon } from "~/utils/icons";
 import { generateDash, regenerateDash } from "~/utils/misc";
 
 import List from "./list";
@@ -95,7 +95,9 @@ function Content() {
                 `${generateDash(workspaceName)}-${workspaceId}` +
                 `?d=${format(new Date().setDate(new Date().getDate() - 1), "yyyy-MM")}`
               }
+              className="flex items-center gap-2.5"
             >
+              <WorkspaceIcon />
               <h3 className="text-base font-medium underline">
                 {title.length > 35 ? `${title.substring(0, 35)}..` : title}
               </h3>

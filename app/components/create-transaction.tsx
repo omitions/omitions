@@ -31,6 +31,7 @@ import { regenerateDash } from "~/utils/misc";
 import { cn } from "~/lib/utils";
 import { ToggleGroup, ToggleGroupItem } from "./ui/toggle-group";
 import toIDR from "~/utils/currency";
+import { WorkspaceIcon } from "~/utils/icons";
 
 export default function CreateTransaction({ date }: { date: Date }) {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -92,16 +93,17 @@ export default function CreateTransaction({ date }: { date: Date }) {
         </Button>
       </SheetTrigger>
       <SheetContent withCloseButton className="sm:max-w-lg">
-        <SheetHeader>
-          <SheetDescription className="font-semibold">
-            {workspaceName}
-          </SheetDescription>
-          <SheetTitle>
-            Catat Transaksi{" "}
-            {format(date, "EEEE d, MMMM yyyy", { locale: localeId })}
-          </SheetTitle>
+        <SheetHeader className="flex-row gap-2.5">
+          <WorkspaceIcon />
+          <div className="">
+            <SheetTitle>
+              Catat Transaksi{" "}
+              {format(date, "EEEE d, MMMM yyyy", { locale: localeId })}
+            </SheetTitle>
+            <SheetDescription>{workspaceName}</SheetDescription>
+          </div>
         </SheetHeader>
-        <div className="mx-8 flex flex-col gap-2">
+        <div className="mx-8 flex flex-col gap-4">
           <Input
             type="text"
             name="description"

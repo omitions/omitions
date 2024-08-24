@@ -34,7 +34,7 @@ export default function Header() {
               <span className="text-sm font-medium text-muted-foreground">
                 Telusuri
               </span>
-              <span className="absolute right-5 flex items-center gap-0.5">
+              <span className="absolute right-5 flex items-center gap-1">
                 <kbd className="pointer-events-none inline-flex h-5 w-5 select-none place-content-center items-center gap-1 rounded border bg-muted font-mono text-[10px] font-medium text-muted-foreground opacity-100">
                   <Command size={10} strokeWidth={2} />
                 </kbd>

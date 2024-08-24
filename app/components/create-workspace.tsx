@@ -37,18 +37,18 @@ export default function CreateWorkspace({
           className="flex flex-col gap-8 px-8"
           onSubmit={() => setIsOpen(false)}
         >
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-4">
             <Input
               type="text"
               name="name"
               required
-              variant="ghost"
+              // variant="ghost"
               placeholder="Masukkan nama workspace"
             />
             <Textarea
               name="description"
               required
-              variant="ghost"
+              // variant="ghost"
               placeholder="Masukkan deskripsi workspace"
             />
           </div>

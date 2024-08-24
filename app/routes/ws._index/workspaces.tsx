@@ -7,7 +7,6 @@ import {
   Ellipsis,
   PencilLine,
   PenLine,
-  Text,
   Trash,
   Trash2,
 } from "lucide-react";
@@ -27,6 +26,7 @@ import UpdateWorkspace from "~/components/update-workspace";
 
 import { generateDash } from "~/utils/misc";
 import { type TWorkspaces } from "~/utils/workspaces.server";
+import { WorkspaceIcon } from "~/utils/icons";
 
 import { cn } from "~/lib/utils";
 
@@ -44,7 +44,7 @@ export default function Workspaces() {
         </h4>
       </div>
       <div className="hidden flex-col gap-0.5 md:flex">
-        <h2 className="text-lg font-bold">Spaces</h2>
+        <h2 className="text-base font-bold">Semua Spaces Anda</h2>
         <p className="text-sm font-normal text-muted-foreground">
           Semua catatan keuangan Anda ada disini
         </p>
@@ -80,9 +80,7 @@ function WorkspaceItem({ _id, name, description }: TWorkspaces) {
       >
         <div className="flex h-full w-10/12 flex-col flex-wrap items-start justify-between md:w-full md:gap-1">
           <div className="flex items-start gap-3">
-            <div className="mt-0.5 h-[20px] place-content-center rounded-sm border border-primary bg-gradient-to-b from-primary/20 to-primary/30 px-0.5">
-              <Text size={12} strokeWidth={2.5} className="text-black" />
-            </div>
+            <WorkspaceIcon />
             <div className="flex flex-col items-start gap-0.5">
               <h4 className="whitespace-nowrap text-wrap text-sm font-medium leading-tight md:font-bold">
                 {name.length > 30 ? `${name.substring(0, 30)}..` : name}

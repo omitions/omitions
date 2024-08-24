@@ -1,10 +1,4 @@
-import {
-  CirclePlus,
-  CreditCard,
-  DollarSign,
-  PencilLine,
-  Trash2,
-} from "lucide-react";
+import { CirclePlus, PencilLine, Trash2 } from "lucide-react";
 import React from "react";
 
 import CreateWallet from "~/components/create-wallet";
@@ -13,6 +7,7 @@ import { Button } from "~/components/ui/button";
 import UpdateWallet from "~/components/update-wallet";
 
 import { cn } from "~/lib/utils";
+import { WalletIcon } from "~/utils/icons";
 
 export default function Wallets() {
   return (
@@ -23,7 +18,7 @@ export default function Wallets() {
         </h4>
       </div>
       <div className="hidden flex-col md:flex">
-        <h2 className="text-lg font-bold">Sumber Dana Anda</h2>
+        <h2 className="text-base font-bold">Sumber Dana Anda</h2>
       </div>
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-4 lg:grid-cols-3 xl:grid-cols-4 2xl:max-w-screen-2xl">
         <WalletItem />
@@ -47,13 +42,8 @@ function WalletItem() {
       >
         <div className="flex h-full w-10/12 flex-col flex-wrap items-start justify-between md:w-full md:gap-1">
           <div className="flex items-start gap-3">
-            <div className="mt-0.5 h-[20px] place-content-center rounded-sm border border-orange-400 bg-gradient-to-b from-orange-400/20 to-orange-400/30 px-0.5">
-              <DollarSign size={12} strokeWidth={2.5} className="text-black" />
-            </div>
+            <WalletIcon />
             <div className="flex flex-col items-start gap-0.5">
-              <p className="text-xs font-normal text-muted-foreground md:text-sm">
-                Saldo
-              </p>
               <h4 className="whitespace-nowrap text-wrap text-sm font-medium leading-tight md:font-bold">
                 IDR 17.240.900
               </h4>

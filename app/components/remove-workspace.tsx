@@ -38,7 +38,7 @@ export default function RemoveWorkspace({
         <Form
           action="/ws"
           method="post"
-          className="flex flex-col gap-6"
+          className="flex flex-col gap-4"
           onSubmit={() => setIsOpen(false)}
         >
           <div className="flex flex-col gap-3">
