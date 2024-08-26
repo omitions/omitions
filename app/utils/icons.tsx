@@ -64,7 +64,11 @@ function WalletIcon() {
 function WorkspaceIcon() {
   return (
     <div className="mt-0.5 flex h-6 w-6 items-center justify-center rounded-sm border border-primary/40 bg-gradient-to-b from-primary/20 to-primary/50">
-      <Text size={14} strokeWidth={2.5} className="text-foreground" />
+      <Text
+        size={14}
+        strokeWidth={2.5}
+        className="!h-[14px] !w-[14px] text-foreground"
+      />
     </div>
   );
 }

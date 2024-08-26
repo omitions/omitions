@@ -1,4 +1,4 @@
-import { Form } from "@remix-run/react";
+import { Form, useSearchParams } from "@remix-run/react";
 
 import React from "react";
 
@@ -17,14 +17,24 @@ import { Textarea } from "~/components/ui/textarea";
 export default function CreateWorkspace({
   actionType,
   children,
+  open,
 }: {
+  open?: boolean;
   actionType: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }) {
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = React.useState(open);
+  const [_, setSearchParams] = useSearchParams();
 
   return (
-    <Sheet open={isOpen} onOpenChange={setIsOpen}>
+    <Sheet
+      open={isOpen}
+      onOpenChange={(bool) => {
+        setSearchParams({});
+        setIsOpen(bool);
+      }}
+      key="create-workspace"
+    >
       <SheetTrigger asChild>{children}</SheetTrigger>
       <SheetContent withCloseButton className="sm:max-w-lg">
         <SheetHeader className="px-4 md:px-8">
@@ -42,13 +52,11 @@ export default function CreateWorkspace({
               type="text"
               name="name"
               required
-              // variant="ghost"
               placeholder="Masukkan nama workspace"
             />
             <Textarea
               name="description"
               required
-              // variant="ghost"
               placeholder="Masukkan deskripsi workspace"
             />
           </div>

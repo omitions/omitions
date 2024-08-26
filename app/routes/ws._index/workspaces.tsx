@@ -76,7 +76,7 @@ function WorkspaceItem({ _id, name, description }: TWorkspaces) {
         prefetch="intent"
         className="h-full min-h-32 w-full justify-start rounded-xl border border-input/50 bg-white p-4 shadow-sm ring-offset-background hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-70 md:min-h-44 md:p-5 md:hover:border-input"
       >
-        <div className="flex h-full w-10/12 flex-col flex-wrap items-start justify-between md:w-full md:gap-1">
+        <div className="flex h-full w-11/12 flex-col flex-wrap items-start justify-between md:w-full md:gap-1">
           <div className="flex items-start gap-3">
             <WorkspaceIcon />
             <div className="flex flex-col items-start gap-0.5">

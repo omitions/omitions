@@ -18,7 +18,7 @@ export async function getCalendar(
   const token = session.get("user").access_token;
 
   let resp = null;
-  // console.log('token: ', token);
+  console.log("token: ", token);
   // console.log(`https://api.mybucks.today/cashflows/calendar?workspace_id=${workspaceId}&date=${date}`)
   // const fetched = await fetch(
   //   `https://api.mybucks.today/cashflows/calendar?workspace_id=${workspaceId}&date=${date}`,

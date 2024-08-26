@@ -1,14 +1,17 @@
 import { json, LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { useLoaderData, useSearchParams } from "@remix-run/react";
 
 import Header from "~/components/header";
 
 import { getWorkspaces } from "~/utils/workspaces.server";
 
+import CreateWallet from "~/components/create-wallet";
+import CreateWorkspace from "~/components/create-workspace";
+
+import { ActionType } from "../ws/route";
+import WorkspaceSidebar from "../ws/sidebar";
 import Wallets from "./wallets";
 import Workspaces from "./workspaces";
-
-import WorkspaceSidebar from "../ws/sidebar";
 
 export const meta: MetaFunction = () => {
   return [{ title: "Workspaces | mybucks.today" }];
@@ -22,6 +25,10 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 export default function Index() {
   const { workspaces } = useLoaderData<typeof loader>();
 
+  const [searchParams] = useSearchParams();
+  const openWorkspace = searchParams.get("open-create-workspace");
+  const openWallet = searchParams.get("open-create-wallet");
+
   return (
     <div className="flex">
       <WorkspaceSidebar workspaceCount={workspaces?.length} />
@@ -32,6 +39,11 @@ export default function Index() {
           </div>
           <div className="mx-auto mt-[var(--header-height)] w-full max-w-[2800px] border-input">
             <Page />
+            <CreateWorkspace
+              actionType={ActionType.CREATE_WORKSPACES}
+              open={openWorkspace === "1"}
+            />
+            <CreateWallet actionType="HELLOO" open={openWallet === "1"} />
           </div>
         </div>
       </div>

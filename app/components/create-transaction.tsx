@@ -93,17 +93,19 @@ export default function CreateTransaction({ date }: { date: Date }) {
         </Button>
       </SheetTrigger>
       <SheetContent withCloseButton className="sm:max-w-lg">
-        <SheetHeader className="flex-row gap-2.5">
-          <WorkspaceIcon />
-          <div className="">
-            <SheetTitle>
+        <SheetHeader className="mt-12 flex-row gap-2.5 px-4 md:mt-0 md:px-8">
+          <div className="hidden md:block">
+            <WorkspaceIcon />
+          </div>
+          <div>
+            <SheetTitle className="">
               Catat Transaksi{" "}
               {format(date, "EEEE d, MMMM yyyy", { locale: localeId })}
             </SheetTitle>
             <SheetDescription>{workspaceName}</SheetDescription>
           </div>
         </SheetHeader>
-        <div className="mx-8 flex flex-col gap-4">
+        <div className="flex flex-col gap-4 px-4 md:px-8">
           <Input
             type="text"
             name="description"

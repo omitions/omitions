@@ -63,28 +63,26 @@ function Content() {
   );
 
   return (
-    <div className="py-6 md:px-6">
-      <div className="flex flex-col gap-6">
-        <div className="flex items-center justify-between">
-          <div className="hidden flex-col gap-2 md:flex">
-            <BackButton />
-            <div className="flex gap-2.5">
-              <WorkspaceIcon />
-              <h2 className="text-lg font-bold">
-                {title.length > 35 ? `${title.substring(0, 35)}..` : title}
-              </h2>
-            </div>
-          </div>
-          <div>
-            <MonthNavigation month={month} setMonth={setMonth} />
+    <div className="flex flex-col gap-6">
+      <div className="flex items-center justify-between">
+        <div className="hidden flex-col gap-2 md:flex">
+          <BackButton />
+          <div className="flex gap-2.5">
+            <WorkspaceIcon />
+            <h2 className="text-lg font-bold">
+              {title.length > 35 ? `${title.substring(0, 35)}..` : title}
+            </h2>
           </div>
         </div>
-        <BigCalendar
-          month={month}
-          setMonth={setMonth}
-          isValid={!!title && !!workspaceId}
-        />
+        <div>
+          <MonthNavigation month={month} setMonth={setMonth} />
+        </div>
       </div>
+      <BigCalendar
+        month={month}
+        setMonth={setMonth}
+        isValid={!!title && !!workspaceId}
+      />
     </div>
   );
 }

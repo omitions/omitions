@@ -78,82 +78,80 @@ function Content() {
   }
   if (!date || !prevDate || !nextDate) return <></>;
   return (
-    <div className="">
-      <div className="flex flex-col gap-6">
-        <div className="fixed z-50 w-[calc(100%_-_var(--sidebar-width-all)_-_40px)] max-w-[2800px] rounded-t-2xl border-b border-input bg-white pt-6">
-          <div className="flex items-start justify-between md:px-6">
-            <div className="hidden flex-col gap-2 md:flex">
-              <BackButton />
-              <h2 className="text-lg font-bold">
-                {format(new Date(date), "EEEE dd, MMMM yyyy", {
-                  locale: localeId,
-                })}
-              </h2>
-              <Link
-                to={
-                  "/ws/" +
-                  `${generateDash(workspaceName)}-${workspaceId}` +
-                  `?d=${format(new Date().setDate(new Date().getDate() - 1), "yyyy-MM")}`
-                }
-                className="flex items-center gap-2.5"
+    <div className="flex flex-col gap-6">
+      <div className="fixed z-50 w-[calc(100%_-_var(--sidebar-width-all)_-_40px)] max-w-[2800px] rounded-t-2xl border-b border-input bg-white pt-6">
+        <div className="flex items-start justify-between md:px-6">
+          <div className="hidden flex-col gap-2 md:flex">
+            <BackButton />
+            <h2 className="text-lg font-bold">
+              {format(new Date(date), "EEEE dd, MMMM yyyy", {
+                locale: localeId,
+              })}
+            </h2>
+            <Link
+              to={
+                "/ws/" +
+                `${generateDash(workspaceName)}-${workspaceId}` +
+                `?d=${format(new Date().setDate(new Date().getDate() - 1), "yyyy-MM")}`
+              }
+              className="flex items-center gap-2.5"
+            >
+              <WorkspaceIcon />
+              <h3 className="text-base font-medium underline">
+                {title.length > 35 ? `${title.substring(0, 35)}..` : title}
+              </h3>
+            </Link>
+          </div>
+          <div className="flex items-center gap-6">
+            <div className="flex items-center gap-1">
+              <Button
+                size="sm"
+                variant="ghost"
+                className="!h-10 !w-10 p-0"
+                onClick={() => {
+                  setSearchParams(
+                    (prev) => {
+                      prev.set(
+                        "d",
+                        `${format(new Date(prevDate), "yyyy-MM-dd")}`,
+                      );
+                      return prev;
+                    },
+                    { preventScrollReset: true },
+                  );
+                }}
               >
-                <WorkspaceIcon />
-                <h3 className="text-base font-medium underline">
-                  {title.length > 35 ? `${title.substring(0, 35)}..` : title}
-                </h3>
-              </Link>
-            </div>
-            <div className="flex items-center gap-6">
-              <div className="flex items-center gap-1">
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  className="!h-10 !w-10 p-0"
-                  onClick={() => {
-                    setSearchParams(
-                      (prev) => {
-                        prev.set(
-                          "d",
-                          `${format(new Date(prevDate), "yyyy-MM-dd")}`,
-                        );
-                        return prev;
-                      },
-                      { preventScrollReset: true },
-                    );
-                  }}
-                >
-                  {new Date(prevDate).getDate()}
-                </Button>
-                <Button size="sm" variant="outline" className="!h-10 !w-10 p-0">
-                  {new Date(date).getDate()}
-                </Button>
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  className="!h-10 !w-10 p-0"
-                  onClick={() => {
-                    setSearchParams(
-                      (prev) => {
-                        prev.set(
-                          "d",
-                          `${format(new Date(nextDate), "yyyy-MM-dd")}`,
-                        );
-                        return prev;
-                      },
-                      { preventScrollReset: true },
-                    );
-                  }}
-                >
-                  {new Date(nextDate).getDate()}
-                </Button>
-              </div>
+                {new Date(prevDate).getDate()}
+              </Button>
+              <Button size="sm" variant="outline" className="!h-10 !w-10 p-0">
+                {new Date(date).getDate()}
+              </Button>
+              <Button
+                size="sm"
+                variant="ghost"
+                className="!h-10 !w-10 p-0"
+                onClick={() => {
+                  setSearchParams(
+                    (prev) => {
+                      prev.set(
+                        "d",
+                        `${format(new Date(nextDate), "yyyy-MM-dd")}`,
+                      );
+                      return prev;
+                    },
+                    { preventScrollReset: true },
+                  );
+                }}
+              >
+                {new Date(nextDate).getDate()}
+              </Button>
             </div>
           </div>
-          <Header />
         </div>
-        <div className="mt-[calc(110px_+_var(--header-height))]">
-          <List />
-        </div>
+        <Header />
+      </div>
+      <div className="mt-[calc(110px_+_var(--header-height))]">
+        <List />
       </div>
     </div>
   );
@@ -177,10 +175,6 @@ function Header() {
       </div>
       {transactions?.length ? (
         <div className="flex items-center gap-3">
-          <Button size="sm" variant="ghost" className="flex gap-1.5">
-            <Filter size={18} strokeWidth={2} />
-            <span>Filters</span>
-          </Button>
           <CreateTransaction
             date={date}
             // actionType="CREATE_TRANSACTION"

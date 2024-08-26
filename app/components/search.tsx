@@ -1,13 +1,20 @@
-import * as React from "react";
-import {
-  CalendarIcon,
-  EnvelopeClosedIcon,
-  FaceIcon,
-  GearIcon,
-  PersonIcon,
-  RocketIcon,
-} from "@radix-ui/react-icons";
+import { useNavigate } from "@remix-run/react";
+import { format } from "date-fns";
 
+import {
+  ArrowUp,
+  Calculator,
+  CirclePlus,
+  Crown,
+  Folder,
+  GanttChart,
+  Plus,
+  ReceiptText,
+  UserRound,
+} from "lucide-react";
+import * as React from "react";
+
+import { Button } from "~/components/ui/button";
 import {
   CommandDialog,
   CommandEmpty,
@@ -15,9 +22,11 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-  CommandSeparator,
-  CommandShortcut,
 } from "~/components/ui/command";
+import { WorkspaceIcon } from "~/utils/icons";
+import { generateDash } from "~/utils/misc";
+
+import { useTypedRouteLoaderData } from "~/utils/useTypedRouteLoaderData";
 
 export function SearchDialog({
   children,
@@ -26,6 +35,9 @@ export function SearchDialog({
   children: JSX.Element;
   withoutK?: boolean;
 }) {
+  const { workspaces } = useTypedRouteLoaderData("root");
+  const navigate = useNavigate();
+
   const [open, setOpen] = React.useState(false);
 
   React.useEffect(() => {
@@ -49,40 +61,162 @@ export function SearchDialog({
           onClick: () => setOpen(true),
         }),
       )}
-      <CommandDialog open={open} onOpenChange={setOpen}>
-        <CommandInput placeholder="Type a command or search..." />
+      <CommandDialog open={open} onOpenChange={setOpen} key="search">
+        <CommandInput placeholder="Telusuri spaces atau menu..." />
         <CommandList>
-          <CommandEmpty>No results found.</CommandEmpty>
-          <CommandGroup heading="Suggestions">
-            <CommandItem>
-              <CalendarIcon className="mr-2 h-4 w-4" />
-              <span>Calendar</span>
+          <CommandEmpty>Tidak ditemukan</CommandEmpty>
+          <CommandGroup heading="Spaces">
+            {workspaces.map((props) => (
+              <CommandItem
+                key={props._id}
+                asChild
+                onSelect={() =>
+                  navigate(
+                    "/ws/" +
+                      `${generateDash(props.name)}-${props._id}` +
+                      `?d=${format(new Date().setDate(new Date().getDate() - 1), "yyyy-MM")}`,
+                  )
+                }
+                className="h-full"
+              >
+                <Button
+                  variant="transparent"
+                  className="w-full items-center justify-start gap-3"
+                >
+                  <WorkspaceIcon />
+                  <span>{props.name}</span>
+                </Button>
+              </CommandItem>
+            ))}
+          </CommandGroup>
+          <CommandGroup heading="Jalan Pintas">
+            <CommandItem
+              asChild
+              onSelect={() => {
+                navigate({
+                  pathname: "/ws",
+                  search: "?open-create-workspace=1",
+                });
+                setOpen(false);
+              }}
+            >
+              <Button variant="transparent" className="w-full justify-start">
+                <CirclePlus size={18} strokeWidth={2} className="mr-3" />
+                <span>Buat Spaces</span>
+              </Button>
             </CommandItem>
-            <CommandItem>
-              <FaceIcon className="mr-2 h-4 w-4" />
-              <span>Search Emoji</span>
-            </CommandItem>
-            <CommandItem>
-              <RocketIcon className="mr-2 h-4 w-4" />
-              <span>Launch</span>
+            <CommandItem
+              asChild
+              onSelect={() => {
+                navigate({
+                  pathname: "/ws",
+                  search: "?open-create-wallet=1",
+                });
+                setOpen(false);
+              }}
+            >
+              <Button variant="transparent" className="w-full justify-start">
+                <CirclePlus size={18} strokeWidth={2} className="mr-3" />
+                <span>Buat Dompet</span>
+              </Button>
             </CommandItem>
           </CommandGroup>
-          <CommandSeparator />
-          <CommandGroup heading="Settings">
-            <CommandItem>
-              <PersonIcon className="mr-2 h-4 w-4" />
-              <span>Profile</span>
-              <CommandShortcut>⌘P</CommandShortcut>
+          <CommandGroup heading="Menu">
+            <CommandItem
+              asChild
+              onSelect={() => {
+                navigate("/ws");
+                setOpen(false);
+              }}
+            >
+              <Button variant="transparent" className="w-full justify-start">
+                <Folder size={18} strokeWidth={2} className="mr-3" />
+                <span>Spaces</span>
+              </Button>
             </CommandItem>
-            <CommandItem>
-              <EnvelopeClosedIcon className="mr-2 h-4 w-4" />
-              <span>Mail</span>
-              <CommandShortcut>⌘B</CommandShortcut>
+            <CommandItem
+              asChild
+              onSelect={() => {
+                navigate("/settings/billing");
+                setOpen(false);
+              }}
+            >
+              <Button variant="transparent" className="w-full justify-start">
+                <Crown size={18} strokeWidth={2} className="mr-3" />
+                <span>Langganan</span>
+              </Button>
             </CommandItem>
-            <CommandItem>
-              <GearIcon className="mr-2 h-4 w-4" />
-              <span>Settings</span>
-              <CommandShortcut>⌘S</CommandShortcut>
+            <CommandItem
+              asChild
+              onSelect={() => {
+                navigate("/settings");
+                setOpen(false);
+              }}
+            >
+              <Button variant="transparent" className="w-full justify-start">
+                <UserRound size={18} strokeWidth={2} className="mr-3" />
+                <span>Akun</span>
+              </Button>
+            </CommandItem>
+            <CommandItem
+              asChild
+              onSelect={() => {
+                navigate("/dash");
+                setOpen(false);
+              }}
+            >
+              <Button variant="transparent" className="w-full justify-start">
+                <GanttChart size={18} strokeWidth={2} className="mr-3" />
+                <span>Ringkasan</span>
+              </Button>
+            </CommandItem>
+            <CommandItem
+              asChild
+              onSelect={() => {
+                navigate("/dash");
+                setOpen(false);
+              }}
+            >
+              <Button variant="transparent" className="w-full justify-start">
+                <Calculator size={18} strokeWidth={2} className="mr-3" />
+                <span>Laporan</span>
+              </Button>
+            </CommandItem>
+            <CommandItem
+              asChild
+              onSelect={() => {
+                navigate("/ws");
+                setOpen(false);
+              }}
+            >
+              <Button variant="transparent" className="w-full justify-start">
+                <Plus size={18} strokeWidth={2} className="mr-3" />
+                <span>Pemasukan</span>
+              </Button>
+            </CommandItem>
+            <CommandItem
+              asChild
+              onSelect={() => {
+                navigate("/ws");
+                setOpen(false);
+              }}
+            >
+              <Button variant="transparent" className="w-full justify-start">
+                <ArrowUp size={18} strokeWidth={2} className="mr-3" />
+                <span>Pengeluaran</span>
+              </Button>
+            </CommandItem>
+            <CommandItem
+              asChild
+              onSelect={() => {
+                navigate("/ws");
+                setOpen(false);
+              }}
+            >
+              <Button variant="transparent" className="w-full justify-start">
+                <ReceiptText size={18} strokeWidth={2} className="mr-3" />
+                <span>Invoice</span>
+              </Button>
             </CommandItem>
           </CommandGroup>
         </CommandList>

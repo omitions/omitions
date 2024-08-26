@@ -7,11 +7,12 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 
-import Navbar from "./components/navbar";
-import { TooltipProvider } from "./components/ui/tooltip";
-import { Toaster } from "./components/ui/toaster";
+import Navbar from "~/components/navbar";
+import { Toaster } from "~/components/ui/toaster";
+import { TooltipProvider } from "~/components/ui/tooltip";
 
-import { sessionStorage } from "./utils/auth.server";
+import { sessionStorage } from "~/utils/auth.server";
+import { getWorkspaces, TWorkspaces } from "~/utils/workspaces.server";
 
 import "react-day-picker/style.css";
 import "./globals.css";
@@ -22,8 +23,14 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   const session = await sessionStorage.getSession(
     request.headers.get("Cookie"),
   );
-  const isAuth = !!session.get("user");
-  return json({ isAuth });
+
+  let isAuth = !!session.get("user");
+  let workspaces: TWorkspaces[] = [];
+
+  if (isAuth) {
+    workspaces = (await getWorkspaces(request)) ?? [];
+  }
+  return json({ isAuth, workspaces });
 };
 
 export function Layout({ children }: { children: React.ReactNode }) {
