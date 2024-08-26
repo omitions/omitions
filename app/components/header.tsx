@@ -11,7 +11,7 @@ import {
 
 export default function Header() {
   return (
-    <div className="h-[var(--header-height)] justify-center hidden md:flex">
+    <div className="hidden h-[var(--header-height)] justify-center md:flex">
       <div className="mx-[19px] flex w-full max-w-[2800px] items-center justify-between bg-background px-5">
         <div>
           <Button size="sm" variant="outline" className="gap-2">

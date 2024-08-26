@@ -183,8 +183,8 @@ function Header() {
           </Button>
           <CreateTransaction
             date={date}
-          // actionType="CREATE_TRANSACTION"
-          // fetcher={fetcher}
+            // actionType="CREATE_TRANSACTION"
+            // fetcher={fetcher}
           />
         </div>
       ) : (

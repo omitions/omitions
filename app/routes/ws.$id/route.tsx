@@ -5,7 +5,7 @@ import Header from "~/components/header";
 import { getCalendar } from "~/utils/cashflows.server";
 import { regenerateDash } from "~/utils/misc";
 
-import Sidebar from "../ws/sidebar";
+import WorkspaceSidebar from "../ws/sidebar";
 
 import Page from "./page";
 
@@ -43,17 +43,15 @@ export async function loader({ params, request }: LoaderFunctionArgs) {
 
 export default function Index() {
   return (
-    <div className="fixed left-0 top-0 h-full w-screen md:relative md:left-auto md:top-auto md:w-full">
-      <div className="flex">
-        <Sidebar workspaceCount={0} withoutMobile />
-        <div className="relative h-full w-full md:ml-auto md:w-[calc(100%_-_var(--sidebar-width-xl))]">
-          <div className="h-full w-full">
-            <div className="fixed left-[var(--sidebar-width-all)] top-0 z-50 w-[calc(100%_-_var(--sidebar-width-all))]">
-              <Header />
-            </div>
-            <div className="mx-auto mt-[var(--header-height)] w-full max-w-[2800px] border-input">
-              <Page />
-            </div>
+    <div className="flex">
+      <WorkspaceSidebar workspaceCount={0} />
+      <div className="relative h-full w-full md:ml-auto md:w-[calc(100%_-_var(--sidebar-width-xl))]">
+        <div className="h-full w-full">
+          <div className="fixed left-[var(--sidebar-width-all)] top-0 z-50 hidden w-[calc(100%_-_var(--sidebar-width-all))] md:block">
+            <Header />
+          </div>
+          <div className="mx-auto mt-[var(--header-height)] w-full max-w-[2800px] border-input">
+            <Page />
           </div>
         </div>
       </div>

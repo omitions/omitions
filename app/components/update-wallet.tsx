@@ -29,14 +29,14 @@ export default function UpdateWallet({
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>{children}</SheetTrigger>
       <SheetContent withCloseButton className="sm:max-w-lg">
-        <SheetHeader>
+        <SheetHeader className="px-4 md:px-8">
           <SheetTitle>Ubah Dompet Anda</SheetTitle>
           <SheetDescription></SheetDescription>
         </SheetHeader>
         <Form
           action="/ws"
           method="post"
-          className="flex flex-col gap-8 px-8"
+          className="flex flex-col gap-8 px-4 md:px-8"
           onSubmit={() => setIsOpen(false)}
         >
           <div className="flex flex-col gap-4">

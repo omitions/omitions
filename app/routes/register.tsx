@@ -68,7 +68,7 @@ function RegisterForm() {
       className="flex w-full flex-col gap-8 lg:max-w-[354px]"
     >
       <header className="flex flex-col gap-2">
-        <div className="fixed left-5 top-5 mb-20 lg:hidden">
+        <div className="mb-20 w-fit lg:hidden">
           <MybucksLogo />
         </div>
         <div className="fixed left-12 top-12 hidden lg:block">

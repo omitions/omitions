@@ -44,16 +44,14 @@ function Mobile() {
             <SheetDescription></SheetDescription>
           </SheetHeader>
           <div className="flex flex-col gap-6">
-            <div>
-              <SheetClose>
-                <button
-                  className="middle center flex h-12 w-12 items-center justify-center rounded-full transition-all"
-                  data-ripple-dark="true"
-                >
-                  <XIcon size={24} strokeWidth={2} />
-                </button>
-              </SheetClose>
-            </div>
+            <SheetClose asChild>
+              <button
+                className="middle center flex h-14 w-14 items-center justify-center rounded-full transition-all"
+                data-ripple-dark="true"
+              >
+                <XIcon size={24} strokeWidth={2} />
+              </button>
+            </SheetClose>
             <div className="flex flex-col gap-1">
               <SheetClose>
                 <NavItem title="Privasi" iconName="ShieldCheck" delay={150} />
