@@ -74,7 +74,7 @@ function WorkspaceItem({ _id, name, description }: TWorkspaces) {
         }
         onFocus={() => setIsActive(true)}
         prefetch="intent"
-        className="h-full min-h-32 w-full justify-start rounded-xl border border-input/50 bg-white p-4 shadow-sm ring-offset-background hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-70 md:min-h-44 md:p-5 md:hover:border-input"
+        className="border-input/50/50 h-full min-h-32 w-full justify-start rounded-xl border bg-white p-4 shadow-sm ring-offset-background hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-70 md:min-h-44 md:p-5 md:hover:border-input/50"
       >
         <div className="flex h-full w-11/12 flex-col flex-wrap items-start justify-between md:w-full md:gap-1">
           <div className="flex items-start gap-3">
@@ -201,7 +201,7 @@ function ButtonCreateWorkspace() {
   return (
     <div className="relative rounded-xl shadow-sm hover:shadow-md">
       <CreateWorkspace actionType={ActionType.CREATE_WORKSPACES}>
-        <button className="h-full min-h-32 w-full justify-start rounded-xl border border-input/50 bg-white px-0 shadow-sm ring-offset-background hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-70 md:min-h-44 md:p-5 md:hover:border-input">
+        <button className="border-input/50/50 h-full min-h-32 w-full justify-start rounded-xl border bg-white px-0 shadow-sm ring-offset-background hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-70 md:min-h-44 md:p-5 md:hover:border-input/50">
           <div className="flex h-full flex-col flex-wrap items-center justify-center gap-0.5 md:w-full md:gap-3">
             <CirclePlus size={24} strokeWidth={1.5} />
             <h3 className="text-xs font-medium md:text-sm">Buat workspace</h3>

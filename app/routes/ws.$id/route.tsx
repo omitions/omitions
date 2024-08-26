@@ -2,7 +2,7 @@ import { defer, json, LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
 
 import Header from "~/components/header";
 
-import { getCalendar } from "~/utils/cashflows.server";
+import { getCalendar, TCalendar } from "~/utils/cashflows.server";
 import { regenerateDash } from "~/utils/misc";
 
 import WorkspaceSidebar from "../ws/sidebar";
@@ -32,8 +32,9 @@ export async function loader({ params, request }: LoaderFunctionArgs) {
   let workspaceName = params.id
     ? regenerateDash(params.id).withoutTheLast()
     : "-";
-  let calendar = await getCalendar(request, workspaceId, d);
+  let calendar: TCalendar[] = await getCalendar(request, workspaceId, d);
 
+  console.log("calendar ", calendar);
   return defer({
     workspaceName,
     error: "",
@@ -50,7 +51,7 @@ export default function Index() {
           <div className="fixed left-[var(--sidebar-width-all)] top-0 z-50 hidden w-[calc(100%_-_var(--sidebar-width-all))] md:block">
             <Header />
           </div>
-          <div className="mx-auto mt-[var(--header-height)] w-full max-w-[2800px] border-input">
+          <div className="mx-auto mt-[var(--header-height)] w-full max-w-[2800px] border-input/50">
             <Page />
           </div>
         </div>

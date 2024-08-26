@@ -1,5 +1,3 @@
-import { useFetcher } from "@remix-run/react";
-
 import { id as localeId } from "date-fns/locale";
 import React from "react";
 import { DayButtonProps, DayPicker } from "react-day-picker";
@@ -14,11 +12,9 @@ export default function BigCalendar({
   month: Date;
   setMonth: React.Dispatch<React.SetStateAction<Date>>;
 }) {
-  const fetcher = useFetcher({ key: "create-transaction" });
-
   if (!isValid) return <>Sorry</>;
   return (
-    <div className="relative !overflow-hidden rounded-lg border border-input bg-white pt-6">
+    <div className="relative !overflow-hidden bg-white">
       <DayPicker
         hideNavigation
         showOutsideDays
@@ -27,26 +23,24 @@ export default function BigCalendar({
         weekStartsOn={0}
         locale={localeId}
         classNames={{
-          root: "relative",
+          root: "relative overflow-scroll",
 
           month: "relative w-full",
           months: "relative w-full",
           month_grid: "mt-8 w-full max-h-[800px]",
 
           week: "relative",
-          weekdays: "flex absolute top-0 w-full",
+          weekdays: "",
           weekday:
-            "flex-1 text-[10px] font-medium font-medium h-full py-2 flex items-center justify-center md:justify-start md:px-8 first:text-red-500 md:uppercase",
+            "text-[10px] font-medium text-left pb-4 md:px-8 first:text-red-500 md:uppercase",
 
           caption_label: "border border-red-500 absolute right-0 hidden",
-          day: "p-0 border-transparent md:border-input border-r last:border-r-transparent border-t first:text-red-500",
-          day_button: "border h-full border-transparent",
+          day: "p-0 h-full border-transparent border-input/50 border-r last:border-r-transparent border-t first:text-red-500",
+          day_button: "border h-full border-transparent hover:border-input/50",
           outside: "text-muted-foreground/50",
         }}
         components={{
-          DayButton: (props: DayButtonProps) => (
-            <DayButton {...props} fetcherProps={fetcher} />
-          ),
+          DayButton: (props: DayButtonProps) => <DayButton {...props} />,
         }}
       />
     </div>

@@ -262,7 +262,7 @@ function SourceOfFund({
   return (
     <ToggleGroupItem
       value={value}
-      className="flex h-full w-full items-center justify-between gap-4 rounded-lg border-2 border-input bg-white p-4 data-[state=on]:border-primary data-[state=on]:text-black"
+      className="flex h-full w-full items-center justify-between gap-4 rounded-lg border-2 border-input/50 bg-white p-4 data-[state=on]:border-primary data-[state=on]:text-black"
     >
       <div className="flex flex-col text-left">
         <h3 className="text-sm font-semibold">{name}</h3>

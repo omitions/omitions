@@ -89,7 +89,7 @@ function Create() {
         onMouseLeave={handleMouseLeave}
         sideOffset={0}
       >
-        <div className="mt-1 flex flex-col rounded-xl border border-input/50 bg-white p-2 shadow-md">
+        <div className="border-input/50/50 mt-1 flex flex-col rounded-xl border bg-white p-2 shadow-md">
           <p className="my-2 ml-4 text-xs font-medium text-muted-foreground">
             omiputra@gmail.com
           </p>
@@ -132,7 +132,7 @@ function Account() {
         onMouseLeave={handleMouseLeave}
         sideOffset={0}
       >
-        <div className="mr-2 mt-2 flex flex-col rounded-xl border border-input/50 bg-white p-2 shadow-md">
+        <div className="border-input/50/50 mr-2 mt-2 flex flex-col rounded-xl border bg-white p-2 shadow-md">
           <p className="my-2 ml-4 text-xs font-medium text-muted-foreground">
             omiputra@gmail.com
           </p>

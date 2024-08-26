@@ -87,6 +87,9 @@ export default function CreateTransaction({
     : "-";
   const workspaceId = params.id ? regenerateDash(params.id).getTheLast() : "";
 
+  const isSubmitting =
+    fetcher.state === "submitting" || fetcher.state === "loading";
+
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
@@ -117,6 +120,9 @@ export default function CreateTransaction({
           method="post"
           key="create-transaction"
           className="flex flex-col gap-4 px-4 md:px-8"
+          onSubmit={() => {
+            setIsOpen(false);
+          }}
         >
           <Input
             type="text"
@@ -242,7 +248,12 @@ export default function CreateTransaction({
             </ToggleGroup>
           </div>
           <SheetFooter className="flex w-full gap-3">
-            <Button type="submit" className="w-full">
+            <Button
+              type="submit"
+              className="w-full"
+              loading={isSubmitting}
+              disabled={isSubmitting}
+            >
               Buat Transaksi
             </Button>
             <SheetClose className="w-full" asChild>
@@ -281,7 +292,7 @@ function SourceOfFund({
   return (
     <ToggleGroupItem
       value={value}
-      className="flex h-full w-full items-center justify-between gap-4 rounded-lg border border-input bg-white p-4 data-[state=on]:border-primary data-[state=on]:text-black"
+      className="flex h-full w-full items-center justify-between gap-4 rounded-lg border border-input/50 bg-white p-4 data-[state=on]:border-primary data-[state=on]:text-black"
     >
       <div className="flex flex-col text-left">
         <h3 className="text-sm font-semibold">{name}</h3>

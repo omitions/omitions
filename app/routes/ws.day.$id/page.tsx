@@ -80,7 +80,7 @@ function Content() {
   if (!date || !prevDate || !nextDate) return <></>;
   return (
     <div className="flex flex-col gap-6">
-      <div className="fixed z-50 w-[calc(100%_-_var(--sidebar-width-all)_-_40px)] max-w-[2800px] rounded-t-2xl border-b border-input bg-white pt-6">
+      <div className="fixed z-50 w-[calc(100%_-_var(--sidebar-width-all)_-_40px)] max-w-[2800px] rounded-t-2xl border-b border-input/50 bg-white pt-6">
         <div className="flex items-start justify-between md:px-6">
           <div className="hidden flex-col gap-2 md:flex">
             <BackButton />

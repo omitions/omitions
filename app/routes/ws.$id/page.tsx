@@ -32,7 +32,7 @@ export default function Page() {
   );
 
   return (
-    <div className="m-5 flex min-h-[calc(97.7vh_-_var(--header-height))] flex-col gap-5 rounded-2xl md:gap-14 md:bg-white md:px-6 md:py-6 md:shadow-sm">
+    <div className="m-5 flex min-h-[calc(97.7vh_-_var(--header-height))] flex-col gap-5 rounded-2xl md:gap-14 md:bg-white md:shadow-sm">
       <div className="flex-1">
         <div className="z-50 flex h-14 w-full items-center justify-start md:hidden md:bg-white">
           <BackButton />
@@ -64,7 +64,7 @@ function Content() {
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between md:px-6 md:py-6">
         <div className="hidden flex-col gap-2 md:flex">
           <BackButton />
           <div className="flex gap-2.5">

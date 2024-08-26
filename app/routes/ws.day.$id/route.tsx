@@ -80,7 +80,7 @@ export default function WorkspaceDay() {
             <div className="fixed left-[var(--sidebar-width-all)] top-0 z-50 w-[calc(100%_-_var(--sidebar-width-all))]">
               <Header />
             </div>
-            <div className="mx-auto mt-[var(--header-height)] w-full max-w-[2800px] border-input">
+            <div className="mx-auto mt-[var(--header-height)] w-full max-w-[2800px] border-input/50">
               <Page />
             </div>
           </div>

@@ -1,17 +1,17 @@
 import { sessionStorage } from "./auth.server";
 import { escapeRegexNumber } from "./misc";
 
-// export type TWorkspaces = {
-//   _id: string;
-//   description: string;
-//   name: string;
-//   user_id: string;
-// };
+export type TCalendar = {
+  _id: string;
+  amount: number;
+  count: number;
+  date: string;
+};
 export async function getCalendar(
   request: Request,
   workspaceId: string,
   date: string,
-): Promise<unknown> {
+): Promise<TCalendar[]> {
   const session = await sessionStorage.getSession(
     request.headers.get("Cookie"),
   );
