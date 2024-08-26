@@ -11,8 +11,8 @@ import {
 
 export default function Header() {
   return (
-    <div className="flex h-[var(--header-height)] justify-center">
-      <div className="mx-[19px] flex w-full max-w-screen-2xl items-center justify-between bg-background px-5">
+    <div className="h-[var(--header-height)] justify-center hidden md:flex">
+      <div className="mx-[19px] flex w-full max-w-[2800px] items-center justify-between bg-background px-5">
         <div>
           <Button size="sm" variant="outline" className="gap-2">
             <BookOpenText size={16} strokeWidth={2} />

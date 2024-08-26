@@ -41,8 +41,8 @@ function Mobile() {
             <MenuIcon size={24} strokeWidth={2} />
           </button>
         </SheetTrigger>
-        <SheetContent side="left">
-          <SheetHeader>
+        <SheetContent side="left" className="px-4">
+          <SheetHeader className="hidden">
             <SheetTitle></SheetTitle>
             <SheetDescription></SheetDescription>
           </SheetHeader>
@@ -59,10 +59,24 @@ function Mobile() {
             </div>
             <div className="flex flex-col gap-1">
               <SheetClose>
+                <NavItem title="Spaces" href="/ws" iconName="Folder" delay={150} />
+              </SheetClose>
+              <SheetClose>
+                <NavItem title="Pemasukan" iconName="Plus" delay={150} />
+              </SheetClose>
+              <SheetClose>
                 <NavItem
-                  title="Semua Spaces"
-                  href="/ws"
-                  iconName="FileText"
+                  title="Pengeluaran"
+                  href="/ws/expenses"
+                  iconName="ArrowUp"
+                  delay={150}
+                />
+              </SheetClose>
+              <SheetClose>
+                <NavItem
+                  title="Invoice"
+                  href="/ws/invoice"
+                  iconName="ReceiptText"
                   delay={150}
                 />
               </SheetClose>

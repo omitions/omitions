@@ -80,7 +80,7 @@ function Content() {
   return (
     <div className="">
       <div className="flex flex-col gap-6">
-        <div className="fixed z-50 w-[calc(100%_-_var(--sidebar-width-all)_-_40px)] max-w-screen-2xl rounded-t-2xl border-b border-input bg-white pt-6 2xl:max-w-[1496px]">
+        <div className="fixed z-50 w-[calc(100%_-_var(--sidebar-width-all)_-_40px)] max-w-[2800px] rounded-t-2xl border-b border-input bg-white pt-6">
           <div className="flex items-start justify-between md:px-6">
             <div className="hidden flex-col gap-2 md:flex">
               <BackButton />
@@ -151,7 +151,7 @@ function Content() {
           </div>
           <Header />
         </div>
-        <div className="mt-[calc(102px_+_var(--header-height))]">
+        <div className="mt-[calc(110px_+_var(--header-height))]">
           <List />
         </div>
       </div>
@@ -183,8 +183,8 @@ function Header() {
           </Button>
           <CreateTransaction
             date={date}
-            // actionType="CREATE_TRANSACTION"
-            // fetcher={fetcher}
+          // actionType="CREATE_TRANSACTION"
+          // fetcher={fetcher}
           />
         </div>
       ) : (

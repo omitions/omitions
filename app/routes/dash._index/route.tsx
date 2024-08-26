@@ -43,7 +43,7 @@ export default function Index() {
             <div className="fixed left-[var(--sidebar-width-all)] top-0 z-50 hidden w-[calc(100%_-_var(--sidebar-width-all))] md:block">
               <Header />
             </div>
-            <div className="mx-auto mt-[var(--header-height)] w-full max-w-screen-2xl border-input">
+            <div className="mx-auto mt-[var(--header-height)] w-full max-w-[2800px] border-input">
               <Page />
             </div>
           </div>

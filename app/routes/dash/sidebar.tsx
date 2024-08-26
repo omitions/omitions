@@ -38,8 +38,8 @@ function Mobile() {
             <MenuIcon size={24} strokeWidth={2} />
           </button>
         </SheetTrigger>
-        <SheetContent side="left">
-          <SheetHeader>
+        <SheetContent side="left" className="px-4">
+          <SheetHeader className="hidden">
             <SheetTitle></SheetTitle>
             <SheetDescription></SheetDescription>
           </SheetHeader>
@@ -56,12 +56,10 @@ function Mobile() {
             </div>
             <div className="flex flex-col gap-1">
               <SheetClose>
-                <NavItem
-                  title="Ringkasan"
-                  href="/dash"
-                  iconName="BarChartHorizontal"
-                  delay={150}
-                />
+                <NavItem title="Ringkasan" href="/dash" iconName="GanttChart" delay={150} />
+              </SheetClose>
+              <SheetClose>
+                <NavItem title="Laporan" iconName="Calculator" delay={150} />
               </SheetClose>
             </div>
           </div>

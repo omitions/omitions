@@ -38,8 +38,8 @@ function Mobile() {
             <MenuIcon size={24} strokeWidth={2} />
           </button>
         </SheetTrigger>
-        <SheetContent side="left">
-          <SheetHeader>
+        <SheetContent side="left" className="px-4">
+          <SheetHeader className="hidden">
             <SheetTitle></SheetTitle>
             <SheetDescription></SheetDescription>
           </SheetHeader>
@@ -56,20 +56,29 @@ function Mobile() {
             </div>
             <div className="flex flex-col gap-1">
               <SheetClose>
+                <NavItem title="Privasi" iconName="ShieldCheck" delay={150} />
+              </SheetClose>
+              <SheetClose>
+                <NavItem title="Laporkan Masalah" iconName="Info" />
+              </SheetClose>
+              <SheetClose>
+                <NavItem title="Preferensi" iconName="Settings2" />
+              </SheetClose>
+              <p className="mb-1.5 ml-4 mt-6 text-xs font-medium text-muted-foreground">
+                Mengenai akun Anda
+              </p>
+              <SheetClose>
                 <NavItem
-                  title="Akun"
-                  href="/settings"
-                  iconName="UserRound"
-                  delay={150}
+                  title="Langganan"
+                  href="/settings/billing"
+                  iconName="Crown"
                 />
               </SheetClose>
               <SheetClose>
-                <NavItem
-                  title="Billing"
-                  href="/settings/billing"
-                  iconName="CreditCard"
-                  delay={150}
-                />
+                <NavItem title="Akun" href="/settings" iconName="UserRound" />
+              </SheetClose>
+              <SheetClose>
+                <NavItem title="Keamanan Akun" iconName="Lock" />
               </SheetClose>
             </div>
           </div>
