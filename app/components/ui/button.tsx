@@ -25,11 +25,11 @@ const buttonVariants = cva(
           "border border-input bg-secondary shadow-sm hover:border-primary hover:ring-2 hover:ring-primary/20 focus-visible:border-primary focus-visible:ring-primary/30 disabled:bg-red-500",
         default:
           "bg-primary text-primary-foreground shadow hover:bg-primary/90 ring-1 ring-foreground",
-        ghost: "hover:bg-secondary focus-visible:bg-primary/30",
+        ghost: "hover:bg-secondary hover:font-bold focus-visible:bg-primary/30",
         transparent: "",
       },
       size: {
-        sm: "h-10 md:h-8 rounded-full px-4 text-xs",
+        sm: "h-10 md:h-9 rounded-full px-4 text-xs",
         lg: "h-11 px-9 rounded-full text-sm",
         icon: "h-9 w-9 md:h-8 md:w-8 rounded-full",
       },

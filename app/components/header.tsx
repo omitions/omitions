@@ -1,8 +1,10 @@
 import { BookOpenText, ChevronDown, Command, Search } from "lucide-react";
+import React from "react";
 
 import { SearchDialog } from "~/components/search";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
-import { Button } from "~/components/ui/button";
+import { Button, ButtonLink } from "~/components/ui/button";
+import { DropdownMenuSeparator } from "~/components/ui/dropdown-menu";
 import {
   Popover,
   PopoverContent,
@@ -55,42 +57,112 @@ export default function Header() {
 }
 
 function Create() {
+  const [open, setOpen] = React.useState(false);
+
+  const handleMouseEnter = () => {
+    setOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    setOpen(false);
+  };
+
   return (
-    <Popover modal={false}>
-      <PopoverTrigger asChild>
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger
+        asChild
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        onClick={(e) => {
+          e.preventDefault();
+        }}
+      >
         <Button size="sm" className="gap-2" variant="secondary">
           <span>Baru</span>
           <ChevronDown size={16} strokeWidth={2} />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-56" align="center" sideOffset={12}>
-        <Button
-          variant="transparent"
-          className="w-full rounded-md border border-red-500 p-0 font-medium"
-        >
-          Buat transaksi hari ini?
-        </Button>
+      <PopoverContent
+        className="w-60 border-none bg-transparent shadow-none"
+        align="center"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        sideOffset={0}
+      >
+        <div className="mt-1 flex flex-col rounded-xl border border-input/50 bg-white p-2 shadow-md">
+          <p className="my-2 ml-4 text-xs font-medium text-muted-foreground">
+            omiputra@gmail.com
+          </p>
+        </div>
       </PopoverContent>
     </Popover>
   );
 }
 
 function Account() {
+  const [open, setOpen] = React.useState(false);
+
+  const handleMouseEnter = () => {
+    setOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    setOpen(false);
+  };
+
   return (
-    <Popover modal={false}>
-      <PopoverTrigger asChild>
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger
+        asChild
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        onClick={(e) => {
+          e.preventDefault();
+        }}
+      >
         <Avatar className="cursor-pointer">
           <AvatarImage src="" alt="@shadcn" />
           <AvatarFallback>OP</AvatarFallback>
         </Avatar>
       </PopoverTrigger>
-      <PopoverContent className="w-56" align="end" sideOffset={12}>
-        <Button
-          variant="transparent"
-          className="w-full rounded-md border border-red-500 p-0 font-medium"
-        >
-          Buat transaksi hari ini?
-        </Button>
+      <PopoverContent
+        className="w-60 border-none bg-transparent shadow-none"
+        align="center"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        sideOffset={0}
+      >
+        <div className="mr-2 mt-2 flex flex-col rounded-xl border border-input/50 bg-white p-2 shadow-md">
+          <p className="my-2 ml-4 text-xs font-medium text-muted-foreground">
+            omiputra@gmail.com
+          </p>
+          <DropdownMenuSeparator />
+          <ButtonLink
+            href="/settings"
+            variant="ghost"
+            size="sm"
+            className="w-full justify-start rounded-md border font-medium"
+          >
+            Akun
+          </ButtonLink>
+          <ButtonLink
+            href="/settings/billing"
+            variant="ghost"
+            size="sm"
+            className="w-full justify-start rounded-md border font-medium"
+          >
+            Langganan
+          </ButtonLink>
+          <DropdownMenuSeparator />
+          <ButtonLink
+            href="/logout"
+            variant="ghost"
+            size="sm"
+            className="w-full justify-start rounded-md border font-medium"
+          >
+            Keluar
+          </ButtonLink>
+        </div>
       </PopoverContent>
     </Popover>
   );

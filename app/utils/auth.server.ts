@@ -1,4 +1,5 @@
 import { createCookieSessionStorage } from "@remix-run/node";
+
 import { Authenticator, AuthorizationError } from "remix-auth";
 import { FormStrategy } from "remix-auth-form";
 
@@ -15,7 +16,7 @@ export const sessionStorage = createCookieSessionStorage({
   },
 });
 
-export const auth = new Authenticator<string>(sessionStorage);
+export const auth = new Authenticator<User>(sessionStorage);
 
 auth.use(
   new FormStrategy(async ({ form }) => {
@@ -43,3 +44,8 @@ auth.use(
     return { ...resp.data };
   }),
 );
+
+export type User = {
+  access_token: string;
+  email?: string;
+};

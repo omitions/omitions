@@ -1,4 +1,4 @@
-import { useParams } from "@remix-run/react";
+import { FetcherWithComponents, useParams } from "@remix-run/react";
 
 import { format } from "date-fns";
 import { id as localeId } from "date-fns/locale";
@@ -6,7 +6,7 @@ import { ArrowUp, Plus, ReceiptText } from "lucide-react";
 import React from "react";
 import { NumericFormat } from "react-number-format";
 
-import { Button, buttonVariants } from "~/components/ui/button";
+import { Button } from "~/components/ui/button";
 import { Input, inputVariants } from "~/components/ui/input";
 import {
   Select,
@@ -25,19 +25,25 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "~/components/ui/sheet";
-
-import { regenerateDash } from "~/utils/misc";
+import { ToggleGroup, ToggleGroupItem } from "~/components/ui/toggle-group";
 
 import { cn } from "~/lib/utils";
-import { ToggleGroup, ToggleGroupItem } from "./ui/toggle-group";
+
 import toIDR from "~/utils/currency";
 import { WorkspaceIcon } from "~/utils/icons";
+import { regenerateDash } from "~/utils/misc";
 
-export default function CreateTransaction({ date }: { date: Date }) {
-  const [isOpen, setIsOpen] = React.useState(false);
-  // const [trxType, setTrxType] = React.useState<string | undefined>(undefined);
+export default function CreateTransaction({
+  date,
+  fetcher,
+}: {
+  date: Date;
+  fetcher: FetcherWithComponents<unknown>;
+}) {
   const [loopType, setLoopType] = React.useState("none");
+  const [isOpen, setIsOpen] = React.useState(false);
   const [timeValue, setTimeValue] = React.useState<string>("00:00");
+  const [trxType, setTrxType] = React.useState<string | undefined>(undefined);
 
   const handleTimeChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     const time = e.target.value;
@@ -79,6 +85,7 @@ export default function CreateTransaction({ date }: { date: Date }) {
   const workspaceName = params.id
     ? regenerateDash(params.id).withoutTheLast()
     : "-";
+  const workspaceId = params.id ? regenerateDash(params.id).getTheLast() : "";
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -105,7 +112,12 @@ export default function CreateTransaction({ date }: { date: Date }) {
             <SheetDescription>{workspaceName}</SheetDescription>
           </div>
         </SheetHeader>
-        <div className="flex flex-col gap-4 px-4 md:px-8">
+        <fetcher.Form
+          action="."
+          method="post"
+          key="create-transaction"
+          className="flex flex-col gap-4 px-4 md:px-8"
+        >
           <Input
             type="text"
             name="description"
@@ -123,7 +135,7 @@ export default function CreateTransaction({ date }: { date: Date }) {
             prefix="IDR "
             className={cn(inputVariants(), "placeholder:font-normal")}
           />
-          <Select>
+          <Select value={trxType} onValueChange={(v) => setTrxType(v)}>
             <SelectTrigger className="w-full gap-1">
               <SelectValue placeholder="Tipe transaksi" />
             </SelectTrigger>
@@ -239,7 +251,17 @@ export default function CreateTransaction({ date }: { date: Date }) {
               </Button>
             </SheetClose>
           </SheetFooter>
-        </div>
+          <input type="hidden" name="type" value={trxType} />
+          <input type="hidden" name="loop_type" value={loopType} />
+          <input
+            type="hidden"
+            name="date_time"
+            value={`${format(new Date(date), "yyyy-MM-dd")} ${timeValue}`}
+          />
+          <input type="hidden" name="workspaces_id" value={workspaceId} />
+          <input type="hidden" name="workspace_name" value={workspaceName} />
+          <input type="hidden" name="_action" value="CREATE_TRANSACTION" />
+        </fetcher.Form>
       </SheetContent>
     </Sheet>
   );

@@ -26,7 +26,7 @@ import {
 import { WorkspaceIcon } from "~/utils/icons";
 import { generateDash } from "~/utils/misc";
 
-import { useTypedRouteLoaderData } from "~/utils/useTypedRouteLoaderData";
+import { useTypedRouteLoaderData } from "~/hooks/useTypedRouteLoaderData";
 
 export function SearchDialog({
   children,
@@ -70,13 +70,14 @@ export function SearchDialog({
               <CommandItem
                 key={props._id}
                 asChild
-                onSelect={() =>
-                  navigate(
-                    "/ws/" +
-                      `${generateDash(props.name)}-${props._id}` +
-                      `?d=${format(new Date().setDate(new Date().getDate() - 1), "yyyy-MM")}`,
-                  )
-                }
+                onSelect={() => {
+                  setOpen(false);
+                  navigate({
+                    pathname:
+                      "/ws/" + `${generateDash(props.name)}-${props._id}`,
+                    search: `?d=${format(new Date().setDate(new Date().getDate() - 1), "yyyy-MM")}`,
+                  });
+                }}
                 className="h-full"
               >
                 <Button
@@ -223,4 +224,10 @@ export function SearchDialog({
       </CommandDialog>
     </>
   );
+}
+
+function wait(time: number) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, time);
+  });
 }

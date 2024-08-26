@@ -46,11 +46,7 @@ export default function List() {
                 ini untuk memulai menulis transaksi Anda..
               </p>
             </div>
-            <CreateTransaction
-              date={date}
-              // actionType="CREATE_TRANSACTION"
-              // fetcher={fetcher}
-            />
+            <CreateTransaction date={date} fetcher={fetcher} />
           </div>
         </div>
       )}
@@ -64,8 +60,17 @@ function Transaction({
   description,
   date_time,
 }: Pick<TTransactions, "type" | "amount" | "description" | "date_time">) {
+  const { transactions } = useLoaderData<typeof loader>();
+
   return (
-    <div className="relative flex h-full cursor-pointer items-center justify-between gap-4 overflow-hidden border border-transparent px-6 py-4 last:rounded-b-2xl hover:border-input hover:shadow-md">
+    <div
+      className={cn(
+        "relative flex h-full cursor-pointer items-center justify-between gap-4 overflow-hidden border border-transparent px-6 py-4 hover:border-input hover:shadow-md",
+        transactions?.length &&
+          transactions?.length >= 2 &&
+          "last:rounded-b-2xl",
+      )}
+    >
       <div className="flex items-center gap-4">
         <div>
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary">

@@ -1,5 +1,6 @@
 import {
   Link,
+  useFetcher,
   useLoaderData,
   useNavigate,
   useParams,
@@ -8,7 +9,7 @@ import {
 
 import { format } from "date-fns";
 import { id as localeId } from "date-fns/locale";
-import { ArrowLeft, ChevronLeft, Filter } from "lucide-react";
+import { ArrowLeft, ChevronLeft } from "lucide-react";
 
 import CreateTransaction from "~/components/create-transaction";
 import { Button } from "~/components/ui/button";
@@ -161,7 +162,7 @@ function Header() {
   const { transactions } = useLoaderData<typeof loader>();
 
   const [searchParams] = useSearchParams();
-  // const fetcher = useFetcher({ key: "create-transaction" });
+  const fetcher = useFetcher({ key: "create-transaction" });
 
   const date = new Date(searchParams.get("d")?.toString() || "") ?? new Date();
 
@@ -175,11 +176,7 @@ function Header() {
       </div>
       {transactions?.length ? (
         <div className="flex items-center gap-3">
-          <CreateTransaction
-            date={date}
-            // actionType="CREATE_TRANSACTION"
-            // fetcher={fetcher}
-          />
+          <CreateTransaction date={date} fetcher={fetcher} />
         </div>
       ) : (
         <div></div>

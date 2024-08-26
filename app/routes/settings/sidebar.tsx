@@ -78,6 +78,12 @@ function Mobile() {
               <SheetClose>
                 <NavItem title="Keamanan Akun" iconName="Lock" />
               </SheetClose>
+              <p className="mb-1.5 ml-4 mt-6 text-xs font-medium text-muted-foreground">
+                Lainnya
+              </p>
+              <SheetClose>
+                <NavItem title="Sampah" iconName="Trash2" />
+              </SheetClose>
             </div>
           </div>
         </SheetContent>
@@ -114,6 +120,10 @@ function Desktop() {
               />
               <NavItem title="Akun" href="/settings" iconName="UserRound" />
               <NavItem title="Keamanan Akun" iconName="Lock" />
+              <p className="mb-1.5 ml-4 mt-6 text-xs font-medium text-muted-foreground">
+                Lainnya
+              </p>
+              <NavItem title="Sampah" iconName="Trash2" />
             </div>
           </div>
         </div>
