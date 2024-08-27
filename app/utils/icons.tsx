@@ -26,7 +26,7 @@ function BloumIcon({ size = 38 }: { size?: number }) {
 }
 
 function MybucksLogo({
-  height = 42,
+  height = 34,
   color = "#404040",
 }: {
   height?: number;

@@ -120,7 +120,7 @@ export async function getTransactions(
   const session = await sessionStorage.getSession(
     request.headers.get("Cookie"),
   );
-  const token = session.get("user").access_token;
+  const token = session.get("user")?.access_token;
 
   let resp = null;
   // console.log("payload ??? ", `https://api.mybucks.today/cashflows/list?workspace_id=${workspaceId}&date=${date}`)

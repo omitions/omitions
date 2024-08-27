@@ -101,7 +101,6 @@ function Transaction({
               type === "cash_in" && "text-primary",
             )}
           >
-            {/* <span>{type === "cash_in" ? "+" : "-"}</span> */}
             <span> </span>
             <span>{toIDR(amount)}</span>
           </h3>

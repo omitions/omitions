@@ -131,9 +131,9 @@ function SidebarFooter({ count }: { count: number }) {
   return (
     <Link
       to="/ws/:id"
-      className="mx-2 rounded-2xl shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 md:mx-0"
+      className="mx-2 rounded-xl border border-input/50 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 md:mx-0"
     >
-      <div className="flex w-full cursor-pointer flex-col gap-3 rounded-2xl bg-white px-4 py-8">
+      <div className="flex w-full cursor-pointer flex-col gap-3 rounded-xl bg-white px-4 py-8">
         <div className="flex items-center justify-between">
           <h4 className="text-xs font-medium">{count || 0}/10 Workspace</h4>
           <p className="text-xs font-medium text-muted-foreground">Gratis</p>

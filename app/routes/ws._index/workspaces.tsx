@@ -47,11 +47,13 @@ export default function Workspaces() {
           Semua catatan keuangan Anda ada disini
         </p>
       </div>
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:gap-4 lg:grid-cols-3 xl:grid-cols-4 2xl:max-w-[2800px] 2xl:grid-cols-5">
-        {workspaces.map((item) => (
-          <WorkspaceItem key={item._id} {...item} />
-        ))}
-        <ButtonCreateWorkspace />
+      <div className="2xl:max-w-[2800px]">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:gap-4 lg:grid-cols-3 xl:grid-cols-4 2xl:max-w-[1900px] 2xl:grid-cols-5">
+          {workspaces.map((item) => (
+            <WorkspaceItem key={item._id} {...item} />
+          ))}
+          <ButtonCreateWorkspace />
+        </div>
       </div>
     </div>
   );

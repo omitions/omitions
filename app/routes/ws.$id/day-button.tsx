@@ -35,25 +35,39 @@ export default function DayButton({
       <div className="relative h-20 border border-transparent md:h-28">
         <p
           className={cn(
-            "left-3 top-4 flex h-6 w-6 items-center justify-center rounded-full bg-white text-[11px] font-bold md:absolute",
+            "left-3 top-4 flex h-5 w-5 items-center justify-center rounded-full bg-white text-[10px] font-bold md:absolute",
             isToday && "bg-foreground text-white",
           )}
         >
           {children}
         </p>
-        <div className="absolute bottom-0 flex w-full flex-col gap-0.5 p-1">
-          <div className="rounded-md bg-primary/10">
+        <div className="absolute top-10 flex w-full flex-col gap-0.5 p-1">
+          <div className="overflow-hidden rounded-md bg-primary/10">
             {data?.amount && (
               <div className="h-11 rounded-md border border-primary/30 px-2 py-1.5">
                 <div className="flex items-center gap-1">
-                  <Import size={13} strokeWidth={2.5} />
-                  <p className="w-fit text-[10px] font-bold">
+                  <div>
+                    <Import
+                      size={12}
+                      strokeWidth={2.5}
+                      className={cn(
+                        "text-foreground",
+                        data?.amount < 0 && "text-red-500",
+                      )}
+                    />
+                  </div>
+                  <p
+                    className={cn(
+                      "w-fit whitespace-nowrap text-[10px] font-semibold text-foreground",
+                      data?.amount < 0 && "text-red-500",
+                    )}
+                  >
                     {typeof data?.amount == "number"
-                      ? toIDR(+data?.amount)
+                      ? toIDR(+data?.amount).toString()
                       : null}
                   </p>
                 </div>
-                <p className="mt-0.5 w-fit text-[10px] font-medium">
+                <p className="mt-0.5 w-fit text-[10px] font-medium text-foreground">
                   {data.count} Transaksi
                 </p>
               </div>

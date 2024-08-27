@@ -18,9 +18,11 @@ export default function Wallets() {
       <div className="hidden flex-col md:flex">
         <h2 className="text-base font-bold">Sumber Dana Anda</h2>
       </div>
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:gap-4 lg:grid-cols-3 xl:grid-cols-4 2xl:max-w-[2800px] 2xl:grid-cols-5">
-        <WalletItem />
-        <ButtonCreateWallet />
+      <div className="2xl:max-w-[2800px]">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:gap-4 lg:grid-cols-3 xl:grid-cols-4 2xl:max-w-[1900px] 2xl:grid-cols-5">
+          <WalletItem />
+          <ButtonCreateWallet />
+        </div>
       </div>
     </div>
   );

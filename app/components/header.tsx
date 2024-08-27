@@ -48,7 +48,7 @@ export default function Header() {
           </SearchDialog>
         </div>
         <div className="flex items-center gap-4">
-          <Create />
+          {/* <Create /> */}
           <Account />
         </div>
       </div>
@@ -100,26 +100,9 @@ function Create() {
 }
 
 function Account() {
-  const [open, setOpen] = React.useState(false);
-
-  const handleMouseEnter = () => {
-    setOpen(true);
-  };
-
-  const handleMouseLeave = () => {
-    setOpen(false);
-  };
-
   return (
-    <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger
-        asChild
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        onClick={(e) => {
-          e.preventDefault();
-        }}
-      >
+    <Popover>
+      <PopoverTrigger asChild>
         <Avatar className="cursor-pointer">
           <AvatarImage src="" alt="@shadcn" />
           <AvatarFallback>OP</AvatarFallback>
@@ -128,12 +111,10 @@ function Account() {
       <PopoverContent
         className="w-60 border-none bg-transparent shadow-none"
         align="center"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
         sideOffset={0}
       >
         <div className="border-input/50/50 mr-2 mt-2 flex flex-col rounded-xl border bg-white p-2 shadow-md">
-          <p className="my-2 ml-4 text-xs font-medium text-muted-foreground">
+          <p className="my-2 ml-2 text-xs font-medium text-muted-foreground">
             omiputra@gmail.com
           </p>
           <DropdownMenuSeparator />
@@ -141,7 +122,7 @@ function Account() {
             href="/settings"
             variant="ghost"
             size="sm"
-            className="w-full justify-start rounded-md border font-medium"
+            className="w-full justify-start rounded-md border px-2 font-medium"
           >
             Akun
           </ButtonLink>
@@ -149,7 +130,7 @@ function Account() {
             href="/settings/billing"
             variant="ghost"
             size="sm"
-            className="w-full justify-start rounded-md border font-medium"
+            className="w-full justify-start rounded-md border px-2 font-medium"
           >
             Langganan
           </ButtonLink>
@@ -158,7 +139,7 @@ function Account() {
             href="/logout"
             variant="ghost"
             size="sm"
-            className="w-full justify-start rounded-md border font-medium"
+            className="w-full justify-start rounded-md border px-2 font-medium text-red-500"
           >
             Keluar
           </ButtonLink>
