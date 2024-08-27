@@ -35,7 +35,7 @@ export default function List() {
           />
         ))
       ) : (
-        <div className="mx-6 my-6 flex h-[440px] items-center justify-center rounded-lg border border-input/50">
+        <div className="mx-6 my-6 flex h-[440px] items-center justify-center">
           <div className="flex flex-col items-center justify-center gap-6">
             <div className="flex flex-col gap-1">
               <h3 className="text-center text-base font-semibold">

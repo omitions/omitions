@@ -15,11 +15,10 @@ export async function getCalendar(
   const session = await sessionStorage.getSession(
     request.headers.get("Cookie"),
   );
-  const token = session.get("user").access_token;
+  const token = session.get("user")?.access_token;
 
   let resp = null;
   // console.log("token: ", token);
-  // console.log(`https://api.mybucks.today/cashflows/calendar?workspace_id=${workspaceId}&date=${date}`)
   const fetched = await fetch(
     `https://api.mybucks.today/cashflows/calendar?workspace_id=${workspaceId}&date=${date}`,
     {
@@ -52,20 +51,10 @@ export async function createTransaction(form: FormData, request: Request) {
   )
     throw new Error("Error");
 
-  // console.log(">>>> payload", {
-  //   amount: +escapeRegexNumber(amount),
-  //   description,
-  //   type,
-  //   loop_type,
-  //   loop_count: +escapeRegexNumber(loop_count),
-  //   workspaces_id,
-  //   date_time,
-  // })
-
   const session = await sessionStorage.getSession(
     request.headers.get("Cookie"),
   );
-  const token = session.get("user").access_token;
+  const token = session.get("user")?.access_token;
 
   // console.log("payload: ", {
   //   amount: type === "cash_out" ? -escapeRegexNumber(amount) : escapeRegexNumber(amount),
@@ -123,7 +112,6 @@ export async function getTransactions(
   const token = session.get("user")?.access_token;
 
   let resp = null;
-  // console.log("payload ??? ", `https://api.mybucks.today/cashflows/list?workspace_id=${workspaceId}&date=${date}`)
   const fetched = await fetch(
     `https://api.mybucks.today/cashflows/list?workspace_id=${workspaceId}&date=${date}`,
     {

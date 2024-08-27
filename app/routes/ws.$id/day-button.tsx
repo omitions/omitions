@@ -58,7 +58,7 @@ export default function DayButton({
                   </div>
                   <p
                     className={cn(
-                      "w-fit whitespace-nowrap text-[10px] font-semibold text-foreground",
+                      "w-fit whitespace-nowrap text-[10px] font-bold text-foreground",
                       data?.amount < 0 && "text-red-500",
                     )}
                   >
@@ -67,7 +67,7 @@ export default function DayButton({
                       : null}
                   </p>
                 </div>
-                <p className="mt-0.5 w-fit text-[10px] font-medium text-foreground">
+                <p className="w-fit text-[10px] font-medium text-foreground">
                   {data.count} Transaksi
                 </p>
               </div>
