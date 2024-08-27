@@ -14,7 +14,7 @@ export default function BigCalendar({
 }) {
   if (!isValid) return <>Sorry</>;
   return (
-    <div className="relative !overflow-hidden bg-white">
+    <div className="relative">
       <DayPicker
         hideNavigation
         showOutsideDays
@@ -23,20 +23,20 @@ export default function BigCalendar({
         weekStartsOn={0}
         locale={localeId}
         classNames={{
-          root: "relative overflow-scroll",
+          root: "relative",
 
-          month: "relative w-full",
-          months: "relative w-full",
+          month:
+            "relative w-full h-full md:border-t md:border-input/50 md:px-4",
+          months: "relative w-full h-full",
           month_grid: "mt-8 w-full max-h-[800px]",
 
           week: "relative",
           weekdays: "",
           weekday:
-            "text-[10px] font-medium text-left pb-4 md:px-8 first:text-red-500 md:uppercase",
+            "text-[10px] font-medium text-left pb-4 md:px-4 first:text-red-500 md:uppercase",
 
-          caption_label: "border border-red-500 absolute right-0 hidden",
-          day: "p-0 h-full border-transparent border-input/50 border-r last:border-r-transparent border-t first:text-red-500",
-          day_button: "border h-full border-transparent hover:border-input/50",
+          caption_label: "hidden",
+          day: "p-0 h-full border-transparent first:text-red-500",
           outside: "text-muted-foreground/50",
         }}
         components={{

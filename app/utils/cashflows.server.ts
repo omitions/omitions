@@ -67,11 +67,24 @@ export async function createTransaction(form: FormData, request: Request) {
   );
   const token = session.get("user").access_token;
 
+  // console.log("payload: ", {
+  //   amount: type === "cash_out" ? -escapeRegexNumber(amount) : escapeRegexNumber(amount),
+  //   description: description?.toString().trim(),
+  //   type,
+  //   loop_type,
+  //   loop_count: +escapeRegexNumber(loop_count),
+  //   workspaces_id,
+  //   date_time,
+  // })
+
   let resp = null;
   const fetched = await fetch("https://api.mybucks.today/cashflows/create", {
     method: "POST",
     body: JSON.stringify({
-      amount: +escapeRegexNumber(amount),
+      amount:
+        type === "cash_out"
+          ? -escapeRegexNumber(amount)
+          : escapeRegexNumber(amount),
       description: description?.toString().trim(),
       type,
       loop_type,

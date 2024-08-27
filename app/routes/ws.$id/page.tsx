@@ -32,7 +32,7 @@ export default function Page() {
   );
 
   return (
-    <div className="m-5 flex min-h-[calc(97.7vh_-_var(--header-height))] flex-col gap-5 rounded-2xl md:gap-14 md:bg-white md:shadow-sm">
+    <div className="m-5 flex flex-col gap-5 rounded-2xl md:gap-14 md:bg-white md:shadow-sm">
       <div className="flex-1">
         <div className="z-50 flex h-14 w-full items-center justify-start md:hidden md:bg-white">
           <BackButton />

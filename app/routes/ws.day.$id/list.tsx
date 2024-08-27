@@ -35,7 +35,7 @@ export default function List() {
           />
         ))
       ) : (
-        <div className="mx-6 mt-6 flex h-[750px] items-center justify-center rounded-lg border border-input/50">
+        <div className="mx-6 my-6 flex h-[440px] items-center justify-center rounded-lg border border-input/50">
           <div className="flex flex-col items-center justify-center gap-6">
             <div className="flex flex-col gap-1">
               <h3 className="text-center text-base font-semibold">
@@ -67,7 +67,7 @@ function Transaction({
       className={cn(
         "relative flex h-full cursor-pointer items-center justify-between gap-4 overflow-hidden border border-transparent px-6 py-4 hover:border-input/50 hover:shadow-md",
         transactions?.length &&
-          transactions?.length >= 2 &&
+          transactions?.length >= 1 &&
           "last:rounded-b-2xl",
       )}
     >
@@ -101,7 +101,7 @@ function Transaction({
               type === "cash_in" && "text-primary",
             )}
           >
-            <span>{type === "cash_in" ? "+" : "-"}</span>
+            {/* <span>{type === "cash_in" ? "+" : "-"}</span> */}
             <span> </span>
             <span>{toIDR(amount)}</span>
           </h3>

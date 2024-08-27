@@ -78,7 +78,7 @@ function regenerateDash(text: string) {
 
 function escapeRegexNumber(input: string) {
   const specialChars = /[.*+?^${}()|[\]\\a-zA-Z]/g;
-  return input.replace(specialChars, "");
+  return +input.replace(specialChars, "");
 }
 
 export { AnchorOrLink, generateDash, regenerateDash, escapeRegexNumber };

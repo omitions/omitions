@@ -34,7 +34,6 @@ export async function loader({ params, request }: LoaderFunctionArgs) {
     : "-";
   let calendar: TCalendar[] = await getCalendar(request, workspaceId, d);
 
-  console.log("calendar ", calendar);
   return defer({
     workspaceName,
     error: "",

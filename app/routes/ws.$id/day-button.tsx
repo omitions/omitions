@@ -8,6 +8,7 @@ import { cn } from "~/lib/utils";
 import { generateDash, regenerateDash } from "~/utils/misc";
 import { loader } from "./route";
 import toIDR from "~/utils/currency";
+import { ArrowRightLeft, ArrowUpRight, FilePen, Import } from "lucide-react";
 
 export default function DayButton({
   className,
@@ -30,29 +31,34 @@ export default function DayButton({
     <Link
       to={"/ws/day/" + `${generateDash(name)}-${_id}` + `?d=${dayDate}`}
       prefetch="intent"
-      className={cn(
-        className,
-        "flex w-full rounded-xl md:h-[110px]",
-        isToday && "bg-secondary",
-      )}
     >
-      <div className="relative flex h-full w-full flex-col gap-1">
-        <div className="md:w-[140px]"></div>
-        <div className="mx-auto my-2 md:mx-0 md:px-6">
-          <p
-            className={cn(
-              "flex h-7 w-7 items-center justify-center gap-1 rounded-full border-2 border-transparent text-[11px] font-medium md:text-xs md:font-medium",
-              isToday && "bg-foreground text-white",
+      <div className="relative h-20 border border-transparent md:h-28">
+        <p
+          className={cn(
+            "left-3 top-4 flex h-6 w-6 items-center justify-center rounded-full bg-white text-[11px] font-bold md:absolute",
+            isToday && "bg-foreground text-white",
+          )}
+        >
+          {children}
+        </p>
+        <div className="absolute bottom-0 flex w-full flex-col gap-0.5 p-1">
+          <div className="rounded-md bg-primary/10">
+            {data?.amount && (
+              <div className="h-11 rounded-md border border-primary/30 px-2 py-1.5">
+                <div className="flex items-center gap-1">
+                  <Import size={13} strokeWidth={2.5} />
+                  <p className="w-fit text-[10px] font-bold">
+                    {typeof data?.amount == "number"
+                      ? toIDR(+data?.amount)
+                      : null}
+                  </p>
+                </div>
+                <p className="mt-0.5 w-fit text-[10px] font-medium">
+                  {data.count} Transaksi
+                </p>
+              </div>
             )}
-          >
-            {children}
-          </p>
-        </div>
-        <div className="mx-auto my-2 hidden md:mx-0 md:block md:px-6">
-          <p className="text-xs">
-            {typeof data?.amount == "number" ? toIDR(+data?.amount) : null}
-          </p>
-          {data?.count && <p className="text-xs">{data?.count} Transaksi</p>}
+          </div>
         </div>
       </div>
     </Link>
