@@ -36,9 +36,11 @@ import { regenerateDash } from "~/utils/misc";
 export default function CreateTransaction({
   date,
   fetcher,
+  children
 }: {
   date: Date;
   fetcher: FetcherWithComponents<unknown>;
+  children?: React.ReactNode;
 }) {
   const [loopType, setLoopType] = React.useState("none");
   const [isOpen, setIsOpen] = React.useState(false);
@@ -93,14 +95,16 @@ export default function CreateTransaction({
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
-        <Button
-          size="sm"
-          variant="secondary"
-          className="flex !h-10 gap-1.5 px-5"
-        >
-          <Plus size={18} strokeWidth={2} />
-          <span>Catat transaksi</span>
-        </Button>
+        {children ?? (
+          <Button
+            size="sm"
+            variant="secondary"
+            className="flex !h-10 gap-1.5 px-5"
+          >
+            <Plus size={18} strokeWidth={2} />
+            <span>Catat transaksi</span>
+          </Button>
+        )}
       </SheetTrigger>
       <SheetContent withCloseButton className="sm:max-w-lg">
         <SheetHeader className="mt-12 flex-row gap-2.5 px-4 md:mt-0 md:px-8">

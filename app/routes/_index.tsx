@@ -38,7 +38,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 
 export default function Login() {
   return (
-    <div className="mx-auto mb-24 flex min-h-screen w-screen overflow-y-scroll lg:overflow-auto">
+    <div className="mx-auto mb-24 flex min-h-screen w-screen overflow-y-scroll md:overflow-hidden">
       <div className="flex w-full items-center justify-center p-5">
         <LoginForm />
       </div>

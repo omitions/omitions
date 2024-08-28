@@ -35,7 +35,7 @@ export default function List() {
           />
         ))
       ) : (
-        <div className="mx-6 my-6 flex h-[440px] items-center justify-center">
+        <div className="mx-6 my-6 flex h-[240px] items-center justify-center">
           <div className="flex flex-col items-center justify-center gap-6">
             <div className="flex flex-col gap-1">
               <h3 className="text-center text-base font-semibold">
@@ -67,8 +67,8 @@ function Transaction({
       className={cn(
         "relative flex h-full cursor-pointer items-center justify-between gap-4 overflow-hidden border border-transparent px-6 py-4 hover:border-input/50 hover:shadow-md",
         transactions?.length &&
-          transactions?.length >= 1 &&
-          "last:rounded-b-2xl",
+        transactions?.length >= 1 &&
+        "last:rounded-b-2xl",
       )}
     >
       <div className="flex items-center gap-4">

@@ -50,7 +50,7 @@ export default function Register() {
 
   if (actionData?.success) return <RedirectPage />;
   return (
-    <div className="mx-auto mb-24 flex min-h-screen w-screen overflow-y-scroll lg:overflow-auto">
+    <div className="mx-auto mb-24 flex min-h-screen w-screen overflow-y-scroll md:overflow-hidden">
       <div className="flex w-full items-center justify-center p-5">
         <RegisterForm />
       </div>
