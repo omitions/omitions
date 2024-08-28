@@ -36,7 +36,7 @@ import { regenerateDash } from "~/utils/misc";
 export default function CreateTransaction({
   date,
   fetcher,
-  children
+  children,
 }: {
   date: Date;
   fetcher: FetcherWithComponents<unknown>;
@@ -106,8 +106,8 @@ export default function CreateTransaction({
           </Button>
         )}
       </SheetTrigger>
-      <SheetContent withCloseButton className="sm:max-w-lg">
-        <SheetHeader className="mt-12 flex-row gap-2.5 px-4 md:mt-0 md:px-8">
+      <SheetContent className="sm:max-w-lg">
+        <SheetHeader className="flex-row gap-2.5 px-4 md:px-8">
           <div className="hidden md:block">
             <WorkspaceIcon />
           </div>
@@ -123,54 +123,60 @@ export default function CreateTransaction({
           action="."
           method="post"
           key="create-transaction"
-          className="flex flex-col gap-4 px-4 md:px-8"
+          className="flex flex-col gap-4"
           onSubmit={() => {
             setIsOpen(false);
           }}
         >
-          <Input
-            type="text"
-            name="description"
-            required
-            placeholder="Tambahkan judul transaksi"
-            className="placeholder:font-normal"
-          />
-          <NumericFormat
-            thousandSeparator="."
-            decimalSeparator=","
-            name="amount"
-            allowLeadingZeros
-            allowNegative={false}
-            placeholder="Nominal"
-            prefix="IDR "
-            className={cn(inputVariants(), "placeholder:font-normal")}
-          />
-          <Select value={trxType} onValueChange={(v) => setTrxType(v)}>
-            <SelectTrigger className="w-full gap-1">
-              <SelectValue placeholder="Tipe transaksi" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="cash_in">
-                <div className="flex items-center gap-3">
-                  <Plus size={16} strokeWidth={2} />
-                  <span>Pemasukan</span>
-                </div>
-              </SelectItem>
-              <SelectItem value="cash_out">
-                <div className="flex items-center gap-3">
-                  <ArrowUp size={16} strokeWidth={2} />
-                  <span>Pengeluaran</span>
-                </div>
-              </SelectItem>
-              <SelectItem value="invoice">
-                <div className="flex items-center gap-3">
-                  <ReceiptText size={16} strokeWidth={2} />
-                  <span>Invoice</span>
-                </div>
-              </SelectItem>
-            </SelectContent>
-          </Select>
-          <div className="mt-5 flex flex-col gap-2.5">
+          <div className="px-4 md:px-8">
+            <Input
+              type="text"
+              name="description"
+              required
+              placeholder="Tambahkan judul transaksi"
+              className="placeholder:font-normal"
+            />
+          </div>
+          <div className="px-4 md:px-8">
+            <NumericFormat
+              thousandSeparator="."
+              decimalSeparator=","
+              name="amount"
+              allowLeadingZeros
+              allowNegative={false}
+              placeholder="Nominal"
+              prefix="IDR "
+              className={cn(inputVariants(), "placeholder:font-normal")}
+            />
+          </div>
+          <div className="px-4 md:px-8">
+            <Select value={trxType} onValueChange={(v) => setTrxType(v)}>
+              <SelectTrigger className="w-full gap-1">
+                <SelectValue placeholder="Tipe transaksi" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="cash_in">
+                  <div className="flex items-center gap-3">
+                    <Plus size={16} strokeWidth={2} />
+                    <span>Pemasukan</span>
+                  </div>
+                </SelectItem>
+                <SelectItem value="cash_out">
+                  <div className="flex items-center gap-3">
+                    <ArrowUp size={16} strokeWidth={2} />
+                    <span>Pengeluaran</span>
+                  </div>
+                </SelectItem>
+                <SelectItem value="invoice">
+                  <div className="flex items-center gap-3">
+                    <ReceiptText size={16} strokeWidth={2} />
+                    <span>Invoice</span>
+                  </div>
+                </SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="mt-5 flex flex-col gap-2.5 px-4 md:px-8">
             <p className="text-sm font-semibold">Tambahkan Waktu</p>
             <Select
               defaultValue="none"
@@ -240,7 +246,7 @@ export default function CreateTransaction({
               </label>
             </div>
           </div>
-          <div className="mt-5 flex flex-col gap-2.5">
+          <div className="mt-5 flex flex-col gap-2.5 px-4 md:px-8">
             <p className="text-sm font-semibold">Sumber Dana</p>
             <ToggleGroup type="single" className="flex flex-col gap-2">
               <SourceOfFund
@@ -251,7 +257,12 @@ export default function CreateTransaction({
               />
             </ToggleGroup>
           </div>
-          <SheetFooter className="flex w-full gap-3">
+          <SheetFooter className="z-50 flex w-full gap-2 px-4 md:gap-3 md:px-8">
+            <SheetClose className="w-full" asChild>
+              <Button type="button" variant="outline" className="md:w-[150px]">
+                Batalkan
+              </Button>
+            </SheetClose>
             <Button
               type="submit"
               className="w-full"
@@ -260,11 +271,6 @@ export default function CreateTransaction({
             >
               Buat Transaksi
             </Button>
-            <SheetClose className="w-full" asChild>
-              <Button type="button" variant="outline" className="w-[150px]">
-                Batalkan
-              </Button>
-            </SheetClose>
           </SheetFooter>
           <input type="hidden" name="type" value={trxType} />
           <input type="hidden" name="loop_type" value={loopType} />
@@ -296,7 +302,7 @@ function SourceOfFund({
   return (
     <ToggleGroupItem
       value={value}
-      className="flex h-full w-full items-center justify-between gap-4 rounded-lg border border-input/50 bg-white p-4 data-[state=on]:border-primary data-[state=on]:text-black"
+      className="flex h-full w-full items-center justify-between gap-4 rounded-lg border border-input/50 bg-white p-4 data-[state=on]:border-foreground data-[state=on]:text-black"
     >
       <div className="flex flex-col text-left">
         <h3 className="text-sm font-semibold">{name}</h3>

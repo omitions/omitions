@@ -23,15 +23,14 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 };
 
 export default function Index() {
-  const { workspaces } = useLoaderData<typeof loader>();
-
   const [searchParams] = useSearchParams();
+
   const openWorkspace = searchParams.get("open-create-workspace");
   const openWallet = searchParams.get("open-create-wallet");
 
   return (
-    <div className="flex overflow-hidden">
-      <WorkspaceSidebar workspaceCount={workspaces?.length} />
+    <div className="flex">
+      <WorkspaceSidebar />
       <div className="relative h-full w-full md:ml-auto md:w-[calc(100%_-_var(--sidebar-width-xl))]">
         <div className="h-full w-full">
           <div className="fixed left-[var(--sidebar-width-all)] top-0 z-50 hidden w-[calc(100%_-_var(--sidebar-width-all))] md:block">

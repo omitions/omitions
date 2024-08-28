@@ -72,7 +72,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 
 export default function WorkspaceDay() {
   return (
-    <div className="fixed left-0 top-0 h-full w-screen md:relative md:left-auto md:top-auto md:w-full overflow-hidden">
+    <div className="fixed left-0 top-0 h-full w-screen md:relative md:left-auto md:top-auto md:w-full">
       <div className="flex">
         <Sidebar workspaceCount={0} withoutMobile />
         <div className="relative h-full w-full md:ml-auto md:w-[calc(100%_-_var(--sidebar-width-xl))]">

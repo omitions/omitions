@@ -60,7 +60,7 @@ export default function App() {
       <TooltipProvider delayDuration={300}>
         <Outlet />
       </TooltipProvider>
-      <div className="fixed bottom-0 block md:hidden">
+      <div className="fixed bottom-8 flex w-full justify-center md:hidden">
         <Navbar />
       </div>
     </main>

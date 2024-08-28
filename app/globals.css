@@ -31,8 +31,8 @@
     --chart-5: 27 87% 67%;
 
     --sidebar-width: 60px;
-    --sidebar-width-xl: 200px;
-    --sidebar-width-all: 260px;
+    --sidebar-width-xl: 210px;
+    --sidebar-width-all: 270px;
 
     --header-height: 76px;
   }
@@ -44,10 +44,10 @@
   }
   html {
     height: 100%;
-    overscroll-behavior-y: none;
-    overscroll-behavior-x: none;
-    overflow-y: scroll;
-    overflow-x: scroll;
+    /* overscroll-behavior-y: none;
+    overscroll-behavior-x: none; */
+    overflow-y: auto;
+    overflow-x: auto;
   }
   body {
     font-synthesis: none;
@@ -92,11 +92,11 @@
 }
 
 @layer utilities {
-  .no-scrollbar::-webkit-scrollbar {
+  /* .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
-  }
+  } */
 }

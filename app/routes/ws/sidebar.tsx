@@ -3,7 +3,6 @@ import { Link } from "@remix-run/react";
 import { MenuIcon, XIcon } from "lucide-react";
 
 import NavItem from "~/components/navigation-item";
-import { Progress } from "~/components/ui/progress";
 import {
   Sheet,
   SheetClose,
@@ -15,15 +14,13 @@ import {
 } from "~/components/ui/sheet";
 
 export default function WorkspaceSidebar({
-  workspaceCount,
   withoutMobile = false,
 }: {
-  workspaceCount: number;
   withoutMobile?: boolean;
 }) {
   return (
     <>
-      <Desktop workspaceCount={workspaceCount} />
+      <Desktop />
       {!withoutMobile && <Mobile />}
     </>
   );
@@ -31,7 +28,7 @@ export default function WorkspaceSidebar({
 
 function Mobile() {
   return (
-    <div className="fixed left-0 top-0 z-50 flex h-14 w-screen items-center justify-start border-b border-border bg-white px-4 md:hidden">
+    <div className="fixed left-0 top-0 z-50 flex h-14 w-screen items-center justify-start border-b border-input bg-background px-4 md:hidden">
       <Sheet>
         <SheetTrigger asChild>
           <button
@@ -41,7 +38,7 @@ function Mobile() {
             <MenuIcon size={24} strokeWidth={2} />
           </button>
         </SheetTrigger>
-        <SheetContent side="left" className="px-4">
+        <SheetContent side="left" className="max-w-[250px] bg-background px-4">
           <SheetHeader className="hidden">
             <SheetTitle></SheetTitle>
             <SheetDescription></SheetDescription>
@@ -91,7 +88,7 @@ function Mobile() {
   );
 }
 
-function Desktop({ workspaceCount }: { workspaceCount: number }) {
+function Desktop() {
   return (
     <div className="fixed left-[var(--sidebar-width)] hidden h-full w-full max-w-[var(--sidebar-width-xl)] md:block">
       <div className="my-1 flex min-h-screen flex-col justify-between pb-6 pt-5 md:pl-3">
@@ -121,25 +118,7 @@ function Desktop({ workspaceCount }: { workspaceCount: number }) {
             </div>
           </div>
         </div>
-        <SidebarFooter count={workspaceCount} />
       </div>
     </div>
-  );
-}
-
-function SidebarFooter({ count }: { count: number }) {
-  return (
-    <Link
-      to="/ws/:id"
-      className="mx-2 rounded-xl border border-input/50 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 md:mx-0"
-    >
-      <div className="flex w-full cursor-pointer flex-col gap-3 rounded-xl bg-white px-4 py-8">
-        <div className="flex items-center justify-between">
-          <h4 className="text-xs font-medium">{count || 0}/10 Workspace</h4>
-          <p className="text-xs font-medium text-muted-foreground">Gratis</p>
-        </div>
-        <Progress value={33} />
-      </div>
-    </Link>
   );
 }

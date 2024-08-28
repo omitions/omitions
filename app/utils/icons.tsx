@@ -55,7 +55,7 @@ function MybucksLogo({
 
 function WalletIcon() {
   return (
-    <div className="mt-0.5 flex h-6 w-6 items-center justify-center rounded-md border border-orange-400/60 bg-gradient-to-b from-orange-400/30 to-orange-400/70">
+    <div className="mt-0.5 flex h-6 w-6 items-center justify-center rounded-md border border-foreground bg-gradient-to-b from-orange-400/30 to-orange-400/70">
       <Landmark size={14} strokeWidth={2.5} className="text-foreground" />
     </div>
   );
@@ -63,7 +63,7 @@ function WalletIcon() {
 
 function WorkspaceIcon() {
   return (
-    <div className="mt-0.5 flex h-6 w-6 items-center justify-center rounded-sm border border-primary/40 bg-gradient-to-b from-primary/20 to-primary/50">
+    <div className="mt-0.5 flex h-6 w-6 items-center justify-center rounded-sm border border-foreground bg-gradient-to-b from-primary/20 to-primary/50">
       <Text
         size={14}
         strokeWidth={2.5}

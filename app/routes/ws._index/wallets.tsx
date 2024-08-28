@@ -13,7 +13,9 @@ export default function Wallets() {
   return (
     <div className="flex flex-col gap-2 md:gap-4">
       <div className="block md:hidden">
-        <h4 className="text-[11px] mb-2 text-muted-foreground">SUMBER DANA ANDA</h4>
+        <h4 className="mb-2 text-[11px] text-muted-foreground">
+          SUMBER DANA ANDA
+        </h4>
       </div>
       <div className="hidden flex-col md:flex">
         <h2 className="text-base font-bold">Sumber Dana Anda</h2>

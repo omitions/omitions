@@ -42,7 +42,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 
 export default function Shell() {
   return (
-    <div className="flex overflow-hidden">
+    <div className="flex">
       <div className="fixed z-50 hidden h-full w-full max-w-[var(--sidebar-width)] bg-secondary md:block">
         <RootSidebar />
       </div>

@@ -65,10 +65,10 @@ function Transaction({
   return (
     <div
       className={cn(
-        "relative flex h-full cursor-pointer items-center justify-between gap-4 overflow-hidden border border-transparent px-6 py-4 hover:border-input/50 hover:shadow-md",
+        "relative flex h-full cursor-pointer items-center justify-between gap-4 border border-transparent px-6 py-4 hover:border-input/50 hover:shadow-md",
         transactions?.length &&
-        transactions?.length >= 1 &&
-        "last:rounded-b-2xl",
+          transactions?.length >= 1 &&
+          "last:rounded-b-2xl",
       )}
     >
       <div className="flex items-center gap-4">

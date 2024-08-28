@@ -80,8 +80,8 @@ function Content() {
   if (!date || !prevDate || !nextDate) return <></>;
   return (
     <div className="flex flex-col gap-6 md:gap-0">
-      <div className="fixed z-50 w-[calc(100%_-_var(--sidebar-width-all)_-_40px)] max-w-[2800px] rounded-t-2xl border-b border-input/50 bg-white pt-6">
-        <div className="flex items-start justify-between md:px-6">
+      <div className="fixed z-50 w-[calc(100%_-_var(--sidebar-width-all)_-_40px)] max-w-[2800px] rounded-t-2xl border-b border-input/50 bg-white pt-4">
+        <div className="flex items-start justify-between md:px-4">
           <div className="hidden flex-col gap-2 md:flex">
             <BackButton />
             <h2 className="text-lg font-bold">
@@ -168,7 +168,7 @@ function Header() {
 
   if (!date) return <></>;
   return (
-    <div className="flex items-end justify-between gap-3 pb-6 md:px-6 md:pt-2">
+    <div className="flex items-end justify-between gap-3 pb-6 md:px-4 md:pt-2">
       <div>
         <p className="text-xs font-semibold uppercase text-muted-foreground">
           Transaksi

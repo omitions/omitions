@@ -1,8 +1,7 @@
-import { Link, useLoaderData } from "@remix-run/react";
+import { useLoaderData } from "@remix-run/react";
 
 import { format } from "date-fns";
 import {
-  ArrowUpRight,
   CirclePlus,
   Ellipsis,
   PencilLine,
@@ -39,7 +38,9 @@ export default function Workspaces() {
   return (
     <div className="flex flex-col gap-2 md:gap-4">
       <div className="block md:hidden">
-        <h4 className="text-[11px] mb-2 text-muted-foreground">SEMUA SPACES ANDA</h4>
+        <h4 className="mb-2 text-[11px] text-muted-foreground">
+          SEMUA SPACES ANDA
+        </h4>
       </div>
       <div className="hidden flex-col gap-0.5 md:flex">
         <h2 className="text-base font-bold">Semua Spaces Anda</h2>
@@ -153,7 +154,7 @@ function MoreMenu({
           <Ellipsis size={18} strokeWidth={2} />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent sideOffset={2} align="start" className="w-44 mr-2">
+      <DropdownMenuContent sideOffset={2} align="start" className="mr-2 w-44">
         <DropdownMenuItem asChild>
           <UpdateWorkspace
             actionType={ActionType.UPDATE_WORKSPACES}

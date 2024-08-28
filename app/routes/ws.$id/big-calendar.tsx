@@ -23,17 +23,18 @@ export default function BigCalendar({
         weekStartsOn={0}
         locale={localeId}
         classNames={{
-          root: "relative",
+          // root: "relative",
 
           month:
             "relative w-full h-full md:border-t md:border-input/50 md:px-4",
           months: "relative w-full h-full",
           month_grid: "mt-8 w-full max-h-[800px]",
+          month_caption: "hidden",
 
           week: "relative",
           weekdays: "",
           weekday:
-            "text-[10px] font-medium text-left pb-4 md:px-4 first:text-red-500 md:uppercase",
+            "text-[10px] font-medium text-center md:text-left pb-4 md:px-4 first:text-red-500 md:uppercase",
 
           caption_label: "hidden",
           day: "p-0 h-full border-transparent first:text-red-500",

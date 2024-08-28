@@ -28,19 +28,23 @@ export default function DayButton({ children, day }: DayButtonProps) {
       to={"/ws/day/" + `${generateDash(name)}-${_id}` + `?d=${dayDate}`}
       prefetch="intent"
     >
-      <div className="relative h-20 border border-transparent md:h-28">
+      <div
+        className={cn(
+          "relative flex h-24 justify-center border border-transparent pt-2 md:h-32",
+        )}
+      >
         <p
           className={cn(
-            "left-3 top-4 flex h-5 w-5 items-center justify-center rounded-full bg-white text-[10px] font-bold md:absolute",
+            "left-3 top-4 flex h-8 w-8 items-center justify-center rounded-full text-xs font-medium md:absolute md:h-7 md:w-7 md:text-[11px] md:font-bold",
             isToday && "bg-foreground text-white",
           )}
         >
           {children}
         </p>
         <div className="absolute top-10 flex w-full flex-col gap-0.5 p-1">
-          <div className="hidden overflow-hidden rounded-sm bg-primary/10 md:block">
+          <div className="hidden overflow-hidden rounded-sm bg-primary/30 md:block">
             {data?.amount && (
-              <div className="h-10 rounded-sm border border-primary/30 px-1.5 py-1">
+              <div className="h-10 rounded-sm border border-foreground px-1.5 py-1">
                 <p
                   className={cn(
                     "w-fit whitespace-nowrap text-[10px] font-bold text-foreground",

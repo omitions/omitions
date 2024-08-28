@@ -43,8 +43,8 @@ export async function loader({ params, request }: LoaderFunctionArgs) {
 
 export default function Index() {
   return (
-    <div className="flex overflow-hidden">
-      <WorkspaceSidebar workspaceCount={0} />
+    <div className="flex">
+      <WorkspaceSidebar />
       <div className="relative h-full w-full md:ml-auto md:w-[calc(100%_-_var(--sidebar-width-xl))]">
         <div className="h-full w-full">
           <div className="fixed left-[var(--sidebar-width-all)] top-0 z-50 hidden w-[calc(100%_-_var(--sidebar-width-all))] md:block">

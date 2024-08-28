@@ -28,7 +28,7 @@ export default function SettingsSidebar({
 
 function Mobile() {
   return (
-    <div className="fixed left-0 top-0 z-50 flex h-14 w-screen items-center justify-start border-b border-border bg-white px-4 md:hidden">
+    <div className="fixed left-0 top-0 z-50 flex h-14 w-screen items-center justify-start border-b border-input bg-background px-4 md:hidden">
       <Sheet>
         <SheetTrigger asChild>
           <button
@@ -38,7 +38,7 @@ function Mobile() {
             <MenuIcon size={24} strokeWidth={2} />
           </button>
         </SheetTrigger>
-        <SheetContent side="left" className="px-4">
+        <SheetContent side="left" className="max-w-[250px] bg-background px-4">
           <SheetHeader className="hidden">
             <SheetTitle></SheetTitle>
             <SheetDescription></SheetDescription>
