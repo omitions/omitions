@@ -27,7 +27,12 @@ export default function Sidebar() {
       <div></div>
       <div className="flex flex-col items-center gap-2">
         <RootNavItem href="/trash" iconName="Trash2" title="Sampah" />
-        <RootNavItem href="/logout" iconName="LogOut" title="Keluar" />
+        <RootNavItem
+          href="/logout"
+          iconName="LogOut"
+          prefetch="none"
+          title="Keluar"
+        />
       </div>
     </div>
   );

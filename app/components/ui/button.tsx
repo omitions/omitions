@@ -104,7 +104,7 @@ const ButtonLink = React.forwardRef<
   React.ComponentPropsWithRef<typeof AnchorOrLink> &
     ButtonProps & { delay?: number }
 >(function ButtonLink({ delay = 0, ...props }, ref) {
-  const { variant, size, href } = props;
+  const { variant, size, href, prefetch = "intent" } = props;
 
   const navigate = useNavigate();
   const redirectTo = async () => {
@@ -117,7 +117,7 @@ const ButtonLink = React.forwardRef<
     <Button asChild variant={variant} size={size} className={props.className}>
       <Comp
         ref={ref}
-        prefetch="intent"
+        prefetch={prefetch}
         onClick={() => (delay ? redirectTo() : null)}
         href={props.href}
         {...props}

@@ -13,7 +13,7 @@ import {
 export default function Header() {
   return (
     <div className="hidden h-[var(--header-height)] justify-center md:flex">
-      <div className="mx-[19px] flex w-full max-w-[2800px] items-center justify-between bg-background px-5">
+      <div className="mx-[19px] flex w-full max-w-[2800px] items-center justify-between bg-background px-4">
         <div>
           <Button size="sm" variant="outline" className="gap-2">
             <BookOpenText size={16} strokeWidth={2} />
@@ -64,11 +64,11 @@ function Account() {
         </Avatar>
       </PopoverTrigger>
       <PopoverContent
-        className="w-60 mr-2 border-none bg-transparent shadow-none"
+        className="mr-2 w-60 border-none bg-transparent shadow-none"
         align="center"
         sideOffset={2}
       >
-        <div className="border-input/50 flex flex-col rounded-xl border bg-white p-2 shadow-md">
+        <div className="flex flex-col rounded-xl border border-input/50 bg-white p-2 shadow-md">
           <p className="my-2 ml-2 text-xs font-medium text-muted-foreground">
             omiputra@gmail.com
           </p>
@@ -93,6 +93,7 @@ function Account() {
           <ButtonLink
             href="/logout"
             variant="ghost"
+            prefetch="none"
             size="sm"
             className="w-full justify-start rounded-md border px-2 font-medium text-red-500"
           >

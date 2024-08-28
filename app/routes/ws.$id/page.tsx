@@ -64,7 +64,7 @@ function Content() {
 
   return (
     <div className="flex flex-col gap-6 md:gap-0">
-      <div className="flex items-center justify-between md:px-6 md:py-6">
+      <div className="flex items-center justify-between md:px-4 md:py-4">
         <div className="hidden flex-col gap-2 md:flex">
           <BackButton />
           <div className="flex gap-2.5">

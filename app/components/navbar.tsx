@@ -1,9 +1,11 @@
 import { Link, useLocation, useRouteLoaderData } from "@remix-run/react";
 
-import { icons } from "lucide-react";
+import { icons, Search } from "lucide-react";
 
 import { cn } from "~/lib/utils";
 import { type loader as rootLoader } from "~/root";
+
+import { SearchDialog } from "./search";
 
 const routeMatcher = ["ws", "settings", "search", "dash"];
 
@@ -17,9 +19,20 @@ export default function Navbar() {
     return <div className="block md:hidden"></div>;
   return (
     <div className="block h-16 w-screen border-t border-border/50 shadow-2xl md:hidden">
-      <div className="flex h-full w-full gap-1 bg-white">
+      <div className="flex h-full w-full gap-1.5 bg-white">
         <Navigation href="/ws" iconName="ScrollText" title="Beranda" />
         <Navigation href="/dash" iconName="Telescope" title="Analisa" />
+        <SearchDialog>
+          <div className="relative flex h-full w-full justify-center overflow-hidden">
+            <button
+              className="middle center absolute -top-8 flex h-32 w-full flex-col items-center justify-center gap-1.5 rounded-full transition-all"
+              data-ripple-dark="true"
+            >
+              <Search size={20} strokeWidth={2} color="currentColor" />
+              <span className="text-[11px]">Cari</span>
+            </button>
+          </div>
+        </SearchDialog>
         <Navigation href="/settings" iconName="Settings" title="Pengaturan" />
       </div>
     </div>
@@ -40,18 +53,17 @@ function Navigation({
 
   // eslint-disable-next-line import/namespace
   const Icon = icons[iconName];
-
   return (
     <Link
       to={href}
       className="relative flex h-full w-full justify-center overflow-hidden"
     >
       <button
-        className="middle center absolute -top-8 flex h-32 w-full flex-col items-center justify-center gap-1 rounded-full transition-all"
+        className="middle center absolute -top-8 flex h-32 w-full flex-col items-center justify-center gap-1.5 rounded-full transition-all"
         data-ripple-dark="true"
       >
         <Icon
-          size={22}
+          size={20}
           strokeWidth={2}
           color={isMatch ? "#1ad55f" : "currentColor"}
         />

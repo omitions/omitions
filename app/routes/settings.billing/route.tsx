@@ -31,7 +31,7 @@ export default function Billing() {
 
 function Page() {
   return (
-    <div className="m-5 flex min-h-[calc(97.7vh_-_var(--header-height))] flex-col gap-5 rounded-2xl md:gap-14 md:bg-white md:px-6 md:py-6 md:shadow-sm">
+    <div className="m-5 flex min-h-[calc(97.7vh_-_var(--header-height))] flex-col gap-5 rounded-2xl md:gap-14 md:bg-white md:px-4 md:py-4 md:shadow-sm">
       <div className="flex flex-col gap-0.5">
         <h2 className="text-lg font-bold">Billing</h2>
         <div>content</div>

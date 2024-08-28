@@ -39,7 +39,7 @@ export default function Workspaces() {
   return (
     <div className="flex flex-col gap-2 md:gap-4">
       <div className="block md:hidden">
-        <h4 className="text-[11px] text-muted-foreground">SEMUA SPACES ANDA</h4>
+        <h4 className="text-[11px] mb-2 text-muted-foreground">SEMUA SPACES ANDA</h4>
       </div>
       <div className="hidden flex-col gap-0.5 md:flex">
         <h2 className="text-base font-bold">Semua Spaces Anda</h2>
@@ -76,7 +76,7 @@ function WorkspaceItem({ _id, name, description }: TWorkspaces) {
         }
         onFocus={() => setIsActive(true)}
         prefetch="intent"
-        className="border-input/50 h-full min-h-32 w-full justify-start rounded-xl border bg-white p-4 shadow-sm ring-offset-background hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-70 md:min-h-44 md:p-5 md:hover:border-input/50"
+        className="h-full min-h-32 w-full justify-start rounded-xl border border-input/50 bg-white p-4 shadow-sm ring-offset-background hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-70 md:min-h-44 md:p-5 md:hover:border-input/50"
       >
         <div className="flex h-full w-11/12 flex-col flex-wrap items-start justify-between md:w-full md:gap-1">
           <div className="flex items-start gap-3">
@@ -153,7 +153,7 @@ function MoreMenu({
           <Ellipsis size={18} strokeWidth={2} />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent sideOffset={0} align="start" className="w-40">
+      <DropdownMenuContent sideOffset={2} align="start" className="w-44 mr-2">
         <DropdownMenuItem asChild>
           <UpdateWorkspace
             actionType={ActionType.UPDATE_WORKSPACES}
@@ -170,12 +170,6 @@ function MoreMenu({
               Ubah
             </Button>
           </UpdateWorkspace>
-        </DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <Link to={"/ws/" + _id} className="flex gap-3">
-            <ArrowUpRight size={16} strokeWidth={2} />
-            Buka
-          </Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
@@ -203,7 +197,7 @@ function ButtonCreateWorkspace() {
   return (
     <div className="relative rounded-xl shadow-sm hover:shadow-md">
       <CreateWorkspace actionType={ActionType.CREATE_WORKSPACES}>
-        <button className="border-input/50 h-full min-h-32 w-full justify-start rounded-xl border bg-white px-0 shadow-sm ring-offset-background hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-70 md:min-h-44 md:p-5 md:hover:border-input/50">
+        <button className="h-full min-h-32 w-full justify-start rounded-xl border border-input/50 bg-white px-0 shadow-sm ring-offset-background hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-70 md:min-h-44 md:p-5 md:hover:border-input/50">
           <div className="flex h-full flex-col flex-wrap items-center justify-center gap-0.5 md:w-full md:gap-3">
             <CirclePlus size={24} strokeWidth={1.5} />
             <h3 className="text-xs font-medium md:text-sm">Buat workspace</h3>

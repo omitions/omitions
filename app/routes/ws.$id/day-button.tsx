@@ -10,10 +10,7 @@ import { generateDash, regenerateDash } from "~/utils/misc";
 
 import { loader } from "./route";
 
-export default function DayButton({
-  children,
-  day,
-}: DayButtonProps) {
+export default function DayButton({ children, day }: DayButtonProps) {
   const { calendar } = useLoaderData<typeof loader>();
 
   const date = day.date;
@@ -41,7 +38,7 @@ export default function DayButton({
           {children}
         </p>
         <div className="absolute top-10 flex w-full flex-col gap-0.5 p-1">
-          <div className="overflow-hidden rounded-sm bg-primary/10 hidden md:block">
+          <div className="hidden overflow-hidden rounded-sm bg-primary/10 md:block">
             {data?.amount && (
               <div className="h-10 rounded-sm border border-primary/30 px-1.5 py-1">
                 <p
@@ -54,7 +51,7 @@ export default function DayButton({
                     ? toIDR(+data?.amount).toString()
                     : null}
                 </p>
-                <p className="w-fit text-[10px] font-medium text-foreground">
+                <p className="w-fit whitespace-nowrap text-[10px] font-medium text-foreground">
                   {data.count} Transaksi
                 </p>
               </div>
