@@ -1,17 +1,16 @@
 import { Link, useLoaderData, useParams } from "@remix-run/react";
-import { format } from "date-fns";
 
+import { format } from "date-fns";
 import { DayButtonProps } from "react-day-picker";
 
 import { cn } from "~/lib/utils";
 
-import { generateDash, regenerateDash } from "~/utils/misc";
-import { loader } from "./route";
 import toIDR from "~/utils/currency";
-import { ArrowRightLeft, ArrowUpRight, FilePen, Import } from "lucide-react";
+import { generateDash, regenerateDash } from "~/utils/misc";
+
+import { loader } from "./route";
 
 export default function DayButton({
-  className,
   children,
   day,
 }: DayButtonProps) {
@@ -42,31 +41,19 @@ export default function DayButton({
           {children}
         </p>
         <div className="absolute top-10 flex w-full flex-col gap-0.5 p-1">
-          <div className="overflow-hidden rounded-md bg-primary/10">
+          <div className="overflow-hidden rounded-sm bg-primary/10 hidden md:block">
             {data?.amount && (
-              <div className="h-11 rounded-md border border-primary/30 px-2 py-1.5">
-                <div className="flex items-center gap-1">
-                  <div>
-                    <Import
-                      size={12}
-                      strokeWidth={2.5}
-                      className={cn(
-                        "text-foreground",
-                        data?.amount < 0 && "text-red-500",
-                      )}
-                    />
-                  </div>
-                  <p
-                    className={cn(
-                      "w-fit whitespace-nowrap text-[10px] font-bold text-foreground",
-                      data?.amount < 0 && "text-red-500",
-                    )}
-                  >
-                    {typeof data?.amount == "number"
-                      ? toIDR(+data?.amount).toString()
-                      : null}
-                  </p>
-                </div>
+              <div className="h-10 rounded-sm border border-primary/30 px-1.5 py-1">
+                <p
+                  className={cn(
+                    "w-fit whitespace-nowrap text-[10px] font-bold text-foreground",
+                    data?.amount < 0 && "text-red-500",
+                  )}
+                >
+                  {typeof data?.amount == "number"
+                    ? toIDR(+data?.amount).toString()
+                    : null}
+                </p>
                 <p className="w-fit text-[10px] font-medium text-foreground">
                   {data.count} Transaksi
                 </p>

@@ -1,5 +1,4 @@
-import { BookOpenText, ChevronDown, Command, Search } from "lucide-react";
-import React from "react";
+import { BookOpenText, Command, Search } from "lucide-react";
 
 import { SearchDialog } from "~/components/search";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
@@ -48,54 +47,10 @@ export default function Header() {
           </SearchDialog>
         </div>
         <div className="flex items-center gap-4">
-          {/* <Create /> */}
           <Account />
         </div>
       </div>
     </div>
-  );
-}
-
-function Create() {
-  const [open, setOpen] = React.useState(false);
-
-  const handleMouseEnter = () => {
-    setOpen(true);
-  };
-
-  const handleMouseLeave = () => {
-    setOpen(false);
-  };
-
-  return (
-    <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger
-        asChild
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        onClick={(e) => {
-          e.preventDefault();
-        }}
-      >
-        <Button size="sm" className="gap-2" variant="secondary">
-          <span>Baru</span>
-          <ChevronDown size={16} strokeWidth={2} />
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent
-        className="w-60 border-none bg-transparent shadow-none"
-        align="center"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        sideOffset={0}
-      >
-        <div className="border-input/50/50 mt-1 flex flex-col rounded-xl border bg-white p-2 shadow-md">
-          <p className="my-2 ml-4 text-xs font-medium text-muted-foreground">
-            omiputra@gmail.com
-          </p>
-        </div>
-      </PopoverContent>
-    </Popover>
   );
 }
 
@@ -109,11 +64,11 @@ function Account() {
         </Avatar>
       </PopoverTrigger>
       <PopoverContent
-        className="w-60 border-none bg-transparent shadow-none"
+        className="w-60 mr-2 border-none bg-transparent shadow-none"
         align="center"
-        sideOffset={0}
+        sideOffset={2}
       >
-        <div className="border-input/50/50 mr-2 mt-2 flex flex-col rounded-xl border bg-white p-2 shadow-md">
+        <div className="border-input/50 flex flex-col rounded-xl border bg-white p-2 shadow-md">
           <p className="my-2 ml-2 text-xs font-medium text-muted-foreground">
             omiputra@gmail.com
           </p>

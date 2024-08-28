@@ -102,7 +102,7 @@ function MonthNavigation({
 
   return (
     <div className="flex items-center gap-6">
-      <h3 className="text-base font-medium">
+      <h3 className="text-base font-bold">
         {format(month, "MMMM yyyy", { locale: localeId })}
       </h3>
       <div className="flex items-center gap-2">

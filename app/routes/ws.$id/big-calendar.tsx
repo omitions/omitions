@@ -17,7 +17,7 @@ export default function BigCalendar({
     <div className="relative">
       <DayPicker
         hideNavigation
-        showOutsideDays
+        showOutsideDays={false}
         onDayClick={(_) => _}
         month={month}
         weekStartsOn={0}
