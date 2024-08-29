@@ -23,9 +23,9 @@ import {
 } from "~/components/ui/dropdown-menu";
 import UpdateWorkspace from "~/components/update-workspace";
 
+import { WorkspaceIcon } from "~/utils/icons";
 import { generateDash } from "~/utils/misc";
 import { type TWorkspaces } from "~/utils/workspaces.server";
-import { WorkspaceIcon } from "~/utils/icons";
 
 import { cn } from "~/lib/utils";
 
@@ -38,7 +38,7 @@ export default function Workspaces() {
   return (
     <div className="flex flex-col gap-2 md:gap-4">
       <div className="block md:hidden">
-        <h4 className="mb-2 text-[11px] text-muted-foreground">
+        <h4 className="mb-2 text-sm text-muted-foreground">
           SEMUA SPACES ANDA
         </h4>
       </div>
@@ -83,10 +83,10 @@ function WorkspaceItem({ _id, name, description }: TWorkspaces) {
           <div className="flex items-start gap-3">
             <WorkspaceIcon />
             <div className="flex flex-col items-start gap-0.5">
-              <h4 className="whitespace-nowrap text-wrap text-sm font-medium leading-tight md:font-bold">
+              <h4 className="whitespace-nowrap text-wrap text-base font-semibold leading-tight md:text-sm md:font-bold">
                 {name.length > 30 ? `${name.substring(0, 30)}..` : name}
               </h4>
-              <p className="text-wrap text-xs font-normal leading-snug text-muted-foreground md:text-sm">
+              <p className="text-wrap text-sm font-normal leading-snug text-muted-foreground">
                 {description.length > 40
                   ? `${description.substring(0, 40)}..`
                   : description}
@@ -95,7 +95,7 @@ function WorkspaceItem({ _id, name, description }: TWorkspaces) {
           </div>
         </div>
       </ButtonLink>
-      <div className="absolute right-0 top-1 block rotate-90 md:hidden">
+      <div className="absolute right-1 top-3 block rotate-90 md:hidden">
         <MoreMenu _id={_id} name={name} description={description} />
       </div>
       <div
@@ -199,9 +199,9 @@ function ButtonCreateWorkspace() {
     <div className="relative rounded-xl shadow-sm hover:shadow-md">
       <CreateWorkspace actionType={ActionType.CREATE_WORKSPACES}>
         <button className="h-full min-h-32 w-full justify-start rounded-xl border border-input/50 bg-white px-0 shadow-sm ring-offset-background hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-70 md:min-h-44 md:p-5 md:hover:border-input/50">
-          <div className="flex h-full flex-col flex-wrap items-center justify-center gap-0.5 md:w-full md:gap-3">
+          <div className="flex h-full flex-col flex-wrap items-center justify-center gap-2 md:w-full md:gap-3">
             <CirclePlus size={24} strokeWidth={1.5} />
-            <h3 className="text-xs font-medium md:text-sm">Buat workspace</h3>
+            <h3 className="text-sm font-medium">Buat spaces</h3>
           </div>
         </button>
       </CreateWorkspace>

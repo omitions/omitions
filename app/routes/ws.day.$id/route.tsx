@@ -9,18 +9,15 @@ import {
 import { id as localeId } from "date-fns/locale";
 import { format } from "date-fns";
 
-import Header from "~/components/header";
-
 import { regenerateDash } from "~/utils/misc";
 import { createTransaction, getTransactions } from "~/utils/cashflows.server";
 
 import Sidebar from "../ws/sidebar";
-
 import Page from "./page";
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
   return [
-    { title: data?.workspaceName + " | " + data?.date },
+    { title: data?.workspaceName + " - " + data?.date + " - Mybucks" },
     { name: "description", content: "Welcome to Remix!" },
   ];
 };
@@ -74,13 +71,10 @@ export default function WorkspaceDay() {
   return (
     <div className="fixed left-0 top-0 h-full w-screen md:relative md:left-auto md:top-auto md:w-full">
       <div className="flex">
-        <Sidebar workspaceCount={0} withoutMobile />
+        <Sidebar withoutMobile />
         <div className="relative h-full w-full md:ml-auto md:w-[calc(100%_-_var(--sidebar-width-xl))]">
           <div className="h-full w-full">
-            <div className="fixed left-[var(--sidebar-width-all)] top-0 z-50 w-[calc(100%_-_var(--sidebar-width-all))]">
-              <Header />
-            </div>
-            <div className="mx-auto mt-[var(--header-height)] w-full max-w-[2800px] border-input/50">
+            <div className="mx-auto w-full max-w-[2800px] border-input/50">
               <Page />
             </div>
           </div>

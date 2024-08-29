@@ -6,7 +6,7 @@ import SettingsSidebar from "../settings/sidebar";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "Edit profil | mybucks.today" },
+    { title: "Akun - Mybucks" },
     { name: "description", content: "Welcome to Remix!" },
   ];
 };

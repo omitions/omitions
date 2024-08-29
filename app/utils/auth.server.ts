@@ -27,7 +27,7 @@ auth.use(
     if (!email) throw new Error("Email is required");
 
     let resp = null;
-    const fetched = await fetch("https://api.mybucks.today/users/login", {
+    const fetched = await fetch("https://api.Mybucks.today/users/login", {
       method: "POST",
       body: JSON.stringify({
         email,

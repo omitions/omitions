@@ -13,9 +13,7 @@ export default function Wallets() {
   return (
     <div className="flex flex-col gap-2 md:gap-4">
       <div className="block md:hidden">
-        <h4 className="mb-2 text-[11px] text-muted-foreground">
-          SUMBER DANA ANDA
-        </h4>
+        <h4 className="mb-2 text-sm text-muted-foreground">SUMBER DANA ANDA</h4>
       </div>
       <div className="hidden flex-col md:flex">
         <h2 className="text-base font-bold">Sumber Dana Anda</h2>
@@ -46,10 +44,10 @@ function WalletItem() {
           <div className="flex items-start gap-3">
             <WalletIcon />
             <div className="flex flex-col items-start gap-0.5">
-              <h4 className="whitespace-nowrap text-wrap text-sm font-medium leading-tight md:font-bold">
+              <h4 className="whitespace-nowrap text-wrap text-base font-semibold leading-tight md:text-sm md:font-bold">
                 IDR 17.240.900
               </h4>
-              <p className="whitespace-nowrap text-wrap text-xs font-medium leading-snug md:text-sm">
+              <p className="whitespace-nowrap text-wrap text-sm font-medium leading-snug">
                 Bank JAGO
               </p>
             </div>
@@ -96,9 +94,9 @@ function ButtonCreateWallet() {
     <div className="relative rounded-xl shadow-sm hover:shadow-md">
       <CreateWallet actionType="HELLOO">
         <button className="h-full min-h-32 w-full justify-start rounded-xl border border-input/50 bg-white px-0 shadow-sm ring-offset-background hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-70 md:min-h-44 md:p-5 md:hover:border-input/50">
-          <div className="flex h-full flex-col flex-wrap items-center justify-center gap-0.5 md:w-full md:gap-3">
+          <div className="flex h-full flex-col flex-wrap items-center justify-center gap-2 md:w-full md:gap-3">
             <CirclePlus size={24} strokeWidth={1.5} />
-            <h3 className="text-xs font-medium md:text-sm">Buat dompet</h3>
+            <h3 className="text-sm font-medium">Buat dompet</h3>
           </div>
         </button>
       </CreateWallet>

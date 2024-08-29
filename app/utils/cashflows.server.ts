@@ -20,7 +20,7 @@ export async function getCalendar(
   let resp = null;
   // console.log("token: ", token);
   const fetched = await fetch(
-    `https://api.mybucks.today/cashflows/calendar?workspace_id=${workspaceId}&date=${date}`,
+    `https://api.Mybucks.today/cashflows/calendar?workspace_id=${workspaceId}&date=${date}`,
     {
       method: "GET",
       headers: {
@@ -67,7 +67,7 @@ export async function createTransaction(form: FormData, request: Request) {
   // })
 
   let resp = null;
-  const fetched = await fetch("https://api.mybucks.today/cashflows/create", {
+  const fetched = await fetch("https://api.Mybucks.today/cashflows/create", {
     method: "POST",
     body: JSON.stringify({
       amount:
@@ -113,7 +113,7 @@ export async function getTransactions(
 
   let resp = null;
   const fetched = await fetch(
-    `https://api.mybucks.today/cashflows/list?workspace_id=${workspaceId}&date=${date}`,
+    `https://api.Mybucks.today/cashflows/list?workspace_id=${workspaceId}&date=${date}`,
     {
       method: "GET",
       headers: {

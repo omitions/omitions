@@ -29,7 +29,7 @@ const buttonVariants = cva(
         transparent: "",
       },
       size: {
-        sm: "h-10 md:h-9 rounded-full px-4 text-xs",
+        sm: "h-10 md:h-9 rounded-full px-6 text-xs",
         lg: "h-11 px-9 rounded-full text-sm",
         icon: "h-9 w-9 md:h-8 md:w-8 rounded-full",
       },

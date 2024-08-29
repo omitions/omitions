@@ -1,9 +1,4 @@
-import {
-  Link,
-  useNavigate,
-  useParams,
-  useSearchParams,
-} from "@remix-run/react";
+import { Link, useParams, useSearchParams } from "@remix-run/react";
 
 import { addMonths, format, subMonths } from "date-fns";
 import { id as localeId } from "date-fns/locale";
@@ -18,33 +13,9 @@ import { WorkspaceIcon } from "~/utils/icons";
 import BigCalendar from "./big-calendar";
 
 export default function Page() {
-  const params = useParams();
-  const navigate = useNavigate();
-
-  const title = params.id ? regenerateDash(params.id).withoutTheLast() : "-";
-
-  const BackButton = () => (
-    <Button
-      variant="transparent"
-      className="gap-2 px-0 font-medium hover:font-medium"
-      onClick={() => navigate(-1)}
-    >
-      <ChevronLeft size={20} strokeWidth={2} />
-      <span>Kembali</span>
-    </Button>
-  );
-
   return (
     <div className="flex flex-col gap-5 rounded-2xl md:m-5 md:gap-14 md:bg-white md:shadow-sm">
-      <div className="flex-1">
-        <div className="z-50 mb-6 flex h-10 w-full items-center justify-between pl-3 pr-4 md:hidden md:bg-white">
-          <BackButton />
-          <h2 className="text-sm font-medium underline">
-            {title.length > 35 ? `${title.substring(0, 35)}..` : title}
-          </h2>
-        </div>
-        <Content />
-      </div>
+      <Content />
     </div>
   );
 }
@@ -108,14 +79,14 @@ function MonthNavigation({
 
   return (
     <div className="flex items-center gap-6">
-      <h3 className="w-full text-base font-bold">
+      <h3 className="w-full text-lg font-bold md:text-base">
         {format(month, "MMMM yyyy", { locale: localeId })}
       </h3>
-      <div className="flex w-full items-center gap-2">
+      <div className="flex w-fit items-center gap-2">
         <Button
           size="sm"
-          variant="outline"
-          className="rounded-xl md:rounded-full"
+          variant="secondary"
+          className=""
           onClick={() => {
             setMonth(today);
             setSearchParams(
@@ -133,7 +104,7 @@ function MonthNavigation({
           Hari ini
         </Button>
         <Button
-          variant="ghost"
+          variant="transparent"
           size="icon"
           onClick={() => {
             setMonth(prevMonth);
@@ -152,7 +123,7 @@ function MonthNavigation({
           <ChevronLeft size={20} strokeWidth={2} />
         </Button>
         <Button
-          variant="ghost"
+          variant="transparent"
           size="icon"
           onClick={() => {
             setMonth(nextMonth);

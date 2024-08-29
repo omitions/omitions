@@ -1,5 +1,5 @@
 import { json, LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
-import { useLoaderData, useSearchParams } from "@remix-run/react";
+import { useSearchParams } from "@remix-run/react";
 
 import Header from "~/components/header";
 
@@ -14,7 +14,7 @@ import Wallets from "./wallets";
 import Workspaces from "./workspaces";
 
 export const meta: MetaFunction = () => {
-  return [{ title: "Workspaces | mybucks.today" }];
+  return [{ title: "Mybucks - Spaces" }];
 };
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {

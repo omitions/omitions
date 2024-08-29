@@ -6,7 +6,7 @@ import SettingsSidebar from "../settings/sidebar";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "Billing | mybucks.today" },
+    { title: "Langganan - Mybucks" },
     { name: "description", content: "Welcome to Remix!" },
   ];
 };

@@ -104,11 +104,11 @@ function Content() {
             </Link>
           </div>
           <div className="flex items-center gap-6">
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1 md:gap-2">
               <Button
                 size="sm"
                 variant="ghost"
-                className="!h-10 !w-10 p-0"
+                className="!h-10 gap-2 p-0 px-5 hover:font-semibold"
                 onClick={() => {
                   setSearchParams(
                     (prev) => {
@@ -122,15 +122,16 @@ function Content() {
                   );
                 }}
               >
-                {new Date(prevDate).getDate()}
+                <span>{new Date(prevDate).getDate()}</span>
+                <span>Sebelumnya</span>
               </Button>
-              <Button size="sm" variant="outline" className="!h-10 !w-10 p-0">
+              <Button size="sm" variant="secondary" className="!h-10 !w-10 p-0">
                 {new Date(date).getDate()}
               </Button>
               <Button
                 size="sm"
                 variant="ghost"
-                className="!h-10 !w-10 p-0"
+                className="!h-10 gap-2 p-0 px-5 hover:font-semibold"
                 onClick={() => {
                   setSearchParams(
                     (prev) => {
@@ -144,14 +145,15 @@ function Content() {
                   );
                 }}
               >
-                {new Date(nextDate).getDate()}
+                <span>Berikutnya</span>
+                <span>{new Date(nextDate).getDate()}</span>
               </Button>
             </div>
           </div>
         </div>
         <Header />
       </div>
-      <div className="mt-[calc(110px_+_var(--header-height))]">
+      <div className="mt-[calc(102px_+_var(--header-height))]">
         <List />
       </div>
     </div>

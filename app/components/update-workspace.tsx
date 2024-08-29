@@ -34,7 +34,7 @@ export default function CreateWorkspace({
       <SheetTrigger asChild>{children}</SheetTrigger>
       <SheetContent withCloseButton className="sm:max-w-lg">
         <SheetHeader className="px-4 md:px-8">
-          <SheetTitle>Ubah Workspace</SheetTitle>
+          <SheetTitle>Ubah Spaces</SheetTitle>
           <SheetDescription></SheetDescription>
         </SheetHeader>
         <Form
@@ -60,7 +60,7 @@ export default function CreateWorkspace({
               placeholder="Masukkan deskripsi workspace"
             />
           </div>
-          <Button type="submit">Ubah Workspace</Button>
+          <Button type="submit">Ubah Spaces</Button>
           <input type="hidden" name="_action" value={actionType} />
           <input type="hidden" name="_id" value={workspaceId} />
         </Form>

@@ -34,7 +34,7 @@ export default function BigCalendar({
           week: "relative",
           weekdays: "",
           weekday:
-            "text-[10px] font-medium text-center md:text-left pb-4 md:px-4 first:text-red-500 md:uppercase",
+            "text-xs font-medium md:font-semibold text-center md:text-left pb-4 md:px-4 first:text-red-500 uppercase",
 
           caption_label: "hidden",
           day: "p-0 h-full border-transparent first:text-red-500",

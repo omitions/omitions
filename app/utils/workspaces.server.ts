@@ -12,7 +12,7 @@ export async function createWorkspace(form: FormData, request: Request) {
   const token = session.get("user").access_token;
 
   let resp = null;
-  const fetched = await fetch("https://api.mybucks.today/workspaces/create", {
+  const fetched = await fetch("https://api.Mybucks.today/workspaces/create", {
     method: "POST",
     body: JSON.stringify({
       name: name.toString().trim(),
@@ -41,7 +41,7 @@ export async function updateWorkspace(form: FormData, request: Request) {
   const token = session.get("user").access_token;
 
   let resp = null;
-  const fetched = await fetch("https://api.mybucks.today/workspaces/update", {
+  const fetched = await fetch("https://api.Mybucks.today/workspaces/update", {
     method: "POST",
     body: JSON.stringify({
       _id,
@@ -67,7 +67,7 @@ export async function removeWorkspace(form: FormData, request: Request) {
   const token = session.get("user").access_token;
 
   let resp = null;
-  const fetched = await fetch("https://api.mybucks.today/workspaces/delete", {
+  const fetched = await fetch("https://api.Mybucks.today/workspaces/delete", {
     method: "POST",
     body: JSON.stringify({
       _id,
@@ -95,7 +95,7 @@ export async function getWorkspaces(request: Request): Promise<TWorkspaces[]> {
   const token = session.get("user").access_token;
 
   let resp = null;
-  const fetched = await fetch("https://api.mybucks.today/workspaces/list", {
+  const fetched = await fetch("https://api.Mybucks.today/workspaces/list", {
     method: "GET",
     headers: {
       Authorization: `Bearer ${token}`,

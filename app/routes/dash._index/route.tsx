@@ -28,7 +28,7 @@ import DashboardSidebar from "../dash/sidebar";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "Ringkasan | mybucks.today" },
+    { title: "Ringkasan - Mybucks" },
     { name: "description", content: "Welcome to Remix!" },
   ];
 };

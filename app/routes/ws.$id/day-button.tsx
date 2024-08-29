@@ -35,19 +35,19 @@ export default function DayButton({ children, day }: DayButtonProps) {
       >
         <p
           className={cn(
-            "left-3 top-4 flex h-8 w-8 items-center justify-center rounded-full text-xs font-medium md:absolute md:h-7 md:w-7 md:text-[11px] md:font-bold",
+            "left-3 top-4 flex h-8 w-8 items-center justify-center rounded-full text-sm font-medium md:absolute md:h-7 md:w-7 md:text-xs md:font-bold",
             isToday && "bg-foreground text-white",
           )}
         >
           {children}
         </p>
-        <div className="absolute top-10 flex w-full flex-col gap-0.5 p-1">
+        <div className="absolute top-12 flex w-full flex-col gap-0.5 p-1">
           <div className="hidden overflow-hidden rounded-sm bg-primary/30 md:block">
             {data?.amount && (
-              <div className="h-10 rounded-sm border border-foreground px-1.5 py-1">
+              <div className="h-11 rounded-sm border border-foreground px-1.5 py-1">
                 <p
                   className={cn(
-                    "w-fit whitespace-nowrap text-[10px] font-bold text-foreground",
+                    "w-fit whitespace-nowrap text-[11px] font-bold text-foreground",
                     data?.amount < 0 && "text-red-500",
                   )}
                 >
@@ -55,7 +55,7 @@ export default function DayButton({ children, day }: DayButtonProps) {
                     ? toIDR(+data?.amount).toString()
                     : null}
                 </p>
-                <p className="w-fit whitespace-nowrap text-[10px] font-medium text-foreground">
+                <p className="w-fit whitespace-nowrap text-[11px] font-medium text-foreground">
                   {data.count} Transaksi
                 </p>
               </div>

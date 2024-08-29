@@ -14,7 +14,7 @@ import { MybucksLogo } from "~/utils/icons";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "Log In | mybucks.today" },
+    { title: "Log In | Mybucks.today" },
     { name: "description", content: "" },
   ];
 };

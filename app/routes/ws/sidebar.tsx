@@ -26,7 +26,7 @@ export default function WorkspaceSidebar({
   );
 }
 
-function Mobile() {
+export function Mobile() {
   return (
     <div className="fixed left-0 top-0 z-50 flex h-14 w-screen items-center justify-start border-b border-input bg-background px-4 md:hidden">
       <Sheet>
@@ -88,7 +88,7 @@ function Mobile() {
   );
 }
 
-function Desktop() {
+export function Desktop() {
   return (
     <div className="fixed left-[var(--sidebar-width)] hidden h-full w-full max-w-[var(--sidebar-width-xl)] md:block">
       <div className="my-1 flex min-h-screen flex-col justify-between pb-6 pt-5 md:pl-3">

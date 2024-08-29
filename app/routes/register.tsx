@@ -8,7 +8,7 @@ import { MybucksLogo } from "~/utils/icons";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "Registrasi | mybucks.today" },
+    { title: "Registrasi | Mybucks.today" },
     { name: "description", content: "" },
   ];
 };
@@ -20,7 +20,7 @@ export async function action({ request }: ActionFunctionArgs) {
   const email = formData.get("email");
   const password = formData.get("password");
 
-  const fetched = await fetch("https://api.mybucks.today/users/register", {
+  const fetched = await fetch("https://api.Mybucks.today/users/register", {
     method: "POST",
     body: JSON.stringify({
       email,

@@ -30,7 +30,7 @@ export default function Navbar() {
               )}
               data-ripple-dark="true"
             >
-              <span className="text-xs font-medium">Cari</span>
+              <span className="text-sm font-medium">Cari</span>
             </button>
           </div>
         </SearchDialog>
@@ -55,7 +55,7 @@ function Navigation({ href, title }: { href: string; title: string }) {
         )}
         data-ripple-dark="true"
       >
-        <span className={cn("text-xs font-medium", isMatch && "font-bold")}>
+        <span className={cn("text-sm font-medium", isMatch && "font-semibold")}>
           {title}
         </span>
       </button>
