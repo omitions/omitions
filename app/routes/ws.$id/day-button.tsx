@@ -42,6 +42,16 @@ export default function DayButton({ children, day }: DayButtonProps) {
           {children}
         </p>
         <div className="absolute top-12 flex w-full flex-col gap-0.5 p-1">
+          <div className="block md:hidden">
+            {data?.amount && (
+              <div
+                className={cn(
+                  "h-2 w-full bg-primary",
+                  data?.amount < 0 && "bg-red-500",
+                )}
+              ></div>
+            )}
+          </div>
           <div className="hidden overflow-hidden rounded-sm bg-primary/30 md:block">
             {data?.amount && (
               <div className="h-11 rounded-sm border border-foreground px-1.5 py-1">

@@ -78,7 +78,7 @@ function MonthNavigation({
   const prevMonth = subMonths(month, 1);
 
   return (
-    <div className="flex items-center gap-6">
+    <div className="mt-28 flex items-center gap-6 md:mt-0">
       <h3 className="w-full text-lg font-bold md:text-base">
         {format(month, "MMMM yyyy", { locale: localeId })}
       </h3>

@@ -44,7 +44,7 @@ function Mobile() {
         <BackButton />
       </div>
       <div className="flex items-center md:hidden">
-        <h2 className="text-sm font-medium underline">
+        <h2 className="text-sm font-bold">
           {title.length > 35 ? `${title.substring(0, 35)}..` : title}
         </h2>
       </div>
