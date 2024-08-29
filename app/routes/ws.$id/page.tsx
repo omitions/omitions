@@ -41,7 +41,7 @@ function Content() {
 
   return (
     <div className="flex flex-col">
-      <div className="flex items-center justify-between md:px-4 md:py-4">
+      <div className="flex items-center justify-between md:px-6 md:py-6">
         <div className="hidden flex-col gap-2 md:flex">
           <BackButton />
           <div className="flex gap-2.5">
@@ -78,7 +78,7 @@ function MonthNavigation({
   const prevMonth = subMonths(month, 1);
 
   return (
-    <div className="mt-28 flex items-center gap-6 md:mt-0">
+    <div className="mt-20 flex items-center gap-6 md:mt-0">
       <h3 className="w-full text-lg font-bold md:text-base">
         {format(month, "MMMM yyyy", { locale: localeId })}
       </h3>

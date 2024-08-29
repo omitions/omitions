@@ -35,7 +35,7 @@ export default function DayButton({ children, day }: DayButtonProps) {
       >
         <p
           className={cn(
-            "left-3 top-4 flex h-8 w-8 items-center justify-center rounded-full text-sm font-medium md:absolute md:h-7 md:w-7 md:text-xs md:font-bold",
+            "left-3 top-4 flex h-8 w-8 items-center justify-center rounded-full text-sm font-medium md:absolute md:h-7 md:w-7 md:text-xs",
             isToday && "bg-foreground text-white",
           )}
         >

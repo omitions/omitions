@@ -1,4 +1,4 @@
-import { BookOpenText, Command, Search } from "lucide-react";
+import { Command, Search } from "lucide-react";
 
 import { SearchDialog } from "~/components/search";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
@@ -13,19 +13,14 @@ import {
 export default function Header() {
   return (
     <div className="hidden h-[var(--header-height)] justify-center md:flex">
-      <div className="mx-[19px] flex w-full max-w-[2800px] items-center justify-between bg-background px-4">
-        <div>
-          <Button size="sm" variant="outline" className="gap-2">
-            <BookOpenText size={16} strokeWidth={2} />
-            <span>Pelajari</span>
-          </Button>
-        </div>
-        <div className="w-full max-w-sm">
+      <div className="mx-[6px] flex w-full max-w-[2800px] items-center justify-between bg-background px-4">
+        <div></div>
+        <div className="w-full max-w-lg">
           <SearchDialog withoutK={true}>
             <Button
               size="sm"
               variant="outline"
-              className="relative !h-11 w-full justify-start gap-2 border-foreground/50 bg-white px-5 hover:border-foreground hover:shadow-sm hover:ring-0"
+              className="relative !h-10 w-full justify-start gap-2 bg-white px-5 hover:border-foreground/30 hover:shadow-sm hover:ring-0"
             >
               <Search
                 size={18}

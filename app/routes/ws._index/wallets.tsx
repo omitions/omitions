@@ -20,8 +20,8 @@ export default function Wallets() {
       </div>
       <div className="2xl:max-w-[2800px]">
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:gap-4 lg:grid-cols-3 xl:grid-cols-4 2xl:max-w-[1900px] 2xl:grid-cols-5">
-          <WalletItem />
           <ButtonCreateWallet />
+          <WalletItem />
         </div>
       </div>
     </div>
@@ -38,7 +38,7 @@ function WalletItem() {
     >
       <button
         onFocus={() => setIsActive(true)}
-        className="h-full min-h-32 w-full justify-start rounded-xl border border-input/50 bg-white p-4 shadow-sm ring-offset-background hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-70 md:min-h-44 md:p-5 md:hover:border-input/50"
+        className="h-full min-h-32 w-full justify-start rounded-xl border border-foreground/30 bg-white p-4 shadow-sm ring-offset-background hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-70 md:min-h-44 md:p-5"
       >
         <div className="flex h-full w-11/12 flex-col flex-wrap items-start justify-between md:w-full md:gap-1">
           <div className="flex items-start gap-3">
@@ -93,7 +93,7 @@ function ButtonCreateWallet() {
   return (
     <div className="relative rounded-xl shadow-sm hover:shadow-md">
       <CreateWallet actionType="HELLOO">
-        <button className="h-full min-h-32 w-full justify-start rounded-xl border border-input/50 bg-white px-0 shadow-sm ring-offset-background hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-70 md:min-h-44 md:p-5 md:hover:border-input/50">
+        <button className="h-full min-h-32 w-full justify-start rounded-xl border border-foreground/30 bg-white px-0 shadow-sm ring-offset-background hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-70 md:min-h-44 md:p-5">
           <div className="flex h-full flex-col flex-wrap items-center justify-center gap-2 md:w-full md:gap-3">
             <CirclePlus size={24} strokeWidth={1.5} />
             <h3 className="text-sm font-medium">Buat dompet</h3>
